@@ -34,6 +34,7 @@
 		175DCE5D1BE3ABC100B1B0A7 /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE5C1BE3ABC100B1B0A7 /* TraktCrew.swift */; };
 		175DCE5F1BE3AC5100B1B0A7 /* TraktAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE5E1BE3AC5100B1B0A7 /* TraktAuthViewController.swift */; };
 		175DCE611BE3B08300B1B0A7 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE601BE3B08300B1B0A7 /* Delay.swift */; };
+		175DCE631BE3B90100B1B0A7 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 175DCE621BE3B90100B1B0A7 /* WebKit.framework */; };
 		8CD4EA674B939D95E130253A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE09F94CB4656A0917F22E9E /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		175DCE5C1BE3ABC100B1B0A7 /* TraktCrew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktCrew.swift; sourceTree = "<group>"; };
 		175DCE5E1BE3AC5100B1B0A7 /* TraktAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktAuthViewController.swift; sourceTree = "<group>"; };
 		175DCE601BE3B08300B1B0A7 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
+		175DCE621BE3B90100B1B0A7 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		82B2C602EB1011150D2B5920 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		954AA1E4D6A04D4DE34464F4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DE09F94CB4656A0917F22E9E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175DCE631BE3B90100B1B0A7 /* WebKit.framework in Frameworks */,
 				8CD4EA674B939D95E130253A /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,6 +231,7 @@
 		AD136E75A11182E26FB840FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				175DCE621BE3B90100B1B0A7 /* WebKit.framework */,
 				DE09F94CB4656A0917F22E9E /* Pods.framework */,
 			);
 			name = Frameworks;

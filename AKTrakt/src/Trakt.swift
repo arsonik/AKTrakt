@@ -13,10 +13,11 @@ import Async
 
 class Trakt {
 	let clientId:String
-	let clientSecret:String
+    let clientSecret:String
+    let applicationId: Int
+    
     var token:TraktToken?
     let manager:Manager
-    let applicationId: Int
 	
     init(clientId:String, clientSecret:String, applicationId: Int){
 		self.clientId = clientId

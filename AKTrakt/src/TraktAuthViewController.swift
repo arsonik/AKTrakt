@@ -11,7 +11,8 @@ import WebKit
 import Alamofire
 
 protocol TraktAuthViewControllerDelegate : class {
-	func TraktAuthViewControllerDidAuthenticate(controller:TraktAuthViewController)
+    func TraktAuthViewControllerDidAuthenticate(controller:TraktAuthViewController)
+    func TraktAuthViewControllerDidCancel(controller:TraktAuthViewController)
 }
 
 class TraktAuthViewController: UIViewController, WKNavigationDelegate {
@@ -34,12 +35,18 @@ class TraktAuthViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel")
+
         wkWebview = WKWebView(frame: view.bounds)
         wkWebview.navigationDelegate = self
 
         view.addSubview(wkWebview)
 
         initWebview()
+    }
+
+    func cancel() {
+        delegate?.TraktAuthViewControllerDidCancel(self)
     }
     
     private func initWebview(){
@@ -49,13 +56,12 @@ class TraktAuthViewController: UIViewController, WKNavigationDelegate {
     private func pinFromNavigation(action: WKNavigationAction) -> String? {
         if let path = action.request.URL?.path where path.containsString("/oauth/authorize/") {
             let folders = path.componentsSeparatedByString("/")
-            print(folders)
+            return folders[3]
         }
         return nil
     }
 
     func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
-        print(navigationAction.request.URL?.path)
         if let pin = pinFromNavigation(navigationAction) {
             decisionHandler(WKNavigationActionPolicy.Cancel)
 
@@ -74,5 +80,13 @@ class TraktAuthViewController: UIViewController, WKNavigationDelegate {
             return ()
         }
         decisionHandler(WKNavigationActionPolicy.Allow)
+    }
+
+    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
+        print(error)
+    }
+
+    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+        print(error)
     }
 }
