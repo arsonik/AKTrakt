@@ -18,7 +18,7 @@ class Trakt {
     let manager:Manager
     let applicationId: Int
 	
-    init(clientId:String, clientSecret:String, applicationId: Int = 3695){
+    init(clientId:String, clientSecret:String, applicationId: Int){
 		self.clientId = clientId
 		self.clientSecret = clientSecret
         self.applicationId = applicationId
