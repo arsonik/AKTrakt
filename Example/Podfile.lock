@@ -1,0 +1,20 @@
+PODS:
+  - AKTrakt (0.1.0)
+  - Nimble (3.0.0)
+  - Quick (0.3.1)
+
+DEPENDENCIES:
+  - AKTrakt (from `../`)
+  - Nimble
+  - Quick (~> 0.3.1)
+
+EXTERNAL SOURCES:
+  AKTrakt:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AKTrakt: 87a45f662544e99246763037d077c32413ddb0de
+  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
+  Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
+
+COCOAPODS: 0.39.0
