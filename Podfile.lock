@@ -1,10 +1,13 @@
 PODS:
   - Alamofire (3.1.0)
+  - Async (0.2.0)
 
 DEPENDENCIES:
   - Alamofire
+  - Async
 
 SPEC CHECKSUMS:
   Alamofire: 415bd7f56197722978759078486689f7ef913dce
+  Async: d80205f1a1b4eea24de8ddc62cf5197ff3025330
 
 COCOAPODS: 0.39.0

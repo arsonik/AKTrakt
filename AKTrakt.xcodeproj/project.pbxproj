@@ -14,6 +14,26 @@
 		175DCE111BE3A75A00B1B0A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 175DCE0F1BE3A75A00B1B0A7 /* LaunchScreen.storyboard */; };
 		175DCE1C1BE3A75A00B1B0A7 /* AKTraktTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE1B1BE3A75A00B1B0A7 /* AKTraktTests.swift */; };
 		175DCE271BE3A75A00B1B0A7 /* AKTraktUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE261BE3A75A00B1B0A7 /* AKTraktUITests.swift */; };
+		175DCE3A1BE3A94400B1B0A7 /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE361BE3A94400B1B0A7 /* Trakt.swift */; };
+		175DCE3B1BE3A94400B1B0A7 /* TraktRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE371BE3A94400B1B0A7 /* TraktRoute.swift */; };
+		175DCE3C1BE3A94400B1B0A7 /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE381BE3A94400B1B0A7 /* TraktId.swift */; };
+		175DCE3D1BE3A94400B1B0A7 /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE391BE3A94400B1B0A7 /* TraktToken.swift */; };
+		175DCE3F1BE3A97000B1B0A7 /* TraktType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE3E1BE3A97000B1B0A7 /* TraktType.swift */; };
+		175DCE411BE3A99A00B1B0A7 /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE401BE3A99A00B1B0A7 /* TraktImageType.swift */; };
+		175DCE431BE3A9B600B1B0A7 /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE421BE3A9B600B1B0A7 /* TraktImageSize.swift */; };
+		175DCE4C1BE3AA4300B1B0A7 /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE451BE3AA4300B1B0A7 /* TraktObject.swift */; };
+		175DCE4D1BE3AA4300B1B0A7 /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE461BE3AA4300B1B0A7 /* TraktShow.swift */; };
+		175DCE4E1BE3AA4300B1B0A7 /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE471BE3AA4300B1B0A7 /* TraktSeason.swift */; };
+		175DCE4F1BE3AA4300B1B0A7 /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE481BE3AA4300B1B0A7 /* TraktEpisode.swift */; };
+		175DCE501BE3AA4300B1B0A7 /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE491BE3AA4300B1B0A7 /* TraktMovie.swift */; };
+		175DCE511BE3AA4300B1B0A7 /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE4A1BE3AA4300B1B0A7 /* TraktPerson.swift */; };
+		175DCE521BE3AA4300B1B0A7 /* TraktWatchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE4B1BE3AA4300B1B0A7 /* TraktWatchable.swift */; };
+		175DCE551BE3AA9700B1B0A7 /* NSHTTPURLResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE541BE3AA9700B1B0A7 /* NSHTTPURLResponse.swift */; };
+		175DCE571BE3AAAA00B1B0A7 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE561BE3AAAA00B1B0A7 /* String.swift */; };
+		175DCE591BE3AB9800B1B0A7 /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE581BE3AB9800B1B0A7 /* TraktCharacter.swift */; };
+		175DCE5D1BE3ABC100B1B0A7 /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE5C1BE3ABC100B1B0A7 /* TraktCrew.swift */; };
+		175DCE5F1BE3AC5100B1B0A7 /* TraktAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE5E1BE3AC5100B1B0A7 /* TraktAuthViewController.swift */; };
+		175DCE611BE3B08300B1B0A7 /* Delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 175DCE601BE3B08300B1B0A7 /* Delay.swift */; };
 		8CD4EA674B939D95E130253A /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE09F94CB4656A0917F22E9E /* Pods.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +68,26 @@
 		175DCE221BE3A75A00B1B0A7 /* AKTraktUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AKTraktUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		175DCE261BE3A75A00B1B0A7 /* AKTraktUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKTraktUITests.swift; sourceTree = "<group>"; };
 		175DCE281BE3A75A00B1B0A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		175DCE361BE3A94400B1B0A7 /* Trakt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trakt.swift; sourceTree = "<group>"; };
+		175DCE371BE3A94400B1B0A7 /* TraktRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktRoute.swift; sourceTree = "<group>"; };
+		175DCE381BE3A94400B1B0A7 /* TraktId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktId.swift; sourceTree = "<group>"; };
+		175DCE391BE3A94400B1B0A7 /* TraktToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktToken.swift; sourceTree = "<group>"; };
+		175DCE3E1BE3A97000B1B0A7 /* TraktType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktType.swift; sourceTree = "<group>"; };
+		175DCE401BE3A99A00B1B0A7 /* TraktImageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktImageType.swift; sourceTree = "<group>"; };
+		175DCE421BE3A9B600B1B0A7 /* TraktImageSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktImageSize.swift; sourceTree = "<group>"; };
+		175DCE451BE3AA4300B1B0A7 /* TraktObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktObject.swift; sourceTree = "<group>"; };
+		175DCE461BE3AA4300B1B0A7 /* TraktShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktShow.swift; sourceTree = "<group>"; };
+		175DCE471BE3AA4300B1B0A7 /* TraktSeason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktSeason.swift; sourceTree = "<group>"; };
+		175DCE481BE3AA4300B1B0A7 /* TraktEpisode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktEpisode.swift; sourceTree = "<group>"; };
+		175DCE491BE3AA4300B1B0A7 /* TraktMovie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktMovie.swift; sourceTree = "<group>"; };
+		175DCE4A1BE3AA4300B1B0A7 /* TraktPerson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktPerson.swift; sourceTree = "<group>"; };
+		175DCE4B1BE3AA4300B1B0A7 /* TraktWatchable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktWatchable.swift; sourceTree = "<group>"; };
+		175DCE541BE3AA9700B1B0A7 /* NSHTTPURLResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSHTTPURLResponse.swift; sourceTree = "<group>"; };
+		175DCE561BE3AAAA00B1B0A7 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		175DCE581BE3AB9800B1B0A7 /* TraktCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktCharacter.swift; sourceTree = "<group>"; };
+		175DCE5C1BE3ABC100B1B0A7 /* TraktCrew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktCrew.swift; sourceTree = "<group>"; };
+		175DCE5E1BE3AC5100B1B0A7 /* TraktAuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktAuthViewController.swift; sourceTree = "<group>"; };
+		175DCE601BE3B08300B1B0A7 /* Delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Delay.swift; sourceTree = "<group>"; };
 		82B2C602EB1011150D2B5920 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		954AA1E4D6A04D4DE34464F4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		DE09F94CB4656A0917F22E9E /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +153,7 @@
 		175DCE051BE3A75A00B1B0A7 /* AKTrakt */ = {
 			isa = PBXGroup;
 			children = (
+				175DCE351BE3A92700B1B0A7 /* src */,
 				175DCE061BE3A75A00B1B0A7 /* AppDelegate.swift */,
 				175DCE081BE3A75A00B1B0A7 /* ViewController.swift */,
 				175DCE0A1BE3A75A00B1B0A7 /* Main.storyboard */,
@@ -139,6 +180,49 @@
 				175DCE281BE3A75A00B1B0A7 /* Info.plist */,
 			);
 			path = AKTraktUITests;
+			sourceTree = "<group>";
+		};
+		175DCE351BE3A92700B1B0A7 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				175DCE531BE3AA8500B1B0A7 /* Extensions */,
+				175DCE441BE3AA3A00B1B0A7 /* Object */,
+				175DCE361BE3A94400B1B0A7 /* Trakt.swift */,
+				175DCE371BE3A94400B1B0A7 /* TraktRoute.swift */,
+				175DCE381BE3A94400B1B0A7 /* TraktId.swift */,
+				175DCE391BE3A94400B1B0A7 /* TraktToken.swift */,
+				175DCE3E1BE3A97000B1B0A7 /* TraktType.swift */,
+				175DCE401BE3A99A00B1B0A7 /* TraktImageType.swift */,
+				175DCE421BE3A9B600B1B0A7 /* TraktImageSize.swift */,
+				175DCE5E1BE3AC5100B1B0A7 /* TraktAuthViewController.swift */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		175DCE441BE3AA3A00B1B0A7 /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				175DCE451BE3AA4300B1B0A7 /* TraktObject.swift */,
+				175DCE461BE3AA4300B1B0A7 /* TraktShow.swift */,
+				175DCE471BE3AA4300B1B0A7 /* TraktSeason.swift */,
+				175DCE481BE3AA4300B1B0A7 /* TraktEpisode.swift */,
+				175DCE491BE3AA4300B1B0A7 /* TraktMovie.swift */,
+				175DCE4A1BE3AA4300B1B0A7 /* TraktPerson.swift */,
+				175DCE4B1BE3AA4300B1B0A7 /* TraktWatchable.swift */,
+				175DCE581BE3AB9800B1B0A7 /* TraktCharacter.swift */,
+				175DCE5C1BE3ABC100B1B0A7 /* TraktCrew.swift */,
+			);
+			name = Object;
+			sourceTree = "<group>";
+		};
+		175DCE531BE3AA8500B1B0A7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				175DCE541BE3AA9700B1B0A7 /* NSHTTPURLResponse.swift */,
+				175DCE561BE3AAAA00B1B0A7 /* String.swift */,
+				175DCE601BE3B08300B1B0A7 /* Delay.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		AD136E75A11182E26FB840FD /* Frameworks */ = {
@@ -331,8 +415,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				175DCE521BE3AA4300B1B0A7 /* TraktWatchable.swift in Sources */,
+				175DCE5D1BE3ABC100B1B0A7 /* TraktCrew.swift in Sources */,
+				175DCE3D1BE3A94400B1B0A7 /* TraktToken.swift in Sources */,
+				175DCE3B1BE3A94400B1B0A7 /* TraktRoute.swift in Sources */,
+				175DCE551BE3AA9700B1B0A7 /* NSHTTPURLResponse.swift in Sources */,
+				175DCE411BE3A99A00B1B0A7 /* TraktImageType.swift in Sources */,
+				175DCE4E1BE3AA4300B1B0A7 /* TraktSeason.swift in Sources */,
+				175DCE4F1BE3AA4300B1B0A7 /* TraktEpisode.swift in Sources */,
 				175DCE091BE3A75A00B1B0A7 /* ViewController.swift in Sources */,
+				175DCE3A1BE3A94400B1B0A7 /* Trakt.swift in Sources */,
+				175DCE501BE3AA4300B1B0A7 /* TraktMovie.swift in Sources */,
+				175DCE611BE3B08300B1B0A7 /* Delay.swift in Sources */,
+				175DCE4C1BE3AA4300B1B0A7 /* TraktObject.swift in Sources */,
+				175DCE431BE3A9B600B1B0A7 /* TraktImageSize.swift in Sources */,
+				175DCE5F1BE3AC5100B1B0A7 /* TraktAuthViewController.swift in Sources */,
+				175DCE571BE3AAAA00B1B0A7 /* String.swift in Sources */,
+				175DCE511BE3AA4300B1B0A7 /* TraktPerson.swift in Sources */,
+				175DCE3F1BE3A97000B1B0A7 /* TraktType.swift in Sources */,
 				175DCE071BE3A75A00B1B0A7 /* AppDelegate.swift in Sources */,
+				175DCE4D1BE3AA4300B1B0A7 /* TraktShow.swift in Sources */,
+				175DCE3C1BE3A94400B1B0A7 /* TraktId.swift in Sources */,
+				175DCE591BE3AB9800B1B0A7 /* TraktCharacter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
