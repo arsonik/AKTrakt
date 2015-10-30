@@ -9,7 +9,4 @@ end
 target 'AKTrakt_Tests', :exclusive => true do
   pod "AKTrakt", :path => "../"
   pod "Alamofire"
-
-  pod 'Quick', '~> 0.3.1'
-  pod 'Nimble'
 end

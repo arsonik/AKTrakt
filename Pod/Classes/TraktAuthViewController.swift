@@ -21,7 +21,7 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
 	private weak var delegate: TraktAuthViewControllerDelegate!
 	private let trakt: Trakt
 
-    init(trakt: Trakt, delegate: TraktAuthViewControllerDelegate) {
+    public init(trakt: Trakt, delegate: TraktAuthViewControllerDelegate) {
         self.trakt = trakt
         self.delegate = delegate
 

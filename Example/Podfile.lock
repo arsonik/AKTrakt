@@ -1,20 +1,18 @@
 PODS:
-  - AKTrakt (0.1.0)
-  - Nimble (3.0.0)
-  - Quick (0.3.1)
+  - AKTrakt (0.1.1):
+    - Alamofire
+  - Alamofire (3.1.0)
 
 DEPENDENCIES:
   - AKTrakt (from `../`)
-  - Nimble
-  - Quick (~> 0.3.1)
+  - Alamofire
 
 EXTERNAL SOURCES:
   AKTrakt:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AKTrakt: 87a45f662544e99246763037d077c32413ddb0de
-  Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
-  Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
+  AKTrakt: 6dbeab6d7da984f66960bdd8f82f75cc0b66fb12
+  Alamofire: 415bd7f56197722978759078486689f7ef913dce
 
 COCOAPODS: 0.39.0
