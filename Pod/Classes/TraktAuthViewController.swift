@@ -28,11 +28,11 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel")
@@ -45,7 +45,7 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
         initWebview()
     }
 
-    func cancel() {
+    public func cancel() {
         delegate?.TraktAuthViewControllerDidCancel(self)
     }
     
@@ -61,7 +61,7 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
         return nil
     }
 
-    func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
+    public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         if let pin = pinFromNavigation(navigationAction) {
             decisionHandler(WKNavigationActionPolicy.Cancel)
 
@@ -82,11 +82,11 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
         decisionHandler(WKNavigationActionPolicy.Allow)
     }
 
-    func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
+    public func webView(webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: NSError) {
         print(error)
     }
 
-    func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
+    public func webView(webView: WKWebView, didFailNavigation navigation: WKNavigation!, withError error: NSError) {
         print(error)
     }
 }

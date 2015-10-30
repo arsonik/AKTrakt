@@ -34,7 +34,7 @@ public class TraktEpisode : TraktWatchable {
 		}
 	}
 	
-	override var description:String {
+	public override var description:String {
 		return "TraktEpisode(\(number)) completed \(completed)"
 	}
 }

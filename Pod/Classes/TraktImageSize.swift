@@ -8,11 +8,8 @@
 
 import Foundation
 
-public enum TraktImageSize:String, CustomStringConvertible {
+public enum TraktImageSize:String {
     case Full = "full"
     , Medium = "medium"
     , Thumb = "thumb"
-    var description:String {
-        return "TraktImageSize:\(rawValue)"
-    }
 }

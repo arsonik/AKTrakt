@@ -31,7 +31,7 @@ public class TraktSeason : TraktWatchable {
 		return episodes.filter {$0.completed == false}
 	}
 	
-	override var description:String {
+	public override var description:String {
 		return "TraktSeason(\(number)) \(episodes.count-notCompleted.count)/\(episodes.count)"
 	}
 }

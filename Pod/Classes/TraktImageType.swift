@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TraktImageType:String, CustomStringConvertible {
+public enum TraktImageType:String {
     case Banner = "banner"
     , ClearArt = "clearart"
     , FanArt = "fanart"
@@ -18,7 +18,4 @@ public enum TraktImageType:String, CustomStringConvertible {
     , Thumb = "thumb"
     , Avatar = "avatar"
     , Screenshot = "screenshot"
-    var description:String {
-        return "TraktImageType:\(rawValue)"
-    }
 }

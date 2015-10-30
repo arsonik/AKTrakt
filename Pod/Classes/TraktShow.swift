@@ -20,7 +20,7 @@ public class TraktShow : TraktWatchable {
 		return list
 	}
 	
-	override var description:String {
+	public override var description:String {
 		return "TraktShow(\(title))"
 	}
 }

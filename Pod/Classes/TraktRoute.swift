@@ -27,14 +27,14 @@ public enum TraktRoute :URLRequestConvertible {
 	, Movie(id:AnyObject)
 	, Search(query:String, type:TraktType!, year:Int!)
 	
-	var domain:String {
+	private var domain:String {
 		switch self {
 		default:
 			return "https://api-v2launch.trakt.tv"
 		}
 	}
 	
-	var method:String {
+	private var method:String {
 		switch self {
 		case .Token, .addToHistory, .removeFromHistory, .addToWatchlist:
 			return "POST"
@@ -45,14 +45,14 @@ public enum TraktRoute :URLRequestConvertible {
 		}
 	}
 
-	var headers:[String:String]? {
+	private var headers:[String:String]? {
 		switch self {
 		default:
 			return nil
 		}
 	}
 	
-	var path:String {
+	private var path:String {
 		switch self {
         case .Token:							return "/oauth/token"
         case .TrendingMovies:					return "/movies/trending"
@@ -74,7 +74,7 @@ public enum TraktRoute :URLRequestConvertible {
 		}
 	}
 	
-	var parameters:[String:AnyObject]! {
+	private var parameters:[String:AnyObject]! {
 		switch self {
 		case .Token(let trakt, let pin):
 			return [
@@ -147,7 +147,7 @@ public enum TraktRoute :URLRequestConvertible {
 	}
 	
 	///
-	var URLRequest:NSMutableURLRequest {
+	public var URLRequest:NSMutableURLRequest {
 		if let url = NSURL(string: "\(domain)\(path)") {
 			let URLRequest = NSMutableURLRequest(URL: url)
 			URLRequest.HTTPMethod = method

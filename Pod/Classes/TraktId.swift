@@ -8,17 +8,13 @@
 
 import Foundation
 
-public enum TraktId : String, CustomStringConvertible {
+public enum TraktId : String {
 	case Imdb = "imdb"
 	, Slug = "slug"
 	, Tmdb = "tmdb"
 	, Trakt = "trakt"
 	, Tvdb = "tvdb"
 	, Tvrage = "tvrage"
-	
-	var description:String {
-		return "TraktId(\(rawValue))"
-	}
 	
 	static func extractIds(data:[String:AnyObject!]!) -> [TraktId:AnyObject]! {
 		if let lids = data?["ids"] as? [String:AnyObject] {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TraktToken : CustomStringConvertible {
+public class TraktToken {
 	let accessToken:String!
 	let expire:NSDate!
 	let refreshToken:String!
@@ -31,9 +31,5 @@ public class TraktToken : CustomStringConvertible {
 			self.refreshToken = nil
 			return nil
 		}
-	}
-	
-	var description:String {
-		return "TraktToken(\(accessToken) - \(expire))"
 	}
 }

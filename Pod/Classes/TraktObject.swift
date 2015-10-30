@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias TraktIdentifier = Int
+public typealias TraktIdentifier = Int
 
 public class TraktObject : CustomStringConvertible {
 	
@@ -81,7 +81,7 @@ public class TraktObject : CustomStringConvertible {
 		return nil
 	}
 	
-	var description:String {
+	public var description:String {
 		return "TraktObject id:\(id)"
 	}
 }
