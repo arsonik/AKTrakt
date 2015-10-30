@@ -10,7 +10,7 @@ import Foundation
 
 typealias TraktIdentifier = Int
 
-class TraktObject : CustomStringConvertible {
+public class TraktObject : CustomStringConvertible {
 	
 	var ids:[TraktId:AnyObject]!
 	var id:TraktIdentifier? {

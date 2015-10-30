@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TraktWatchable: TraktObject {
+public class TraktWatchable: TraktObject {
 
     var title:String!
     var overview:String!

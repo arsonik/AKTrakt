@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TraktCrew {
+public class TraktCrew {
     let job:String!
     let person:TraktPerson!
 

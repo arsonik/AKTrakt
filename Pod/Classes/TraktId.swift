@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TraktId : String, CustomStringConvertible {
+public enum TraktId : String, CustomStringConvertible {
 	case Imdb = "imdb"
 	, Slug = "slug"
 	, Tmdb = "tmdb"

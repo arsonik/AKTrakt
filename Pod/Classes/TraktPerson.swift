@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TraktPerson : TraktObject {
+public class TraktPerson : TraktObject {
 
     let name:String!
 

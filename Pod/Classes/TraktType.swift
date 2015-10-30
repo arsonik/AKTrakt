@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TraktType:String {
+public enum TraktType:String {
     case Movies = "movies"
     , Shows = "shows"
     , Seasons = "seasons"

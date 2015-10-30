@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TraktToken : CustomStringConvertible {
+public class TraktToken : CustomStringConvertible {
 	let accessToken:String!
 	let expire:NSDate!
 	let refreshToken:String!

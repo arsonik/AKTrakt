@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TraktCharacter {
+public class TraktCharacter {
     let character:String!
     let person:TraktPerson!
 

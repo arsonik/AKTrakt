@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TraktMovie : TraktWatchable {
+public class TraktMovie : TraktWatchable {
 
 	let trailer:String? // Youtube video name ex: _1MDrwqjeGo
     let rating:Float? // 6.544

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 
-class Trakt {
+public class Trakt {
 	let clientId:String
     let clientSecret:String
     let applicationId: Int

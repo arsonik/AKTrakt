@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum TraktImageType:String, CustomStringConvertible {
+public enum TraktImageType:String, CustomStringConvertible {
     case Banner = "banner"
     , ClearArt = "clearart"
     , FanArt = "fanart"

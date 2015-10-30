@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-enum TraktRoute :URLRequestConvertible {
+public enum TraktRoute :URLRequestConvertible {
 	
     case Token(client:Trakt, pin:String)
     , TrendingMovies
