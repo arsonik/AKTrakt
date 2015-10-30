@@ -9,9 +9,9 @@
 import Foundation
 
 public class TraktToken {
-	let accessToken:String!
-	let expire:NSDate!
-	let refreshToken:String!
+	public let accessToken:String!
+	public let expire:NSDate!
+	public let refreshToken:String!
 	
 	init(accessToken:String, expire:NSDate, refreshToken:String){
 		self.accessToken = accessToken

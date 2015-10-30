@@ -10,9 +10,9 @@ import Foundation
 
 public class TraktShow : TraktWatchable {
 	
-	var seasons:[TraktSeason] = []
+	public var seasons:[TraktSeason] = []
 	
-	var notCompleted:[TraktEpisode] {
+	public var notCompleted:[TraktEpisode] {
 		var list:[TraktEpisode] = []
 		for season in seasons {
 			list += season.notCompleted

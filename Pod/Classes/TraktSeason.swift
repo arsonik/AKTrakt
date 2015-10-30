@@ -10,10 +10,10 @@ import Foundation
 
 public class TraktSeason : TraktWatchable {
 	
-	weak var show:TraktShow!
+	public weak var show:TraktShow!
 	
-	let number:Int!
-	var episodes:[TraktEpisode] = []
+	public let number:Int!
+	public var episodes:[TraktEpisode] = []
 	
 	override init?(data:[String:AnyObject]!){
 		if let n = data?["number"] as? Int {
@@ -27,7 +27,7 @@ public class TraktSeason : TraktWatchable {
 		}
 	}
 	
-	var notCompleted:[TraktEpisode] {
+	public var notCompleted:[TraktEpisode] {
 		return episodes.filter {$0.completed == false}
 	}
 	

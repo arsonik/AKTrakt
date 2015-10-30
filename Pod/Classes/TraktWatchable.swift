@@ -10,10 +10,10 @@ import Foundation
 
 public class TraktWatchable: TraktObject {
 
-    var title:String!
-    var overview:String!
-    var watched:Bool = false
-    var watchlist:Bool = false
+    public var title:String!
+    public var overview:String!
+    public var watched:Bool = false
+    public var watchlist:Bool = false
 
     override init?(data: [String : AnyObject]!) {
         overview = data?["overview"] as? String

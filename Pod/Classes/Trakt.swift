@@ -11,12 +11,12 @@ import Alamofire
 
 
 public class Trakt {
-	let clientId:String
-    let clientSecret:String
-    let applicationId: Int
+	internal let clientId:String
+    internal let clientSecret:String
+    internal let applicationId: Int
     
     public var token:TraktToken?
-    let manager:Manager
+    private let manager:Manager
 	
     public init(clientId:String, clientSecret:String, applicationId: Int){
 		self.clientId = clientId
@@ -200,20 +200,21 @@ public class Trakt {
 		}
 	}
 	
-	public func collection(type:TraktType, completion:((result:[TraktObject]!, error:NSError?) -> Void)) -> Request {
+	public func collection(type:TraktType, completion:((result:[TraktObject]?, error:NSError?) -> Void)) -> Request {
 		return manager.request(TraktRoute.Collection(type).OAuthRequest(self)).responseJSON { (response) -> Void in
-			var list:[TraktObject]! = nil
+			var list:[TraktObject]? = nil
 			if let entries = response.result.value as? [[String:AnyObject]] {
 				list = []
 				for entry in entries {
 					if let sh = entry["show"] as? [String:AnyObject], o = TraktShow(data: sh) where type == TraktType.Shows {
-						list.append(o)
+						list!.append(o)
 					}
 				}
 			}
-			else{
-			}
-			completion(result: list, error: nil)
+            else {
+                print(response.request?.URL)
+            }
+			completion(result: list, error: response.result.error)
 		}
     }
 

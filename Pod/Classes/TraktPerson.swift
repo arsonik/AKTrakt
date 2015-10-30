@@ -10,7 +10,7 @@ import Foundation
 
 public class TraktPerson : TraktObject {
 
-    let name:String!
+    public let name:String!
 
     override init?(data: [String : AnyObject]!) {
 

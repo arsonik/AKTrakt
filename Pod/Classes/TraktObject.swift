@@ -12,11 +12,11 @@ public typealias TraktIdentifier = Int
 
 public class TraktObject : CustomStringConvertible {
 	
-	var ids:[TraktId:AnyObject]!
-	var id:TraktIdentifier? {
+	public var ids:[TraktId:AnyObject]!
+	public var id:TraktIdentifier? {
 		return ids[TraktId.Trakt] as? TraktIdentifier
 	}
-	var type:TraktType? {
+	public var type:TraktType? {
 		if self is TraktEpisode {
 			return TraktType.Episodes
 		}
@@ -32,7 +32,7 @@ public class TraktObject : CustomStringConvertible {
 		return nil
 	}
 	
-	var images:[TraktImageType:[TraktImageSize:String]] = [:]
+	public var images:[TraktImageType:[TraktImageSize:String]] = [:]
 
 
 	init?(data: [String : AnyObject]!) {
@@ -74,7 +74,7 @@ public class TraktObject : CustomStringConvertible {
 		return nil
 	}
 	
-	func imageURL(type:TraktImageType, size: TraktImageSize) -> NSURL? {
+	public func imageURL(type:TraktImageType, size: TraktImageSize) -> NSURL? {
 		if let uri = images[type]?[size] {
 			return NSURL(string: uri)
 		}

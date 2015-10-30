@@ -10,15 +10,15 @@ import Foundation
 
 public class TraktEpisode : TraktWatchable {
 	
-	weak var season:TraktSeason!
+	public weak var season:TraktSeason!
 	
-	let number:Int!
-	var seasonNumber:Int!
-	var completed:Bool!
+	public let number:Int!
+	public var seasonNumber:Int!
+	public var completed:Bool!
 	
 	var loaded:Bool! = false
 	
-	var firstAired:NSDate!
+	public var firstAired:NSDate!
 	
 	override init?(data: [String:AnyObject]!){
 		if let n = data?["number"] as? Int {

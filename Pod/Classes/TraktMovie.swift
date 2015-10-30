@@ -10,13 +10,13 @@ import Foundation
 
 public class TraktMovie : TraktWatchable {
 
-	let trailer:String? // Youtube video name ex: _1MDrwqjeGo
-    let rating:Float? // 6.544
-    let year:Int? // 2015
-    let runtime:Int? // length
-    let genres:[String]?
+	public let trailer:String? // Youtube video name ex: _1MDrwqjeGo
+    public let rating:Float? // 6.544
+    public let year:Int? // 2015
+    public let runtime:Int? // length
+    public let genres:[String]?
 		
-	override init?(data: [String : AnyObject]!) {
+	public override init?(data: [String : AnyObject]!) {
 		rating = data?["rating"] as? Float ?? nil
 		year = data?["year"] as? Int ?? nil
         genres = data?["genres"] as? [String]

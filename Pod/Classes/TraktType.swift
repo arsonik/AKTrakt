@@ -15,7 +15,7 @@ public enum TraktType:String {
     , Episodes = "episodes"
     , Persons = "person"
 
-    init?(single:String){
+    public init?(single:String){
         switch single {
         case "movie":	self = .Movies
         case "show":	self = .Shows
@@ -27,7 +27,7 @@ public enum TraktType:String {
         }
     }
 
-    var single:String {
+    public var single:String {
         switch self {
         case .Movies:	return "movie"
         case .Shows:	return "show"

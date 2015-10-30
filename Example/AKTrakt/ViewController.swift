@@ -28,12 +28,23 @@ class ViewController: UIViewController, TraktAuthViewControllerDelegate {
             let authVC = TraktAuthViewController(trakt: trakt, delegate: self)
             let nav = UINavigationController(rootViewController: authVC)
             navigationController?.presentViewController(nav, animated: true, completion: nil)
+        }
+        else {
+            load()
+        }
+    }
 
+    func load() {
+        trakt.trendingMovies { (movies, error) -> Void in
+            for movie in movies! {
+                movie.description
+            }
         }
     }
 
     func TraktAuthViewControllerDidAuthenticate(controller: TraktAuthViewController) {
         navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        load()
     }
 
     func TraktAuthViewControllerDidCancel(controller: TraktAuthViewController) {
