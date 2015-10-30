@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = "AKTrakt"
   s.version          = "0.1.0"
-  s.summary          = "A short description of AKTrakt."
+  s.summary          = "Swift Trakt.tv client."
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,6 +17,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
   s.description      = <<-DESC
+    A simple trakt.tv client written in swift.
                        DESC
 
   s.homepage         = "https://github.com/arsonik/AKTrakt"
@@ -29,11 +30,8 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'AKTrakt' => ['Pod/Assets/*.png']
-  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'UIKit', 'Webkit'
+  s.dependency 'Alamofire'
 end
