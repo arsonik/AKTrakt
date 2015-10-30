@@ -32,6 +32,10 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
+    public func embedInNavigationController() -> UINavigationController {
+        return UINavigationController(rootViewController: self)
+    }
+
     public override func viewDidLoad() {
         super.viewDidLoad()
 

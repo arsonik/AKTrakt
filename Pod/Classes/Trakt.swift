@@ -15,8 +15,11 @@ public class Trakt {
     internal let clientSecret:String
     internal let applicationId: Int
     
-    public var token:TraktToken?
+    internal var token:TraktToken?
     private let manager:Manager
+    public var hasToken:Bool {
+        return token != nil
+    }
 	
     public init(clientId:String, clientSecret:String, applicationId: Int){
 		self.clientId = clientId
@@ -343,55 +346,7 @@ public class Trakt {
 	
 	
 	var searchOperationQueue:NSOperationQueue = NSOperationQueue()
-	/*
-	func search(item:WatchableItem, completion:((results:[TraktObject]?, error:NSError?) -> Void)) -> NSOperation {
-		let op = NSBlockOperation()
-		op.addExecutionBlock {[weak op] () -> Void in
-			// it s an episode
-			if let sn = item.seasonNumber, en = item.episodeNumber {
-				self.manager.request(TraktRoute.Episode(showId: item.title.slug, season: sn, episode: en).OAuthRequest(self)).responseJSON { (response) -> Void in
-					if op?.cancelled == true {
-						return ()
-					}
-					if let episode = TraktEpisode(data: response.result.value as? [String:AnyObject]) {
-						completion(results: [episode], error: response.result.error)
-					}
-					else{
-						// failed > search
-						self.search(item.title, completion: { (results, error) -> Void in
-							completion(results: results, error: error)
-						})
-					}
-				}
-			}
-			// movie
-			else{
-				var id:String = item.title.slug
-				if let yr = item.year {
-					id += "-\(yr)"
-				}
-				// try to load movie with slug
-				self.manager.request(TraktRoute.Movie(id:id).OAuthRequest(self)).responseJSON { (response) -> Void in
-					if op?.cancelled == true {
-						return ()
-					}
-					if let movie = TraktMovie(data: response.result.value as? [String:AnyObject]) {
-						completion(results: [movie], error: nil)
-					}
-					else{
-						print("cannot find movie \(item)")
-						// failed > search
-						self.search(item.title, type: TraktType.Movies, year: item.year, completion: { (results, error) -> Void in
-							completion(results: results, error: error)
-						})
-					}
-				}
-			}
-		}
-		searchOperationQueue.addOperation(op)
-		return op
-	}
-	*/
+
 	public func search(query:String, type:TraktType! = nil, year:Int! = nil, completion:((results:[TraktObject]?, error:NSError?) -> Void)) -> Request {
 		return manager.request(TraktRoute.Search(query: query, type: type, year: year).OAuthRequest(self)).responseJSON { (response) -> Void in
 			var list:[TraktObject]?

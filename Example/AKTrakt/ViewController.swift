@@ -11,7 +11,6 @@ import AKTrakt
 
 class ViewController: UIViewController, TraktAuthViewControllerDelegate {
 
-
     var trakt:Trakt!
 
     override func viewDidLoad() {
@@ -24,10 +23,9 @@ class ViewController: UIViewController, TraktAuthViewControllerDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        if trakt.token == nil {
+        if !trakt.hasToken {
             let authVC = TraktAuthViewController(trakt: trakt, delegate: self)
-            let nav = UINavigationController(rootViewController: authVC)
-            navigationController?.presentViewController(nav, animated: true, completion: nil)
+            navigationController?.presentViewController(authVC.embedInNavigationController(), animated: true, completion: nil)
         }
         else {
             load()
@@ -37,7 +35,7 @@ class ViewController: UIViewController, TraktAuthViewControllerDelegate {
     func load() {
         trakt.trendingMovies { (movies, error) -> Void in
             for movie in movies! {
-                movie.description
+                print(movie.title)
             }
         }
     }
