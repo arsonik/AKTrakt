@@ -42,27 +42,25 @@ public class Trakt {
 		return nil
 	}
     
-    public func exchangePinForToken(pin:String, completion:(Bool, NSError?) -> Void) {
+    public func exchangePinForToken(pin:String, completion:(TraktToken?, NSError?) -> Void) {
         let request = TraktRoute.Token(client: self, pin: pin)
         manager.request(request).responseJSON { (response) -> Void in
             if let aToken = TraktToken(data: response.result.value as? [String:AnyObject]) {
-                self.token = aToken
-                completion(true, nil)
+                completion(aToken, nil)
             }
             else{
-                UIAlertView(title: "", message: "Failed to get a valid token", delegate: nil, cancelButtonTitle: "OK").show()
-                print(response.result.error)
-                //self.initWebview()
+                print(response.result.value)
+                completion(nil, response.result.error)
             }
         }
     }
 
     public func clearToken() {
-        token = nil
-        saveTokenToDefaults(token: nil)
+        saveToken(token: nil)
     }
 	
-	public func saveTokenToDefaults(token t:TraktToken!) {
+	public func saveToken(token t:TraktToken!) {
+        token = t
 		let defaults = NSUserDefaults.standardUserDefaults()
         if t != nil {
             defaults.setObject(t.accessToken, forKey: "trakt_access_token_\(clientId)")

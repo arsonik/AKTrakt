@@ -40,12 +40,12 @@ class ViewController: UIViewController, TraktAuthViewControllerDelegate {
         }
     }
 
-    func TraktAuthViewControllerDidAuthenticate(controller: TraktAuthViewController) {
+    func TraktAuthViewControllerDidAuthenticate(controller: UIViewController) {
         navigationController?.dismissViewControllerAnimated(true, completion: nil)
         load()
     }
 
-    func TraktAuthViewControllerDidCancel(controller: TraktAuthViewController) {
+    func TraktAuthViewControllerDidCancel(controller: UIViewController) {
         navigationController?.dismissViewControllerAnimated(true, completion: nil)
     }
 

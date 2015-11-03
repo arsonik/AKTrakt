@@ -10,11 +10,6 @@ import UIKit
 import WebKit
 import Alamofire
 
-public protocol TraktAuthViewControllerDelegate : class {
-    func TraktAuthViewControllerDidAuthenticate(controller:TraktAuthViewController)
-    func TraktAuthViewControllerDidCancel(controller:TraktAuthViewController)
-}
-
 public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
 
     private var wkWebview: WKWebView!

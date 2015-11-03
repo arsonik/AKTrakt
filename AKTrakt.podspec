@@ -25,13 +25,25 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { "Florian Morello" => "arsonik@me.com" }
   s.source           = { :git => "https://github.com/arsonik/AKTrakt.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/arsonik/AKTrakt.git", :tag => s.version.to_s }
 
+  s.tvos.deployment_target = '9.0'
   s.platform     = :ios, '8.0'
+  s.platform     = :tvos, '9.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/**/*'
+  s.source_files = 'Pod/Classes/shared/**/*'
+  s.ios.source_files = 'Pod/Classes/ios/**/*'
+  s.tvos.source_files = 'Pod/Classes/tvos/**/*'
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  s.frameworks = 'UIKit', 'Webkit'
+    s.tvos.resource_bundles = {
+        'AKTraktTvOs' => [
+            'Pod/Resources/tvos/**/*'
+        ]
+    }
+
+  s.ios.frameworks = 'UIKit', 'Webkit'
   s.dependency 'Alamofire'
+#  s.tvos.dependency 'QRCode'
+
 end
