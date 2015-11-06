@@ -26,8 +26,8 @@
                         <constraint firstAttribute="width" secondItem="WTm-8r-H6E" secondAttribute="height" multiplier="1:1" id="s4v-pf-QDl"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GHR-Le-jgu">
-                    <rect key="frame" x="927" y="720" width="67" height="66"/>
+                <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GHR-Le-jgu">
+                    <rect key="frame" x="927" y="721" width="67" height="66"/>
                     <animations/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" keyboardAppearance="alert" returnKeyType="go"/>
@@ -36,15 +36,15 @@
                     </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1m-Il-izZ">
-                    <rect key="frame" x="939" y="833" width="42" height="21"/>
+                    <rect key="frame" x="946" y="836" width="29" height="27"/>
                     <animations/>
-                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <animations/>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="GHR-Le-jgu" firstAttribute="top" secondItem="WTm-8r-H6E" secondAttribute="bottom" constant="30" id="3vm-AX-cEp"/>
                 <constraint firstItem="GHR-Le-jgu" firstAttribute="centerX" secondItem="WTm-8r-H6E" secondAttribute="centerX" id="4hl-Jd-CnS"/>
@@ -55,8 +55,5 @@
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
         </view>
-        <navigationItem title="Authentification" id="ks7-Wo-mBt">
-            <barButtonItem key="backBarButtonItem" title="test" id="sqd-pQ-hO3"/>
-        </navigationItem>
     </objects>
 </document>

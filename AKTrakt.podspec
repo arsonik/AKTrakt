@@ -25,7 +25,6 @@ Pod::Spec.new do |s|
   s.license          = 'MIT'
   s.author           = { "Florian Morello" => "arsonik@me.com" }
   s.source           = { :git => "https://github.com/arsonik/AKTrakt.git", :tag => s.version.to_s }
-  s.source           = { :git => "https://github.com/arsonik/AKTrakt.git", :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'

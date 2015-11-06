@@ -19,7 +19,6 @@ public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
         qrImageView.image = UIImage(named: "TraktQRCode.png", inBundle: bundle, compatibleWithTraitCollection: nil)
         uriLabel.text = "https://trakt.tv/pin/\(trakt.applicationId)"
 
@@ -41,7 +40,11 @@ public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate
                 self?.delegate?.TraktAuthViewControllerDidAuthenticate(self!)
             }
             else {
-                print("error while exchanging")
+				let ac = UIAlertController(title: "Trakt Error", message: error?.localizedDescription, preferredStyle: UIAlertControllerStyle.Alert)
+				ac.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+					self?.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+				}))
+				self?.presentViewController(ac, animated: true, completion: nil)
             }
         }
         return true
