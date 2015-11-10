@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 
-
 public class Trakt {
 	internal let clientId:String
     internal let clientSecret:String
@@ -42,7 +41,7 @@ public class Trakt {
 		return nil
 	}
     
-    public func exchangePinForToken(pin:String, completion:(TraktToken?, NSError?) -> Void) {
+    internal func exchangePinForToken(pin:String, completion:(TraktToken?, NSError?) -> Void) {
         let request = TraktRoute.Token(client: self, pin: pin)
         manager.request(request).responseJSON { (response) -> Void in
             if let aToken = TraktToken(data: response.result.value as? [String:AnyObject]) {
