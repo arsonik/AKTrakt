@@ -44,6 +44,14 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
         initWebview()
     }
 
+
+	public static func credientialViewController(trakt: Trakt, delegate: TraktAuthViewControllerDelegate) -> TraktAuthViewController? {
+		if trakt.token == nil {
+			return TraktAuthViewController(trakt: trakt, delegate: delegate)
+		}
+		return nil
+	}
+
     public func cancel() {
         delegate?.TraktAuthViewControllerDidCancel(self)
     }

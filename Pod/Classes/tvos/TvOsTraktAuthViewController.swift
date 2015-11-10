@@ -50,7 +50,6 @@ public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate
         return true
     }
 
-
 	public static func credientialViewController(trakt: Trakt, delegate: TraktAuthViewControllerDelegate) -> TvOsTraktAuthViewController? {
 		if trakt.token == nil {
 			let podBundle = NSBundle(forClass: self.classForCoder())
