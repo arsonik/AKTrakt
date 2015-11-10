@@ -28,7 +28,7 @@ public class TraktSeason : TraktWatchable {
 	}
 	
 	public var notCompleted:[TraktEpisode] {
-		return episodes.filter {$0.completed == false}
+		return episodes.filter {$0.watched == false}
 	}
 	
 	public override var description:String {

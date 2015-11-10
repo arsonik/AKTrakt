@@ -14,9 +14,8 @@ public class TraktEpisode : TraktWatchable {
 	
 	public let number:Int!
 	public var seasonNumber:Int!
-	public var completed:Bool!
 	
-	var loaded:Bool! = false
+	var loaded:Bool? = false
 	
 	public var firstAired:NSDate!
 	
@@ -24,8 +23,10 @@ public class TraktEpisode : TraktWatchable {
 		if let n = data?["number"] as? Int {
 			number = n
 			seasonNumber = data?["season"] as? Int
-			completed = data?["completed"] as? Bool
 			super.init(data: data)
+			if let c = data?["completed"] as? Bool {
+				watched = c
+			}
 		}
 		else {
 			number = nil
@@ -35,6 +36,6 @@ public class TraktEpisode : TraktWatchable {
 	}
 	
 	public override var description:String {
-		return "TraktEpisode(\(number)) completed \(completed)"
+		return "TraktEpisode(\(number)) completed \(watched)"
 	}
 }

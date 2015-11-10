@@ -14,8 +14,8 @@ public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate
     @IBOutlet weak var pinField: UITextField!
     @IBOutlet weak var uriLabel: UILabel!
 
-    public weak var delegate: TraktAuthViewControllerDelegate!
-    public var trakt:Trakt!
+    internal weak var delegate: TraktAuthViewControllerDelegate!
+    internal var trakt:Trakt!
 
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,18 +50,20 @@ public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate
         return true
     }
 
-    public static func test() -> TvOsTraktAuthViewController? {
-        let podBundle = NSBundle(forClass: self.classForCoder())
-        if let bundleURL = podBundle.URLForResource("AKTraktTvOs", withExtension: "bundle") {
-            if let bundle = NSBundle(URL: bundleURL) {
-                return TvOsTraktAuthViewController(nibName: "TvOsTraktAuthViewController", bundle: bundle)
 
-            }else {
-                assertionFailure("Could not load the bundle")
-            }
-        } else {
-            assertionFailure("Could not create a path to the bundle")
-        }
-        return nil
-    }
+	public static func credientialViewController(trakt: Trakt, delegate: TraktAuthViewControllerDelegate) -> TvOsTraktAuthViewController? {
+		if trakt.token == nil {
+			let podBundle = NSBundle(forClass: self.classForCoder())
+			if let bundleURL = podBundle.URLForResource("AKTraktTvOs", withExtension: "bundle") {
+				if let bundle = NSBundle(URL: bundleURL) {
+					let vc = TvOsTraktAuthViewController(nibName: "TvOsTraktAuthViewController", bundle: bundle)
+					vc.delegate = delegate
+					vc.trakt = trakt
+					return vc
+
+				}
+			}
+		}
+		return nil
+	}
 }

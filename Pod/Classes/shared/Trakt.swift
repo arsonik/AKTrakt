@@ -16,9 +16,6 @@ public class Trakt {
     
     internal var token:TraktToken?
     private let manager:Manager
-    public var hasToken:Bool {
-        return token != nil
-    }
 	
     public init(clientId:String, clientSecret:String, applicationId: Int){
 		self.clientId = clientId
@@ -70,17 +67,23 @@ public class Trakt {
             defaults.removeObjectForKey("trakt_access_token_\(clientId)")
             defaults.removeObjectForKey("trakt_expire_\(clientId)")
             defaults.removeObjectForKey("trakt_refresh_token_\(clientId)")
-
         }
 	}
 
     public func watched(objects:[TraktObject]){
+		for show in objects.filter({$0 is TraktWatchable}) {
+			(show as! TraktWatchable).watched = true
+		}
+		
 		manager.request(TraktRoute.addToHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
                     self.watched(objects)
                 }
             }
+			else {
+				print(response.result.value)
+			}
 		}
     }
 
