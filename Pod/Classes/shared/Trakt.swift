@@ -272,7 +272,31 @@ public class Trakt {
 		df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
 		return df
 	}()
-	
+
+    public func searchEpisode(id: AnyObject, season:Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
+        //print("serch ep \(id), \(season), \(episode)")
+        return manager.request(TraktRoute.Episode(showId: id, season: season, episode: episode).OAuthRequest(self)).responseJSON { (response) -> Void in
+            if let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) {
+                completion(o, nil)
+            }
+            else {
+                completion(nil, response.result.error)
+            }
+        }
+    }
+
+    public func searchMovie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
+        //print("serch mv \(id)")
+        return manager.request(TraktRoute.Movie(id: id).OAuthRequest(self)).responseJSON { (response) -> Void in
+            if let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) {
+                completion(o, nil)
+            }
+            else {
+                completion(nil, response.result.error)
+            }
+        }
+    }
+
 	public func episode(episode:TraktEpisode, completion:((loaded:Bool) -> Void)) -> Request? {
 		if let ld = episode.loaded where ld == false {
 			episode.loaded = nil
