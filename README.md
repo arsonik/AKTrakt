@@ -1,6 +1,6 @@
 # AKTrakt
 
-[![CI Status](http://img.shields.io/travis/Florian Morello/AKTrakt.svg?style=flat)](https://travis-ci.org/Florian Morello/AKTrakt)
+[![CI Status](http://img.shields.io/travis/arsonik/AKTrakt.svg?style=flat)](https://travis-ci.org/arsonik/AKTrakt)
 [![Version](https://img.shields.io/cocoapods/v/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
 [![License](https://img.shields.io/cocoapods/l/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
 [![Platform](https://img.shields.io/cocoapods/p/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)

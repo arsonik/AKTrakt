@@ -1,7 +1,7 @@
 PODS:
-  - AKTrakt (0.1.1):
+  - AKTrakt (0.1.4):
     - Alamofire
-  - Alamofire (3.1.0)
+  - Alamofire (3.1.3)
 
 DEPENDENCIES:
   - AKTrakt (from `../`)
@@ -12,7 +12,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AKTrakt: 6dbeab6d7da984f66960bdd8f82f75cc0b66fb12
-  Alamofire: 415bd7f56197722978759078486689f7ef913dce
+  AKTrakt: 9496268949526eabcb48e4be8b12b86736e7ed91
+  Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
 
 COCOAPODS: 0.39.0
