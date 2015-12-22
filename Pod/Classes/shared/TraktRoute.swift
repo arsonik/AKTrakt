@@ -26,6 +26,7 @@ public enum TraktRoute :URLRequestConvertible {
 	, Episode(showId:AnyObject, season:Int, episode:Int)
 	, Movie(id:AnyObject)
 	, Search(query:String, type:TraktType!, year:Int!)
+	, Rate(TraktWatchable, Int)
 	
 	private var domain:String {
 		switch self {
@@ -36,7 +37,7 @@ public enum TraktRoute :URLRequestConvertible {
 	
 	private var method:String {
 		switch self {
-		case .Token, .addToHistory, .removeFromHistory, .addToWatchlist:
+		case .Token, .addToHistory, .removeFromHistory, .addToWatchlist, .Rate:
 			return "POST"
         case .HideRecommendation:
             return "DELETE"
@@ -69,6 +70,7 @@ public enum TraktRoute :URLRequestConvertible {
 		case .removeFromHistory:				return "/sync/history/remove"
 		case .addToWatchlist:					return "/sync/watchlist"
 		case .Search:							return "/search"
+		case .Rate:								return "/sync/ratings"
 
         case .HideRecommendation(let movie):    return "/recommendations/movies/\(movie.id!)"
 		}
@@ -140,6 +142,16 @@ public enum TraktRoute :URLRequestConvertible {
 				p["year"] = v
 			}
 			return p
+
+		case .Rate(let object, let rate):
+
+			var p:[String: [AnyObject]] = [:]
+			let e: [String: AnyObject] = [
+				"rating": rate,
+				"ids": ["trakt": object.id!]
+			]
+			p["\(object.type!.rawValue)"] = [e]
+			return p
 		
 		default:
 			return nil
@@ -159,7 +171,7 @@ public enum TraktRoute :URLRequestConvertible {
 			}
 
 			switch self {
-			case .Token, .addToHistory, .removeFromHistory, .addToWatchlist:
+			case .Token, .addToHistory, .removeFromHistory, .addToWatchlist, .Rate:
 				let encoding = Alamofire.ParameterEncoding.JSON
 				return encoding.encode(URLRequest, parameters: parameters).0
 			default:

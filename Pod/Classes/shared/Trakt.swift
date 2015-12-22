@@ -264,7 +264,18 @@ public class Trakt {
             }
         }
     }
-	
+
+	public func rate(object: TraktWatchable, rate: Int, completion: (Bool?, NSError?) -> Void) -> Request {
+		return manager.request(TraktRoute.Rate(object, rate).OAuthRequest(self)).responseJSON { (response) -> Void in
+			if let item = response.result.value as? [String: AnyObject], added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
+				completion(true, nil)
+			}
+			else {
+				completion(false, response.result.error)
+			}
+		}
+	}
+
 	private lazy var dateFormatter:NSDateFormatter = {
 		let df = NSDateFormatter()
 		df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
