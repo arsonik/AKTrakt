@@ -297,7 +297,6 @@ public class Trakt {
     }
 
     public func searchMovie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
-        //print("serch mv \(id)")
         return manager.request(TraktRoute.Movie(id: id).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) {
                 completion(o, nil)
@@ -378,7 +377,6 @@ public class Trakt {
 			completion(loaded: loaded, error: nil)
 		}
 	}
-	
 	
 	var searchOperationQueue:NSOperationQueue = NSOperationQueue()
 
