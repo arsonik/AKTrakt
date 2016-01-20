@@ -242,7 +242,30 @@ public class Trakt {
             }
         }
     }
-
+    
+    public func trendingShows(completion: ([TraktShow]?, NSError?) -> Void) -> Request {
+        return manager.request(TraktRoute.TrendingShows.OAuthRequest(self)).responseJSON { (response) -> Void in
+            if let r = response.response where r.shouldRetry {
+                return delay(5) {
+                    self.trendingShows(completion)
+                }
+            }
+            if let entries = response.result.value as? [[String:AnyObject]] {
+                var list:[TraktShow] = []
+                for entry in entries {
+                    //print(entry["show"])
+                    if let sh = entry["show"] as? [String:AnyObject], o = TraktShow(data: sh) {
+                        list.append(o)
+                    }
+                }
+                completion(list, response.result.error)
+            }
+            else {
+                completion(nil, response.result.error)
+            }
+        }
+    }
+    
     public func recommendationsMovies(completion: ([TraktMovie]?, NSError?) -> Void) -> Request {
         return manager.request(TraktRoute.RecommandationsMovies.OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {

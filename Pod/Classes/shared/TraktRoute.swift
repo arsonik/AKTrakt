@@ -13,6 +13,7 @@ public enum TraktRoute :URLRequestConvertible {
 	
     case Token(client:Trakt, pin:String)
     , TrendingMovies
+    , TrendingShows
     , RecommandationsMovies
     , Collection(TraktType)
     , Watchlist(TraktType)
@@ -57,6 +58,7 @@ public enum TraktRoute :URLRequestConvertible {
 		switch self {
         case .Token:							return "/oauth/token"
         case .TrendingMovies:					return "/movies/trending"
+        case .TrendingShows:					return "/shows/trending"
         case .RecommandationsMovies:			return "/recommendations/movies"
 		case .Movie(let id):					return "/movies/\(id)"
 		case .Episode(let showId, let season, let episode):
