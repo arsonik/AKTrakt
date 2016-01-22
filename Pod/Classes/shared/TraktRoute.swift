@@ -91,7 +91,7 @@ public enum TraktRoute :URLRequestConvertible {
 		case .Watchlist, .Collection, .Progress, .Episode, .Movie:
 			return ["extended": "full,images"]
 
-		case .TrendingMovies, .RecommandationsMovies:
+		case .TrendingMovies, .TrendingShows, .RecommandationsMovies:
 			return ["extended": "full,images", "limit": "100"]
 
         case .addToWatchlist(let objects):
