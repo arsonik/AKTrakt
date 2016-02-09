@@ -23,5 +23,9 @@ public class TraktShow : TraktWatchable {
 	public override var description:String {
 		return "TraktShow(\(title))"
 	}
+    
+    public override init?(data: [String : AnyObject]!) {
+        super.init(data: data)
+    }
 }
 
