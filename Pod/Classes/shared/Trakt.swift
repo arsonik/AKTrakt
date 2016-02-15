@@ -204,20 +204,23 @@ public class Trakt {
 	}
 	
 	public func collection(type:TraktType, completion:((result:[TraktObject]?, error:NSError?) -> Void)) -> Request {
-		return manager.request(TraktRoute.Collection(type).OAuthRequest(self)).responseJSON { (response) -> Void in
-			var list:[TraktObject]? = nil
-			if let entries = response.result.value as? [[String:AnyObject]] {
-				list = []
+		return manager.request(TraktRoute.Collection(type).OAuthRequest(self)).responseJSON { [weak self] response -> Void in
+            if let r = response.response where r.shouldRetry {
+                return delay(5) {
+                    self?.collection(type, completion: completion)
+                }
+            } else if let entries = response.result.value as? [[String:AnyObject]] {
+                var list:[TraktObject] = []
 				for entry in entries {
 					if let sh = entry["show"] as? [String:AnyObject], o = TraktShow(data: sh) where type == TraktType.Shows {
-						list!.append(o)
+						list.append(o)
 					}
-				}
+                }
+                completion(result: list, error: nil)
 			}
             else {
-                print(response.request?.URL)
+                completion(result: nil, error: response.result.error)
             }
-			completion(result: list, error: response.result.error)
 		}
     }
 
