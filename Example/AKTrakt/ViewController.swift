@@ -25,12 +25,17 @@ class ViewController: UIViewController, TraktAuthViewControllerDelegate {
 		}
     }
 
-    func load() {
-        trakt.trendingMovies { (movies, error) -> Void in
-            for movie in movies! {
-                print(movie.title)
-            }
-        }
+	func load() {
+		trakt.trendingMovies { (movies, error) -> Void in
+			for movie in movies! {
+				print(movie.title)
+			}
+		}
+		trakt.trendingShows { (shows, error) -> Void in
+			for show in shows! {
+				print(show.title)
+			}
+		}
     }
 
     func TraktAuthViewControllerDidAuthenticate(controller: UIViewController) {
