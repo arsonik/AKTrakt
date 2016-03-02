@@ -9,8 +9,8 @@
 import Foundation
 
 public class TraktCharacter {
-    public let character:String!
-    public let person:TraktPerson!
+    public let character: String!
+    public let person: TraktPerson!
 
     init?(data: [String : AnyObject]!) {
         if let n = data["character"] as? String, p = data["person"] as? [String:AnyObject], pers = TraktPerson(data: p) {

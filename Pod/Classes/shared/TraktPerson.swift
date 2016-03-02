@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class TraktPerson : TraktObject {
+public class TraktPerson: TraktObject {
 
-    public let name:String!
+    public let name: String!
 
     override init?(data: [String : AnyObject]!) {
 

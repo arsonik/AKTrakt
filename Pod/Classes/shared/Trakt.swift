@@ -113,28 +113,22 @@ public class Trakt {
         }
     }
 
-    public func people(movie:TraktMovie) {
+    public func people(movie: TraktMovie, completion:((succeed: Bool, error:NSError?) -> Void)) {
         manager.request(TraktRoute.People(movie.id!).OAuthRequest(self)).responseJSON { (response) -> Void in
-            if let result = response.result.value as? [String:AnyObject] {
-                if let castData = result["cast"] as? [[String:AnyObject]] {
-                    var cast:[TraktCharacter] = []
-                    for pip in castData {
-                        if let people = TraktCharacter(data: pip) {
-                            cast.append(people)
-                        }
+            if let result = response.result.value as? [String: AnyObject] {
+                if let castData = result["cast"] as? [[String: AnyObject]] {
+                    movie.casting = castData.flatMap {
+                        TraktCharacter(data: $0)
                     }
                 }
-                if let crewData = result["crew"] as? [String:[[String:AnyObject]]] {
-                    var crew:[TraktCrew] = []
-                    for (_, pips) in crewData {
-                        for pip in pips {
-                            if let people = TraktCrew(data: pip) {
-                                crew.append(people)
-                            }
-                        }
+                if let crewData = result["crew"] as? [String: [[String: AnyObject]]] {
+                    movie.crew = crewData.values.flatMap({$0}).flatMap {
+                        TraktCrew(data: $0)
                     }
                 }
-
+                completion(succeed: true, error: response.result.error)
+            } else {
+                completion(succeed: false, error: response.result.error)
             }
         }
     }
@@ -324,6 +318,7 @@ public class Trakt {
 
     public func searchMovie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
         return manager.request(TraktRoute.Movie(id: id).OAuthRequest(self)).responseJSON { (response) -> Void in
+            // Todo: should not create a new object, complete the object instead
             if let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) {
                 completion(o, nil)
             }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TraktMovie : TraktWatchable {
+public class TraktMovie: TraktWatchable {
 
 	public let trailer: String? // Youtube video name ex: _1MDrwqjeGo
     public let rating: Float? // 6.544
@@ -16,6 +16,9 @@ public class TraktMovie : TraktWatchable {
     public let release: NSDate?
     public let runtime: Int? // length
     public let genres: [String]?
+
+    public var crew: [TraktCrew]?
+    public var casting: [TraktCharacter]?
 		
 	public override init?(data: [String : AnyObject]!) {
 		rating = data?["rating"] as? Float ?? nil

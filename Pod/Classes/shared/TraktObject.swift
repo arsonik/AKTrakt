@@ -10,24 +10,28 @@ import Foundation
 
 public typealias TraktIdentifier = Int
 
-public class TraktObject : CustomStringConvertible {
+public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
+    return lhs.id == rhs.id
+}
+
+public class TraktObject: CustomStringConvertible, Equatable {
 	
-	public var ids:[TraktId:AnyObject]!
-	public var id:TraktIdentifier? {
+	public var ids: [TraktId:AnyObject]!
+	public var id: TraktIdentifier? {
 		return ids[TraktId.Trakt] as? TraktIdentifier
 	}
-	public var type:TraktType? {
+	public var type: TraktType? {
 		if self is TraktEpisode {
-			return TraktType.Episodes
+			return .Episodes
 		}
 		else if self is TraktSeason {
-			return TraktType.Seasons
+			return .Seasons
 		}
 		else if self is TraktShow {
-			return TraktType.Shows
+			return .Shows
 		}
 		else if self is TraktMovie {
-			return TraktType.Movies
+			return .Movies
 		}
 		return nil
 	}
@@ -35,7 +39,7 @@ public class TraktObject : CustomStringConvertible {
 	public var images:[TraktImageType:[TraktImageSize:String]] = [:]
 
 
-	init?(data: [String : AnyObject]!) {
+	init?(data: [String: AnyObject]!) {
 
 		ids = TraktId.extractIds(data) ?? [:]
 
@@ -55,7 +59,7 @@ public class TraktObject : CustomStringConvertible {
 		}
 	}
 
-	static func autoload(item:[String:AnyObject]!) -> TraktObject! {
+	static func autoload(item:[String: AnyObject]!) -> TraktObject! {
 		if let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? [String:AnyObject] {
 			switch type {
 			case .Shows:

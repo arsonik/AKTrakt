@@ -34,12 +34,8 @@ Pod::Spec.new do |s|
   s.source_files = 'Pod/Classes/shared/**/*'
   s.ios.source_files = 'Pod/Classes/ios/**/*'
   s.tvos.source_files = 'Pod/Classes/tvos/**/*'
-
-    s.tvos.resource_bundles = {
-        'AKTraktTvOs' => [
-            'Pod/Resources/tvos/**/*'
-        ]
-    }
+ # s.tvos.resource_bundles = {'AKTraktTvOs' => ['Pod/Resources/tvos/**/*.{xib,png}']}
+  s.tvos.resources = 'Pod/Resources/tvos/*.{xib,png}'
 
   s.ios.frameworks = 'UIKit', 'Webkit'
   s.dependency 'Alamofire'
