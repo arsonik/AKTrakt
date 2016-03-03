@@ -18,8 +18,7 @@ class ViewController: UIViewController, TraktAuthViewControllerDelegate {
 
 		if let vc = TvOsTraktAuthViewController.credientialViewController(trakt, delegate: self) {
 			presentViewController(vc, animated: true, completion: nil)
-		}
-		else {
+		} else {
 			load()
 		}
 	}
@@ -42,4 +41,3 @@ class ViewController: UIViewController, TraktAuthViewControllerDelegate {
 	}
 
 }
-

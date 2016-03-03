@@ -231,6 +231,7 @@
 				607FACCE1AFB9204008FA782 /* Resources */,
 				5DD668363034103C97473FB9 /* Embed Pods Frameworks */,
 				0F092E49AE63FBC26918D9E4 /* Copy Pods Resources */,
+				174FE9251C85917000FA2EAE /* Swift lint */,
 			);
 			buildRules = (
 			);
@@ -363,6 +364,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt_iOS_Example/Pods-AKTrakt_iOS_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		174FE9251C85917000FA2EAE /* Swift lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift lint";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
 		323B7B89A9F8D0ADC6CEDB5F /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

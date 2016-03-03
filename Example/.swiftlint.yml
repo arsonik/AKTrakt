@@ -1,0 +1,14 @@
+disabled_rules:
+excluded:
+    - Pods/Alamofire
+line_length: 200
+type_body_length:
+    - 300 # warning
+    - 400 # error
+function_body_length:
+    - 100 # warning
+    - 400 # error
+variable_name:
+    excluded:
+        - URLString
+        - URLRequest

@@ -10,14 +10,14 @@ import Foundation
 import Alamofire
 
 public class Trakt {
-	internal let clientId:String
-    internal let clientSecret:String
+	internal let clientId: String
+    internal let clientSecret: String
     internal let applicationId: Int
     
-    internal var token:TraktToken?
-    private let manager:Manager
+    internal var token: TraktToken?
+    private let manager: Manager
 	
-    public init(clientId:String, clientSecret:String, applicationId: Int){
+    public init(clientId: String, clientSecret: String, applicationId: Int){
 		self.clientId = clientId
 		self.clientSecret = clientSecret
         self.applicationId = applicationId
@@ -197,19 +197,22 @@ public class Trakt {
 		}
 	}
 	
-	public func collection(type:TraktType, completion:((result:[TraktObject]?, error:NSError?) -> Void)) -> Request {
+	public func collection(type:TraktType, completion:((result: [TraktObject]?, error:NSError?) -> Void)) -> Request {
 		return manager.request(TraktRoute.Collection(type).OAuthRequest(self)).responseJSON { [weak self] response -> Void in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
                     self?.collection(type, completion: completion)
                 }
-            } else if let entries = response.result.value as? [[String:AnyObject]] {
-                var list:[TraktObject] = []
-				for entry in entries {
-					if let sh = entry["show"] as? [String:AnyObject], o = TraktShow(data: sh) where type == TraktType.Shows {
-						list.append(o)
+            } else if let entries = response.result.value as? [[String: AnyObject]] {
+				let list: [TraktObject] = entries.flatMap({
+					if type == .Shows {
+						return TraktShow(data: $0["show"] as? [String: AnyObject])
+					} else if type == .Movies {
+						return TraktMovie(data: $0["movie"] as? [String: AnyObject])
+					} else {
+						return nil
 					}
-                }
+				})
                 completion(result: list, error: nil)
 			}
             else {
@@ -225,13 +228,10 @@ public class Trakt {
                     self.trendingMovies(completion)
                 }
             }
-            if let entries = response.result.value as? [[String:AnyObject]] {
-                var list:[TraktMovie] = []
-                for entry in entries {
-                    if let sh = entry["movie"] as? [String:AnyObject], o = TraktMovie(data: sh) {
-                        list.append(o)
-                    }
-                }
+			if let entries = response.result.value as? [[String:AnyObject]] {
+				let list = entries.flatMap({
+					TraktMovie(data: $0["movie"] as? [String:AnyObject])
+				})
                 completion(list, response.result.error)
             }
             else {
@@ -248,13 +248,9 @@ public class Trakt {
                 }
             }
             if let entries = response.result.value as? [[String:AnyObject]] {
-                var list:[TraktShow] = []
-                for entry in entries {
-                    //print(entry["show"])
-                    if let sh = entry["show"] as? [String:AnyObject], o = TraktShow(data: sh) {
-                        list.append(o)
-                    }
-                }
+				let list = entries.flatMap({
+					TraktShow(data: $0["show"] as? [String:AnyObject])
+				})
                 completion(list, response.result.error)
             }
             else {
@@ -271,12 +267,9 @@ public class Trakt {
                 }
             }
             if let entries = response.result.value as? [[String:AnyObject]] {
-                var list:[TraktMovie] = []
-                for entry in entries {
-                    if let o = TraktMovie(data: entry) {
-                        list.append(o)
-                    }
-                }
+				let list = entries.flatMap({
+					TraktMovie(data: $0)
+				})
                 completion(list, response.result.error)
             }
             else {
@@ -403,21 +396,15 @@ public class Trakt {
 
 	public func search(query:String, type:TraktType! = nil, year:Int! = nil, completion:((results:[TraktObject]?, error:NSError?) -> Void)) -> Request {
 		return manager.request(TraktRoute.Search(query: query, type: type, year: year).OAuthRequest(self)).responseJSON { (response) -> Void in
-			var list:[TraktObject]?
+			let list:[TraktObject]?
 			if let items = response.result.value as? [[String:AnyObject]] {
-				list = []
-				for item in items {
-					if let o = TraktObject.autoload(item) {
-						list!.append(o)
-					}
-				}
+				list = items.flatMap({
+					TraktObject.autoload($0)
+				})
+			} else {
+				list = nil
 			}
 			completion(results: list, error: response.result.error)
 		}
 	}
 }
-
-
-
-
-
