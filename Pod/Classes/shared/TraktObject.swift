@@ -23,20 +23,17 @@ public class TraktObject: CustomStringConvertible, Equatable {
 	public var type: TraktType? {
 		if self is TraktEpisode {
 			return .Episodes
-		}
-		else if self is TraktSeason {
+		} else if self is TraktSeason {
 			return .Seasons
-		}
-		else if self is TraktShow {
+		} else if self is TraktShow {
 			return .Shows
-		}
-		else if self is TraktMovie {
+		} else if self is TraktMovie {
 			return .Movies
 		}
 		return nil
 	}
 	
-	public var images:[TraktImageType:[TraktImageSize:String]] = [:]
+	public var images:[TraktImageType: [TraktImageSize: String]] = [:]
 
 
 	init?(data: [String: AnyObject]!) {

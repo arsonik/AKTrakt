@@ -114,13 +114,14 @@ public class Trakt {
     }
 
     public func people(movie: TraktMovie, completion:((succeed: Bool, error:NSError?) -> Void)) {
-        manager.request(TraktRoute.People(movie.id!).OAuthRequest(self)).responseJSON { (response) -> Void in
+        manager.request(TraktRoute.People(.Movies, movie.id!).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let result = response.result.value as? [String: AnyObject] {
                 if let castData = result["cast"] as? [[String: AnyObject]] {
                     movie.casting = castData.flatMap {
-                        TraktCharacter(data: $0)
+						TraktCharacter(data: $0)
                     }
                 }
+				// possible keys: production, art, crew, costume & make-up, directing, writing, sound, and camera
                 if let crewData = result["crew"] as? [String: [[String: AnyObject]]] {
                     movie.crew = crewData.values.flatMap({$0}).flatMap {
                         TraktCrew(data: $0)

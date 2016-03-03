@@ -17,7 +17,7 @@ public enum TraktRoute :URLRequestConvertible {
     , RecommandationsMovies
     , Collection(TraktType)
     , Watchlist(TraktType)
-    , People(TraktIdentifier)
+    , People(TraktType, TraktIdentifier)
 	, Watched(TraktType)
 	, addToWatchlist([TraktObject])
 	, addToHistory([TraktObject])
@@ -67,7 +67,7 @@ public enum TraktRoute :URLRequestConvertible {
 		case .Watchlist(let type):				return "/sync/watchlist/\(type.rawValue)"
         case .Watched(let type):				return "/sync/watched/\(type.rawValue)"
         case .Progress(let id):					return "/shows/\(id)/progress/watched"
-        case .People(let id):					return "/movies/\(id)/people"
+        case .People(let type, let id):			return "/\(type.rawValue)/\(id)/people"
 		case .addToHistory:						return "/sync/history"
 		case .removeFromHistory:				return "/sync/history/remove"
 		case .addToWatchlist:					return "/sync/watchlist"
@@ -88,7 +88,7 @@ public enum TraktRoute :URLRequestConvertible {
 				"redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
 				"grant_type": "authorization_code"
 			]
-		case .Watchlist, .Collection, .Progress, .Episode, .Movie:
+		case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People:
 			return ["extended": "full,images"]
 
 		case .TrendingMovies, .TrendingShows, .RecommandationsMovies:

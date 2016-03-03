@@ -9,11 +9,9 @@
 import Foundation
 
 public class TraktPerson: TraktObject {
-
     public let name: String!
 
-    override init?(data: [String : AnyObject]!) {
-
+    override init?(data: [String: AnyObject]!) {
         if let n = data["name"] as? String {
             name = n
             super.init(data: data)
@@ -25,5 +23,4 @@ public class TraktPerson: TraktObject {
         }
     }
 }
-
 
