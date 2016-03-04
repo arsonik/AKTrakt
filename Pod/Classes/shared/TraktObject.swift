@@ -14,9 +14,9 @@ public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
     return lhs.id == rhs.id
 }
 
-public class TraktObject: CustomStringConvertible, Equatable {
+public class TraktObject: CustomStringConvertible, Hashable {
 	
-	public var ids: [TraktId:AnyObject]!
+	public var ids: [TraktId: AnyObject]!
 	public var id: TraktIdentifier? {
 		return ids[TraktId.Trakt] as? TraktIdentifier
 	}
@@ -32,6 +32,10 @@ public class TraktObject: CustomStringConvertible, Equatable {
 		}
 		return nil
 	}
+
+    public var hashValue: Int {
+        return id!
+    }
 	
 	public var images:[TraktImageType: [TraktImageSize: String]] = [:]
 

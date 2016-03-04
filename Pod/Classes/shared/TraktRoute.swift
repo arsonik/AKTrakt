@@ -18,6 +18,7 @@ public enum TraktRoute :URLRequestConvertible {
     , Collection(TraktType)
     , Watchlist(TraktType)
     , People(TraktType, TraktIdentifier)
+    , Credits(TraktIdentifier, TraktType)
 	, Watched(TraktType)
 	, addToWatchlist([TraktObject])
 	, addToHistory([TraktObject])
@@ -72,7 +73,8 @@ public enum TraktRoute :URLRequestConvertible {
 		case .removeFromHistory:				return "/sync/history/remove"
 		case .addToWatchlist:					return "/sync/watchlist"
 		case .Search:							return "/search"
-		case .Rate:								return "/sync/ratings"
+        case .Rate:								return "/sync/ratings"
+        case .Credits(let id, let type):        return "/people/\(id)/\(type.rawValue)"
 
         case .HideRecommendation(let movie):    return "/recommendations/movies/\(movie.id!)"
 		}

@@ -134,7 +134,40 @@ public class Trakt {
         }
     }
 
-	public func watchList(type:TraktType, completion:((result:[TraktObject]?, error:NSError?) -> Void)){
+    public func credits(person: TraktPerson, type: TraktType, completion:((result: [TraktWatchable]?, error: NSError?) -> Void)) {
+        manager.request(TraktRoute.Credits(person.id!, type).OAuthRequest(self)).responseJSON { (response) -> Void in
+            if let result = response.result.value as? [String: AnyObject] {
+                var list: Set<TraktWatchable> = []
+
+                if let crew = result["crew"] as? [String: [[String: AnyObject]]] {
+                    crew.flatMap({
+                        return $0.1.flatMap({
+                            guard let item = $0[type.single] as? [String: AnyObject] else {
+                                return nil
+                            }
+                            return type == .Movies ? TraktMovie(data: item) : TraktShow(data: item)
+                        })
+                    }).forEach({
+                        list.insert($0)
+                    })
+                }
+                if let cast = result["cast"] as? [[String: AnyObject]] {
+                    cast.flatMap({
+                        guard let item = $0[type.single] as? [String: AnyObject] else {
+                            return nil
+                        }
+                        return type == .Movies ? TraktMovie(data: item) : TraktShow(data: item)
+                    }).forEach({
+                        list.insert($0)
+                    })
+                }
+
+                completion(result: Array(list), error: response.result.error)
+            }
+        }
+    }
+
+	public func watchList(type: TraktType, completion:((result: [TraktObject]?, error: NSError?) -> Void)) {
 		manager.request(TraktRoute.Watchlist(type).OAuthRequest(self)).responseJSON { (response) -> Void in
 			var list:[TraktObject]? = nil
 			if let entries = response.result.value as? [[String:AnyObject]] {
