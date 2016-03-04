@@ -35,7 +35,6 @@ public class TraktObject: CustomStringConvertible, Equatable {
 	
 	public var images:[TraktImageType: [TraktImageSize: String]] = [:]
 
-
 	init?(data: [String: AnyObject]!) {
 
 		ids = TraktId.extractIds(data) ?? [:]

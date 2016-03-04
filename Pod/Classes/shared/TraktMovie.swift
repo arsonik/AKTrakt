@@ -25,7 +25,6 @@ public class TraktMovie: TraktWatchable {
 		year = data?["year"] as? Int ?? nil
         genres = data?["genres"] as? [String]
         runtime = data?["runtime"] as? Int ?? nil
-
         let df = NSDateFormatter()
         df.dateFormat = "yyyy'-'MM'-'dd"
 
