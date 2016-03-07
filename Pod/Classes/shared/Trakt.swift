@@ -55,7 +55,7 @@ public class Trakt {
         saveToken(token: nil)
     }
 	
-	public func saveToken(token t:TraktToken!) {
+	public func saveToken(token t: TraktToken!) {
         token = t
 		let defaults = NSUserDefaults.standardUserDefaults()
         if t != nil {
@@ -70,7 +70,7 @@ public class Trakt {
         }
 	}
 
-    public func watched(objects:[TraktObject]){
+    public func watched(objects:[TraktWatchable]){
 		for show in objects.filter({$0 is TraktWatchable}) {
 			(show as! TraktWatchable).watched = true
 		}
@@ -87,7 +87,7 @@ public class Trakt {
 		}
     }
 
-    public func unWatch(objects: [TraktObject]){
+    public func unWatch(objects: [TraktWatchable]){
         manager.request(TraktRoute.removeFromHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
@@ -107,7 +107,7 @@ public class Trakt {
         }
     }
 
-    public func addToWatchlist(objects: TraktObject...) {
+    public func addToWatchlist(objects: TraktWatchable...) {
         manager.request(TraktRoute.addToWatchlist(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
             ()
         }
@@ -355,7 +355,7 @@ public class Trakt {
         }
     }
 
-	public func episode(episode:TraktEpisode, completion:((loaded:Bool) -> Void)) -> Request? {
+	public func episode(episode: TraktEpisode, completion:((loaded:Bool) -> Void)) -> Request? {
 		if let ld = episode.loaded where ld == false {
 			episode.loaded = nil
 			return manager.request(TraktRoute.Episode(showId: episode.season.show.id!, season: episode.season.number, episode: episode.number).OAuthRequest(self)).responseJSON { (response) -> Void in
@@ -402,7 +402,7 @@ public class Trakt {
 		return nil
 	}
 	
-	public func progress(show:TraktShow, completion:((loaded:Bool, error:NSError?) -> Void)){
+	public func progress(show: TraktShow, completion:((loaded: Bool, error: NSError?) -> Void)){
 		manager.request(TraktRoute.Progress(show.id!).OAuthRequest(self)).responseJSON { (response) -> Void in
 			var loaded:Bool = false
             
@@ -428,7 +428,7 @@ public class Trakt {
 	
 	var searchOperationQueue:NSOperationQueue = NSOperationQueue()
 
-	public func search(query:String, type:TraktType! = nil, year:Int! = nil, completion:((results:[TraktObject]?, error:NSError?) -> Void)) -> Request {
+	public func search(query:String, type:TraktType! = nil, year:Int! = nil, completion:((results: [TraktObject]?, error:NSError?) -> Void)) -> Request {
 		return manager.request(TraktRoute.Search(query: query, type: type, year: year).OAuthRequest(self)).responseJSON { (response) -> Void in
 			let list:[TraktObject]?
 			if let items = response.result.value as? [[String:AnyObject]] {

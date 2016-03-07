@@ -21,10 +21,10 @@ public class TraktMovie: TraktWatchable {
     public var casting: [TraktCharacter]?
 		
 	public override init?(data: [String : AnyObject]!) {
-		rating = data?["rating"] as? Float ?? nil
-		year = data?["year"] as? Int ?? nil
+		rating = data?["rating"] as? Float
+		year = data?["year"] as? Int
         genres = data?["genres"] as? [String]
-        runtime = data?["runtime"] as? Int ?? nil
+        runtime = data?["runtime"] as? Int
         let df = NSDateFormatter()
         df.dateFormat = "yyyy'-'MM'-'dd"
 
@@ -42,7 +42,5 @@ public class TraktMovie: TraktWatchable {
 		}
 
 		super.init(data: data)
-
-	}
-	
+	}	
 }

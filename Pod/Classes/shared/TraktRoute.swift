@@ -90,7 +90,7 @@ public enum TraktRoute :URLRequestConvertible {
 				"redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
 				"grant_type": "authorization_code"
 			]
-		case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People:
+		case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits:
 			return ["extended": "full,images"]
 
 		case .TrendingMovies, .TrendingShows, .RecommandationsMovies:
