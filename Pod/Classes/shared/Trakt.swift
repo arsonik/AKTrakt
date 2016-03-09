@@ -13,8 +13,10 @@ public class Trakt {
 	internal let clientId: String
     internal let clientSecret: String
     internal let applicationId: Int
-
     internal var token: TraktToken?
+	internal var retryInterval: Double = 5
+	private var attempts = NSCache()
+	internal var maximumAttempt: Int = 5
     private let manager: Manager
 
     public init(clientId: String, clientSecret: String, applicationId: Int) {
@@ -82,15 +84,23 @@ public class Trakt {
 		return df
 	}()
 
+
 	private func query(route: TraktRoute, completionHandler: Response<AnyObject, NSError> -> Void) -> Request {
+		let key = "\(route.hashValue)"
 		return manager.request(route.needAuthorization() ? route.OAuthRequest(self) : route).responseJSON { [weak self] response in
-			if response.response?.statusCode >= 500 {
-				return delay(5) {
-					self?.query(route, completionHandler: completionHandler)
+			if let interval = self?.retryInterval where response.response?.statusCode >= 500 {
+				var attempt: Int = self?.attempts.objectForKey(key) as? Int ?? 1
+				self?.attempts.setValue(++attempt, forKey: key)
+				if attempt < self!.maximumAttempt {
+					return delay(interval) {
+						self?.query(route, completionHandler: completionHandler)
+					}
+				} else {
+					print("Maximum attempt reached for request \(route)")
 				}
-			} else {
-				completionHandler(response)
 			}
+			self?.attempts.removeObjectForKey(key)
+			completionHandler(response)
 		}
 	}
 

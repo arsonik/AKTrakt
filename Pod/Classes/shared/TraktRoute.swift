@@ -9,7 +9,11 @@
 import Foundation
 import Alamofire
 
-public enum TraktRoute: URLRequestConvertible {
+public func == (left: TraktRoute, right: TraktRoute) -> Bool {
+	return left.hashValue == right.hashValue
+}
+
+public enum TraktRoute: URLRequestConvertible, Hashable {
 	case Token(client: Trakt, pin: String)
 	case Trending(TraktType)
 	case Recommandations(TraktType)
@@ -27,6 +31,10 @@ public enum TraktRoute: URLRequestConvertible {
 	case Movie(id: AnyObject)
 	case Search(query: String, type: TraktType!, year: Int!)
 	case Rate(TraktWatchable, Int)
+
+	public var hashValue: Int {
+		return URLRequest.URL?.absoluteString.hashValue ?? NSDate().timeIntervalSince1970.hashValue
+	}
 
 	private var domain: String {
 		switch self {
