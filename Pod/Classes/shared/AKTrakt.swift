@@ -8,12 +8,6 @@
 
 import Foundation
 
-public extension NSHTTPURLResponse {
-    var shouldRetry: Bool {
-        return statusCode >= 500
-    }
-}
-
 public extension String {
     var slug: String {
         var cp = self.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
