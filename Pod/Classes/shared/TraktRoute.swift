@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 
 public enum TraktRoute: URLRequestConvertible {
-
 	case Token(client: Trakt, pin: String)
 	case Trending(TraktType)
 	case Recommandations(TraktType)
@@ -181,6 +180,15 @@ public enum TraktRoute: URLRequestConvertible {
 			}
 		} else {
 			return NSMutableURLRequest()
+		}
+	}
+
+	internal func needAuthorization() -> Bool {
+		switch self {
+		case .Token:
+			return false
+		default:
+			return true
 		}
 	}
 

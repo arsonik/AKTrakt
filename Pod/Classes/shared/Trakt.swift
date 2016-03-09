@@ -40,9 +40,8 @@ public class Trakt {
 		return TraktToken(accessToken: at, expire: ex, refreshToken: rt)
 	}
 
-    internal func exchangePinForToken(pin: String, completion: (TraktToken?, NSError?) -> Void) {
-        let request = TraktRoute.Token(client: self, pin: pin)
-        manager.request(request).responseJSON { response in
+    internal func exchangePinForToken(pin: String, completion: (TraktToken?, NSError?) -> Void) -> Request {
+        return query(TraktRoute.Token(client: self, pin: pin)) { response in
             if let aToken = TraktToken(data: response.result.value as? [String: AnyObject]) {
                 completion(aToken, nil)
             } else {
@@ -83,11 +82,11 @@ public class Trakt {
 		return df
 	}()
 
-	private func query(request: NSURLRequest, completionHandler: Response<AnyObject, NSError> -> Void) -> Request {
-		return manager.request(request).responseJSON { [weak self] response in
+	private func query(route: TraktRoute, completionHandler: Response<AnyObject, NSError> -> Void) -> Request {
+		return manager.request(route.needAuthorization() ? route.OAuthRequest(self) : route).responseJSON { [weak self] response in
 			if response.response?.statusCode >= 500 {
 				return delay(5) {
-					self?.query(request, completionHandler: completionHandler)
+					self?.query(route, completionHandler: completionHandler)
 				}
 			} else {
 				completionHandler(response)
@@ -99,31 +98,37 @@ public class Trakt {
 		objects.forEach {
 			$0.watched = true
 		}
-		return query(TraktRoute.AddToHistory(objects).OAuthRequest(self)) { response in
+		return query(TraktRoute.AddToHistory(objects)) { response in
+			/*
+			if let item = response.result.value as? [String: AnyObject], added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
+				completion(true, nil)
+			} else {
+				completion(false, response.result.error)
+			}*/
             print(response.result.value)
 		}
     }
 
     public func unWatch(objects: [TraktWatchable]) -> Request {
-		return query(TraktRoute.RemoveFromHistory(objects).OAuthRequest(self)) { response in
+		return query(TraktRoute.RemoveFromHistory(objects)) { response in
 			print(response.result.value)
         }
     }
 
     public func hideFromRecommendations(movie: TraktMovie) -> Request {
-		return query(TraktRoute.HideRecommendation(movie).OAuthRequest(self)) { response in
+		return query(TraktRoute.HideRecommendation(movie)) { response in
 			print(response.result.value)
         }
     }
 
     public func addToWatchlist(objects: TraktWatchable...) -> Request {
-		return query(TraktRoute.AddToWatchlist(objects).OAuthRequest(self)) { response in
+		return query(TraktRoute.AddToWatchlist(objects)) { response in
 			print(response.result.value)
         }
     }
 
     public func people(object: TraktWatchable, completion: ((succeed: Bool, error: NSError?) -> Void)) -> Request {
-        return query(TraktRoute.People(object.type!, object.id!).OAuthRequest(self)) { response in
+        return query(TraktRoute.People(object.type!, object.id!)) { response in
             if let result = response.result.value as? [String: AnyObject] {
 				if let castData = result["cast"] as? [[String: AnyObject]] {
                     let data = castData.flatMap {
@@ -148,7 +153,7 @@ public class Trakt {
     }
 
     public func credits(person: TraktPerson, type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
-        return query(TraktRoute.Credits(person.id!, type).OAuthRequest(self)) { response in
+        return query(TraktRoute.Credits(person.id!, type)) { response in
             if let result = response.result.value as? [String: AnyObject] {
                 var list: Set<TraktWatchable> = []
                 if let crew = result["crew"] as? [String: [[String: AnyObject]]] {
@@ -179,7 +184,7 @@ public class Trakt {
     }
 
 	public func watchList(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
-		return query(TraktRoute.Watchlist(type).OAuthRequest(self)) { response in
+		return query(TraktRoute.Watchlist(type)) { response in
 			var list: [TraktWatchable]? = nil
 			if let entries = response.result.value as? [[String: AnyObject]] {
 				list = []
@@ -209,7 +214,7 @@ public class Trakt {
 	}
 
 	public func watched(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
-		return query(TraktRoute.Watched(type).OAuthRequest(self)) { response in
+		return query(TraktRoute.Watched(type)) { response in
 			var list: [TraktWatchable]? = nil
 			if let entries = response.result.value as? [[String: AnyObject]] {
 				list = []
@@ -239,7 +244,7 @@ public class Trakt {
 	}
 
 	public func collection(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
-		return query(TraktRoute.Collection(type).OAuthRequest(self)) { response -> Void in
+		return query(TraktRoute.Collection(type)) { response -> Void in
             if let entries = response.result.value as? [[String: AnyObject]] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Shows {
@@ -258,7 +263,7 @@ public class Trakt {
     }
 
 	public func trending(type: TraktType, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
-		return query(TraktRoute.Trending(type).OAuthRequest(self)) { response in
+		return query(TraktRoute.Trending(type)) { response in
 			if let entries = response.result.value as? [[String: AnyObject]] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Movies {
@@ -277,7 +282,7 @@ public class Trakt {
 	}
 
 	public func recommendations(type: TraktType, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
-        return query(TraktRoute.Recommandations(type).OAuthRequest(self)) { response in
+        return query(TraktRoute.Recommandations(type)) { response in
             if let entries = response.result.value as? [[String: AnyObject]] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Movies {
@@ -296,7 +301,7 @@ public class Trakt {
     }
 
 	public func rate(object: TraktWatchable, rate: Int, completion: (Bool, NSError?) -> Void) -> Request {
-		return query(TraktRoute.Rate(object, rate).OAuthRequest(self)) { response in
+		return query(TraktRoute.Rate(object, rate)) { response in
 			if let item = response.result.value as? [String: AnyObject], added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
 				completion(true, nil)
 			} else {
@@ -306,7 +311,7 @@ public class Trakt {
 	}
 
     public func searchMovie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
-        return query(TraktRoute.Movie(id: id).OAuthRequest(self)) { response in
+        return query(TraktRoute.Movie(id: id)) { response in
             // Todo: should not create a new object, complete the object instead
             if let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) {
                 completion(o, nil)
@@ -318,7 +323,7 @@ public class Trakt {
 
 	public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
 		//print("serch ep \(id), \(season), \(episode)")
-		return query(TraktRoute.Episode(showId: id, season: season, episode: episode).OAuthRequest(self)) { response in
+		return query(TraktRoute.Episode(showId: id, season: season, episode: episode)) { response in
 			if let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) {
 				completion(o, nil)
 			} else {
@@ -330,7 +335,7 @@ public class Trakt {
 	public func episode(episode: TraktEpisode, completion: (loaded: Bool) -> Void) -> Request? {
 		if episode.loaded == false {
 			episode.loaded = nil
-			return query(TraktRoute.Episode(showId: episode.season.show.id!, season: episode.season.number, episode: episode.number).OAuthRequest(self)) { response in
+			return query(TraktRoute.Episode(showId: episode.season.show.id!, season: episode.season.number, episode: episode.number)) { response in
 				guard let data = response.result.value as? [String: AnyObject], title = data["title"] as? String, overview = data["overview"] as? String else {
 					// cancelled
 					if response.result.error?.code == -999 {
@@ -372,7 +377,7 @@ public class Trakt {
 	}
 
 	public func progress(show: TraktShow, completion: ((loaded: Bool, error: NSError?) -> Void)) -> Request {
-		return query(TraktRoute.Progress(show.id!).OAuthRequest(self)) { response in
+		return query(TraktRoute.Progress(show.id!)) { response in
 			var loaded: Bool = false
 
 			if let data = response.result.value as? [String: AnyObject], seasons = data["seasons"] as? [[String: AnyObject]] {
@@ -396,7 +401,7 @@ public class Trakt {
 	}
 
 	public func search(query: String, type: TraktType! = nil, year: Int! = nil, completion: ((results: [TraktObject]?, error: NSError?) -> Void)) -> Request {
-		return self.query(TraktRoute.Search(query: query, type: type, year: year).OAuthRequest(self)) { response in
+		return self.query(TraktRoute.Search(query: query, type: type, year: year)) { response in
 			let list: [TraktObject]?
 			if let items = response.result.value as? [[String: AnyObject]] {
 				list = items.flatMap({
