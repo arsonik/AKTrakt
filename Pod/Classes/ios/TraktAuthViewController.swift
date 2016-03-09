@@ -55,7 +55,7 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
     public func cancel() {
         delegate?.TraktAuthViewControllerDidCancel(self)
     }
-    
+
     private func initWebview() {
         wkWebview.loadRequest(NSURLRequest(URL: NSURL(string: "http://trakt.tv/pin/\(trakt.applicationId)")!))
     }

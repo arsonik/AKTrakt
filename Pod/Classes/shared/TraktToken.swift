@@ -12,13 +12,13 @@ public class TraktToken {
 	public let accessToken: String!
 	public let expire: NSDate!
 	public let refreshToken: String!
-	
+
 	init(accessToken: String, expire: NSDate, refreshToken: String) {
 		self.accessToken = accessToken
 		self.expire = expire
 		self.refreshToken = refreshToken
 	}
-	
+
 	init?(data: [String: AnyObject]!) {
 		if let token = data, access_token = token["access_token"] as? String, expiresin = token["expires_in"] as? Int, rt = token["refresh_token"] as? String {
 			self.expire = NSDate(timeIntervalSinceNow: Double(expiresin))

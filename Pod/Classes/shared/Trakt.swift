@@ -13,15 +13,15 @@ public class Trakt {
 	internal let clientId: String
     internal let clientSecret: String
     internal let applicationId: Int
-    
+
     internal var token: TraktToken?
     private let manager: Manager
-	
+
     public init(clientId: String, clientSecret: String, applicationId: Int) {
 		self.clientId = clientId
 		self.clientSecret = clientSecret
         self.applicationId = applicationId
-        
+
         manager = Manager()
 
         // autoload token
@@ -29,7 +29,7 @@ public class Trakt {
             token = td
         }
     }
-	
+
 	private func tokenFromDefaults() -> TraktToken? {
 		let defaults = NSUserDefaults.standardUserDefaults()
 		if let at = defaults.objectForKey("trakt_access_token_\(clientId)") as? String, ex = defaults.objectForKey("trakt_expire_\(clientId)") as? NSDate, rt = defaults.objectForKey("trakt_refresh_token_\(clientId)") as? String {
@@ -37,7 +37,7 @@ public class Trakt {
 		}
 		return nil
 	}
-    
+
     internal func exchangePinForToken(pin: String, completion: (TraktToken?, NSError?) -> Void) {
         let request = TraktRoute.Token(client: self, pin: pin)
         manager.request(request).responseJSON { response in
@@ -59,7 +59,7 @@ public class Trakt {
     public func clearToken() {
         saveToken(token: nil)
     }
-	
+
 	public func saveToken(token t: TraktToken!) {
         token = t
 		let defaults = NSUserDefaults.standardUserDefaults()
@@ -79,7 +79,7 @@ public class Trakt {
 		objects.forEach {
 			$0.watched = true
 		}
-		
+
 		manager.request(TraktRoute.addToHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
@@ -235,7 +235,7 @@ public class Trakt {
 			completion(result: list, error: nil)
 		}
 	}
-	
+
 	public func collection(type: TraktType, completion: ((result: [TraktObject]?, error: NSError?) -> Void)) -> Request {
 		return manager.request(TraktRoute.Collection(type).OAuthRequest(self)).responseJSON { [weak self] response -> Void in
             if let r = response.response where r.shouldRetry {
@@ -278,7 +278,7 @@ public class Trakt {
             }
         }
     }
-    
+
     public func trendingShows(completion: ([TraktShow]?, NSError?) -> Void) -> Request {
         return manager.request(TraktRoute.TrendingShows.OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
@@ -297,7 +297,7 @@ public class Trakt {
             }
         }
     }
-    
+
     public func recommendationsMovies(completion: ([TraktMovie]?, NSError?) -> Void) -> Request {
         return manager.request(TraktRoute.RecommandationsMovies.OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
@@ -383,7 +383,7 @@ public class Trakt {
 								}
 							}
 						}
-					}					
+					}
 					if let fa = data["first_aired"] as? String {
 						episode.firstAired = self.dateFormatter.dateFromString(fa)
 					}
@@ -406,11 +406,11 @@ public class Trakt {
 		}
 		return nil
 	}
-	
+
 	public func progress(show: TraktShow, completion: ((loaded: Bool, error: NSError?) -> Void)) {
 		manager.request(TraktRoute.Progress(show.id!).OAuthRequest(self)).responseJSON { (response) -> Void in
 			var loaded: Bool = false
-            
+
 			if let data = response.result.value as? [String: AnyObject], seasons = data["seasons"] as? [[String: AnyObject]] {
 				for season in seasons {
 					if let ms = TraktSeason(data: season), episodes = season["episodes"] as? [[String: AnyObject]] {
@@ -430,7 +430,7 @@ public class Trakt {
 			completion(loaded: loaded, error: nil)
 		}
 	}
-	
+
 	var searchOperationQueue: NSOperationQueue = NSOperationQueue()
 
 	public func search(query: String, type: TraktType! = nil, year: Int! = nil, completion: ((results: [TraktObject]?, error: NSError?) -> Void)) -> Request {

@@ -19,7 +19,7 @@ public class TraktMovie: TraktWatchable {
 
     public var crew: [TraktCrew]?
     public var casting: [TraktCharacter]?
-		
+
 	public override init?(data: [String : AnyObject]!) {
 		rating = data?["rating"] as? Float
 		year = data?["year"] as? Int
@@ -42,5 +42,5 @@ public class TraktMovie: TraktWatchable {
 		}
 
 		super.init(data: data)
-	}	
+	}
 }

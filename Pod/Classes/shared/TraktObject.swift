@@ -15,7 +15,7 @@ public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
 }
 
 public class TraktObject: CustomStringConvertible, Hashable {
-	
+
 	public var ids: [TraktId: AnyObject]!
 	public var id: TraktIdentifier? {
 		return ids[TraktId.Trakt] as? TraktIdentifier
@@ -36,7 +36,7 @@ public class TraktObject: CustomStringConvertible, Hashable {
     public var hashValue: Int {
         return id!
     }
-	
+
 	public var images: [TraktImageType: [TraktImageSize: String]] = [:]
 
 	init?(data: [String: AnyObject]!) {
@@ -74,17 +74,17 @@ public class TraktObject: CustomStringConvertible, Hashable {
                 return TraktPerson(data: data)
 			}
 		}
-		
+
 		return nil
 	}
-	
+
 	public func imageURL(type: TraktImageType, size: TraktImageSize) -> NSURL? {
 		if let uri = images[type]?[size] {
 			return NSURL(string: uri)
 		}
 		return nil
 	}
-	
+
 	public var description: String {
 		return "TraktObject id:\(id)"
 	}

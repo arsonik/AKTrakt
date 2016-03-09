@@ -15,7 +15,7 @@ public enum TraktId : String {
 	case Trakt = "trakt"
 	case Tvdb = "tvdb"
 	case Tvrage = "tvrage"
-	
+
 	static func extractIds(data: [String: AnyObject!]!) -> [TraktId: AnyObject]! {
 		if let lids = data?["ids"] as? [String: AnyObject] {
 			var ids: [TraktId: AnyObject] = [:]

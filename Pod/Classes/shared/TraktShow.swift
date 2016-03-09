@@ -9,9 +9,9 @@
 import Foundation
 
 public class TraktShow : TraktWatchable {
-	
+
 	public var seasons: [TraktSeason] = []
-	
+
 	public var notCompleted: [TraktEpisode] {
 		var list: [TraktEpisode] = []
 		for season in seasons {
@@ -19,11 +19,11 @@ public class TraktShow : TraktWatchable {
 		}
 		return list
 	}
-	
+
 	public override var description: String {
 		return "TraktShow(\(title))"
 	}
-    
+
     public override init?(data: [String : AnyObject]!) {
         super.init(data: data)
     }

@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 public enum TraktRoute: URLRequestConvertible {
-	
+
     case Token(client: Trakt, pin: String)
     case TrendingMovies
     case TrendingShows
@@ -29,14 +29,14 @@ public enum TraktRoute: URLRequestConvertible {
 	case Movie(id: AnyObject)
 	case Search(query: String, type: TraktType!, year: Int!)
 	case Rate(TraktWatchable, Int)
-	
+
 	private var domain: String {
 		switch self {
 		default:
 			return "https://api-v2launch.trakt.tv"
 		}
 	}
-	
+
 	private var method: String {
 		switch self {
 		case .Token, .addToHistory, .removeFromHistory, .addToWatchlist, .Rate:
@@ -54,7 +54,7 @@ public enum TraktRoute: URLRequestConvertible {
 			return nil
 		}
 	}
-	
+
 	private var path: String {
 		switch self {
         case .Token:							return "/oauth/token"
@@ -79,7 +79,7 @@ public enum TraktRoute: URLRequestConvertible {
         case .HideRecommendation(let movie):    return "/recommendations/movies/\(movie.id!)"
 		}
 	}
-	
+
 	private var parameters: [String: AnyObject]! {
 		switch self {
 		case .Token(let trakt, let pin):
@@ -133,7 +133,7 @@ public enum TraktRoute: URLRequestConvertible {
 				}
 			}
 			return p
-		
+
 		case .Search(let query, let type, let year):
 			var p: [String: AnyObject] = [
 				"query": query,
@@ -156,12 +156,12 @@ public enum TraktRoute: URLRequestConvertible {
 			]
 			p["\(object.type!.rawValue)"] = [e]
 			return p
-		
+
 		default:
 			return nil
 		}
 	}
-	
+
 	///
 	public var URLRequest: NSMutableURLRequest {
 		if let url = NSURL(string: "\(domain)\(path)") {
@@ -186,7 +186,7 @@ public enum TraktRoute: URLRequestConvertible {
 		print("url failed for \(path)")
 		return NSMutableURLRequest(URL: NSURL(string: "http://localhost")!)
 	}
-	
+
 	func OAuthRequest(trakt: Trakt) -> NSURLRequest {
 		let req = URLRequest.mutableCopy() as! NSMutableURLRequest
 		req.setValue("2", forHTTPHeaderField: "trakt-api-version")
