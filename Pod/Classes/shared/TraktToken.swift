@@ -25,7 +25,6 @@ public class TraktToken {
 			self.accessToken = access_token
 			self.refreshToken = rt
 		} else {
-
 			self.accessToken = nil
 			self.expire = nil
 			self.refreshToken = nil
