@@ -11,6 +11,9 @@ import Foundation
 public class TraktShow: TraktWatchable {
 
 	public var seasons: [TraktSeason] = []
+	
+	public var crew: [TraktCrew]?
+	public var casting: [TraktCharacter]?
 
 	public var notCompleted: [TraktEpisode] {
 		var list: [TraktEpisode] = []

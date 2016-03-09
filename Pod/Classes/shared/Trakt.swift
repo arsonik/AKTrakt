@@ -122,19 +122,23 @@ public class Trakt {
         }
     }
 
-    public func people(movie: TraktMovie, completion: ((succeed: Bool, error: NSError?) -> Void)) -> Request {
-        return query(TraktRoute.People(.Movies, movie.id!).OAuthRequest(self)) { response in
+    public func people(object: TraktWatchable, completion: ((succeed: Bool, error: NSError?) -> Void)) -> Request {
+        return query(TraktRoute.People(object.type!, object.id!).OAuthRequest(self)) { response in
             if let result = response.result.value as? [String: AnyObject] {
-                if let castData = result["cast"] as? [[String: AnyObject]] {
-                    movie.casting = castData.flatMap {
+				if let castData = result["cast"] as? [[String: AnyObject]] {
+                    let data = castData.flatMap {
 						TraktCharacter(data: $0)
-                    }
+					}
+					(object as? TraktShow)?.casting = data
+					(object as? TraktMovie)?.casting = data
                 }
 				// possible keys: production, art, crew, costume & make-up, directing, writing, sound, and camera
                 if let crewData = result["crew"] as? [String: [[String: AnyObject]]] {
-                    movie.crew = crewData.values.flatMap({$0}).flatMap {
+                    let data = crewData.values.flatMap({$0}).flatMap {
                         TraktCrew(data: $0)
-                    }
+					}
+					(object as? TraktShow)?.crew = data
+					(object as? TraktMovie)?.crew = data
                 }
                 completion(succeed: true, error: response.result.error)
             } else {
@@ -147,7 +151,6 @@ public class Trakt {
         return query(TraktRoute.Credits(person.id!, type).OAuthRequest(self)) { response in
             if let result = response.result.value as? [String: AnyObject] {
                 var list: Set<TraktWatchable> = []
-
                 if let crew = result["crew"] as? [String: [[String: AnyObject]]] {
                     crew.flatMap({
                         return $0.1.flatMap({
@@ -273,11 +276,17 @@ public class Trakt {
 		}
 	}
 
-    public func recommendationsMovies(completion: ([TraktMovie]?, NSError?) -> Void) -> Request {
-        return query(TraktRoute.RecommandationsMovies.OAuthRequest(self)) { response in
+	public func recommendations(type: TraktType, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
+        return query(TraktRoute.Recommandations(type).OAuthRequest(self)) { response in
             if let entries = response.result.value as? [[String: AnyObject]] {
-				let list = entries.flatMap({
-					TraktMovie(data: $0)
+				let list: [TraktWatchable] = entries.flatMap({
+					if type == .Movies {
+						return TraktMovie(data: $0)
+					} else if type == .Shows {
+						return TraktShow(data: $0)
+					} else {
+						return nil
+					}
 				})
                 completion(list, response.result.error)
             } else {
