@@ -75,15 +75,23 @@ public class Trakt {
         }
 	}
 
+	private lazy var dateFormatter: NSDateFormatter = {
+		let df = NSDateFormatter()
+		df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+		df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+		df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
+		return df
+	}()
+
     public func watched(objects: [TraktWatchable]) {
 		objects.forEach {
 			$0.watched = true
 		}
 
-		manager.request(TraktRoute.AddToHistory(objects).OAuthRequest(self)).responseJSON { response in
+		manager.request(TraktRoute.AddToHistory(objects).OAuthRequest(self)).responseJSON { [weak self] response in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
-                    self.watched(objects)
+                    self?.watched(objects)
                 }
             } else {
 				print(response.result.value)
@@ -92,20 +100,20 @@ public class Trakt {
     }
 
     public func unWatch(objects: [TraktWatchable]) {
-        manager.request(TraktRoute.RemoveFromHistory(objects).OAuthRequest(self)).responseJSON { response in
+        manager.request(TraktRoute.RemoveFromHistory(objects).OAuthRequest(self)).responseJSON { [weak self] response in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
-                    self.unWatch(objects)
+                    self?.unWatch(objects)
                 }
             }
         }
     }
 
     public func hideFromRecommendations(movie: TraktMovie) {
-        manager.request(TraktRoute.HideRecommendation(movie).OAuthRequest(self)).responseJSON { response in
+        manager.request(TraktRoute.HideRecommendation(movie).OAuthRequest(self)).responseJSON { [weak self] response in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
-                    self.hideFromRecommendations(movie)
+                    self?.hideFromRecommendations(movie)
                 }
             }
         }
@@ -294,7 +302,7 @@ public class Trakt {
         }
     }
 
-	public func rate(object: TraktWatchable, rate: Int, completion: (Bool?, NSError?) -> Void) -> Request {
+	public func rate(object: TraktWatchable, rate: Int, completion: (Bool, NSError?) -> Void) -> Request {
 		return manager.request(TraktRoute.Rate(object, rate).OAuthRequest(self)).responseJSON { response in
 			if let item = response.result.value as? [String: AnyObject], added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
 				completion(true, nil)
@@ -303,15 +311,6 @@ public class Trakt {
 			}
 		}
 	}
-
-	private lazy var dateFormatter: NSDateFormatter = {
-		let df = NSDateFormatter()
-		df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-		df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-		df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
-		return df
-	}()
-
 
     public func searchMovie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
         return manager.request(TraktRoute.Movie(id: id).OAuthRequest(self)).responseJSON { response in
@@ -323,11 +322,7 @@ public class Trakt {
             }
         }
     }
-}
 
-// MARK: Show, Episodes
-
-extension Trakt {
 	public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
 		//print("serch ep \(id), \(season), \(episode)")
 		return manager.request(TraktRoute.Episode(showId: id, season: season, episode: episode).OAuthRequest(self)).responseJSON { response in
@@ -406,9 +401,7 @@ extension Trakt {
 			completion(loaded: loaded, error: nil)
 		}
 	}
-}
 
-extension Trakt {
 	public func search(query: String, type: TraktType! = nil, year: Int! = nil, completion: ((results: [TraktObject]?, error: NSError?) -> Void)) -> Request {
 		return manager.request(TraktRoute.Search(query: query, type: type, year: year).OAuthRequest(self)).responseJSON { response in
 			let list: [TraktObject]?

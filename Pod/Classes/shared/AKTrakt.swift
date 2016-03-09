@@ -10,7 +10,7 @@ import Foundation
 
 public extension NSHTTPURLResponse {
     var shouldRetry: Bool {
-        return statusCode == 504 || statusCode == 503
+        return statusCode >= 500
     }
 }
 
