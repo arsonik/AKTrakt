@@ -16,8 +16,8 @@ public class TraktCrew {
         if let n = data["job"] as? String, p = data["person"] as? [String: AnyObject], pers = TraktPerson(data: p) {
             job = n
             person = pers
-        }
-        else {
+        } else {
+
             job = nil
             person = nil
             return nil

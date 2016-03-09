@@ -19,8 +19,8 @@ public class TraktSeason : TraktWatchable {
 		if let n = data?["number"] as? Int {
 			number = n
 			super.init(data: data)
-		}
-		else {
+		} else {
+
 			number = nil
 			super.init(data: nil)
 			return nil

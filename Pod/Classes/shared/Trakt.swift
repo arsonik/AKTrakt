@@ -43,8 +43,7 @@ public class Trakt {
         manager.request(request).responseJSON { response in
             if let aToken = TraktToken(data: response.result.value as? [String: AnyObject]) {
                 completion(aToken, nil)
-            }
-            else {
+            } else {
 				let err: NSError?
 				if let error = (response.result.value as? [String: AnyObject])?["error_description"] as? String {
 					err = NSError(domain: "trakt.tv", code: 401, userInfo: [NSLocalizedDescriptionKey: error])
@@ -67,8 +66,8 @@ public class Trakt {
             defaults.setObject(t.accessToken, forKey: "trakt_access_token_\(clientId)")
             defaults.setObject(t.expire, forKey: "trakt_expire_\(clientId)")
             defaults.setObject(t.refreshToken, forKey: "trakt_refresh_token_\(clientId)")
-        }
-        else {
+        } else {
+
             defaults.removeObjectForKey("trakt_access_token_\(clientId)")
             defaults.removeObjectForKey("trakt_expire_\(clientId)")
             defaults.removeObjectForKey("trakt_refresh_token_\(clientId)")
@@ -85,8 +84,8 @@ public class Trakt {
                 return delay(5) {
                     self.watched(objects)
                 }
-            }
-			else {
+            } else {
+
 				print(response.result.value)
 			}
 		}
@@ -183,15 +182,15 @@ public class Trakt {
 						case .Movies:
 							if let a = TraktMovie(data: v) {
 								list!.append(a)
-							}
-							else{
+							} else {
+
 								print("Failed TraktMovie\(v)")
 							}
 						case .Shows:
 							if let show = TraktShow(data: v) {
 								list!.append(show)
-							}
-							else{
+							} else {
+
 								print("Failed TraktShow\(v)")
 							}
 						default:
@@ -215,15 +214,15 @@ public class Trakt {
 						case .Movies:
 							if let a = TraktMovie(data: v) {
 								list!.append(a)
-							}
-							else{
+							} else {
+
 								print("Failed TraktMovie\(v)")
 							}
 						case .Shows:
 							if let show = TraktShow(data: v) {
 								list!.append(show)
-							}
-							else{
+							} else {
+
 								print("Failed TraktShow\(v)")
 							}
 						default:
@@ -253,8 +252,8 @@ public class Trakt {
 					}
 				})
                 completion(result: list, error: nil)
-			}
-            else {
+			} else {
+
                 completion(result: nil, error: response.result.error)
             }
 		}
@@ -272,8 +271,8 @@ public class Trakt {
 					TraktMovie(data: $0["movie"] as? [String: AnyObject])
 				})
                 completion(list, response.result.error)
-            }
-            else {
+            } else {
+
                 completion(nil, response.result.error)
             }
         }
@@ -291,8 +290,8 @@ public class Trakt {
 					TraktShow(data: $0["show"] as? [String: AnyObject])
 				})
                 completion(list, response.result.error)
-            }
-            else {
+            } else {
+
                 completion(nil, response.result.error)
             }
         }
@@ -310,8 +309,8 @@ public class Trakt {
 					TraktMovie(data: $0)
 				})
                 completion(list, response.result.error)
-            }
-            else {
+            } else {
+
                 completion(nil, response.result.error)
             }
         }
@@ -321,8 +320,8 @@ public class Trakt {
 		return manager.request(TraktRoute.Rate(object, rate).OAuthRequest(self)).responseJSON { (response) -> Void in
 			if let item = response.result.value as? [String: AnyObject], added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
 				completion(true, nil)
-			}
-			else {
+			} else {
+
 				completion(false, response.result.error)
 			}
 		}
@@ -341,8 +340,8 @@ public class Trakt {
         return manager.request(TraktRoute.Episode(showId: id, season: season, episode: episode).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) {
                 completion(o, nil)
-            }
-            else {
+            } else {
+
                 completion(nil, response.result.error)
             }
         }
@@ -353,8 +352,8 @@ public class Trakt {
             // Todo: should not create a new object, complete the object instead
             if let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) {
                 completion(o, nil)
-            }
-            else {
+            } else {
+
                 completion(nil, response.result.error)
             }
         }
@@ -388,20 +387,20 @@ public class Trakt {
 						episode.firstAired = self.dateFormatter.dateFromString(fa)
 					}
 					episode.loaded = true
-				}
-				else{
+				} else {
+
 					// cancelled
 					if response.result.error?.code == -999 {
 						episode.loaded = false
-					}
-					else{
+					} else {
+
 						print("Cannot load episode \(episode) \(response.result.error)")
 					}
 				}
 				completion(loaded: episode.loaded != nil && episode.loaded == true)
 			}
-		}
-		else {
+		} else {
+
 			completion(loaded: episode.loaded != nil && episode.loaded == true)
 		}
 		return nil

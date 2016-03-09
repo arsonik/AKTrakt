@@ -77,8 +77,8 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
                 if let token = TraktToken(data: response.result.value as? [String: AnyObject]) {
 					self.trakt.saveToken(token: token)
                     self.delegate?.TraktAuthViewControllerDidAuthenticate(self)
-                }
-                else{
+                } else {
+
                     UIAlertView(title: "", message: "Failed to get a valid token", delegate: nil, cancelButtonTitle: "OK").show()
                     self.initWebview()
                 }

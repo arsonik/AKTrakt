@@ -35,8 +35,8 @@ public class TraktPerson: TraktObject {
             }
 
             super.init(data: data)
-        }
-        else {
+        } else {
+
             name = nil
             biography = nil
             birthday = nil
@@ -59,4 +59,3 @@ public class TraktPerson: TraktObject {
 
     }
 }
-

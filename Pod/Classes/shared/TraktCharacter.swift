@@ -16,8 +16,8 @@ public class TraktCharacter {
         if let n = data["character"] as? String, p = data["person"] as? [String: AnyObject], pers = TraktPerson(data: p) {
             character = n
 			person = pers
-        }
-        else {
+        } else {
+
             character = nil
             person = nil
             return nil

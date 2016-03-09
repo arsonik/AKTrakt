@@ -27,8 +27,8 @@ public class TraktEpisode: TraktWatchable {
 			if let c = data?["completed"] as? Bool {
 				watched = c
 			}
-		}
-		else {
+		} else {
+
 			number = nil
 			super.init(data: nil)
 			return nil

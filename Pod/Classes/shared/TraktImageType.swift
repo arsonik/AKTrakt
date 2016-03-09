@@ -10,12 +10,12 @@ import Foundation
 
 public enum TraktImageType: String {
     case Banner = "banner"
-    , ClearArt = "clearart"
-    , FanArt = "fanart"
-    , HeadShot = "headshot"
-    , Logo = "logo"
-    , Poster = "poster"
-    , Thumb = "thumb"
-    , Avatar = "avatar"
-    , Screenshot = "screenshot"
+    case ClearArt = "clearart"
+    case FanArt = "fanart"
+    case HeadShot = "headshot"
+    case Logo = "logo"
+    case Poster = "poster"
+    case Thumb = "thumb"
+    case Avatar = "avatar"
+    case Screenshot = "screenshot"
 }

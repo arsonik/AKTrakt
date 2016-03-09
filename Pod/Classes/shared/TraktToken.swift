@@ -24,8 +24,8 @@ public class TraktToken {
 			self.expire = NSDate(timeIntervalSinceNow: Double(expiresin))
 			self.accessToken = access_token
 			self.refreshToken = rt
-		}
-		else{
+		} else {
+
 			self.accessToken = nil
 			self.expire = nil
 			self.refreshToken = nil

@@ -28,4 +28,3 @@ public class TraktShow : TraktWatchable {
         super.init(data: data)
     }
 }
-

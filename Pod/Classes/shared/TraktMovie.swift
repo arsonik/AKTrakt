@@ -36,8 +36,8 @@ public class TraktMovie: TraktWatchable {
 
 		if let x = data?["trailer"] as? String, url = NSURL(string: x), params = url.query?.componentsSeparatedByString("v=") where params.count == 2 {
 			trailer = params[1]
-		}
-		else {
+		} else {
+
 			trailer = nil
 		}
 
