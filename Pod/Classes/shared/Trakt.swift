@@ -261,43 +261,27 @@ public class Trakt {
 		}
     }
 
-    public func trendingMovies(completion: ([TraktMovie]?, NSError?) -> Void) -> Request {
-        return manager.request(TraktRoute.TrendingMovies.OAuthRequest(self)).responseJSON { response in
-            if let r = response.response where r.shouldRetry {
-                return delay(5) {
-                    self.trendingMovies(completion)
-                }
-            }
+	public func trending(type: TraktType, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
+		return manager.request(TraktRoute.Trending(type).OAuthRequest(self)).responseJSON { response in
+			if let r = response.response where r.shouldRetry {
+				return delay(5) {
+					self.trending(type, completion: completion)
+				}
+			}
 			if let entries = response.result.value as? [[String: AnyObject]] {
-				let list = entries.flatMap({
-					TraktMovie(data: $0["movie"] as? [String: AnyObject])
+				let list: [TraktWatchable] = entries.flatMap({
+					if type == .Movies {
+						return TraktMovie(data: $0[type.single] as? [String: AnyObject])
+					} else {
+						return TraktShow(data: $0[type.single] as? [String: AnyObject])
+					}
 				})
-                completion(list, response.result.error)
-            } else {
-
-                completion(nil, response.result.error)
-            }
-        }
-    }
-
-    public func trendingShows(completion: ([TraktShow]?, NSError?) -> Void) -> Request {
-        return manager.request(TraktRoute.TrendingShows.OAuthRequest(self)).responseJSON { response in
-            if let r = response.response where r.shouldRetry {
-                return delay(5) {
-                    self.trendingShows(completion)
-                }
-            }
-            if let entries = response.result.value as? [[String: AnyObject]] {
-				let list = entries.flatMap({
-					TraktShow(data: $0["show"] as? [String: AnyObject])
-				})
-                completion(list, response.result.error)
-            } else {
-
-                completion(nil, response.result.error)
-            }
-        }
-    }
+				completion(list, response.result.error)
+			} else {
+				completion(nil, response.result.error)
+			}
+		}
+	}
 
     public func recommendationsMovies(completion: ([TraktMovie]?, NSError?) -> Void) -> Request {
         return manager.request(TraktRoute.RecommandationsMovies.OAuthRequest(self)).responseJSON { response in
@@ -337,17 +321,6 @@ public class Trakt {
 		return df
 	}()
 
-    public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
-        //print("serch ep \(id), \(season), \(episode)")
-        return manager.request(TraktRoute.Episode(showId: id, season: season, episode: episode).OAuthRequest(self)).responseJSON { response in
-            if let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) {
-                completion(o, nil)
-            } else {
-
-                completion(nil, response.result.error)
-            }
-        }
-    }
 
     public func searchMovie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
         return manager.request(TraktRoute.Movie(id: id).OAuthRequest(self)).responseJSON { response in
@@ -360,6 +333,22 @@ public class Trakt {
             }
         }
     }
+}
+
+// MARK: Show, Episodes
+
+extension Trakt {
+	public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
+		//print("serch ep \(id), \(season), \(episode)")
+		return manager.request(TraktRoute.Episode(showId: id, season: season, episode: episode).OAuthRequest(self)).responseJSON { response in
+			if let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) {
+				completion(o, nil)
+			} else {
+
+				completion(nil, response.result.error)
+			}
+		}
+	}
 
 	public func episode(episode: TraktEpisode, completion: (loaded: Bool) -> Void) -> Request? {
 		if episode.loaded == false {
@@ -428,9 +417,9 @@ public class Trakt {
 			completion(loaded: loaded, error: nil)
 		}
 	}
+}
 
-	var searchOperationQueue: NSOperationQueue = NSOperationQueue()
-
+extension Trakt {
 	public func search(query: String, type: TraktType! = nil, year: Int! = nil, completion: ((results: [TraktObject]?, error: NSError?) -> Void)) -> Request {
 		return manager.request(TraktRoute.Search(query: query, type: type, year: year).OAuthRequest(self)).responseJSON { response in
 			let list: [TraktObject]?

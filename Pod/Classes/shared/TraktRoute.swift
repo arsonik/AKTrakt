@@ -11,9 +11,8 @@ import Alamofire
 
 public enum TraktRoute: URLRequestConvertible {
 
-    case Token(client: Trakt, pin: String)
-    case TrendingMovies
-    case TrendingShows
+	case Token(client: Trakt, pin: String)
+	case Trending(TraktType)
     case RecommandationsMovies
     case Collection(TraktType)
     case Watchlist(TraktType)
@@ -57,9 +56,8 @@ public enum TraktRoute: URLRequestConvertible {
 
 	private var path: String {
 		switch self {
-        case .Token:							return "/oauth/token"
-        case .TrendingMovies:					return "/movies/trending"
-        case .TrendingShows:					return "/shows/trending"
+		case .Token:							return "/oauth/token"
+		case .Trending(let type):				return "/\(type.rawValue)/trending"
         case .RecommandationsMovies:			return "/recommendations/movies"
 		case .Movie(let id):					return "/movies/\(id)"
 		case .Episode(let showId, let season, let episode):
@@ -93,7 +91,7 @@ public enum TraktRoute: URLRequestConvertible {
 		case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits:
 			return ["extended": "full,images"]
 
-		case .TrendingMovies, .TrendingShows, .RecommandationsMovies:
+		case .Trending, .RecommandationsMovies:
 			return ["extended": "full,images", "limit": "100"]
 
         case .AddToWatchlist(let objects):

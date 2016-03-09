@@ -29,14 +29,14 @@ class ViewController: UIViewController {
 	}
 
 	func load() {
-		trakt.trendingMovies { [weak self] movies, error in
-			if movies != nil {
-				self?.items = movies!
+		trakt.trending(.Movies) { [weak self] objects, error in
+			if let movies = objects as? [TraktMovie] {
+				self?.items = movies
 				self?.collectionView.reloadData()
 			}
 		}
 	}
-	
+
 	@IBAction func clearToken(sender: AnyObject) {
 		trakt.clearToken()
 
@@ -73,6 +73,3 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 		}
 	}
 }
-
-
-
