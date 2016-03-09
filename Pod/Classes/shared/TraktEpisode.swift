@@ -19,7 +19,7 @@ public class TraktEpisode: TraktWatchable {
 	
 	public var firstAired: NSDate!
 	
-	override init?(data: [String: AnyObject]!){
+	override init?(data: [String: AnyObject]!) {
 		if let n = data?["number"] as? Int {
 			number = n
 			seasonNumber = data?["season"] as? Int

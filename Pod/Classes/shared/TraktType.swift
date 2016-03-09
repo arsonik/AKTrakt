@@ -15,7 +15,7 @@ public enum TraktType: String {
     , Episodes = "episodes"
     , Persons = "person"
 
-    public init?(single: String){
+    public init?(single: String) {
         switch single {
         case "movie":	self = .Movies
         case "show":	self = .Shows

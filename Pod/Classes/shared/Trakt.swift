@@ -75,7 +75,7 @@ public class Trakt {
         }
 	}
 
-    public func watched(objects: [TraktWatchable]){
+    public func watched(objects: [TraktWatchable]) {
 		objects.forEach {
 			$0.watched = true
 		}
@@ -92,7 +92,7 @@ public class Trakt {
 		}
     }
 
-    public func unWatch(objects: [TraktWatchable]){
+    public func unWatch(objects: [TraktWatchable]) {
         manager.request(TraktRoute.removeFromHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
@@ -102,7 +102,7 @@ public class Trakt {
         }
     }
 
-    public func hideFromRecommendations(movie: TraktMovie){
+    public func hideFromRecommendations(movie: TraktMovie) {
         manager.request(TraktRoute.HideRecommendation(movie).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
@@ -204,7 +204,7 @@ public class Trakt {
 		}
 	}
 
-	public func watched(type: TraktType, completion: ((result: [TraktObject]?, error: NSError?) -> Void)){
+	public func watched(type: TraktType, completion: ((result: [TraktObject]?, error: NSError?) -> Void)) {
 		manager.request(TraktRoute.Watched(type).OAuthRequest(self)).responseJSON { (response) -> Void in
 			var list: [TraktObject]? = nil
 			if let entries = response.result.value as? [[String: AnyObject]] {
@@ -407,7 +407,7 @@ public class Trakt {
 		return nil
 	}
 	
-	public func progress(show: TraktShow, completion: ((loaded: Bool, error: NSError?) -> Void)){
+	public func progress(show: TraktShow, completion: ((loaded: Bool, error: NSError?) -> Void)) {
 		manager.request(TraktRoute.Progress(show.id!).OAuthRequest(self)).responseJSON { (response) -> Void in
 			var loaded: Bool = false
             

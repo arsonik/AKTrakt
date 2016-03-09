@@ -15,7 +15,7 @@ public class TraktSeason : TraktWatchable {
 	public let number: Int!
 	public var episodes: [TraktEpisode] = []
 	
-	override init?(data: [String: AnyObject]!){
+	override init?(data: [String: AnyObject]!) {
 		if let n = data?["number"] as? Int {
 			number = n
 			super.init(data: data)
