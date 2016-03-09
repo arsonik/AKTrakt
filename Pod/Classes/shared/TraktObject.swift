@@ -45,9 +45,9 @@ public class TraktObject: CustomStringConvertible, Hashable {
 
 		if let im = data?["images"] as? [String: AnyObject] {
 			for (rawType, list) in im {
-				if let type = TraktImageType(rawValue: rawType), listed = list as? [String: AnyObject]  {
+				if let type = TraktImageType(rawValue: rawType), listed = list as? [String: AnyObject] {
 					for (rawSize, uri) in listed {
-						if let size = TraktImageSize(rawValue: rawSize), u = uri as? String  {
+						if let size = TraktImageSize(rawValue: rawSize), u = uri as? String {
 							if images[type] == nil {
 								images[type] = [:]
 							}

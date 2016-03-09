@@ -10,10 +10,10 @@ import Foundation
 
 public enum TraktType: String {
     case Movies = "movies"
-    , Shows = "shows"
-    , Seasons = "seasons"
-    , Episodes = "episodes"
-    , Persons = "person"
+    case Shows = "shows"
+    case Seasons = "seasons"
+    case Episodes = "episodes"
+    case Persons = "person"
 
     public init?(single: String) {
         switch single {

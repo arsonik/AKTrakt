@@ -8,28 +8,7 @@
 
 import UIKit
 
-extension String {
-	func stringByAddingPercentEncodingForURLQueryValue() -> String? {
-		let allowedCharacters = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~")
-		return self.stringByAddingPercentEncodingWithAllowedCharacters(allowedCharacters)
-	}
-}
-
-extension Dictionary {
-	func stringFromHttpParameters() -> String {
-		let parameterArray = self.map { (key, value) -> String in
-			let percentEscapedKey = (key as! String).stringByAddingPercentEncodingForURLQueryValue()!
-			let percentEscapedValue = (value as! String).stringByAddingPercentEncodingForURLQueryValue()!
-			return "\(percentEscapedKey)=\(percentEscapedValue)"
-		}
-
-		return parameterArray.joinWithSeparator("&")
-	}
-
-}
-
-public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate {
-
+public class TvOsTraktAuthViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var qrImageView: UIImageView!
 	@IBOutlet weak var pinField: UITextField!
 	@IBOutlet weak var uriLabel: UILabel!
@@ -48,7 +27,9 @@ public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate
 		let redirectTo = "https://trakt.tv/pin/\(trakt.applicationId)"
         qrImageView.image = UIImage(named: "TraktQRCode.png", inBundle: TvOsTraktAuthViewController.bundle, compatibleWithTraitCollection: nil)
 		uriLabel.text = redirectTo
-		infoLabel.text = String(format: "Please authorize %@\n to access your Trakt.tv account", NSBundle.mainBundle().infoDictionary!["CFBundleName"] as! String)
+		if let appName = NSBundle.mainBundle().infoDictionary?["CFBundleName"] as? String {
+			infoLabel.text = String(format: "Please authorize %@\n to access your Trakt.tv account", appName)
+		}
     }
 
     static var bundle: NSBundle? {
@@ -62,7 +43,7 @@ public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate
 		activity.startAnimating()
         trakt.exchangePinForToken(pinEntry) { [weak self] token, error in
             if token != nil {
-                self?.trakt.saveToken(token: token)
+                self?.trakt.saveToken(token)
                 self?.delegate?.TraktAuthViewControllerDidAuthenticate(self!)
             } else {
 

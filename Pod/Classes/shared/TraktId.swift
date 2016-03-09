@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TraktId : String {
+public enum TraktId: String {
 	case Imdb = "imdb"
 	case Slug = "slug"
 	case Tmdb = "tmdb"
@@ -19,7 +19,7 @@ public enum TraktId : String {
 	static func extractIds(data: [String: AnyObject!]!) -> [TraktId: AnyObject]! {
 		if let lids = data?["ids"] as? [String: AnyObject] {
 			var ids: [TraktId: AnyObject] = [:]
-			for (a,b) in lids {
+			for (a, b) in lids {
 				if let id = TraktId(rawValue: a) {
 					ids[id] = b
 				}

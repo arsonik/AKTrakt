@@ -20,9 +20,9 @@ public enum TraktRoute: URLRequestConvertible {
     case People(TraktType, TraktIdentifier)
     case Credits(TraktIdentifier, TraktType)
 	case Watched(TraktType)
-	case addToWatchlist([TraktObject])
-	case addToHistory([TraktObject])
-    case removeFromHistory([TraktObject])
+	case AddToWatchlist([TraktObject])
+	case AddToHistory([TraktObject])
+    case RemoveFromHistory([TraktObject])
     case HideRecommendation(TraktMovie)
 	case Progress(AnyObject)
 	case Episode(showId: AnyObject, season: Int, episode: Int)
@@ -39,7 +39,7 @@ public enum TraktRoute: URLRequestConvertible {
 
 	private var method: String {
 		switch self {
-		case .Token, .addToHistory, .removeFromHistory, .addToWatchlist, .Rate:
+		case .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
 			return "POST"
         case .HideRecommendation:
             return "DELETE"
@@ -69,9 +69,9 @@ public enum TraktRoute: URLRequestConvertible {
         case .Watched(let type):				return "/sync/watched/\(type.rawValue)"
         case .Progress(let id):					return "/shows/\(id)/progress/watched"
         case .People(let type, let id):			return "/\(type.rawValue)/\(id)/people"
-		case .addToHistory:						return "/sync/history"
-		case .removeFromHistory:				return "/sync/history/remove"
-		case .addToWatchlist:					return "/sync/watchlist"
+		case .AddToHistory:						return "/sync/history"
+		case .RemoveFromHistory:				return "/sync/history/remove"
+		case .AddToWatchlist:					return "/sync/watchlist"
 		case .Search:							return "/search"
         case .Rate:								return "/sync/ratings"
         case .Credits(let id, let type):        return "/people/\(id)/\(type.rawValue)"
@@ -96,7 +96,7 @@ public enum TraktRoute: URLRequestConvertible {
 		case .TrendingMovies, .TrendingShows, .RecommandationsMovies:
 			return ["extended": "full,images", "limit": "100"]
 
-        case .addToWatchlist(let objects):
+        case .AddToWatchlist(let objects):
             var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
             for object in objects {
                 if let id = object.id {
@@ -108,7 +108,7 @@ public enum TraktRoute: URLRequestConvertible {
             }
             return p
 
-		case .addToHistory(let objects):
+		case .AddToHistory(let objects):
 			var p: [String: [[String: AnyObject]]] = [:]
 			for object in objects {
 				if let id = object.ids[TraktId.Trakt] as? Int {
@@ -121,7 +121,7 @@ public enum TraktRoute: URLRequestConvertible {
 			}
 			return p
 
-		case .removeFromHistory(let objects):
+		case .RemoveFromHistory(let objects):
 			var p: [String: [[String: AnyObject]]] = [:]
 			for object in objects {
 				if let id = object.ids[TraktId.Trakt] as? Int {
@@ -162,7 +162,6 @@ public enum TraktRoute: URLRequestConvertible {
 		}
 	}
 
-	///
 	public var URLRequest: NSMutableURLRequest {
 		if let url = NSURL(string: "\(domain)\(path)") {
 			let URLRequest = NSMutableURLRequest(URL: url)
@@ -175,20 +174,20 @@ public enum TraktRoute: URLRequestConvertible {
 			}
 
 			switch self {
-			case .Token, .addToHistory, .removeFromHistory, .addToWatchlist, .Rate:
+			case .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
 				let encoding = Alamofire.ParameterEncoding.JSON
 				return encoding.encode(URLRequest, parameters: parameters).0
 			default:
 				let encoding = Alamofire.ParameterEncoding.URL
 				return encoding.encode(URLRequest, parameters: parameters).0
 			}
+		} else {
+			return NSMutableURLRequest()
 		}
-		print("url failed for \(path)")
-		return NSMutableURLRequest(URL: NSURL(string: "http://localhost")!)
 	}
 
-	func OAuthRequest(trakt: Trakt) -> NSURLRequest {
-		let req = URLRequest.mutableCopy() as! NSMutableURLRequest
+	func OAuthRequest(trakt: Trakt) -> NSMutableURLRequest {
+		let req = URLRequest
 		req.setValue("2", forHTTPHeaderField: "trakt-api-version")
 		req.setValue(trakt.clientId, forHTTPHeaderField: "trakt-api-key")
 		if let token = trakt.token {

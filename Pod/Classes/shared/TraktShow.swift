@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TraktShow : TraktWatchable {
+public class TraktShow: TraktWatchable {
 
 	public var seasons: [TraktSeason] = []
 

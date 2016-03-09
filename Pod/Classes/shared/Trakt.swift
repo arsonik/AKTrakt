@@ -56,16 +56,16 @@ public class Trakt {
     }
 
     public func clearToken() {
-        saveToken(token: nil)
+        saveToken(nil)
     }
 
-	public func saveToken(token t: TraktToken!) {
-        token = t
+	public func saveToken(token: TraktToken!) {
+        self.token = token
 		let defaults = NSUserDefaults.standardUserDefaults()
-        if t != nil {
-            defaults.setObject(t.accessToken, forKey: "trakt_access_token_\(clientId)")
-            defaults.setObject(t.expire, forKey: "trakt_expire_\(clientId)")
-            defaults.setObject(t.refreshToken, forKey: "trakt_refresh_token_\(clientId)")
+        if token != nil {
+            defaults.setObject(token.accessToken, forKey: "trakt_access_token_\(clientId)")
+            defaults.setObject(token.expire, forKey: "trakt_expire_\(clientId)")
+            defaults.setObject(token.refreshToken, forKey: "trakt_refresh_token_\(clientId)")
         } else {
 
             defaults.removeObjectForKey("trakt_access_token_\(clientId)")
@@ -79,7 +79,7 @@ public class Trakt {
 			$0.watched = true
 		}
 
-		manager.request(TraktRoute.addToHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
+		manager.request(TraktRoute.AddToHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
                     self.watched(objects)
@@ -92,7 +92,7 @@ public class Trakt {
     }
 
     public func unWatch(objects: [TraktWatchable]) {
-        manager.request(TraktRoute.removeFromHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
+        manager.request(TraktRoute.RemoveFromHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
             if let r = response.response where r.shouldRetry {
                 return delay(5) {
                     self.unWatch(objects)
@@ -112,7 +112,7 @@ public class Trakt {
     }
 
     public func addToWatchlist(objects: TraktWatchable...) {
-        manager.request(TraktRoute.addToWatchlist(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
+        manager.request(TraktRoute.AddToWatchlist(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
             ()
         }
     }
@@ -359,48 +359,45 @@ public class Trakt {
         }
     }
 
-	public func episode(episode: TraktEpisode, completion: ((loaded: Bool) -> Void)) -> Request? {
-		if let ld = episode.loaded where ld == false {
+	public func episode(episode: TraktEpisode, completion: (loaded: Bool) -> Void) -> Request? {
+		if episode.loaded == false {
 			episode.loaded = nil
-			return manager.request(TraktRoute.Episode(showId: episode.season.show.id!, season: episode.season.number, episode: episode.number).OAuthRequest(self)).responseJSON { (response) -> Void in
-				if let data = response.result.value as? [String: AnyObject], title = data["title"] as? String, overview = data["overview"] as? String {
-					episode.title = title
-					episode.overview = overview
-					if let ids = TraktId.extractIds(data) {
-						episode.ids = ids
-					}
-					if let im = data["images"] as? [String: [String: String]] {
-						for (t, l) in im {
-							if let type = TraktImageType(rawValue: t) {
-								for (s,uri) in l {
-									if let size = TraktImageSize(rawValue: s) {
-										if episode.images[type] == nil {
-											episode.images[type] = [:]
-										}
-										episode.images[type]![size] = uri
-									}
-								}
-							}
-						}
-					}
-					if let fa = data["first_aired"] as? String {
-						episode.firstAired = self.dateFormatter.dateFromString(fa)
-					}
-					episode.loaded = true
-				} else {
-
+			return manager.request(TraktRoute.Episode(showId: episode.season.show.id!, season: episode.season.number, episode: episode.number).OAuthRequest(self)).responseJSON { response in
+				guard let data = response.result.value as? [String: AnyObject], title = data["title"] as? String, overview = data["overview"] as? String else {
 					// cancelled
 					if response.result.error?.code == -999 {
 						episode.loaded = false
 					} else {
-
 						print("Cannot load episode \(episode) \(response.result.error)")
 					}
+					return completion(loaded: episode.loaded != nil && episode.loaded == true)
 				}
+
+				episode.title = title
+				episode.overview = overview
+				if let ids = TraktId.extractIds(data) {
+					episode.ids = ids
+				}
+				(data["images"] as? [String: [String: String]])?.forEach { t, l in
+					if let type = TraktImageType(rawValue: t) {
+						for (s, uri) in l {
+							if let size = TraktImageSize(rawValue: s) {
+								if episode.images[type] == nil {
+									episode.images[type] = [:]
+								}
+								episode.images[type]![size] = uri
+							}
+						}
+					}
+				}
+
+				if let fa = data["first_aired"] as? String {
+					episode.firstAired = self.dateFormatter.dateFromString(fa)
+				}
+				episode.loaded = true
 				completion(loaded: episode.loaded != nil && episode.loaded == true)
 			}
 		} else {
-
 			completion(loaded: episode.loaded != nil && episode.loaded == true)
 		}
 		return nil

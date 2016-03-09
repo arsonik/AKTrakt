@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TraktSeason : TraktWatchable {
+public class TraktSeason: TraktWatchable {
 
 	public weak var show: TraktShow!
 
