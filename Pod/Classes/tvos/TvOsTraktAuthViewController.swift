@@ -46,7 +46,6 @@ public class TvOsTraktAuthViewController: UIViewController, UITextFieldDelegate 
                 self?.trakt.saveToken(token)
                 self?.delegate?.TraktAuthViewControllerDidAuthenticate(self!)
             } else {
-
 				let ac = UIAlertController(title: "Trakt Error", message: error?.localizedDescription, preferredStyle: .Alert)
 				ac.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: { (action) -> Void in
 					self?.navigationController?.dismissViewControllerAnimated(true, completion: nil)

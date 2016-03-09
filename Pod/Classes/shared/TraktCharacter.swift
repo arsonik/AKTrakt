@@ -17,7 +17,6 @@ public class TraktCharacter {
             character = n
 			person = pers
         } else {
-
             character = nil
             person = nil
             return nil

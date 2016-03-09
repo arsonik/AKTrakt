@@ -17,7 +17,6 @@ public class TraktCrew {
             job = n
             person = pers
         } else {
-
             job = nil
             person = nil
             return nil

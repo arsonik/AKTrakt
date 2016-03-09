@@ -28,7 +28,6 @@ public class TraktEpisode: TraktWatchable {
 				watched = c
 			}
 		} else {
-
 			number = nil
 			super.init(data: nil)
 			return nil

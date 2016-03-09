@@ -69,7 +69,6 @@ public class Trakt {
             defaults.setObject(token.expire, forKey: "trakt_expire_\(clientId)")
             defaults.setObject(token.refreshToken, forKey: "trakt_refresh_token_\(clientId)")
         } else {
-
             defaults.removeObjectForKey("trakt_access_token_\(clientId)")
             defaults.removeObjectForKey("trakt_expire_\(clientId)")
             defaults.removeObjectForKey("trakt_refresh_token_\(clientId)")
@@ -87,7 +86,6 @@ public class Trakt {
                     self.watched(objects)
                 }
             } else {
-
 				print(response.result.value)
 			}
 		}
@@ -185,14 +183,12 @@ public class Trakt {
 							if let a = TraktMovie(data: v) {
 								list!.append(a)
 							} else {
-
 								print("Failed TraktMovie\(v)")
 							}
 						case .Shows:
 							if let show = TraktShow(data: v) {
 								list!.append(show)
 							} else {
-
 								print("Failed TraktShow\(v)")
 							}
 						default:
@@ -217,14 +213,12 @@ public class Trakt {
 							if let a = TraktMovie(data: v) {
 								list!.append(a)
 							} else {
-
 								print("Failed TraktMovie\(v)")
 							}
 						case .Shows:
 							if let show = TraktShow(data: v) {
 								list!.append(show)
 							} else {
-
 								print("Failed TraktShow\(v)")
 							}
 						default:
@@ -255,7 +249,6 @@ public class Trakt {
 				})
                 completion(result: list, error: nil)
 			} else {
-
                 completion(result: nil, error: response.result.error)
             }
 		}
@@ -296,7 +289,6 @@ public class Trakt {
 				})
                 completion(list, response.result.error)
             } else {
-
                 completion(nil, response.result.error)
             }
         }
@@ -307,7 +299,6 @@ public class Trakt {
 			if let item = response.result.value as? [String: AnyObject], added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
 				completion(true, nil)
 			} else {
-
 				completion(false, response.result.error)
 			}
 		}
@@ -328,7 +319,6 @@ public class Trakt {
             if let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) {
                 completion(o, nil)
             } else {
-
                 completion(nil, response.result.error)
             }
         }
@@ -344,7 +334,6 @@ extension Trakt {
 			if let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) {
 				completion(o, nil)
 			} else {
-
 				completion(nil, response.result.error)
 			}
 		}

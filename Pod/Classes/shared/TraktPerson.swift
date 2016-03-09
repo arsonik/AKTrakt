@@ -36,7 +36,6 @@ public class TraktPerson: TraktObject {
 
             super.init(data: data)
         } else {
-
             name = nil
             biography = nil
             birthday = nil

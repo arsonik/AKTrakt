@@ -20,7 +20,6 @@ public class TraktSeason: TraktWatchable {
 			number = n
 			super.init(data: data)
 		} else {
-
 			number = nil
 			super.init(data: nil)
 			return nil
