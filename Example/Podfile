@@ -11,6 +11,7 @@ target 'AKTrakt_TvOS_Example' do
 	platform :tvos, '9.0'
 	pod "AKTrakt", :path => "../"
 	pod "Alamofire"
+	pod "AlamofireImage"
 end
 
 target 'AKTrakt_Tests' do

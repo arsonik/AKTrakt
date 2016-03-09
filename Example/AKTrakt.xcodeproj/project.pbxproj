@@ -205,12 +205,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17109D0F1C05EF0A007D3D16 /* Build configuration list for PBXNativeTarget "AKTrakt_TvOS_Example" */;
 			buildPhases = (
-				80474D58DC9AC96AB3211A7C /* Check Pods Manifest.lock */,
+				80474D58DC9AC96AB3211A7C /* 📦 Check Pods Manifest.lock */,
 				17109CFF1C05EF0A007D3D16 /* Sources */,
 				17109D001C05EF0A007D3D16 /* Frameworks */,
 				17109D011C05EF0A007D3D16 /* Resources */,
-				0DC09246E258DEDF7C6EDC1B /* Embed Pods Frameworks */,
-				C22FD465AC972ECF977EEDBE /* Copy Pods Resources */,
+				0DC09246E258DEDF7C6EDC1B /* 📦 Embed Pods Frameworks */,
+				C22FD465AC972ECF977EEDBE /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -225,12 +225,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AKTrakt_iOS_Example" */;
 			buildPhases = (
-				85B7E2163FDFA45D4502C5DA /* Check Pods Manifest.lock */,
+				85B7E2163FDFA45D4502C5DA /* 📦 Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				5DD668363034103C97473FB9 /* Embed Pods Frameworks */,
-				0F092E49AE63FBC26918D9E4 /* Copy Pods Resources */,
+				5DD668363034103C97473FB9 /* 📦 Embed Pods Frameworks */,
+				0F092E49AE63FBC26918D9E4 /* 📦 Copy Pods Resources */,
 				174FE9251C85917000FA2EAE /* Swift lint */,
 			);
 			buildRules = (
@@ -246,12 +246,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AKTrakt_Tests" */;
 			buildPhases = (
-				BE5825E11A61A17A1BD98203 /* Check Pods Manifest.lock */,
+				BE5825E11A61A17A1BD98203 /* 📦 Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
-				323B7B89A9F8D0ADC6CEDB5F /* Embed Pods Frameworks */,
-				7C58B27D8153DA79C49686DD /* Copy Pods Resources */,
+				323B7B89A9F8D0ADC6CEDB5F /* 📦 Embed Pods Frameworks */,
+				7C58B27D8153DA79C49686DD /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -335,14 +335,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0DC09246E258DEDF7C6EDC1B /* Embed Pods Frameworks */ = {
+		0DC09246E258DEDF7C6EDC1B /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,14 +350,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt_TvOS_Example/Pods-AKTrakt_TvOS_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0F092E49AE63FBC26918D9E4 /* Copy Pods Resources */ = {
+		0F092E49AE63FBC26918D9E4 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -379,14 +379,14 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		323B7B89A9F8D0ADC6CEDB5F /* Embed Pods Frameworks */ = {
+		323B7B89A9F8D0ADC6CEDB5F /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,14 +394,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt_Tests/Pods-AKTrakt_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5DD668363034103C97473FB9 /* Embed Pods Frameworks */ = {
+		5DD668363034103C97473FB9 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -409,14 +409,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt_iOS_Example/Pods-AKTrakt_iOS_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7C58B27D8153DA79C49686DD /* Copy Pods Resources */ = {
+		7C58B27D8153DA79C49686DD /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,14 +424,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt_Tests/Pods-AKTrakt_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		80474D58DC9AC96AB3211A7C /* Check Pods Manifest.lock */ = {
+		80474D58DC9AC96AB3211A7C /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,14 +439,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		85B7E2163FDFA45D4502C5DA /* Check Pods Manifest.lock */ = {
+		85B7E2163FDFA45D4502C5DA /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,14 +454,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		BE5825E11A61A17A1BD98203 /* Check Pods Manifest.lock */ = {
+		BE5825E11A61A17A1BD98203 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,14 +469,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C22FD465AC972ECF977EEDBE /* Copy Pods Resources */ = {
+		C22FD465AC972ECF977EEDBE /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

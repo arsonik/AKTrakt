@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "AKTrakt"
-  s.version          = "0.1.4"
+  s.version          = "0.1.5"
   s.summary          = "Swift Trakt.tv client."
 
 # This description is used to generate tags and improve search results.
@@ -34,11 +34,11 @@ Pod::Spec.new do |s|
   s.source_files = 'Pod/Classes/shared/**/*'
   s.ios.source_files = 'Pod/Classes/ios/**/*'
   s.tvos.source_files = 'Pod/Classes/tvos/**/*'
- # s.tvos.resource_bundles = {'AKTraktTvOs' => ['Pod/Resources/tvos/**/*.{xib,png}']}
+# s.tvos.resource_bundles = {'AKTraktTvOsBundle' => ['Pod/Resources/tvos/**/*']}
   s.tvos.resources = 'Pod/Resources/tvos/*.{xib,png}'
 
   s.ios.frameworks = 'UIKit', 'Webkit'
   s.dependency 'Alamofire'
-#  s.tvos.dependency 'QRCode'
+#  s.tvos.dependency 'QRCode' # Waiting for pull request
 
 end

@@ -40,13 +40,18 @@ public class Trakt {
     
     internal func exchangePinForToken(pin:String, completion:(TraktToken?, NSError?) -> Void) {
         let request = TraktRoute.Token(client: self, pin: pin)
-        manager.request(request).responseJSON { (response) -> Void in
-            if let aToken = TraktToken(data: response.result.value as? [String:AnyObject]) {
+        manager.request(request).responseJSON { response in
+            if let aToken = TraktToken(data: response.result.value as? [String: AnyObject]) {
                 completion(aToken, nil)
             }
-            else{
-                print(response.result.value)
-                completion(nil, response.result.error)
+            else {
+				let err: NSError?
+				if let error = (response.result.value as? [String: AnyObject])?["error_description"] as? String {
+					err = NSError(domain: "trakt.tv", code: 401, userInfo: [NSLocalizedDescriptionKey: error])
+				} else {
+					err = response.result.error
+				}
+                completion(nil, err)
             }
         }
     }
@@ -71,8 +76,8 @@ public class Trakt {
 	}
 
     public func watched(objects:[TraktWatchable]){
-		for show in objects.filter({$0 is TraktWatchable}) {
-			(show as! TraktWatchable).watched = true
+		objects.forEach {
+			$0.watched = true
 		}
 		
 		manager.request(TraktRoute.addToHistory(objects).OAuthRequest(self)).responseJSON { (response) -> Void in
