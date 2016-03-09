@@ -10,16 +10,16 @@ import Foundation
 
 public class TraktEpisode: TraktWatchable {
 	
-	public weak var season:TraktSeason!
+	public weak var season: TraktSeason!
 	
-	public let number:Int!
-	public var seasonNumber:Int!
+	public let number: Int!
+	public var seasonNumber: Int!
 	
-	var loaded:Bool? = false
+	var loaded: Bool? = false
 	
-	public var firstAired:NSDate!
+	public var firstAired: NSDate!
 	
-	override init?(data: [String:AnyObject]!){
+	override init?(data: [String: AnyObject]!){
 		if let n = data?["number"] as? Int {
 			number = n
 			seasonNumber = data?["season"] as? Int
@@ -35,7 +35,7 @@ public class TraktEpisode: TraktWatchable {
 		}
 	}
 	
-	public override var description:String {
+	public override var description: String {
 		return "TraktEpisode(\(number)) completed \(watched)"
 	}
 }

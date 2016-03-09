@@ -37,7 +37,7 @@ public class TvOsTraktAuthViewController : UIViewController, UITextFieldDelegate
 	@IBOutlet weak var activity: UIActivityIndicatorView!
 
     internal weak var delegate: TraktAuthViewControllerDelegate!
-    internal var trakt:Trakt!
+    internal var trakt: Trakt!
 
     public override func viewDidLoad() {
         super.viewDidLoad()

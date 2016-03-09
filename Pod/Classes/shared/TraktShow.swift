@@ -10,17 +10,17 @@ import Foundation
 
 public class TraktShow : TraktWatchable {
 	
-	public var seasons:[TraktSeason] = []
+	public var seasons: [TraktSeason] = []
 	
-	public var notCompleted:[TraktEpisode] {
-		var list:[TraktEpisode] = []
+	public var notCompleted: [TraktEpisode] {
+		var list: [TraktEpisode] = []
 		for season in seasons {
 			list += season.notCompleted
 		}
 		return list
 	}
 	
-	public override var description:String {
+	public override var description: String {
 		return "TraktShow(\(title))"
 	}
     

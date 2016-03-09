@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum TraktImageSize:String {
+public enum TraktImageSize: String {
     case Full = "full"
     , Medium = "medium"
     , Thumb = "thumb"

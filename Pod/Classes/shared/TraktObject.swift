@@ -37,13 +37,13 @@ public class TraktObject: CustomStringConvertible, Hashable {
         return id!
     }
 	
-	public var images:[TraktImageType: [TraktImageSize: String]] = [:]
+	public var images: [TraktImageType: [TraktImageSize: String]] = [:]
 
 	init?(data: [String: AnyObject]!) {
 
 		ids = TraktId.extractIds(data) ?? [:]
 
-		if let im = data?["images"] as? [String:AnyObject] {
+		if let im = data?["images"] as? [String: AnyObject] {
 			for (rawType, list) in im {
 				if let type = TraktImageType(rawValue: rawType), listed = list as? [String: AnyObject]  {
 					for (rawSize, uri) in listed {
@@ -59,8 +59,8 @@ public class TraktObject: CustomStringConvertible, Hashable {
 		}
 	}
 
-	static func autoload(item:[String: AnyObject]!) -> TraktObject! {
-		if let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? [String:AnyObject] {
+	static func autoload(item: [String: AnyObject]!) -> TraktObject! {
+		if let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? [String: AnyObject] {
 			switch type {
 			case .Shows:
 				return TraktShow(data: data)
@@ -78,14 +78,14 @@ public class TraktObject: CustomStringConvertible, Hashable {
 		return nil
 	}
 	
-	public func imageURL(type:TraktImageType, size: TraktImageSize) -> NSURL? {
+	public func imageURL(type: TraktImageType, size: TraktImageSize) -> NSURL? {
 		if let uri = images[type]?[size] {
 			return NSURL(string: uri)
 		}
 		return nil
 	}
 	
-	public var description:String {
+	public var description: String {
 		return "TraktObject id:\(id)"
 	}
 }

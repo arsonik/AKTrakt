@@ -15,7 +15,7 @@ public extension NSHTTPURLResponse {
 }
 
 public extension String {
-    var slug:String {
+    var slug: String {
         var cp = self.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
         // remove accents
         cp = cp.stringByFoldingWithOptions(NSStringCompareOptions.DiacriticInsensitiveSearch, locale: NSLocale.currentLocale())
@@ -25,7 +25,7 @@ public extension String {
     }
 }
 
-public func delay(delay:Double, closure:()->()) {
+public func delay(delay: Double, closure: ()->()) {
     dispatch_after(
         dispatch_time(
             DISPATCH_TIME_NOW,

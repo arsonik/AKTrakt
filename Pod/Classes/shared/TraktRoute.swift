@@ -9,35 +9,35 @@
 import Foundation
 import Alamofire
 
-public enum TraktRoute :URLRequestConvertible {
+public enum TraktRoute: URLRequestConvertible {
 	
-    case Token(client:Trakt, pin:String)
-    , TrendingMovies
-    , TrendingShows
-    , RecommandationsMovies
-    , Collection(TraktType)
-    , Watchlist(TraktType)
-    , People(TraktType, TraktIdentifier)
-    , Credits(TraktIdentifier, TraktType)
-	, Watched(TraktType)
-	, addToWatchlist([TraktObject])
-	, addToHistory([TraktObject])
-    , removeFromHistory([TraktObject])
-    , HideRecommendation(TraktMovie)
-	, Progress(AnyObject)
-	, Episode(showId:AnyObject, season:Int, episode:Int)
-	, Movie(id:AnyObject)
-	, Search(query:String, type:TraktType!, year:Int!)
-	, Rate(TraktWatchable, Int)
+    case Token(client: Trakt, pin: String)
+    case TrendingMovies
+    case TrendingShows
+    case RecommandationsMovies
+    case Collection(TraktType)
+    case Watchlist(TraktType)
+    case People(TraktType, TraktIdentifier)
+    case Credits(TraktIdentifier, TraktType)
+	case Watched(TraktType)
+	case addToWatchlist([TraktObject])
+	case addToHistory([TraktObject])
+    case removeFromHistory([TraktObject])
+    case HideRecommendation(TraktMovie)
+	case Progress(AnyObject)
+	case Episode(showId: AnyObject, season: Int, episode: Int)
+	case Movie(id: AnyObject)
+	case Search(query: String, type: TraktType!, year: Int!)
+	case Rate(TraktWatchable, Int)
 	
-	private var domain:String {
+	private var domain: String {
 		switch self {
 		default:
 			return "https://api-v2launch.trakt.tv"
 		}
 	}
 	
-	private var method:String {
+	private var method: String {
 		switch self {
 		case .Token, .addToHistory, .removeFromHistory, .addToWatchlist, .Rate:
 			return "POST"
@@ -48,14 +48,14 @@ public enum TraktRoute :URLRequestConvertible {
 		}
 	}
 
-	private var headers:[String:String]? {
+	private var headers: [String: String]? {
 		switch self {
 		default:
 			return nil
 		}
 	}
 	
-	private var path:String {
+	private var path: String {
 		switch self {
         case .Token:							return "/oauth/token"
         case .TrendingMovies:					return "/movies/trending"
@@ -80,7 +80,7 @@ public enum TraktRoute :URLRequestConvertible {
 		}
 	}
 	
-	private var parameters:[String:AnyObject]! {
+	private var parameters: [String: AnyObject]! {
 		switch self {
 		case .Token(let trakt, let pin):
 			return [
@@ -109,7 +109,7 @@ public enum TraktRoute :URLRequestConvertible {
             return p
 
 		case .addToHistory(let objects):
-			var p:[String:[[String:AnyObject]]] = [:]
+			var p: [String: [[String: AnyObject]]] = [:]
 			for object in objects {
 				if let id = object.ids[TraktId.Trakt] as? Int {
 
@@ -122,7 +122,7 @@ public enum TraktRoute :URLRequestConvertible {
 			return p
 
 		case .removeFromHistory(let objects):
-			var p:[String:[[String:AnyObject]]] = [:]
+			var p: [String: [[String: AnyObject]]] = [:]
 			for object in objects {
 				if let id = object.ids[TraktId.Trakt] as? Int {
 
@@ -135,7 +135,7 @@ public enum TraktRoute :URLRequestConvertible {
 			return p
 		
 		case .Search(let query, let type, let year):
-			var p:[String:AnyObject] = [
+			var p: [String: AnyObject] = [
 				"query": query,
 				"limit": 5
 			]
@@ -149,7 +149,7 @@ public enum TraktRoute :URLRequestConvertible {
 
 		case .Rate(let object, let rate):
 
-			var p:[String: [AnyObject]] = [:]
+			var p: [String: [AnyObject]] = [:]
 			let e: [String: AnyObject] = [
 				"rating": rate,
 				"ids": ["trakt": object.id!]
@@ -163,7 +163,7 @@ public enum TraktRoute :URLRequestConvertible {
 	}
 	
 	///
-	public var URLRequest:NSMutableURLRequest {
+	public var URLRequest: NSMutableURLRequest {
 		if let url = NSURL(string: "\(domain)\(path)") {
 			let URLRequest = NSMutableURLRequest(URL: url)
 			URLRequest.HTTPMethod = method
@@ -187,7 +187,7 @@ public enum TraktRoute :URLRequestConvertible {
 		return NSMutableURLRequest(URL: NSURL(string: "http://localhost")!)
 	}
 	
-	func OAuthRequest(trakt:Trakt) -> NSURLRequest {
+	func OAuthRequest(trakt: Trakt) -> NSURLRequest {
 		let req = URLRequest.mutableCopy() as! NSMutableURLRequest
 		req.setValue("2", forHTTPHeaderField: "trakt-api-version")
 		req.setValue(trakt.clientId, forHTTPHeaderField: "trakt-api-key")

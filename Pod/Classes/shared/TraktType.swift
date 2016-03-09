@@ -8,14 +8,14 @@
 
 import Foundation
 
-public enum TraktType:String {
+public enum TraktType: String {
     case Movies = "movies"
     , Shows = "shows"
     , Seasons = "seasons"
     , Episodes = "episodes"
     , Persons = "person"
 
-    public init?(single:String){
+    public init?(single: String){
         switch single {
         case "movie":	self = .Movies
         case "show":	self = .Shows
@@ -27,7 +27,7 @@ public enum TraktType:String {
         }
     }
 
-    public var single:String {
+    public var single: String {
         switch self {
         case .Movies:	return "movie"
         case .Shows:	return "show"
