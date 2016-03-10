@@ -37,3 +37,10 @@ public func < (lhs: NSDate, rhs: NSDate) -> Bool {
 }
 
 extension NSDate: Comparable { }
+
+
+#if os(tvOS)
+	public typealias TraktAuthenticationViewController = TvOsTraktAuthViewController
+#else
+	public typealias TraktAuthenticationViewController = TraktAuthViewController
+#endif

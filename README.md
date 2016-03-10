@@ -20,6 +20,12 @@ it, simply add the following line to your Podfile:
 pod "AKTrakt"
 ```
 
+## Screenshots
+
+![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/TVlogin.png)
+![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/TVmovies.png)
+![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/iOSmovies.png)
+
 ## Code
 
 ```swift
@@ -38,10 +44,44 @@ override func viewDidAppear(animated: Bool) {
 }
 ```
 
-## Screenshots
+A (probably not up to date) list of what you can request:
+```swift
+public func watched(objects: [TraktWatchable]) -> Request {
 
-![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/TVlogin.png)
-![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/TVmovies.png)
+public func unWatch(objects: [TraktWatchable]) -> Request {
+
+public func hideFromRecommendations(movie: TraktMovie) -> Request {
+
+public func addToWatchlist(objects: TraktWatchable...) -> Request {
+
+public func people(object: TraktWatchable, completion: ((succeed: Bool, error: NSError?) -> Void)) -> Request {
+
+public func credits(person: TraktPerson, type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
+
+public func watchList(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
+
+public func watched(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
+
+public func collection(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
+
+public func trending(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
+
+public func recommendations(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
+
+public func rate(object: TraktWatchable, rate: Int, completion: (Bool, NSError?) -> Void) -> Request {
+
+public func searchMovie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
+
+public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
+
+public func episode(episode: TraktEpisode, completion: (loaded: Bool) -> Void) -> Request? {
+
+public func progress(show: TraktShow, completion: ((loaded: Bool, error: NSError?) -> Void)) -> Request {
+
+public func search(query: String, type: TraktType! = nil, year: Int! = nil, pagination: TraktPagination! = nil, completion: ((results: [TraktObject]?, error: NSError?) -> 
+```
+
+Feel free to fork, and add more features !
 
 ## Author
 

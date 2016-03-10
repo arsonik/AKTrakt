@@ -11,9 +11,9 @@
 		17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		17109D0B1C05EF0A007D3D16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17109D091C05EF0A007D3D16 /* Main.storyboard */; };
 		17109D0D1C05EF0A007D3D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17109D0C1C05EF0A007D3D16 /* Assets.xcassets */; };
+		17F050011C91D789006F448F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		1916EB99410FD5C19C25C524 /* Pods_AKTrakt_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35769ED395217FF0FD00A41 /* Pods_AKTrakt_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
-		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
@@ -36,7 +36,7 @@
 		07F71D2B3D219AF07177959D /* Pods_AKTrakt_TvOS_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKTrakt_TvOS_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		17109D031C05EF0A007D3D16 /* AKTrakt_TvOS_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AKTrakt_TvOS_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17109D051C05EF0A007D3D16 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		17109D071C05EF0A007D3D16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		17109D071C05EF0A007D3D16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = AKTrakt_TvOS_Example/ViewController.swift; sourceTree = "<group>"; };
 		17109D0A1C05EF0A007D3D16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		17109D0C1C05EF0A007D3D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17109D0E1C05EF0A007D3D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,7 +48,6 @@
 		607FACD01AFB9204008FA782 /* AKTrakt_iOS_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AKTrakt_iOS_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		607FACD71AFB9204008FA782 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -95,7 +94,6 @@
 			isa = PBXGroup;
 			children = (
 				17109D051C05EF0A007D3D16 /* AppDelegate.swift */,
-				17109D071C05EF0A007D3D16 /* ViewController.swift */,
 				17109D091C05EF0A007D3D16 /* Main.storyboard */,
 				17109D0C1C05EF0A007D3D16 /* Assets.xcassets */,
 				17109D0E1C05EF0A007D3D16 /* Info.plist */,
@@ -119,6 +117,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				17109D071C05EF0A007D3D16 /* ViewController.swift */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* AKTrakt_iOS_Example */,
 				17109D041C05EF0A007D3D16 /* AKTrakt_TvOS_Example */,
@@ -143,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -500,7 +498,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				17F050011C91D789006F448F /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

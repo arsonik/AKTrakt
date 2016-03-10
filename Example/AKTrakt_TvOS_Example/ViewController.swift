@@ -15,13 +15,15 @@ class ViewController: UIViewController {
 	@IBOutlet weak var collectionView: UICollectionView!
 	var items: [TraktMovie] = []
 
-
 	let trakt = Trakt(clientId: "37558e63c821f673801c2c0788f4f877f5ed626bf5ba4493626173b3ac19b594", clientSecret: "9a80ed5b84182af99be0a452696e68e525b2c629e6f2a9a7cd748e4147d85690", applicationId: 3695)
 
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
+		displayAuth()
+	}
 
-		if let vc = TvOsTraktAuthViewController.credientialViewController(trakt, delegate: self) {
+	func displayAuth() {
+		if let vc = TraktAuthenticationViewController.credientialViewController(trakt, delegate: self) {
 			presentViewController(vc, animated: true, completion: nil)
 		} else {
 			load()
@@ -39,10 +41,7 @@ class ViewController: UIViewController {
 
 	@IBAction func clearToken(sender: AnyObject) {
 		trakt.clearToken()
-
-		if let vc = TvOsTraktAuthViewController.credientialViewController(trakt, delegate: self) {
-			presentViewController(vc, animated: true, completion: nil)
-		}
+		displayAuth()
 	}
 }
 
@@ -71,5 +70,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 		if let url = items[indexPath.row].imageURL(.Poster, size: .Thumb) {
 			(cell.viewWithTag(1) as? UIImageView)?.af_setImageWithURL(url)
 		}
+	}
+
+	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+		// Here you have the selected movie
+		print(items[indexPath.row].title)
 	}
 }

@@ -5,6 +5,7 @@ target 'AKTrakt_iOS_Example' do
 	platform :ios, '8.0'
 	pod "AKTrakt", :path => "../"
 	pod "Alamofire"
+	pod "AlamofireImage"
 end
 
 target 'AKTrakt_TvOS_Example' do

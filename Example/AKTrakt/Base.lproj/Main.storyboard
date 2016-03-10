@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,9 +17,67 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gki-bY-thA">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="20" id="Se2-Gx-V1O">
+                                    <size key="itemSize" width="100" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="movie" id="3H0-oN-Zjh">
+                                        <rect key="frame" x="20" y="84" width="100" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U57-We-qvP">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="U57-We-qvP" firstAttribute="top" secondItem="3H0-oN-Zjh" secondAttribute="top" id="cRS-RD-ZYT"/>
+                                            <constraint firstAttribute="bottom" secondItem="U57-We-qvP" secondAttribute="bottom" id="cxp-8y-kNC"/>
+                                            <constraint firstItem="U57-We-qvP" firstAttribute="leading" secondItem="3H0-oN-Zjh" secondAttribute="leading" id="uPH-gO-Q5f"/>
+                                            <constraint firstAttribute="trailing" secondItem="U57-We-qvP" secondAttribute="trailing" id="xLs-MA-sJJ"/>
+                                        </constraints>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="dCs-IT-etA"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="7In-hH-7yH"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="gki-bY-thA" secondAttribute="trailing" id="2TM-I7-ZfP"/>
+                            <constraint firstItem="gki-bY-thA" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="NAG-4k-5Na"/>
+                            <constraint firstItem="gki-bY-thA" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="cUZ-DF-Mgd"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gki-bY-thA" secondAttribute="bottom" id="e9R-0M-8fv"/>
+                            <constraint firstItem="gki-bY-thA" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="rdA-ti-ZsJ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="cUZ-DF-Mgd"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="nCC-by-1S5"/>
+                    <navigationItem key="navigationItem" id="nCC-by-1S5">
+                        <barButtonItem key="rightBarButtonItem" title="clear token" id="uHy-ZU-7mG">
+                            <connections>
+                                <action selector="clearToken:" destination="vXZ-lx-hvc" id="vKB-4V-i4b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="gki-bY-thA" id="eK5-Q5-Eqr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
