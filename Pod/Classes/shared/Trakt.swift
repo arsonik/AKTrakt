@@ -272,8 +272,8 @@ public class Trakt {
 		}
     }
 
-	public func trending(type: TraktType, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
-		return query(TraktRoute.Trending(type)) { response in
+	public func trending(type: TraktType, limit: Int! = 100, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
+		return query(TraktRoute.Trending(type, limit: limit)) { response in
 			if let entries = response.result.value as? [[String: AnyObject]] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Movies {
@@ -291,8 +291,8 @@ public class Trakt {
 		}
 	}
 
-	public func recommendations(type: TraktType, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
-        return query(TraktRoute.Recommandations(type)) { response in
+	public func recommendations(type: TraktType, limit: Int! = 100, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
+        return query(TraktRoute.Recommandations(type, limit: limit)) { response in
             if let entries = response.result.value as? [[String: AnyObject]] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Movies {

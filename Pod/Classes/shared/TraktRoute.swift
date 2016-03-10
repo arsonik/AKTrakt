@@ -15,8 +15,8 @@ public func == (left: TraktRoute, right: TraktRoute) -> Bool {
 
 public enum TraktRoute: URLRequestConvertible, Hashable {
 	case Token(client: Trakt, pin: String)
-	case Trending(TraktType)
-	case Recommandations(TraktType)
+	case Trending(TraktType, limit: Int)
+	case Recommandations(TraktType, limit: Int)
     case Collection(TraktType)
     case Watchlist(TraktType)
     case People(TraktType, TraktIdentifier)
@@ -64,8 +64,8 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	private var path: String {
 		switch self {
 		case .Token:							return "/oauth/token"
-		case .Trending(let type):				return "/\(type.rawValue)/trending"
-        case .Recommandations(let type):		return "/recommendations/\(type.rawValue)"
+		case .Trending(let type, _):			return "/\(type.rawValue)/trending"
+        case .Recommandations(let type, _):		return "/recommendations/\(type.rawValue)"
 		case .Movie(let id):					return "/movies/\(id)"
 		case .Episode(let showId, let season, let episode):
 												return "/shows/\(showId)/seasons/\(season)/episodes/\(episode)"
@@ -98,8 +98,10 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits:
 			return ["extended": "full,images"]
 
-		case .Trending, .Recommandations:
-			return ["extended": "full,images", "limit": "100"]
+		case .Trending(_, let limit):
+			return ["extended": "full,images", "limit": limit]
+		case .Recommandations(_, let limit):
+			return ["extended": "full,images", "limit": limit]
 
         case .AddToWatchlist(let objects):
             var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
