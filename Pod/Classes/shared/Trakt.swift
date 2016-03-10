@@ -19,6 +19,9 @@ public class Trakt {
 	internal var maximumAttempt: Int = 5
     private let manager: Manager
 
+	public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, verificationUrl: String, expiresAt: NSDate, interval: NSTimeInterval)
+	public typealias JSONHash = [String: AnyObject!]
+
     public init(clientId: String, clientSecret: String, applicationId: Int) {
 		self.clientId = clientId
 		self.clientSecret = clientSecret
@@ -44,7 +47,7 @@ public class Trakt {
 
     internal func exchangePinForToken(pin: String, completion: (TraktToken?, NSError?) -> Void) -> Request {
         return query(TraktRoute.Token(client: self, pin: pin)) { response in
-            if let aToken = TraktToken(data: response.result.value as? [String: AnyObject]) {
+            if let aToken = TraktToken(data: response.result.value as? JSONHash) {
                 completion(aToken, nil)
             } else {
 				let err: NSError?
@@ -84,11 +87,10 @@ public class Trakt {
 		return df
 	}()
 
-
 	private func query(route: TraktRoute, completionHandler: Response<AnyObject, NSError> -> Void) -> Request {
 		let key = "\(route.hashValue)"
 		return manager.request(route.needAuthorization() ? route.OAuthRequest(self) : route).responseJSON { [weak self] response in
-			if let interval = self?.retryInterval where response.response?.statusCode >= 500 {
+			if let interval = self?.retryInterval where response.response?.statusCode >= 500 && route.retryOnFailure() {
 				var attempt: Int = self?.attempts.objectForKey(key) as? Int ?? 1
 				self?.attempts.setValue(++attempt, forKey: key)
 				if attempt < self!.maximumAttempt {
@@ -101,6 +103,28 @@ public class Trakt {
 			}
 			self?.attempts.removeObjectForKey(key)
 			completionHandler(response)
+		}
+	}
+
+	public func generateCode(completion: (GeneratedCodeResponse?, NSError?) -> Void) -> Request {
+		return query(TraktRoute.GenerateCode(clientId: clientId)) { response in
+			guard
+				let data = response.result.value as? JSONHash,
+				deviceCode = data["device_code"] as? String,
+				userCode = data["user_code"] as? String,
+				verificationUrl = data["verification_url"] as? String,
+				expiresIn = data["expires_in"] as? Double,
+				interval = data["interval"] as? Double
+				else {
+					return completion(nil, response.result.error)
+			}
+			completion((deviceCode: deviceCode, userCode: userCode, verificationUrl: verificationUrl, expiresAt: NSDate().dateByAddingTimeInterval(expiresIn), interval: interval), nil)
+		}
+	}
+
+	public func pollDevice(response: GeneratedCodeResponse, completion: (TraktToken?, NSError?) -> Void) -> Request {
+		return query(TraktRoute.PollDevice(deviceCode: response.deviceCode, clientId: clientId, clientSecret: clientSecret)) { response in
+			completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
 		}
 	}
 

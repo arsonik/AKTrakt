@@ -14,6 +14,8 @@ public func == (left: TraktRoute, right: TraktRoute) -> Bool {
 }
 
 public enum TraktRoute: URLRequestConvertible, Hashable {
+	case GenerateCode(clientId: String)
+	case PollDevice(deviceCode: String, clientId: String, clientSecret: String)
 	case Token(client: Trakt, pin: String)
 	case Trending(TraktType, TraktPagination)
 	case Recommandations(TraktType, TraktPagination)
@@ -50,7 +52,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
 	private var method: String {
 		switch self {
-		case .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
+		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
 			return "POST"
         case .HideRecommendation:
             return "DELETE"
@@ -68,6 +70,8 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
 	private var path: String {
 		switch self {
+		case .PollDevice:						return "/oauth/device/token"
+		case .GenerateCode:						return "/oauth/device/code"
 		case .Token:							return "/oauth/token"
 		case .Trending(let type, _):			return "/\(type.rawValue)/trending"
         case .Recommandations(let type, _):		return "/recommendations/\(type.rawValue)"
@@ -92,6 +96,18 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
 	private var parameters: [String: AnyObject]! {
 		switch self {
+		case .PollDevice(let deviceCode, let clientId, let clientSecret):
+			return [
+				"client_id": clientId,
+				"client_secret": clientSecret,
+				"code": deviceCode,
+			]
+
+		case .GenerateCode(let clientId):
+			return [
+				"client_id": clientId
+			]
+
 		case .Token(let trakt, let pin):
 			return [
 				"code": pin,
@@ -184,8 +200,9 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 			request.setValue(value, forHTTPHeaderField: key)
 
 		}
+		
 		switch self {
-		case .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
+		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
 			let encoding = Alamofire.ParameterEncoding.JSON
 			return encoding.encode(request, parameters: parameters).0
 		default:
@@ -194,9 +211,18 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		}
 	}
 
+	func retryOnFailure() -> Bool {
+		switch self {
+		case .PollDevice:
+			return false
+		default:
+			return true
+		}
+	}
+
 	internal func needAuthorization() -> Bool {
 		switch self {
-		case .Token:
+		case .Token, .GenerateCode, .PollDevice:
 			return false
 		default:
 			return true

@@ -8,8 +8,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TvOsTraktAuthViewController" customModule="AKTrakt">
             <connections>
                 <outlet property="activity" destination="3mz-Bd-1lS" id="q7j-ZV-Cbc"/>
+                <outlet property="codeLabel" destination="1L6-Aj-pqz" id="mn3-ko-dAi"/>
                 <outlet property="infoLabel" destination="DZd-Dx-iyv" id="64p-5G-iJp"/>
-                <outlet property="pinField" destination="GHR-Le-jgu" id="ZKc-e4-yfD"/>
                 <outlet property="qrImageView" destination="WTm-8r-H6E" id="QGD-yj-ciN"/>
                 <outlet property="uriLabel" destination="i1m-Il-izZ" id="POF-9e-bzf"/>
                 <outlet property="view" destination="iN0-l3-epB" id="PGy-UJ-GOS"/>
@@ -27,45 +27,41 @@
                         <constraint firstAttribute="width" constant="700" id="fiG-Hz-3zB"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PIN" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GHR-Le-jgu">
-                    <rect key="frame" x="860" y="538" width="350" height="69"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="350" id="fek-Dy-CPQ"/>
-                    </constraints>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
-                    <connections>
-                        <outlet property="delegate" destination="-1" id="N6F-cZ-1oR"/>
-                    </connections>
-                </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Url" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1m-Il-izZ">
-                    <rect key="frame" x="860" y="380" width="62" height="58"/>
+                    <rect key="frame" x="860" y="566" width="62" height="58"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                    <color key="textColor" red="0.19818918590000001" green="0.65116118050000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please authorize the app to acces your trakt.tv account" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZd-Dx-iyv">
-                    <rect key="frame" x="860" y="200" width="845" height="114"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZd-Dx-iyv">
+                    <rect key="frame" x="860" y="240" width="976" height="226"/>
+                    <string key="text">Please authorize the app to acces your trakt.tv account. Visit the url below from your computer or a mobile device or scan the QRCode. Then enter the code when asked.</string>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="3mz-Bd-1lS">
-                    <rect key="frame" x="1244" y="541" width="64" height="64"/>
+                    <rect key="frame" x="1090" y="738" width="64" height="64"/>
                     <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1L6-Aj-pqz">
+                    <rect key="frame" x="860" y="724" width="180" height="91"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="i1m-Il-izZ" firstAttribute="leading" secondItem="DZd-Dx-iyv" secondAttribute="leading" id="1KZ-ws-ZWv"/>
-                <constraint firstItem="GHR-Le-jgu" firstAttribute="top" secondItem="i1m-Il-izZ" secondAttribute="bottom" constant="100" id="5go-0c-DoZ"/>
-                <constraint firstItem="i1m-Il-izZ" firstAttribute="top" secondItem="DZd-Dx-iyv" secondAttribute="bottom" constant="66" id="BJg-hN-CFq"/>
-                <constraint firstItem="3mz-Bd-1lS" firstAttribute="centerY" secondItem="GHR-Le-jgu" secondAttribute="centerY" id="JPR-Iu-u2e"/>
+                <constraint firstItem="1L6-Aj-pqz" firstAttribute="centerY" secondItem="3mz-Bd-1lS" secondAttribute="centerY" id="47p-iS-ORO"/>
+                <constraint firstItem="i1m-Il-izZ" firstAttribute="top" secondItem="DZd-Dx-iyv" secondAttribute="bottom" constant="100" id="BJg-hN-CFq"/>
+                <constraint firstItem="3mz-Bd-1lS" firstAttribute="leading" secondItem="1L6-Aj-pqz" secondAttribute="trailing" constant="50" id="FjG-Bk-p98"/>
                 <constraint firstItem="WTm-8r-H6E" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="80" id="KsC-sV-VWP"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="DZd-Dx-iyv" secondAttribute="trailing" constant="80" id="MCR-8S-OGV"/>
-                <constraint firstItem="DZd-Dx-iyv" firstAttribute="top" secondItem="WTm-8r-H6E" secondAttribute="top" constant="10" id="OTH-Uo-N2c"/>
-                <constraint firstItem="GHR-Le-jgu" firstAttribute="leading" secondItem="i1m-Il-izZ" secondAttribute="leading" id="aMr-I6-1ke"/>
+                <constraint firstItem="DZd-Dx-iyv" firstAttribute="top" secondItem="WTm-8r-H6E" secondAttribute="top" constant="50" id="OTH-Uo-N2c"/>
+                <constraint firstItem="1L6-Aj-pqz" firstAttribute="leading" secondItem="i1m-Il-izZ" secondAttribute="leading" id="ZMn-Fr-N1o"/>
                 <constraint firstItem="DZd-Dx-iyv" firstAttribute="leading" secondItem="WTm-8r-H6E" secondAttribute="trailing" constant="80" id="bQe-bD-97I"/>
-                <constraint firstItem="3mz-Bd-1lS" firstAttribute="leading" secondItem="GHR-Le-jgu" secondAttribute="trailing" constant="34" id="gT7-aL-JST"/>
+                <constraint firstItem="1L6-Aj-pqz" firstAttribute="top" secondItem="i1m-Il-izZ" secondAttribute="bottom" constant="100" id="bkO-wP-E5C"/>
                 <constraint firstItem="WTm-8r-H6E" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="p6H-8F-FW2"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
