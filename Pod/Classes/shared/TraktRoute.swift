@@ -15,8 +15,8 @@ public func == (left: TraktRoute, right: TraktRoute) -> Bool {
 
 public enum TraktRoute: URLRequestConvertible, Hashable {
 	case Token(client: Trakt, pin: String)
-	case Trending(TraktType, limit: Int)
-	case Recommandations(TraktType, limit: Int)
+	case Trending(TraktType, TraktPagination)
+	case Recommandations(TraktType, TraktPagination)
     case Collection(TraktType)
     case Watchlist(TraktType)
     case People(TraktType, TraktIdentifier)
@@ -29,11 +29,16 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	case Progress(AnyObject)
 	case Episode(showId: AnyObject, season: Int, episode: Int)
 	case Movie(id: AnyObject)
-	case Search(query: String, type: TraktType!, year: Int!)
+	case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
 	case Rate(TraktWatchable, Int)
 
+	/// Create a unique identifier for that route
 	public var hashValue: Int {
-		return URLRequest.URL?.absoluteString.hashValue ?? NSDate().timeIntervalSince1970.hashValue
+		var uniqid = method + path
+		uniqid += (parameters?.flatMap({
+			"\($0)=\($1)"
+		}).joinWithSeparator(",")) ?? ""
+		return uniqid.hashValue
 	}
 
 	private var domain: String {
@@ -98,10 +103,15 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits:
 			return ["extended": "full,images"]
 
-		case .Trending(_, let limit):
-			return ["extended": "full,images", "limit": limit]
-		case .Recommandations(_, let limit):
-			return ["extended": "full,images", "limit": limit]
+		case .Trending(_, let pagination):
+			var p = pagination.value()
+			p["extended"] = "full,images"
+			return p
+			
+		case .Recommandations(_, let pagination):
+			var p = pagination.value()
+			p["extended"] = "full,images"
+			return p
 
         case .AddToWatchlist(let objects):
             var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
@@ -141,11 +151,9 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 			}
 			return p
 
-		case .Search(let query, let type, let year):
-			var p: [String: AnyObject] = [
-				"query": query,
-				"limit": 5
-			]
+		case .Search(let query, let type, let year, let pagination):
+			var p = pagination.value()
+			p["query"] = query
 			if let v = type {
 				p["type"] = v.single
 			}
@@ -155,7 +163,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 			return p
 
 		case .Rate(let object, let rate):
-
 			var p: [String: [AnyObject]] = [:]
 			let e: [String: AnyObject] = [
 				"rating": rate,
@@ -170,26 +177,20 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	}
 
 	public var URLRequest: NSMutableURLRequest {
-		if let url = NSURL(string: "\(domain)\(path)") {
-			let URLRequest = NSMutableURLRequest(URL: url)
-			URLRequest.HTTPMethod = method
-			URLRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-			if let hl = headers {
-				for (k, v) in hl {
-					URLRequest.setValue(v, forHTTPHeaderField: k)
-				}
-			}
+		let request = NSMutableURLRequest(URL: NSURL(string: "\(domain)\(path)")!)
+		request.HTTPMethod = method
+		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+		headers?.forEach{ key, value in
+			request.setValue(value, forHTTPHeaderField: key)
 
-			switch self {
-			case .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
-				let encoding = Alamofire.ParameterEncoding.JSON
-				return encoding.encode(URLRequest, parameters: parameters).0
-			default:
-				let encoding = Alamofire.ParameterEncoding.URL
-				return encoding.encode(URLRequest, parameters: parameters).0
-			}
-		} else {
-			return NSMutableURLRequest()
+		}
+		switch self {
+		case .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
+			let encoding = Alamofire.ParameterEncoding.JSON
+			return encoding.encode(request, parameters: parameters).0
+		default:
+			let encoding = Alamofire.ParameterEncoding.URL
+			return encoding.encode(request, parameters: parameters).0
 		}
 	}
 
@@ -210,5 +211,22 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 			req.setValue("Bearer \(token.accessToken)", forHTTPHeaderField: "Authorization")
 		}
 		return req
+	}
+}
+
+public class TraktPagination {
+	var page: Int = 1
+	var limit: Int = 10
+
+	public init(page: Int, limit: Int) {
+		self.page = page
+		self.limit = limit
+	}
+
+	func value() -> [String: AnyObject] {
+		return [
+			"page": page,
+			"limit": limit
+		]
 	}
 }

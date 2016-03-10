@@ -272,8 +272,8 @@ public class Trakt {
 		}
     }
 
-	public func trending(type: TraktType, limit: Int! = 100, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
-		return query(TraktRoute.Trending(type, limit: limit)) { response in
+	public func trending(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
+		return query(TraktRoute.Trending(type, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
 			if let entries = response.result.value as? [[String: AnyObject]] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Movies {
@@ -291,8 +291,8 @@ public class Trakt {
 		}
 	}
 
-	public func recommendations(type: TraktType, limit: Int! = 100, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
-        return query(TraktRoute.Recommandations(type, limit: limit)) { response in
+	public func recommendations(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
+        return query(TraktRoute.Recommandations(type, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
             if let entries = response.result.value as? [[String: AnyObject]] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Movies {
@@ -410,8 +410,8 @@ public class Trakt {
 		}
 	}
 
-	public func search(query: String, type: TraktType! = nil, year: Int! = nil, completion: ((results: [TraktObject]?, error: NSError?) -> Void)) -> Request {
-		return self.query(TraktRoute.Search(query: query, type: type, year: year)) { response in
+	public func search(query: String, type: TraktType! = nil, year: Int! = nil, pagination: TraktPagination! = nil, completion: ((results: [TraktObject]?, error: NSError?) -> Void)) -> Request {
+		return self.query(TraktRoute.Search(query: query, type: type, year: year, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
 			let list: [TraktObject]?
 			if let items = response.result.value as? [[String: AnyObject]] {
 				list = items.flatMap({
