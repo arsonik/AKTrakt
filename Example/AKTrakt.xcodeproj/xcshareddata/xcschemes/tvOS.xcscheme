@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "17109D021C05EF0A007D3D16"
-               BuildableName = "AKTrakt_TvOS_Example.app"
-               BlueprintName = "AKTrakt_TvOS_Example"
+               BuildableName = "AKTrakt tvOS.app"
+               BlueprintName = "AKTrakt tvOS"
                ReferencedContainer = "container:AKTrakt.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,8 +33,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17109D021C05EF0A007D3D16"
-            BuildableName = "AKTrakt_TvOS_Example.app"
-            BlueprintName = "AKTrakt_TvOS_Example"
+            BuildableName = "AKTrakt tvOS.app"
+            BlueprintName = "AKTrakt tvOS"
             ReferencedContainer = "container:AKTrakt.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17109D021C05EF0A007D3D16"
-            BuildableName = "AKTrakt_TvOS_Example.app"
-            BlueprintName = "AKTrakt_TvOS_Example"
+            BuildableName = "AKTrakt tvOS.app"
+            BlueprintName = "AKTrakt tvOS"
             ReferencedContainer = "container:AKTrakt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -75,8 +75,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17109D021C05EF0A007D3D16"
-            BuildableName = "AKTrakt_TvOS_Example.app"
-            BlueprintName = "AKTrakt_TvOS_Example"
+            BuildableName = "AKTrakt tvOS.app"
+            BlueprintName = "AKTrakt tvOS"
             ReferencedContainer = "container:AKTrakt.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

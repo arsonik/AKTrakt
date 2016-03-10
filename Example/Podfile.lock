@@ -1,5 +1,5 @@
 PODS:
-  - AKTrakt (0.1.5):
+  - AKTrakt (0.1.6):
     - Alamofire
   - Alamofire (3.1.3)
   - AlamofireImage (2.3.0):
@@ -15,10 +15,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AKTrakt: ad31e9d59fbb7315639d8b760fc519b6ac17afb2
+  AKTrakt: 856269fad2839c950f1d7c4a8ff0d1aba43f6e16
   Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
   AlamofireImage: 4013fb5b99b10117bf2554a67b9bd2231d476b45
 
-PODFILE CHECKSUM: ec38b80f7f6974daa3a06ee652f80c36e3558823
+PODFILE CHECKSUM: ad75938223f8aaeda7ebf172562c49ffa0cdce8e
 
 COCOAPODS: 1.0.0.beta.5

@@ -9,7 +9,7 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="AKTrakt_iOS_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="AKTrakt_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -69,7 +69,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="nCC-by-1S5">
-                        <barButtonItem key="rightBarButtonItem" title="clear token" id="uHy-ZU-7mG">
+                        <barButtonItem key="leftBarButtonItem" title="clear token" id="uHy-ZU-7mG">
                             <connections>
                                 <action selector="clearToken:" destination="vXZ-lx-hvc" id="vKB-4V-i4b"/>
                             </connections>
