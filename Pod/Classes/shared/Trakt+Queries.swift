@@ -290,18 +290,18 @@ extension Trakt {
 		if episode.loaded == false {
 			episode.loaded = nil
 			return query(.Episode(showId: episode.season.show.id!, season: episode.season.number, episode: episode.number)) { response in
-				guard let data = response.result.value as? [String: AnyObject], title = data["title"] as? String, overview = data["overview"] as? String else {
+				guard let data = response.result.value as? JSONHash else {
 					// cancelled
-					if response.result.error?.code == -999 {
+					if response.result.error?.code == NSURLErrorCancelled {
 						episode.loaded = false
 					} else {
-						print("Cannot load episode \(episode) \(response.result.error)")
+						print("Cannot load episode \(episode) \(response.result.error) \(response.result.value)")
 					}
 					return completion(loaded: episode.loaded != nil && episode.loaded == true)
 				}
 
-				episode.title = title
-				episode.overview = overview
+				episode.title = data["title"] as? String
+				episode.overview = data["overview"] as? String
 				if let ids = TraktId.extractIds(data) {
 					episode.ids = ids
 				}

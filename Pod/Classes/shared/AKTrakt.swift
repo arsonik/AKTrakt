@@ -10,7 +10,9 @@ import Foundation
 
 public extension String {
     var slug: String {
-        var cp = self.lowercaseString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+        var cp = self.lowercaseString.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
+        cp = cp.stringByTrimmingCharactersInSet(.illegalCharacterSet())
+        cp = cp.stringByTrimmingCharactersInSet(.symbolCharacterSet())
         // remove accents
         cp = cp.stringByFoldingWithOptions(NSStringCompareOptions.DiacriticInsensitiveSearch, locale: NSLocale.currentLocale())
         cp = cp.stringByReplacingOccurrencesOfString(" ", withString: "-", options: NSStringCompareOptions.LiteralSearch, range: nil)
