@@ -74,6 +74,11 @@
                                 <action selector="clearToken:" destination="vXZ-lx-hvc" id="vKB-4V-i4b"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Login" id="Fbn-A7-VGr">
+                            <connections>
+                                <action selector="displayAuth" destination="vXZ-lx-hvc" id="uB6-o6-nxD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="gki-bY-thA" id="eK5-Q5-Eqr"/>

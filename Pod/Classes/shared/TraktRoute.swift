@@ -33,6 +33,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	case Movie(id: AnyObject)
 	case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
 	case Rate(TraktWatchable, Int)
+	case Profile(String!)
 
 	/// Create a unique identifier for that route
 	public var hashValue: Int {
@@ -89,8 +90,8 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Search:							return "/search"
         case .Rate:								return "/sync/ratings"
         case .Credits(let id, let type):        return "/people/\(id)/\(type.rawValue)"
-
         case .HideRecommendation(let movie):    return "/recommendations/movies/\(movie.id!)"
+		case .Profile(let name):				return "/users/\((name ?? "me"))"
 		}
 	}
 
@@ -222,21 +223,19 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
 	internal func needAuthorization() -> Bool {
 		switch self {
-		case .Token, .GenerateCode, .PollDevice:
+		case .Token,
+			.GenerateCode,
+			.PollDevice,
+			.People,
+			.Credits,
+			.Trending,
+			.Movie,
+			.Episode,
+			.Search:
 			return false
 		default:
 			return true
 		}
-	}
-
-	func OAuthRequest(trakt: Trakt) -> NSMutableURLRequest {
-		let req = URLRequest
-		req.setValue("2", forHTTPHeaderField: "trakt-api-version")
-		req.setValue(trakt.clientId, forHTTPHeaderField: "trakt-api-key")
-		if let token = trakt.token {
-			req.setValue("Bearer \(token.accessToken)", forHTTPHeaderField: "Authorization")
-		}
-		return req
 	}
 }
 

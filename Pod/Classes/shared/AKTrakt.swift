@@ -19,7 +19,7 @@ public extension String {
     }
 }
 
-public func delay(delay: Double, closure: ()->()) {
+internal func delay(delay: Double, closure: ()->()) {
     dispatch_after(
         dispatch_time(
             DISPATCH_TIME_NOW,
@@ -27,20 +27,3 @@ public func delay(delay: Double, closure: ()->()) {
         ),
         dispatch_get_main_queue(), closure)
 }
-
-public func == (lhs: NSDate, rhs: NSDate) -> Bool {
-	return lhs === rhs || lhs.compare(rhs) == .OrderedSame
-}
-
-public func < (lhs: NSDate, rhs: NSDate) -> Bool {
-	return lhs.compare(rhs) == .OrderedAscending
-}
-
-extension NSDate: Comparable { }
-
-
-#if os(tvOS)
-	public typealias TraktAuthenticationViewController = TvOsTraktAuthViewController
-#else
-	public typealias TraktAuthenticationViewController = TraktAuthViewController
-#endif

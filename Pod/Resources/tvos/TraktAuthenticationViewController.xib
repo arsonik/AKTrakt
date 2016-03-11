@@ -5,7 +5,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TvOsTraktAuthViewController" customModule="AKTrakt">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TraktAuthenticationViewController" customModule="AKTrakt">
             <connections>
                 <outlet property="activity" destination="3mz-Bd-1lS" id="q7j-ZV-Cbc"/>
                 <outlet property="codeLabel" destination="1L6-Aj-pqz" id="mn3-ko-dAi"/>
@@ -68,6 +68,6 @@
         </view>
     </objects>
     <resources>
-        <image name="TraktQRCode.png" width="512" height="512"/>
+        <image name="TraktQRCode.png" width="930" height="930"/>
     </resources>
 </document>

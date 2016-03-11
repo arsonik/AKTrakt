@@ -1,6 +1,6 @@
 //
-//  TvOsTraktAuthViewController.swift
-//  Pods
+//  TraktAuthenticationViewController.swift
+//  Arsonik
 //
 //  Created by Florian Morello on 30/10/15.
 //
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class TvOsTraktAuthViewController: UIViewController {
+public class TraktAuthenticationViewController: UIViewController {
     @IBOutlet weak var qrImageView: UIImageView!
 	@IBOutlet weak var codeLabel: UILabel!
 	@IBOutlet weak var uriLabel: UILabel!
@@ -34,7 +34,7 @@ public class TvOsTraktAuthViewController: UIViewController {
 		super.viewWillAppear(true)
 
 		getNewCode()
-		qrImageView.image = UIImage(named: "TraktQRCode.png", inBundle: TvOsTraktAuthViewController.bundle, compatibleWithTraitCollection: nil)
+		qrImageView.image = UIImage(named: "TraktQRCode.png", inBundle: TraktAuthenticationViewController.bundle, compatibleWithTraitCollection: nil)
 	}
 
 	public override func viewWillDisappear(animated: Bool) {
@@ -57,11 +57,11 @@ public class TvOsTraktAuthViewController: UIViewController {
 	}
 
     static var bundle: NSBundle? {
-        return NSBundle(forClass: TvOsTraktAuthViewController.self)
+        return NSBundle(forClass: TraktAuthenticationViewController.self)
     }
 
 	public func poll(timer: NSTimer) {
-		if responseCode?.expiresAt < NSDate() || responseCode == nil {
+		if responseCode?.expiresAt.compare(NSDate()) == .OrderedAscending || responseCode == nil {
 			timer.invalidate()
 			getNewCode()
 		} else {
@@ -70,16 +70,16 @@ public class TvOsTraktAuthViewController: UIViewController {
 				self?.activity.stopAnimating()
 				if token != nil {
 					timer.invalidate()
-					self?.trakt.saveToken(token)
+					self?.trakt.saveToken(token!)
 					self?.delegate?.TraktAuthViewControllerDidAuthenticate(self!)
 				}
 			})
 		}
 	}
 
-	public static func credientialViewController(trakt: Trakt, delegate: TraktAuthViewControllerDelegate) -> TvOsTraktAuthViewController? {
-		if trakt.token == nil {
-			let vc = TvOsTraktAuthViewController(nibName: "TvOsTraktAuthViewController", bundle: TvOsTraktAuthViewController.bundle)
+	public static func credientialViewController(trakt: Trakt, delegate: TraktAuthViewControllerDelegate) -> UIViewController? {
+		if !trakt.hasValidToken() {
+			let vc = TraktAuthenticationViewController(nibName: "TraktAuthenticationViewController", bundle: TraktAuthenticationViewController.bundle)
 			vc.delegate = delegate
 			vc.trakt = trakt
 			return vc

@@ -1,5 +1,5 @@
 //
-//  TraktAuthViewController.swift
+//  TraktAuthenticationViewController.swift
 //  Arsonik
 //
 //  Created by Florian Morello on 09/04/15.
@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import Alamofire
 
-public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
+public class TraktAuthenticationViewController: UIViewController, WKNavigationDelegate {
 
     private var wkWebview: WKWebView!
 	private weak var delegate: TraktAuthViewControllerDelegate!
@@ -30,7 +30,7 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
 
         wkWebview = WKWebView(frame: view.bounds)
         wkWebview.navigationDelegate = self
@@ -40,15 +40,14 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
         initWebview()
     }
 
-
 	public static func credientialViewController(trakt: Trakt, delegate: TraktAuthViewControllerDelegate) -> UIViewController? {
-		if trakt.token == nil {
-			return UINavigationController(rootViewController: TraktAuthViewController(trakt: trakt, delegate: delegate))
+		if !trakt.hasValidToken() {
+			return UINavigationController(rootViewController: TraktAuthenticationViewController(trakt: trakt, delegate: delegate))
 		}
 		return nil
 	}
 
-    public func cancel() {
+    @IBAction public func cancel() {
         delegate?.TraktAuthViewControllerDidCancel(self)
     }
 
@@ -66,11 +65,11 @@ public class TraktAuthViewController: UIViewController, WKNavigationDelegate {
 
     public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         if let pin = pinFromNavigation(navigationAction) {
-            decisionHandler(WKNavigationActionPolicy.Cancel)
+            decisionHandler(.Cancel)
 
             let request = TraktRoute.Token(client: trakt, pin: pin)
             Alamofire.request(request).responseJSON { (response) -> Void in
-                if let token = TraktToken(data: response.result.value as? [String: AnyObject]) {
+                if let token = TraktToken(data: response.result.value as? Trakt.JSONHash) {
 					self.trakt.saveToken(token)
                     self.delegate?.TraktAuthViewControllerDidAuthenticate(self)
                 } else {
