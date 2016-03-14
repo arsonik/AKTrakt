@@ -8,16 +8,24 @@
 
 import Foundation
 
+/// 🎥 TraktMovie
 public class TraktMovie: TraktWatchable {
 
-	public let trailer: String? // Youtube video name ex: _1MDrwqjeGo
-    public let rating: Float? // 6.544
-    public let year: Int? // 2015
+	/// Youtube video name ex: _1MDrwqjeGo
+	public let trailer: String?
+	/// Rating between 0-10
+	public let rating: Float?
+	/// Production year
+	public let year: Int?
+	/// Release date
     public let release: NSDate?
-    public let runtime: Int? // length
-    public let genres: [String]?
-
-    public var crew: [TraktCrew]?
+	/// Length in minutes
+    public let runtime: Int?
+	/// Array of genres
+	public let genres: [String]?
+	/// Array of TraktCrew
+	public var crew: [TraktCrew]?
+	/// Array of TraktCharacter
     public var casting: [TraktCharacter]?
 
 	public override init?(data: [String : AnyObject]!) {

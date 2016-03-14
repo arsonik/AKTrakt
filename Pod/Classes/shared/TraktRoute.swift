@@ -9,28 +9,43 @@
 import Foundation
 import Alamofire
 
-public func == (left: TraktRoute, right: TraktRoute) -> Bool {
-	return left.hashValue == right.hashValue
-}
-
+/// Trakt routes
+/// All the routes used in the main class
 public enum TraktRoute: URLRequestConvertible, Hashable {
+	///	Generate new device codes
 	case GenerateCode(clientId: String)
+	///	Poll for the access_token
 	case PollDevice(deviceCode: String, clientId: String, clientSecret: String)
+	///	Exchange code for access_token
 	case Token(client: Trakt, pin: String)
+	///	Get Trending Movies/Shows
 	case Trending(TraktType, TraktPagination)
+	///	Get Recommendations Movies/Shows
 	case Recommandations(TraktType, TraktPagination)
-    case Collection(TraktType)
-    case Watchlist(TraktType)
-    case People(TraktType, TraktIdentifier)
-    case Credits(TraktIdentifier, TraktType)
+	///	Get Collection Movies/Shows
+	case Collection(TraktType)
+	///	Get Watchlist Movies/Shows/Seasons/Episodes
+	case Watchlist(TraktType)
+	///	Get Movies/Shows Credits for a person
+	case People(TraktType, TraktIdentifier)
+	///	Get Movies/Shows Credits
+	case Credits(TraktIdentifier, TraktType)
+	///	Get Watched Movies/Shows
 	case Watched(TraktType)
-	case AddToWatchlist([TraktObject])
-	case AddToHistory([TraktObject])
-    case RemoveFromHistory([TraktObject])
-    case HideRecommendation(TraktWatchable)
-	case Progress(AnyObject)
+	///	Add to Watchlist Movies/Shows/Episodes
+	case AddToWatchlist([TraktWatchable])
+	///	Add to Watched History Movies/Shows/Episodes
+	case AddToHistory([TraktWatchable])
+	///	Remove from Watched History Movies/Shows/Episodes
+	case RemoveFromHistory([TraktWatchable])
+	///	Hide from recommendations Movies/Shows
+	case HideRecommendation(TraktWatchable)
+	///	Get Progress for a show
+	case Progress(TraktShow)
+	///	Find an episode by its show id, season number, episode number
 	case Episode(showId: AnyObject, season: Int, episode: Int)
-	case Movie(id: AnyObject)
+	///	Find a movie by its id (slug...)
+	case Movie(id: String)
 	case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
 	case Rate(TraktWatchable, Int)
 	case Profile(String!)
@@ -82,7 +97,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Collection(let type):				return "/sync/collection/\(type.rawValue)"
 		case .Watchlist(let type):				return "/sync/watchlist/\(type.rawValue)"
         case .Watched(let type):				return "/sync/watched/\(type.rawValue)"
-        case .Progress(let id):					return "/shows/\(id)/progress/watched"
+        case .Progress(let show):				return "/shows/\(show.id)/progress/watched"
         case .People(let type, let id):			return "/\(type.rawValue)/\(id)/people"
 		case .AddToHistory:						return "/sync/history"
 		case .RemoveFromHistory:				return "/sync/history/remove"
@@ -133,11 +148,11 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .AddToWatchlist(let objects):
             var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
             for object in objects {
-                if let id = object.id {
-                    if p[object.type!.rawValue] == nil {
-                        p[object.type!.rawValue] = []
+                if let id = object.id, type = object.type?.rawValue {
+                    if p[type] == nil {
+                        p[type] = []
                     }
-                    p[object.type!.rawValue]?.append(["ids": ["trakt": id]])
+                    p[type]?.append(["ids": ["trakt": id]])
                 }
             }
             return p
@@ -237,6 +252,11 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 			return true
 		}
 	}
+}
+
+/// TraktRoute Equatable function
+public func == (left: TraktRoute, right: TraktRoute) -> Bool {
+	return left.hashValue == right.hashValue
 }
 
 public class TraktPagination {

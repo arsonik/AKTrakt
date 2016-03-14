@@ -265,7 +265,7 @@ extension Trakt {
 		}
 	}
 
-	public func searchMovie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
+	public func searchMovie(id: String, completion: (TraktMovie?, NSError?) -> Void) -> Request {
 		return query(.Movie(id: id)) { response in
 			// Todo: should not create a new object, complete the object instead
 			if let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) {
@@ -331,7 +331,7 @@ extension Trakt {
 	}
 
 	public func progress(show: TraktShow, completion: ((loaded: Bool, error: NSError?) -> Void)) -> Request {
-		return query(.Progress(show.id!)) { response in
+		return query(.Progress(show)) { response in
 			var loaded: Bool = false
 
 			if let data = response.result.value as? [String: AnyObject], seasons = data["seasons"] as? [[String: AnyObject]] {
