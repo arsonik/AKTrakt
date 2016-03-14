@@ -15,7 +15,7 @@ public class TraktEpisode: TraktWatchable {
 	public let number: Int!
 	public var seasonNumber: Int!
 
-	var loaded: Bool? = false
+	public var loaded: Bool? = false
 
 	public var firstAired: NSDate!
 

@@ -70,9 +70,9 @@ extension Trakt {
 		}
 	}
 
-	public func hideFromRecommendations(movie: TraktMovie) -> Request {
-		return query(.HideRecommendation(movie)) { response in
-			print(response.result.value)
+	public func hideFromRecommendations(object: TraktWatchable, completion: ((Bool, NSError?) -> Void)? = nil) -> Request {
+		return query(.HideRecommendation(object)) { response in
+			completion?((response.response?.statusCode == 204) ?? false, response.result.error)
 		}
 	}
 

@@ -27,7 +27,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	case AddToWatchlist([TraktObject])
 	case AddToHistory([TraktObject])
     case RemoveFromHistory([TraktObject])
-    case HideRecommendation(TraktMovie)
+    case HideRecommendation(TraktWatchable)
 	case Progress(AnyObject)
 	case Episode(showId: AnyObject, season: Int, episode: Int)
 	case Movie(id: AnyObject)
@@ -90,7 +90,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Search:							return "/search"
         case .Rate:								return "/sync/ratings"
         case .Credits(let id, let type):        return "/people/\(id)/\(type.rawValue)"
-        case .HideRecommendation(let movie):    return "/recommendations/movies/\(movie.id!)"
+        case .HideRecommendation(let object):   return "/recommendations/\(object.type!.rawValue)/\(object.id!)"
 		case .Profile(let name):				return "/users/\((name ?? "me"))"
 		}
 	}
