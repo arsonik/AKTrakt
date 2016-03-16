@@ -17,7 +17,7 @@ public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
 public class TraktObject: CustomStringConvertible, Hashable {
 
 	public var ids: [TraktId: AnyObject]!
-	public var id: TraktIdentifier? {
+	public var id: TraktIdentifier! {
 		return ids[TraktId.Trakt] as? TraktIdentifier
 	}
 	public var type: TraktType? {
