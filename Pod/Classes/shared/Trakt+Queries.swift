@@ -76,9 +76,18 @@ extension Trakt {
 		}
 	}
 
-	public func addToWatchlist(objects: TraktWatchable...) -> Request {
-		return query(.AddToWatchlist(objects)) { response in
-			print(response.result.value)
+	public func addToWatchlist(object: TraktWatchable, completion: ((Bool, NSError?) -> Void)) -> Request {
+		return query(.AddToWatchlist([object])) { response in
+			if let result = response.result.value as? JSONHash,
+				added = result["added"] as? [String: Int],
+				type = object.type?.rawValue,
+				success = added[type]
+				
+				where success == 1 {
+				completion(true, nil)
+			} else {
+				completion(false, response.result.error)
+			}
 		}
 	}
 
@@ -371,6 +380,19 @@ extension Trakt {
 	public func profile(name: String!, completion: (JSONHash?, NSError?) -> Void) -> Request {
 		return query(.Profile(name)) { response in
 			completion(response.result.value as? JSONHash, response.result.error)
+		}
+	}
+
+	public func releases(movie: TraktMovie, countryCode: String! = nil, completion: ([TraktRelease]?, NSError?) -> Void) -> Request {
+		return query(.Releases(movie, countryCode: countryCode)) { response in
+			if let data = response.result.value as? [JSONHash] {
+				let list = data.flatMap {
+					TraktRelease(data: $0)
+				}
+				completion(list, response.result.error)
+			} else {
+				completion(nil, response.result.error)
+			}
 		}
 	}
 }
