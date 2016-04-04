@@ -82,8 +82,23 @@ extension Trakt {
 				added = result["added"] as? [String: Int],
 				type = object.type?.rawValue,
 				success = added[type]
-				
 				where success == 1 {
+				object.watchlist = true
+				completion(true, nil)
+			} else {
+				completion(false, response.result.error)
+			}
+		}
+	}
+
+	public func removeFromWatchlist(object: TraktWatchable, completion: ((Bool, NSError?) -> Void)) -> Request {
+		return query(.RemoveFromWatchlist([object])) { response in
+			if let result = response.result.value as? JSONHash,
+				added = result["deleted"] as? [String: Int],
+				type = object.type?.rawValue,
+				success = added[type]
+				where success == 1 {
+				object.watchlist = false
 				completion(true, nil)
 			} else {
 				completion(false, response.result.error)
@@ -93,8 +108,8 @@ extension Trakt {
 
 	public func people(object: TraktWatchable, completion: ((succeed: Bool, error: NSError?) -> Void)) -> Request {
 		return query(.People(object.type!, object.id!)) { response in
-			if let result = response.result.value as? [String: AnyObject] {
-				if let castData = result["cast"] as? [[String: AnyObject]] {
+			if let result = response.result.value as? JSONHash {
+				if let castData = result["cast"] as? [JSONHash] {
 					let data = castData.flatMap {
 						TraktCharacter(data: $0)
 					}
@@ -102,7 +117,7 @@ extension Trakt {
 					(object as? TraktMovie)?.casting = data
 				}
 				// possible keys: production, art, crew, costume & make-up, directing, writing, sound, and camera
-				if let crewData = result["crew"] as? [String: [[String: AnyObject]]] {
+				if let crewData = result["crew"] as? [String: [JSONHash]] {
 					let data = crewData.values.flatMap({$0}).flatMap {
 						TraktCrew(data: $0)
 					}
@@ -149,29 +164,22 @@ extension Trakt {
 
 	public func watchList(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
 		return query(.Watchlist(type)) { response in
-			var list: [TraktWatchable]? = nil
-			if let entries = response.result.value as? [[String: AnyObject]] {
-				list = []
-				for entry in entries {
-					if let t = entry["type"] as? String, v = entry[t] as? [String: AnyObject] where type.single == t {
-						switch type {
-						case .Movies:
-							if let a = TraktMovie(data: v) {
-								list!.append(a)
-							} else {
-								print("Failed TraktMovie\(v)")
-							}
-						case .Shows:
-							if let show = TraktShow(data: v) {
-								list!.append(show)
-							} else {
-								print("Failed TraktShow\(v)")
-							}
-						default:
-							print("Not handled \(type)")
-						}
-					}
+			let list: [TraktWatchable]? = (response.result.value as? [JSONHash])?.flatMap { entry in
+				guard let t = entry["type"] as? String, v = entry[t] as? JSONHash else {
+					return nil
 				}
+				switch type {
+				case .Movies:
+					return TraktMovie(data: v)
+				case .Shows:
+					return TraktShow(data: v)
+				default:
+					print("Not handled \(type)")
+				}
+				return nil
+			}
+			list?.forEach {
+				$0.watchlist = true
 			}
 			completion(result: list, error: nil)
 		}
@@ -179,29 +187,22 @@ extension Trakt {
 
 	public func watched(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
 		return query(.Watched(type)) { response in
-			var list: [TraktWatchable]? = nil
-			if let entries = response.result.value as? [[String: AnyObject]] {
-				list = []
-				for entry in entries {
-					if let v = entry[type.single] as? [String: AnyObject] {
-						switch type {
-						case .Movies:
-							if let a = TraktMovie(data: v) {
-								list!.append(a)
-							} else {
-								print("Failed TraktMovie\(v)")
-							}
-						case .Shows:
-							if let show = TraktShow(data: v) {
-								list!.append(show)
-							} else {
-								print("Failed TraktShow\(v)")
-							}
-						default:
-							print("Not handled \(type)")
-						}
-					}
+			let list: [TraktWatchable]? = (response.result.value as? [JSONHash])?.flatMap { entry in
+				guard let v = entry[type.single] as? [String: AnyObject] else {
+					return nil
 				}
+				switch type {
+				case .Movies:
+					return TraktMovie(data: v)
+				case .Shows:
+					return TraktShow(data: v)
+				default:
+					print("Not handled \(type)")
+				}
+				return nil
+			}
+			list?.forEach {
+				$0.watched = true
 			}
 			completion(result: list, error: nil)
 		}
@@ -386,10 +387,10 @@ extension Trakt {
 	public func releases(movie: TraktMovie, countryCode: String! = nil, completion: ([TraktRelease]?, NSError?) -> Void) -> Request {
 		return query(.Releases(movie, countryCode: countryCode)) { response in
 			if let data = response.result.value as? [JSONHash] {
-				let list = data.flatMap {
+				movie.releases = data.flatMap {
 					TraktRelease(data: $0)
 				}
-				completion(list, response.result.error)
+				completion(movie.releases, response.result.error)
 			} else {
 				completion(nil, response.result.error)
 			}

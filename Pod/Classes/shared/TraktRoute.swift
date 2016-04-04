@@ -34,6 +34,8 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	case Watched(TraktType)
 	///	Add to Watchlist Movies/Shows/Episodes
 	case AddToWatchlist([TraktWatchable])
+	///	Remove From Watchlist Movies/Shows/Episodes
+	case RemoveFromWatchlist([TraktWatchable])
 	///	Add to Watched History Movies/Shows/Episodes
 	case AddToHistory([TraktWatchable])
 	///	Remove from Watched History Movies/Shows/Episodes
@@ -73,7 +75,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
 	private var method: String {
 		switch self {
-		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
+		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate, .RemoveFromWatchlist:
 			return "POST"
         case .HideRecommendation:
             return "DELETE"
@@ -107,6 +109,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .AddToHistory:						return "/sync/history"
 		case .RemoveFromHistory:				return "/sync/history/remove"
 		case .AddToWatchlist:					return "/sync/watchlist"
+		case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
 		case .Search:							return "/search"
         case .Rate:								return "/sync/ratings"
         case .Credits(let id, let type):        return "/people/\(id)/\(type.rawValue)"
@@ -154,15 +157,27 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
         case .AddToWatchlist(let objects):
             var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
-            for object in objects {
+            objects.forEach { object in
                 if let id = object.id, type = object.type?.rawValue {
                     if p[type] == nil {
                         p[type] = []
                     }
-                    p[type]?.append(["ids": ["trakt": id]])
+                    p[type]?.append(["ids": [TraktId.Trakt.rawValue: id]])
                 }
             }
             return p
+
+		case .RemoveFromWatchlist(let objects):
+			var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
+			objects.forEach { object in
+				if let id = object.id, type = object.type?.rawValue {
+					if p[type] == nil {
+						p[type] = []
+					}
+					p[type]?.append(["ids": [TraktId.Trakt.rawValue: id]])
+				}
+			}
+			return p
 
 		case .AddToHistory(let objects):
 			var p: [String: [[String: AnyObject]]] = [:]
@@ -225,7 +240,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		}
 		
 		switch self {
-		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate:
+		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .RemoveFromWatchlist, .Rate:
 			let encoding = Alamofire.ParameterEncoding.JSON
 			return encoding.encode(request, parameters: parameters).0
 		default:

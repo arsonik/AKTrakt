@@ -26,7 +26,9 @@ public class TraktMovie: TraktWatchable {
 	/// Array of TraktCrew
 	public var crew: [TraktCrew]?
 	/// Array of TraktCharacter
-    public var casting: [TraktCharacter]?
+	public var casting: [TraktCharacter]?
+	/// Array of TraktRelease
+	public var releases: [TraktRelease]?
 
 	public override init?(data: [String : AnyObject]!) {
 		rating = data?["rating"] as? Float
