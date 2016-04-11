@@ -10,24 +10,32 @@ import Foundation
 
 public class TraktSeason: TraktWatchable {
 
-	public weak var show: TraktShow!
+	public weak var show: TraktShow?
 
 	public let number: Int!
-	public var episodes: [TraktEpisode] = []
+
+	private var _episodes: [TraktEpisode] = []
+	public var episodes: [TraktEpisode] {
+		return _episodes
+	}
 
 	override init?(data: [String: AnyObject]!) {
 		if let n = data?["number"] as? Int {
 			number = n
 			super.init(data: data)
 		} else {
-			number = nil
-			super.init(data: nil)
 			return nil
 		}
 	}
 
 	public var notCompleted: [TraktEpisode] {
 		return episodes.filter {$0.watched == false}
+	}
+
+	public func addEpisode(episode: TraktEpisode) {
+		episode.season = self
+		episode.seasonNumber = self.number
+		_episodes.append(episode)
 	}
 
 	public override var description: String {

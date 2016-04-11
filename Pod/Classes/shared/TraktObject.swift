@@ -11,7 +11,7 @@ import Foundation
 public typealias TraktIdentifier = Int
 
 public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
-    return lhs.id == rhs.id
+    return lhs.id != nil && rhs.id != nil && lhs.id == rhs.id
 }
 
 public class TraktObject: CustomStringConvertible, Hashable {

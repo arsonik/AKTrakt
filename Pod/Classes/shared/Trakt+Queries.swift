@@ -299,7 +299,7 @@ extension Trakt {
 	public func episode(episode: TraktEpisode, completion: (loaded: Bool) -> Void) -> Request? {
 		if episode.loaded == false {
 			episode.loaded = nil
-			return query(.Episode(showId: episode.season.show.id!, season: episode.season.number, episode: episode.number)) { response in
+			return query(.Episode(showId: episode.season!.show!.id!, season: episode.season!.number, episode: episode.number)) { response in
 				guard let data = response.result.value as? JSONHash else {
 					// cancelled
 					if response.result.error?.code == NSURLErrorCancelled {
@@ -328,7 +328,7 @@ extension Trakt {
 					}
 				}
 
-				if let fa = data["first_aired"] as? String {
+				if let fa = data["first_aired"] as? String where episode.firstAired == nil {
 					episode.firstAired = self.dateFormatter.dateFromString(fa)
 				}
 				episode.loaded = true
@@ -340,27 +340,26 @@ extension Trakt {
 		return nil
 	}
 
-	public func progress(show: TraktShow, completion: ((loaded: Bool, error: NSError?) -> Void)) -> Request {
+	public func progress(show: TraktShow, completion: ((episode: TraktEpisode?, error: NSError?) -> Void)) -> Request {
 		return query(.Progress(show)) { response in
-			var loaded: Bool = false
+			guard let data = response.result.value as? JSONHash else {
+				return completion(episode: nil, error: response.result.error)
+			}
 
-			if let data = response.result.value as? [String: AnyObject], seasons = data["seasons"] as? [[String: AnyObject]] {
-				for season in seasons {
-					if let ms = TraktSeason(data: season), episodes = season["episodes"] as? [[String: AnyObject]] {
-						ms.show = show
-						for episode in episodes {
-							if let ep = TraktEpisode(data:episode) {
-								ep.season = ms
-								ep.seasonNumber = ms.number
-								ms.episodes.append(ep)
-							}
-						}
-						show.seasons.append(ms)
-						loaded = true
+			(data["seasons"] as? [JSONHash])?.forEach { seasonData in
+				if let season = TraktSeason(data: seasonData), episodes = seasonData["episodes"] as? [JSONHash] {
+					episodes.flatMap({TraktEpisode(data: $0)}).forEach {
+						season.addEpisode($0)
 					}
+					show.addSeason(season)
 				}
 			}
-			completion(loaded: loaded, error: nil)
+
+			if let nxt = data["next_episode"] as? JSONHash, next = TraktEpisode(data: nxt) {
+				completion(episode: next, error: nil)
+			} else {
+				return completion(episode: nil, error: response.result.error)
+			}
 		}
 	}
 

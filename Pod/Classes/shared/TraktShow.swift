@@ -10,21 +10,25 @@ import Foundation
 
 public class TraktShow: TraktWatchable {
 
-	public var seasons: [TraktSeason] = []
+	private var _seasons: [TraktSeason] = []
+	public var seasons: [TraktSeason] {
+		return _seasons
+	}
 	
 	public var crew: [TraktCrew]?
 	public var casting: [TraktCharacter]?
 
 	public var notCompleted: [TraktEpisode] {
-		var list: [TraktEpisode] = []
-		for season in seasons {
-			list += season.notCompleted
-		}
-		return list
+		return seasons.flatMap({ $0.notCompleted })
 	}
 
 	public override var description: String {
 		return "TraktShow(\(title))"
+	}
+
+	public func addSeason(season: TraktSeason) {
+		season.show = self
+		_seasons.append(season)
 	}
 
     public override init?(data: [String : AnyObject]!) {

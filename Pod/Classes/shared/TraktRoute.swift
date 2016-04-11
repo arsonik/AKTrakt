@@ -113,7 +113,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Search:							return "/search"
         case .Rate:								return "/sync/ratings"
         case .Credits(let id, let type):        return "/people/\(id)/\(type.rawValue)"
-		case .HideRecommendation(let object):   return "/recommendations/\(object.type!.rawValue)/\(object.id!)"
+		case .HideRecommendation(let object):   return "/recommendations/\(object.type!.rawValue)/\(object.id)"
 		case .Profile(let name):				return "/users/\((name ?? "me"))"
 		case .Releases(let movie, let countryCode):
 			return "/movies/\((movie.id))/releases/\((countryCode ?? ""))"

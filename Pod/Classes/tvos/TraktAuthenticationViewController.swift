@@ -25,7 +25,7 @@ public class TraktAuthenticationViewController: UIViewController {
 			if responseCode != nil {
 				uriLabel?.text = responseCode!.verificationUrl
 				codeLabel?.text = responseCode!.userCode
-				intervalTimer = NSTimer.scheduledTimerWithTimeInterval(responseCode!.interval, target: self, selector: "poll:", userInfo: nil, repeats: true)
+				intervalTimer = NSTimer.scheduledTimerWithTimeInterval(responseCode!.interval, target: self, selector: #selector(TraktAuthenticationViewController.poll(_:)), userInfo: nil, repeats: true)
 			}
 		}
 	}
