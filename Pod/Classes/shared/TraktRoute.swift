@@ -142,7 +142,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 				"redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
 				"grant_type": "authorization_code"
 			]
-		case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits:
+		case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits, .Watched:
 			return ["extended": "full,images"]
 
 		case .Trending(_, let pagination):

@@ -31,6 +31,8 @@ public class TraktShow: TraktWatchable {
 		_seasons.append(season)
 	}
 
+    public var nextEpisode: TraktEpisode?
+
     public override init?(data: [String : AnyObject]!) {
         super.init(data: data)
     }
