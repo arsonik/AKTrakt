@@ -43,49 +43,63 @@ public class TraktObject: CustomStringConvertible, Hashable {
 
 		ids = TraktId.extractIds(data) ?? [:]
 
-		if let im = data?["images"] as? [String: AnyObject] {
-			for (rawType, list) in im {
-				if let type = TraktImageType(rawValue: rawType), listed = list as? [String: AnyObject] {
-					for (rawSize, uri) in listed {
-						if let size = TraktImageSize(rawValue: rawSize), u = uri as? String {
-							if images[type] == nil {
-								images[type] = [:]
-							}
-							images[type]![size] = u
-						}
-					}
-				}
-			}
+		(data?["images"] as? [String: AnyObject])?.forEach { rawType, list in
+            if let type = TraktImageType(rawValue: rawType), listed = list as? [String: AnyObject] {
+                listed.forEach { rawSize, uri in
+                    if let size = TraktImageSize(rawValue: rawSize), u = uri as? String {
+                        if images[type] == nil {
+                            images[type] = [:]
+                        }
+                        images[type]![size] = u
+                    }
+                }
+            }
 		}
 	}
 
 	static func autoload(item: [String: AnyObject]!) -> TraktObject! {
-		if let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? [String: AnyObject] {
-			switch type {
-			case .Shows:
-				return TraktShow(data: data)
-			case .Movies:
-				return TraktMovie(data: data)
-			case .Seasons:
-                return TraktSeason(data: data)
-            case .Episodes:
-                return TraktEpisode(data: data)
-            case .Persons:
-                return TraktPerson(data: data)
-			}
-		}
-
-		return nil
+		guard let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? [String: AnyObject] else {
+            return nil
+        }
+        switch type {
+        case .Shows:
+            return TraktShow(data: data)
+        case .Movies:
+            return TraktMovie(data: data)
+        case .Seasons:
+            return TraktSeason(data: data)
+        case .Episodes:
+            return TraktEpisode(data: data)
+        case .Persons:
+            return TraktPerson(data: data)
+        }
 	}
 
-	public func imageURL(type: TraktImageType, size: TraktImageSize) -> NSURL? {
-		if let uri = images[type]?[size] {
-			return NSURL(string: uri)
-		}
-		return nil
+    public func imageURL(type: TraktImageType, thatFits imageView: UIImageView?) -> NSURL? {
+        guard let image = imageView else {
+            return nil
+        }
+        let scale = UIScreen.mainScreen().scale
+        let area = (image.frame.width * image.frame.height) * scale
+        let sizes = TraktImageType.sizes[type]?.sort({$0.0.1.area < $0.1.1.area})
+        print(sizes)
+        return nil
+    }
+
+
+	@available(*, deprecated=1.0, message="Use imageURL ! that fits") public func imageURL(type: TraktImageType, size: TraktImageSize) -> NSURL? {
+		guard let uri = images[type]?[size] else {
+            return nil
+        }
+        return NSURL(string: uri)
 	}
 
 	public var description: String {
 		return "TraktObject id:\(id)"
 	}
+}
+extension CGSize {
+    var area: CGFloat {
+        return width * height
+    }
 }

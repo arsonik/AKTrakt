@@ -16,16 +16,13 @@ public enum TraktId: String {
 	case Tvdb = "tvdb"
 	case Tvrage = "tvrage"
 
-	static func extractIds(data: [String: AnyObject!]!) -> [TraktId: AnyObject]! {
-		if let lids = data?["ids"] as? [String: AnyObject] {
-			var ids: [TraktId: AnyObject] = [:]
-			for (a, b) in lids {
-				if let id = TraktId(rawValue: a) {
-					ids[id] = b
-				}
-			}
-			return ids
+    static func extractIds(data: [String: AnyObject!]!) -> [TraktId: AnyObject]! {
+        var ids: [TraktId: AnyObject] = [:]
+		(data?["ids"] as? [String: AnyObject])?.forEach { id, value in
+            if let identifier = TraktId(rawValue: id) {
+                ids[identifier] = value
+            }
 		}
-		return nil
+        return ids.count > 0 ? ids : nil
 	}
 }
