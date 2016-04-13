@@ -12,20 +12,17 @@ public class TraktSeason: TraktWatchable {
 
 	public weak var show: TraktShow?
 
-	public let number: Int!
+	public var number: Int!
 
 	private var _episodes: [TraktEpisode] = []
 	public var episodes: [TraktEpisode] {
 		return _episodes
 	}
 
-	override init?(data: [String: AnyObject]!) {
-		if let n = data?["number"] as? Int {
-			number = n
-			super.init(data: data)
-		} else {
-			return nil
-		}
+	public override func digest(data: [String : AnyObject]?) {
+		super.digest(data)
+
+		number = data?["number"] as? Int ?? number
 	}
 
 	public var notCompleted: [TraktEpisode] {

@@ -12,17 +12,17 @@ import Foundation
 public class TraktMovie: TraktWatchable {
 
 	/// Youtube video name ex: _1MDrwqjeGo
-	public let trailer: String?
+	public var trailer: String?
 	/// Rating between 0-10
-	public let rating: Float?
+	public var rating: Float?
 	/// Production year
-	public let year: Int?
+	public var year: Int?
 	/// Release date
-    public let release: NSDate?
+    public var release: NSDate?
 	/// Length in minutes
-    public let runtime: Int?
+    public var runtime: Int?
 	/// Array of genres
-	public let genres: [String]?
+	public var genres: [String]?
 	/// Array of TraktCrew
 	public var crew: [TraktCrew]?
 	/// Array of TraktCharacter
@@ -30,26 +30,28 @@ public class TraktMovie: TraktWatchable {
 	/// Array of TraktRelease
 	public var releases: [TraktRelease]?
 
-	public override init?(data: [String : AnyObject]!) {
-		rating = data?["rating"] as? Float
-		year = data?["year"] as? Int
-        genres = data?["genres"] as? [String]
-        runtime = data?["runtime"] as? Int
-        let df = NSDateFormatter()
-        df.dateFormat = "yyyy'-'MM'-'dd"
+	override public func digest(data: [String : AnyObject]?) {
+		super.digest(data)
+		
+		rating = data?["rating"] as? Float ?? rating
+		year = data?["year"] as? Int ?? year
+		genres = data?["genres"] as? [String] ?? genres
+		runtime = data?["runtime"] as? Int ?? runtime
 
-        if let r = data?["released"] as? String, d = df.dateFromString(r) {
-            release = d
-        } else {
-            release = nil
-        }
+		let df = NSDateFormatter()
+		df.dateFormat = "yyyy'-'MM'-'dd"
+
+		if let r = data?["released"] as? String, d = df.dateFromString(r) {
+			release = d
+		} else {
+			release = nil
+		}
 
 		if let x = data?["trailer"] as? String, url = NSURL(string: x), params = url.query?.componentsSeparatedByString("v=") where params.count == 2 {
 			trailer = params[1]
 		} else {
 			trailer = nil
 		}
-
-		super.init(data: data)
+		
 	}
 }

@@ -16,7 +16,7 @@ public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
 
 public class TraktObject: CustomStringConvertible, Hashable {
 
-	public var ids: [TraktId: AnyObject]!
+	public var ids: [TraktId: AnyObject] = [:]
 	public var id: TraktIdentifier! {
 		return ids[TraktId.Trakt] as? TraktIdentifier
 	}
@@ -39,21 +39,24 @@ public class TraktObject: CustomStringConvertible, Hashable {
 
 	public var images: [TraktImageType: [TraktImageSize: String]] = [:]
 
-	init?(data: [String: AnyObject]!) {
+	public init?(data: [String: AnyObject]!) {
+		digest(data)
+	}
 
+	public func digest(data: [String: AnyObject]?) {
 		ids = TraktId.extractIds(data) ?? [:]
 
 		(data?["images"] as? [String: AnyObject])?.forEach { rawType, list in
-            if let type = TraktImageType(rawValue: rawType), listed = list as? [String: AnyObject] {
-                listed.forEach { rawSize, uri in
-                    if let size = TraktImageSize(rawValue: rawSize), u = uri as? String {
-                        if images[type] == nil {
-                            images[type] = [:]
-                        }
-                        images[type]![size] = u
-                    }
-                }
-            }
+			if let type = TraktImageType(rawValue: rawType), listed = list as? [String: AnyObject] {
+				listed.forEach { rawSize, uri in
+					if let size = TraktImageSize(rawValue: rawSize), u = uri as? String {
+						if images[type] == nil {
+							images[type] = [:]
+						}
+						images[type]![size] = u
+					}
+				}
+			}
 		}
 	}
 
@@ -75,27 +78,41 @@ public class TraktObject: CustomStringConvertible, Hashable {
         }
 	}
 
-    public func imageURL(type: TraktImageType, thatFits imageView: UIImageView?) -> NSURL? {
-        guard let image = imageView else {
-            return nil
-        }
-        let scale = UIScreen.mainScreen().scale
-        let area = (image.frame.width * image.frame.height) * scale
-        let sizes = TraktImageType.sizes[type]?.sort({$0.0.1.area < $0.1.1.area})
-        print(sizes)
-        return nil
-    }
-
-
-	@available(*, deprecated=1.0, message="Use imageURL ! that fits") public func imageURL(type: TraktImageType, size: TraktImageSize) -> NSURL? {
-		guard let uri = images[type]?[size] else {
-            return nil
-        }
-        return NSURL(string: uri)
+	static var timeFormatter: NSDateFormatter {
+		let df = NSDateFormatter()
+		df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+		df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+		df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
+		return df
 	}
 
+    public func imageURL(type: TraktImageType, thatFits imageView: UIImageView?) -> NSURL? {
+		guard let image = imageView,
+			// sort by area ascending
+			sizes = TraktImageType.sizes[type]?.sort({$0.0.1.area < $0.1.1.area}) else {
+            return nil
+        }
+		let area = (image.frame.width * image.frame.height) * UIScreen.mainScreen().scale
+		var selectedSize: TraktImageSize! = nil
+		for size in sizes {
+			if size.1.area >= area {
+				selectedSize = size.0
+				//print("Filling with \(size.0.rawValue) \(size.1) > \(image.frame.size)")
+				break;
+			}
+		}
+		if selectedSize == nil {
+			// use the largest image
+			selectedSize = sizes.last?.0
+		}
+		guard let aSize = selectedSize, uri = images[type]?[aSize] else {
+			return nil
+		}
+		return NSURL(string: uri)
+    }
+
 	public var description: String {
-		return "TraktObject id:\(id)"
+		return "TraktObject \(ids)"
 	}
 }
 extension CGSize {

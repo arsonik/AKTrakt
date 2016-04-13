@@ -12,30 +12,19 @@ public class TraktEpisode: TraktWatchable {
 
 	public weak var season: TraktSeason?
 
-	public let number: Int!
+	public var number: Int!
 	public var seasonNumber: Int?
 	public var loaded: Bool? = false
 	public var firstAired: NSDate?
 
-	override init?(data: [String: AnyObject]!) {
-		guard let n = data?["number"] as? Int else {
-			return nil
-		}
-		number = n
-		seasonNumber = data?["season"] as? Int
-		if let fa = data?["first_aired"] as? String {
-			let df = NSDateFormatter()
-			df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-			df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-			df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
-			firstAired = df.dateFromString(fa)
-		} else {
-			firstAired = nil
-		}
-		super.init(data: data)
+	override public func digest(data: [String : AnyObject]!) {
+		super.digest(data)
 
-		if let c = data?["completed"] as? Bool {
-			watched = c
+		number = data?["number"] as? Int ?? number
+		seasonNumber = data?["season"] as? Int ?? seasonNumber
+		watched = data?["completed"] as? Bool ?? watched
+		if let fa = data["first_aired"] as? String, date = TraktObject.timeFormatter.dateFromString(fa) {
+			firstAired = date
 		}
 	}
 

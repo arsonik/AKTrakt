@@ -49,24 +49,25 @@ extension Trakt {
 		}
 	}
 
-	public func watched(objects: [TraktWatchable]) -> Request {
-		objects.forEach {
-			$0.watched = true
-		}
-		return query(.AddToHistory(objects)) { response in
-			/*
-			if let item = response.result.value as? [String: AnyObject], added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
-			completion(true, nil)
+	public func watched(object: TraktWatchable, completion: ((Bool, NSError?) -> Void)) -> Request {
+		return query(.AddToHistory([object])) { response in
+			if let item = response.result.value as? JSONHash, added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
+				object.watched = true
+				completion(true, nil)
 			} else {
-			completion(false, response.result.error)
-			}*/
-			print(response.result.value)
+				completion(false, response.result.error)
+			}
 		}
 	}
 
-	public func unWatch(objects: [TraktWatchable]) -> Request {
-		return query(.RemoveFromHistory(objects)) { response in
-			print(response.result.value)
+	public func unWatch(object: TraktWatchable, completion: ((Bool, NSError?) -> Void)) -> Request {
+		return query(.RemoveFromHistory([object])) { response in
+			if let item = response.result.value as? JSONHash, added = item["deleted"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
+				object.watched = false
+				completion(true, nil)
+			} else {
+				completion(false, response.result.error)
+			}
 		}
 	}
 
@@ -277,65 +278,40 @@ extension Trakt {
 
 	public func searchMovie(id: String, completion: (TraktMovie?, NSError?) -> Void) -> Request {
 		return query(.Movie(id: id)) { response in
-			// Todo: should not create a new object, complete the object instead
-			if let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) {
-				completion(o, nil)
-			} else {
-				completion(nil, response.result.error)
+			guard let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) else {
+				print("Cannot find movie \(id)")
+				return completion(nil, response.result.error)
 			}
+			completion(o, nil)
 		}
 	}
 
 	public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
 		return query(.Episode(showId: id, season: season, episode: episode)) { response in
-			if let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) {
-				completion(o, nil)
-			} else {
-				completion(nil, response.result.error)
+			guard let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) else {
+				print("Cannot find episode \(id)")
+				return completion(nil, response.result.error)
 			}
+			completion(o, nil)
 		}
 	}
 
-	public func episode(episode: TraktEpisode, completion: (loaded: Bool) -> Void) -> Request? {
-		if episode.loaded == false {
+	public func episode(episode: TraktEpisode, completion: (Bool, NSError?) -> Void) -> Request? {
+		if episode.loaded != nil && episode.loaded == false {
 			episode.loaded = nil
 			return query(.Episode(showId: episode.season!.show!.id!, season: episode.season!.number, episode: episode.number)) { response in
 				guard let data = response.result.value as? JSONHash else {
-					// cancelled
-					if response.result.error?.code == NSURLErrorCancelled {
-						episode.loaded = false
-					} else {
-						print("Cannot load episode \(episode) \(response.result.error) \(response.result.value)")
-					}
-					return completion(loaded: episode.loaded != nil && episode.loaded == true)
+					episode.loaded = false
+					print("Cannot load episode \(episode) \(response.result.error) \(response.result.value)")
+					return completion(episode.loaded != nil && episode.loaded == true, response.result.error)
 				}
 
-				episode.title = data["title"] as? String
-				episode.overview = data["overview"] as? String
-				if let ids = TraktId.extractIds(data) {
-					episode.ids = ids
-				}
-				(data["images"] as? [String: [String: String]])?.forEach { t, l in
-					if let type = TraktImageType(rawValue: t) {
-						for (s, uri) in l {
-							if let size = TraktImageSize(rawValue: s) {
-								if episode.images[type] == nil {
-									episode.images[type] = [:]
-								}
-								episode.images[type]![size] = uri
-							}
-						}
-					}
-				}
-
-				if let fa = data["first_aired"] as? String where episode.firstAired == nil {
-					episode.firstAired = self.dateFormatter.dateFromString(fa)
-				}
+				episode.digest(data)
 				episode.loaded = true
-				completion(loaded: episode.loaded != nil && episode.loaded == true)
+				completion(true, nil)
 			}
 		} else {
-			completion(loaded: episode.loaded != nil && episode.loaded == true)
+			completion(episode.loaded != nil && episode.loaded == true, nil)
 		}
 		return nil
 	}

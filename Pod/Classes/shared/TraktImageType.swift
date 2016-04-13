@@ -26,7 +26,7 @@ public enum TraktImageType: String {
             .Medium: CGSize(width: 600, height: 900),
             .Thumb: CGSize(width: 300, height: 450),
         ],
-        .ClearArt: [
+        .FanArt: [
             .Full: CGSize(width: 1920, height: 1080),
             .Medium: CGSize(width: 1280, height: 720),
             .Thumb: CGSize(width: 853, height: 480),

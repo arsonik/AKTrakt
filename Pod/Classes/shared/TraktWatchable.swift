@@ -15,10 +15,10 @@ public class TraktWatchable: TraktObject {
     public var watched: Bool = false
     public var watchlist: Bool = false
 
-    override init?(data: [String : AnyObject]!) {
-        overview = data?["overview"] as? String
-        title = data?["title"] as? String
+	override public func digest(data: [String : AnyObject]?) {
+		super.digest(data)
 
-        super.init(data: data)
-    }
+		title = data?["title"] as? String ?? title
+		overview = data?["overview"] as? String ?? overview
+	}
 }
