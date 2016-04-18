@@ -302,7 +302,9 @@ extension Trakt {
 			return query(.Episode(showId: episode.season!.show!.id!, season: episode.season!.number, episode: episode.number)) { response in
 				guard let data = response.result.value as? JSONHash else {
 					episode.loaded = false
-					print("Cannot load episode \(episode) \(response.result.error) \(response.result.value)")
+					if response.result.error?.code != NSURLErrorCancelled {
+						print("Cannot load episode \(episode) \(response.result.error) \(response.result.value)")
+					}
 					return completion(episode.loaded != nil && episode.loaded == true, response.result.error)
 				}
 
