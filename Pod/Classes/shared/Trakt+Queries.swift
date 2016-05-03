@@ -186,26 +186,38 @@ extension Trakt {
 		}
 	}
 
-	public func watched(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
+	public typealias WatchedReturn = (object: TraktWatchable, plays: Int, lastWatchedAt: NSDate)
+
+	public func watched(type: TraktType, completion: (([WatchedReturn]?, NSError?) -> Void)) -> Request {
 		return query(.Watched(type)) { response in
-			let list: [TraktWatchable]? = (response.result.value as? [JSONHash])?.flatMap { entry in
-				guard let v = entry[type.single] as? [String: AnyObject] else {
-					return nil
+			let list: [WatchedReturn]? = (response.result.value as? [JSONHash])?.flatMap { entry in
+				guard let objectData = entry[type.single] as? JSONHash,
+					plays = entry["plays"] as? Int,
+					lastAt = entry["last_watched_at"] as? String,
+					lastWatchedAt = self.dateFormatter.dateFromString(lastAt) else {
+						print(response.result.error)
+						return nil
 				}
+
+				let object: TraktWatchable?
 				switch type {
 				case .Movies:
-					return TraktMovie(data: v)
+					object = TraktMovie(data: objectData)
 				case .Shows:
-					return TraktShow(data: v)
+					object = TraktShow(data: objectData)
 				default:
-					print("Not handled \(type)")
+					fatalError("Not handled \(type)")
 				}
-				return nil
+				if object != nil {
+					return (object: object!, plays: plays, lastWatchedAt: lastWatchedAt)
+				} else {
+					return nil
+				}
 			}
 			list?.forEach {
-				$0.watched = true
+				$0.object.watched = true
 			}
-			completion(result: list, error: nil)
+			completion(list, nil)
 		}
 	}
 
@@ -318,10 +330,10 @@ extension Trakt {
 		return nil
 	}
 
-	public func progress(show: TraktShow, completion: ((episode: TraktEpisode?, error: NSError?) -> Void)) -> Request {
+	public func progress(show: TraktShow, completion: ((status: Bool, error: NSError?) -> Void)) -> Request {
 		return query(.Progress(show)) { response in
 			guard let data = response.result.value as? JSONHash else {
-				return completion(episode: nil, error: response.result.error)
+				return completion(status: false, error: response.result.error)
 			}
 
 			(data["seasons"] as? [JSONHash])?.forEach { seasonData in
@@ -334,10 +346,10 @@ extension Trakt {
 			}
 
 			if let nxt = data["next_episode"] as? JSONHash, next = TraktEpisode(data: nxt) {
-				completion(episode: next, error: nil)
-			} else {
-				return completion(episode: nil, error: response.result.error)
+				show.nextEpisode = next
 			}
+
+			return completion(status: true, error: response.result.error)
 		}
 	}
 

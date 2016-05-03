@@ -17,13 +17,17 @@ public class TraktShow: TraktWatchable {
 	
 	public var crew: [TraktCrew]?
 	public var casting: [TraktCharacter]?
+	/// Production year
+	public var year: Int?
 
-	public var notCompleted: [TraktEpisode] {
-		return seasons.flatMap({ $0.notCompleted })
+	override public func digest(data: [String : AnyObject]?) {
+		super.digest(data)
+
+		year = data?["year"] as? Int ?? year
 	}
 
-	public override var description: String {
-		return "TraktShow(\(title))"
+	public var notCompleted: [TraktEpisode] {
+		return seasons.flatMap { $0.notCompleted }.sort {$0.0.seasonNumber < $0.1.seasonNumber && $0.0.number < $0.1.number}
 	}
 
 	public func addSeason(season: TraktSeason) {
@@ -31,5 +35,9 @@ public class TraktShow: TraktWatchable {
 		_seasons.append(season)
 	}
 
-    public var nextEpisode: TraktEpisode?
+	public var nextEpisode: TraktEpisode?
+	
+	public override var description: String {
+		return "TraktShow(\(title))"
+	}
 }

@@ -76,7 +76,7 @@ public class Trakt {
 		return manager.request(request).responseJSON { [weak self] response in
 			if let interval = self?.retryInterval where response.response?.statusCode >= 500 && route.retryOnFailure() {
 				var attempt: Int = self?.attempts.objectForKey(key) as? Int ?? 1
-				self?.attempts.setValue(++attempt, forKey: key)
+				self?.attempts.setObject(++attempt, forKey: key)
 				if attempt < self!.maximumAttempt {
 					return delay(interval) {
 						self?.query(route, completionHandler: completionHandler)
