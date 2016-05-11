@@ -12,26 +12,32 @@ public class TraktSeason: TraktWatchable {
 
 	public weak var show: TraktShow?
 
-	public var number: Int!
+	public let number: Int
 
 	private var _episodes: [TraktEpisode] = []
 	public var episodes: [TraktEpisode] {
 		return _episodes
 	}
 
-	public override func digest(data: [String : AnyObject]?) {
-		super.digest(data)
+	override init?(data: [String : AnyObject]!) {
+		guard let sn = data?["number"] as? Int else {
+			return nil
+		}
 
-		number = data?["number"] as? Int ?? number
+		number = sn
+		super.init(data: data)
 	}
 
 	public var notCompleted: [TraktEpisode] {
 		return episodes.filter {$0.watched == false}
 	}
 
+	public func episode(number: Int) -> TraktEpisode? {
+		return episodes.filter {$0.number == number} . first
+	}
+
 	public func addEpisode(episode: TraktEpisode) {
 		episode.season = self
-		episode.seasonNumber = self.number
 		_episodes.append(episode)
 	}
 

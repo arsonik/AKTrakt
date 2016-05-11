@@ -20,5 +20,6 @@ public class TraktWatchable: TraktObject {
 
 		title = data?["title"] as? String ?? title
 		overview = data?["overview"] as? String ?? overview
+		watched = data?["completed"] as? Bool ?? watched
 	}
 }

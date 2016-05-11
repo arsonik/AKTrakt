@@ -30,6 +30,10 @@ public class TraktShow: TraktWatchable {
 		return seasons.flatMap { $0.notCompleted }.sort {$0.0.seasonNumber < $0.1.seasonNumber && $0.0.number < $0.1.number}
 	}
 
+	public func season(number: Int) -> TraktSeason? {
+		return seasons.filter {$0.number == number} . first
+	}
+
 	public func addSeason(season: TraktSeason) {
 		season.show = self
 		_seasons.append(season)

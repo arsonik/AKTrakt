@@ -12,17 +12,24 @@ public class TraktEpisode: TraktWatchable {
 
 	public weak var season: TraktSeason?
 
-	public var number: Int!
-	public var seasonNumber: Int?
+	public let number: Int
+	public let seasonNumber: Int
 	public var loaded: Bool? = false
 	public var firstAired: NSDate?
+
+	override init?(data: [String : AnyObject]!) {
+		guard let en = data?["number"] as? Int, sn = data?["season"] as? Int else {
+			return nil
+		}
+
+		number = en
+		seasonNumber = sn
+		super.init(data: data)
+	}
 
 	override public func digest(data: [String : AnyObject]!) {
 		super.digest(data)
 
-		number = data?["number"] as? Int ?? number
-		seasonNumber = data?["season"] as? Int ?? seasonNumber
-		watched = data?["completed"] as? Bool ?? watched
 		if let fa = data["first_aired"] as? String, date = TraktObject.timeFormatter.dateFromString(fa) {
 			firstAired = date
 		}

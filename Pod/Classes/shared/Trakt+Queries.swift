@@ -190,7 +190,11 @@ extension Trakt {
 
 	public func watched(type: TraktType, completion: (([WatchedReturn]?, NSError?) -> Void)) -> Request {
 		return query(.Watched(type)) { response in
-			let list: [WatchedReturn]? = (response.result.value as? [JSONHash])?.flatMap { entry in
+			guard let data = (response.result.value as? [JSONHash]) else {
+				return completion(nil, response.result.error)
+			}
+
+			let list: [WatchedReturn]? = data.flatMap { entry in
 				guard let objectData = entry[type.single] as? JSONHash,
 					plays = entry["plays"] as? Int,
 					lastAt = entry["last_watched_at"] as? String,
@@ -338,7 +342,11 @@ extension Trakt {
 
 			(data["seasons"] as? [JSONHash])?.forEach { seasonData in
 				if let season = TraktSeason(data: seasonData), episodes = seasonData["episodes"] as? [JSONHash] {
-					episodes.flatMap({TraktEpisode(data: $0)}).forEach {
+					episodes.flatMap {
+						var test = $0
+						test["season"] = season.number
+						return TraktEpisode(data: test)
+					}.forEach {
 						season.addEpisode($0)
 					}
 					show.addSeason(season)
@@ -347,6 +355,14 @@ extension Trakt {
 
 			if let nxt = data["next_episode"] as? JSONHash, next = TraktEpisode(data: nxt) {
 				show.nextEpisode = next
+				if show.season(next.seasonNumber)?.episode(next.number) == nil {
+					if let season = show.season(next.seasonNumber) {
+						season.addEpisode(next)
+					} else if let season = TraktSeason(data: ["number": next.seasonNumber]) {
+						season.addEpisode(next)
+						show.addSeason(season)
+					}
+				}
 			}
 
 			return completion(status: true, error: response.result.error)

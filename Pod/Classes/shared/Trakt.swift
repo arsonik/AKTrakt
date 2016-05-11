@@ -14,10 +14,12 @@ public class Trakt {
 	internal let clientId: String
     internal let clientSecret: String
     internal let applicationId: Int
-    private var token: TraktToken?
+	private var token: TraktToken?
+	/// Delay between each attempt
 	internal var retryInterval: Double = 5
 	private var attempts = NSCache()
-	internal var maximumAttempt: Int = 5
+	/// Number of attempt after getting 500 errors
+	internal var maximumAttempt: Int = 6
     private let manager: Manager
     public let traktApiVersion = 2
 
@@ -51,6 +53,14 @@ public class Trakt {
 		self.token = token
 	}
 
+	internal lazy var dateFormatter: NSDateFormatter = {
+		let df = NSDateFormatter()
+		df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+		df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+		df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
+		return df
+	}()
+
 	internal func query(route: TraktRoute, completionHandler: Response<AnyObject, NSError> -> Void) -> Request! {
 		let request = route.URLRequest
 		request.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
@@ -67,19 +77,24 @@ public class Trakt {
 
 		let key = route.hashValue
 		return manager.request(request).responseJSON { [weak self] response in
-			if let interval = self?.retryInterval where response.response?.statusCode >= 500 && route.retryOnFailure() {
-                var attempt: Int = self?.attempts.objectForKey(key) as? Int ?? 0
+			guard let ss = self else {
+				completionHandler(response)
+				return
+			}
+			if response.response?.statusCode >= 500 && route.retryOnFailure() {
+                var attempt: Int = ss.attempts.objectForKey(key) as? Int ?? 0
                 attempt += 1
-				self?.attempts.setObject(attempt, forKey: key)
-				if attempt < self?.maximumAttempt {
-					return delay(interval) {
-						self?.query(route, completionHandler: completionHandler)
+				ss.attempts.setObject(attempt, forKey: key)
+				if attempt < ss.maximumAttempt {
+					// try again after delay
+					return delay(ss.retryInterval) {
+						ss.query(route, completionHandler: completionHandler)
 					}
 				} else {
-					print("Maximum attempt \(attempt)/\(self?.maximumAttempt) reached for request \(route)")
+					print("Maximum attempt \(attempt)/\(ss.maximumAttempt) reached for request \(route)")
 				}
 			}
-			self?.attempts.removeObjectForKey(key)
+			ss.attempts.removeObjectForKey(key)
 			completionHandler(response)
 		}
 	}
