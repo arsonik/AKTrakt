@@ -12,9 +12,11 @@ import Foundation
 public class TraktMovie: TraktWatchable {
 
 	/// Youtube video name ex: _1MDrwqjeGo
-	public var trailer: String?
-	/// Rating between 0-10
-	public var rating: Float?
+    public var trailer: String?
+    /// Rating between 0-10
+    public var rating: Float?
+    /// Number of votes
+    public var votes: Int?
 	/// Production year
 	public var year: Int?
 	/// Release date
@@ -32,8 +34,9 @@ public class TraktMovie: TraktWatchable {
 
 	override public func digest(data: [String : AnyObject]?) {
 		super.digest(data)
-		
-		rating = data?["rating"] as? Float ?? rating
+
+        rating = data?["rating"] as? Float ?? rating
+        votes = data?["votes"] as? Int ?? votes
 		year = data?["year"] as? Int ?? year
 		genres = data?["genres"] as? [String] ?? genres
 		runtime = data?["runtime"] as? Int ?? runtime
