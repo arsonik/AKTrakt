@@ -48,6 +48,8 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	case Episode(showId: AnyObject, season: Int, episode: Int)
 	///	Find a movie by its id (slug...)
 	case Movie(id: String)
+    /// Find a show by its id(slug...)
+    case Show(id: String)
 	///	Search based on query with optional type, pagination
 	case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
 	/// Rate something from 1-10
@@ -99,6 +101,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Trending(let type, _):			return "/\(type.rawValue)/trending"
         case .Recommandations(let type, _):		return "/recommendations/\(type.rawValue)"
 		case .Movie(let id):					return "/movies/\(id)"
+        case .Show(let id):                     return "/shows/\(id)"
 		case .Episode(let showId, let season, let episode):
 												return "/shows/\(showId)/seasons/\(season)/episodes/\(episode)"
 		case .Collection(let type):				return "/sync/collection/\(type.rawValue)"
