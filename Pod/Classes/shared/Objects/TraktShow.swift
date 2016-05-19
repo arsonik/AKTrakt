@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TraktShow: TraktWatchable {
+public class TraktShow: TraktWatchable, Castable, TraktIdentifiable {
 
 	private var _seasons: [TraktSeason] = []
 	public var seasons: [TraktSeason] {
@@ -18,7 +18,11 @@ public class TraktShow: TraktWatchable {
 	public var crew: [TraktCrew]?
 	public var casting: [TraktCharacter]?
 	/// Production year
-	public var year: Int?
+    public var year: Int?
+
+    public var type: TraktType {
+        return .Shows
+    }
 
 	override public func digest(data: JSONHash?) {
 		super.digest(data)

@@ -27,21 +27,21 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	///	Get Watchlist Movies/Shows/Seasons/Episodes
 	case Watchlist(TraktType)
 	///	Get Movies/Shows Credits for a person
-	case People(TraktType, TraktIdentifier)
+	case People(protocol<TraktIdentifiable, Castable>)
 	///	Get Movies/Shows Credits
 	case Credits(TraktIdentifier, TraktType)
 	///	Get Watched Movies/Shows
 	case Watched(TraktType)
 	///	Add to Watchlist Movies/Shows/Episodes
-	case AddToWatchlist([TraktWatchable])
+	case AddToWatchlist([protocol<TraktIdentifiable, Watchable>])
 	///	Remove From Watchlist Movies/Shows/Episodes
-	case RemoveFromWatchlist([TraktWatchable])
+	case RemoveFromWatchlist([protocol<TraktIdentifiable, Watchable>])
 	///	Add to Watched History Movies/Shows/Episodes
-	case AddToHistory([TraktWatchable])
+	case AddToHistory([protocol<TraktIdentifiable, Watchable>])
 	///	Remove from Watched History Movies/Shows/Episodes
-	case RemoveFromHistory([TraktWatchable])
+	case RemoveFromHistory([protocol<TraktIdentifiable, Watchable>])
 	///	Hide from recommendations Movies/Shows
-	case HideRecommendation(TraktWatchable)
+	case HideRecommendation(protocol<TraktIdentifiable, Watchable>)
 	///	Get Progress for a show
 	case Progress(TraktShow)
 	///	Find an episode by its show id, season number, episode number
@@ -53,7 +53,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	///	Search based on query with optional type, pagination
 	case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
 	/// Rate something from 1-10
-	case Rate(TraktWatchable, Int)
+	case Rate(protocol<TraktIdentifiable, Watchable>, Int)
 	/// Load a user
 	case Profile(String!)
 	/// Get Movie Releases
@@ -101,7 +101,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Watchlist(let type):				return "/sync/watchlist/\(type.rawValue)"
         case .Watched(let type):				return "/sync/watched/\(type.rawValue)"
         case .Progress(let show):				return "/shows/\(show.id)/progress/watched"
-        case .People(let type, let id):			return "/\(type.rawValue)/\(id)/people"
+        case .People(let object):               return "/\(object.type.rawValue)/\(object.id)/people"
 		case .AddToHistory:						return "/sync/history"
 		case .RemoveFromHistory:				return "/sync/history/remove"
 		case .AddToWatchlist:					return "/sync/watchlist"
@@ -109,7 +109,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		case .Search:							return "/search"
         case .Rate:								return "/sync/ratings"
         case .Credits(let id, let type):        return "/people/\(id)/\(type.rawValue)"
-		case .HideRecommendation(let object):   return "/recommendations/\(object.type!.rawValue)/\(object.id)"
+		case .HideRecommendation(let object):   return "/recommendations/\(object.type.rawValue)/\(object.id)"
 		case .Profile(let name):				return "/users/\((name ?? "me"))"
 		case .Releases(let movie, let countryCode):
 			return "/movies/\((movie.id))/releases/\((countryCode ?? ""))"
@@ -154,50 +154,37 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .AddToWatchlist(let objects):
             var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
             objects.forEach { object in
-                if let id = object.id, type = object.type?.rawValue {
-                    if p[type] == nil {
-                        p[type] = []
-                    }
-                    p[type]?.append(["ids": [TraktId.Trakt.rawValue: id]])
+                if p[object.type.rawValue] == nil {
+                    p[object.type.rawValue] = []
                 }
+                p[object.type.rawValue]?.append(["ids": [TraktId.Trakt.rawValue: object.id]])
             }
             return p
 
 		case .RemoveFromWatchlist(let objects):
 			var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
 			objects.forEach { object in
-				if let id = object.id, type = object.type?.rawValue {
-					if p[type] == nil {
-						p[type] = []
-					}
-					p[type]?.append(["ids": [TraktId.Trakt.rawValue: id]])
-				}
+                if p[object.type.rawValue] == nil {
+                    p[object.type.rawValue] = []
+                }
+                p[object.type.rawValue]?.append(["ids": [TraktId.Trakt.rawValue: object.id]])
 			}
 			return p
 
 		case .AddToHistory(let objects):
 			var p: [String: [[String: AnyObject]]] = [:]
 			for object in objects {
-				if let id = object.ids[TraktId.Trakt] as? Int {
-
-					if p[object.type!.rawValue] == nil {
-						p[object.type!.rawValue] = []
-					}
-					p[object.type!.rawValue]?.append(["ids": ["trakt": id]])
-				}
+                if p[object.type.rawValue] == nil {
+                    p[object.type.rawValue] = []
+                }
+                p[object.type.rawValue]?.append(["ids": ["trakt": object.id]])
 			}
 			return p
 
 		case .RemoveFromHistory(let objects):
 			var p: [String: [[String: AnyObject]]] = [:]
 			for object in objects {
-				if let id = object.ids[TraktId.Trakt] as? Int {
-
-					if p[object.type!.rawValue] == nil {
-						p[object.type!.rawValue] = []
-					}
-					p[object.type!.rawValue]?.append(["ids": ["trakt": id]])
-				}
+				p[object.type.rawValue]?.append(["ids": ["trakt": object.id]])
 			}
 			return p
 
@@ -216,9 +203,9 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 			var p: [String: [AnyObject]] = [:]
 			let e: [String: AnyObject] = [
 				"rating": rate,
-				"ids": ["trakt": object.id!]
+				"ids": ["trakt": object.id]
 			]
-			p["\(object.type!.rawValue)"] = [e]
+			p["\(object.type.rawValue)"] = [e]
 			return p
 
 		default:

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TraktSeason: TraktWatchable {
+public class TraktSeason: TraktWatchable, TraktIdentifiable {
 
 	public weak var show: TraktShow?
 
@@ -17,7 +17,11 @@ public class TraktSeason: TraktWatchable {
 	private var _episodes: [TraktEpisode] = []
 	public var episodes: [TraktEpisode] {
 		return _episodes
-	}
+    }
+
+    public var type: TraktType {
+        return .Seasons
+    }
 
 	override init?(data: JSONHash!) {
 		guard let sn = data?["number"] as? Int else {

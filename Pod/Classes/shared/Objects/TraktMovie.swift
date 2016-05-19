@@ -9,7 +9,7 @@
 import Foundation
 
 /// 🎥 TraktMovie
-public class TraktMovie: TraktWatchable {
+public class TraktMovie: TraktWatchable, Castable, TraktIdentifiable {
 
 	/// Youtube video name ex: _1MDrwqjeGo
     public var trailer: String?
@@ -25,12 +25,18 @@ public class TraktMovie: TraktWatchable {
     public var runtime: Int?
 	/// Array of genres
 	public var genres: [String]?
+
 	/// Array of TraktCrew
 	public var crew: [TraktCrew]?
 	/// Array of TraktCharacter
 	public var casting: [TraktCharacter]?
+
 	/// Array of TraktRelease
 	public var releases: [TraktRelease]?
+
+    public var type: TraktType {
+        return .Movies
+    }
 
 	override public func digest(data: JSONHash?) {
 		super.digest(data)

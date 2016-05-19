@@ -13,13 +13,14 @@
 		17F050011C91D789006F448F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		17F050031C91E044006F448F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		1916EB99410FD5C19C25C524 /* Pods_AKTrakt_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35769ED395217FF0FD00A41 /* Pods_AKTrakt_Tests.framework */; };
+		2B145BC16186DEFE8B407C98 /* Pods_Internal_AKTrakt_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 515D408CD9F6C2C5B411CA02 /* Pods_Internal_AKTrakt_tvOS.framework */; };
+		51C30F7814FA9EFDC22BF33F /* Pods_Internal_AKTrakt_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C0BB79514F5BD2EE925795 /* Pods_Internal_AKTrakt_Tests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		877BBF7A1A334EA028E19A1F /* Pods_AKTrakt_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0209FC0239CCC97BBB71760 /* Pods_AKTrakt_iOS.framework */; };
-		B2EF89A99AC2F3CEFB189D4D /* Pods_AKTrakt_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC6591DD132C834E1254AEC /* Pods_AKTrakt_tvOS.framework */; };
+		612B127C202921F1199BDE39 /* Pods_Internal_AKTrakt_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D9C57E2E1B0FF0C4840765E /* Pods_Internal_AKTrakt_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,18 +35,24 @@
 
 /* Begin PBXFileReference section */
 		07F71D2B3D219AF07177959D /* Pods_AKTrakt_TvOS_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKTrakt_TvOS_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		14E5C7337E3EE6FBEA91ACBD /* Pods-Internal-AKTrakt_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-AKTrakt_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Internal-AKTrakt_Tests/Pods-Internal-AKTrakt_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		17109D031C05EF0A007D3D16 /* AKTrakt tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AKTrakt tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17109D071C05EF0A007D3D16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		17109D0A1C05EF0A007D3D16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		17109D0C1C05EF0A007D3D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17109D0E1C05EF0A007D3D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		182C70A2E7B66212F11535CC /* Pods-Internal-AKTrakt iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-AKTrakt iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS.release.xcconfig"; sourceTree = "<group>"; };
+		23FEA1385334FF34EF4E2120 /* Pods-Internal-AKTrakt iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-AKTrakt iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		245F7FCCBDB3759206111274 /* AKTrakt.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AKTrakt.podspec; path = ../AKTrakt.podspec; sourceTree = "<group>"; };
 		26D2E836229100EA6ABDA02D /* Pods-AKTrakt_iOS_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt_iOS_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt_iOS_Example/Pods-AKTrakt_iOS_Example.release.xcconfig"; sourceTree = "<group>"; };
 		3AC6591DD132C834E1254AEC /* Pods_AKTrakt_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKTrakt_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D3C1936CC3115AD3313CA7C /* Pods-AKTrakt_TvOS_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt_TvOS_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt_TvOS_Example/Pods-AKTrakt_TvOS_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		3EA807B8988BDDABCDA59297 /* Pods-AKTrakt iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt iOS/Pods-AKTrakt iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3FE3708F3CB787397C3C3878 /* Pods-Internal-AKTrakt tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-AKTrakt tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Internal-AKTrakt tvOS/Pods-Internal-AKTrakt tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		4A27F2655770831A0A3BDF8D /* Pods-AKTrakt_TvOS_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt_TvOS_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt_TvOS_Example/Pods-AKTrakt_TvOS_Example.release.xcconfig"; sourceTree = "<group>"; };
 		4C12865FF0E76E1DD0B2BFBC /* Pods_AKTrakt_iOS_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKTrakt_iOS_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D9C57E2E1B0FF0C4840765E /* Pods_Internal_AKTrakt_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Internal_AKTrakt_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		515D408CD9F6C2C5B411CA02 /* Pods_Internal_AKTrakt_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Internal_AKTrakt_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		577F402CD1F5BA57DA0A6BC0 /* Pods-AKTrakt iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt iOS/Pods-AKTrakt iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* AKTrakt iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AKTrakt iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,9 +64,12 @@
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		829FB6DE651D94D5C0BCC7A7 /* Pods-AKTrakt_iOS_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt_iOS_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt_iOS_Example/Pods-AKTrakt_iOS_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		8372053CFE34D254B930445B /* Pods-Internal-AKTrakt tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-AKTrakt tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Internal-AKTrakt tvOS/Pods-Internal-AKTrakt tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		8C0E7CE2D9ED797DDA93319A /* Pods-AKTrakt tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt tvOS/Pods-AKTrakt tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		9E2E7AD6BF2AD4A119FBEB44 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		A6C0BB79514F5BD2EE925795 /* Pods_Internal_AKTrakt_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Internal_AKTrakt_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7BBC843F486C040B81601EC /* Pods-AKTrakt_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt_Tests/Pods-AKTrakt_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		A7F000AEBF92B57C35B2646F /* Pods-Internal-AKTrakt_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-AKTrakt_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Internal-AKTrakt_Tests/Pods-Internal-AKTrakt_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		D0209FC0239CCC97BBB71760 /* Pods_AKTrakt_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKTrakt_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA97070D16F0D986F3944D8A /* Pods-AKTrakt_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AKTrakt_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AKTrakt_Tests/Pods-AKTrakt_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E35769ED395217FF0FD00A41 /* Pods_AKTrakt_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AKTrakt_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2EF89A99AC2F3CEFB189D4D /* Pods_AKTrakt_tvOS.framework in Frameworks */,
+				2B145BC16186DEFE8B407C98 /* Pods_Internal_AKTrakt_tvOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				877BBF7A1A334EA028E19A1F /* Pods_AKTrakt_iOS.framework in Frameworks */,
+				612B127C202921F1199BDE39 /* Pods_Internal_AKTrakt_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1916EB99410FD5C19C25C524 /* Pods_AKTrakt_Tests.framework in Frameworks */,
+				51C30F7814FA9EFDC22BF33F /* Pods_Internal_AKTrakt_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,6 +138,12 @@
 				3EA807B8988BDDABCDA59297 /* Pods-AKTrakt iOS.release.xcconfig */,
 				F62ED134814F0256A3C2451A /* Pods-AKTrakt tvOS.debug.xcconfig */,
 				8C0E7CE2D9ED797DDA93319A /* Pods-AKTrakt tvOS.release.xcconfig */,
+				23FEA1385334FF34EF4E2120 /* Pods-Internal-AKTrakt iOS.debug.xcconfig */,
+				182C70A2E7B66212F11535CC /* Pods-Internal-AKTrakt iOS.release.xcconfig */,
+				3FE3708F3CB787397C3C3878 /* Pods-Internal-AKTrakt tvOS.debug.xcconfig */,
+				8372053CFE34D254B930445B /* Pods-Internal-AKTrakt tvOS.release.xcconfig */,
+				14E5C7337E3EE6FBEA91ACBD /* Pods-Internal-AKTrakt_Tests.debug.xcconfig */,
+				A7F000AEBF92B57C35B2646F /* Pods-Internal-AKTrakt_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -210,6 +227,9 @@
 				4C12865FF0E76E1DD0B2BFBC /* Pods_AKTrakt_iOS_Example.framework */,
 				D0209FC0239CCC97BBB71760 /* Pods_AKTrakt_iOS.framework */,
 				3AC6591DD132C834E1254AEC /* Pods_AKTrakt_tvOS.framework */,
+				4D9C57E2E1B0FF0C4840765E /* Pods_Internal_AKTrakt_iOS.framework */,
+				515D408CD9F6C2C5B411CA02 /* Pods_Internal_AKTrakt_tvOS.framework */,
+				A6C0BB79514F5BD2EE925795 /* Pods_Internal_AKTrakt_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -363,7 +383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt tvOS/Pods-AKTrakt tvOS-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt tvOS/Pods-Internal-AKTrakt tvOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		0F092E49AE63FBC26918D9E4 /* 📦 Copy Pods Resources */ = {
@@ -378,7 +398,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt iOS/Pods-AKTrakt iOS-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		174FE9251C85917000FA2EAE /* 🛡 Swift lint */ = {
@@ -407,7 +427,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt_Tests/Pods-AKTrakt_Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt_Tests/Pods-Internal-AKTrakt_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5DD668363034103C97473FB9 /* 📦 Embed Pods Frameworks */ = {
@@ -422,7 +442,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt iOS/Pods-AKTrakt iOS-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7C58B27D8153DA79C49686DD /* 📦 Copy Pods Resources */ = {
@@ -437,7 +457,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt_Tests/Pods-AKTrakt_Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt_Tests/Pods-Internal-AKTrakt_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		80474D58DC9AC96AB3211A7C /* 📦 Check Pods Manifest.lock */ = {
@@ -497,7 +517,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AKTrakt tvOS/Pods-AKTrakt tvOS-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt tvOS/Pods-Internal-AKTrakt tvOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -569,7 +589,7 @@
 /* Begin XCBuildConfiguration section */
 		17109D101C05EF0A007D3D16 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F62ED134814F0256A3C2451A /* Pods-AKTrakt tvOS.debug.xcconfig */;
+			baseConfigurationReference = 3FE3708F3CB787397C3C3878 /* Pods-Internal-AKTrakt tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -587,7 +607,7 @@
 		};
 		17109D111C05EF0A007D3D16 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8C0E7CE2D9ED797DDA93319A /* Pods-AKTrakt tvOS.release.xcconfig */;
+			baseConfigurationReference = 8372053CFE34D254B930445B /* Pods-Internal-AKTrakt tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -685,7 +705,7 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 577F402CD1F5BA57DA0A6BC0 /* Pods-AKTrakt iOS.debug.xcconfig */;
+			baseConfigurationReference = 23FEA1385334FF34EF4E2120 /* Pods-Internal-AKTrakt iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AKTrakt/Info.plist;
@@ -699,7 +719,7 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3EA807B8988BDDABCDA59297 /* Pods-AKTrakt iOS.release.xcconfig */;
+			baseConfigurationReference = 182C70A2E7B66212F11535CC /* Pods-Internal-AKTrakt iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AKTrakt/Info.plist;
@@ -713,7 +733,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7BBC843F486C040B81601EC /* Pods-AKTrakt_Tests.debug.xcconfig */;
+			baseConfigurationReference = 14E5C7337E3EE6FBEA91ACBD /* Pods-Internal-AKTrakt_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -734,7 +754,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DA97070D16F0D986F3944D8A /* Pods-AKTrakt_Tests.release.xcconfig */;
+			baseConfigurationReference = A7F000AEBF92B57C35B2646F /* Pods-Internal-AKTrakt_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

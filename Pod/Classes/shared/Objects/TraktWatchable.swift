@@ -8,7 +8,17 @@
 
 import Foundation
 
-public class TraktWatchable: TraktObject {
+public protocol Castable: class {
+    var crew: [TraktCrew]? { get set }
+    var casting: [TraktCharacter]? { get set }
+}
+
+public protocol Watchable: class {
+    var watched: Bool { get set }
+    var watchlist: Bool { get set }
+}
+
+public class TraktWatchable: TraktObject, Watchable {
 
     public var title: String?
     public var overview: String?

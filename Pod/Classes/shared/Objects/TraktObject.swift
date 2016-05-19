@@ -11,32 +11,27 @@ import Foundation
 public typealias TraktIdentifier = Int
 
 public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
-    return lhs.id != nil && rhs.id != nil && lhs.id == rhs.id && lhs.id != 0 && rhs.id != 0
+    return lhs.id == rhs.id && lhs.id != 0 && rhs.id != 0
+}
+
+public protocol TraktIdentifiable: class {
+    /// Trakt Identifier
+    var id: TraktIdentifier { get }
+
+    /// Trakt Type
+    var type: TraktType { get }
 }
 
 public class TraktObject: CustomStringConvertible, Hashable {
 
 	public var ids: [TraktId: AnyObject] = [:]
     
-	public var id: TraktIdentifier! {
-		return ids[TraktId.Trakt] as? TraktIdentifier
-	}
-
-	public var type: TraktType? {
-		if self is TraktEpisode {
-			return .Episodes
-		} else if self is TraktSeason {
-			return .Seasons
-		} else if self is TraktShow {
-			return .Shows
-		} else if self is TraktMovie {
-			return .Movies
-		}
-		return nil
+	public var id: TraktIdentifier {
+		return ids[TraktId.Trakt] as? TraktIdentifier ?? 0
 	}
 
     public var hashValue: Int {
-        return id ?? 0
+        return id
     }
 
 	public var images: [TraktImageType: [TraktImageSize: String]] = [:]
