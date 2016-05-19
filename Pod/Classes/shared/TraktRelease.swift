@@ -27,9 +27,9 @@ public class TraktRelease: CustomStringConvertible {
 
 		guard
 			let country = data?["country"] as? String,
-			let certification = data?["certification"] as? String,
-			let release_date = data?["release_date"] as? String, date = df.dateFromString(release_date),
-			let release_type = data?["release_type"] as? String, type = TraktReleaseType(rawValue: release_type)
+			certification = data?["certification"] as? String,
+			release_date = data?["release_date"] as? String, date = df.dateFromString(release_date),
+			release_type = data?["release_type"] as? String, type = TraktReleaseType(rawValue: release_type)
 			else {
 			return nil
 		}
