@@ -78,8 +78,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 	}
 
 	func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-		if let url = items[indexPath.row].imageURL(.Poster, size: .Thumb) {
-			(cell.viewWithTag(1) as? UIImageView)?.af_setImageWithURL(url)
+		if let image = (cell.viewWithTag(1) as? UIImageView), url = items[indexPath.row].imageURL(.Poster, thatFits: image) {
+			image.af_setImageWithURL(url)
 		}
 	}
 
