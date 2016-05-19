@@ -30,7 +30,7 @@ public class TraktAuthenticationViewController: UIViewController, WKNavigationDe
     public override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancel")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(TraktAuthenticationViewController.cancel))
 
         wkWebview = WKWebView(frame: view.bounds)
         wkWebview.navigationDelegate = self
