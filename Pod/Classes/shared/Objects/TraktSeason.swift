@@ -19,7 +19,7 @@ public class TraktSeason: TraktWatchable {
 		return _episodes
 	}
 
-	override init?(data: [String : AnyObject]!) {
+	override init?(data: JSONHash!) {
 		guard let sn = data?["number"] as? Int else {
 			return nil
 		}

@@ -69,7 +69,7 @@ public class TraktAuthenticationViewController: UIViewController, WKNavigationDe
 
             let request = TraktRoute.Token(client: trakt, pin: pin)
             Alamofire.request(request).responseJSON { (response) -> Void in
-                if let token = TraktToken(data: response.result.value as? Trakt.JSONHash) {
+                if let token = TraktToken(data: response.result.value as? JSONHash) {
 					self.trakt.saveToken(token)
                     self.delegate?.TraktAuthViewControllerDidAuthenticate(self)
                 } else {

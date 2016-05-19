@@ -24,7 +24,6 @@ public class Trakt {
     public let traktApiVersion = 2
 
 	public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, verificationUrl: String, expiresAt: NSDate, interval: NSTimeInterval)
-	public typealias JSONHash = [String: AnyObject!]
 
     public init(clientId: String, clientSecret: String, applicationId: Int) {
 		self.clientId = clientId
@@ -51,15 +50,23 @@ public class Trakt {
 	public func saveToken(token: TraktToken) {
 		token.save(clientId)
 		self.token = token
-	}
+    }
 
-	internal lazy var dateFormatter: NSDateFormatter = {
-		let df = NSDateFormatter()
-		df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-		df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-		df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
-		return df
-	}()
+    public static let dateFormatter: NSDateFormatter = {
+        let df = NSDateFormatter()
+        df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        df.dateFormat = "yyyy'-'MM'-'dd"
+        return df
+    }()
+
+    public static let datetimeFormatter: NSDateFormatter = {
+        let df = NSDateFormatter()
+        df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
+        return df
+    }()
 
 	internal func query(route: TraktRoute, completionHandler: Response<AnyObject, NSError> -> Void) -> Request! {
 		let request = route.URLRequest

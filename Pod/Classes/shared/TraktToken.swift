@@ -26,7 +26,7 @@ public class TraktToken {
 		self.scope = scope
 	}
 
-	convenience init?(data: Trakt.JSONHash!) {
+	convenience init?(data: JSONHash!) {
 		guard let token = data,
 			accessToken = token["access_token"] as? String,
 			expiresIn = token["expires_in"] as? Double,
@@ -40,21 +40,21 @@ public class TraktToken {
 
 	internal static func load(clientId: String) -> TraktToken? {
 		let defaults = NSUserDefaults.standardUserDefaults()
-		guard let data = defaults.objectForKey(TraktToken.userDefaultsTokenKey + clientId) as? Trakt.JSONHash else {
+		guard let data = defaults.objectForKey(TraktToken.userDefaultsTokenKey + clientId) as? JSONHash else {
 			return nil
 		}
 		return TraktToken(data: data)
 	}
 
 	internal func save(clientId: String!) {
-		NSUserDefaults.standardUserDefaults().setObject(data(), forKey: TraktToken.userDefaultsTokenKey + clientId)
+		NSUserDefaults.standardUserDefaults().setObject(data, forKey: TraktToken.userDefaultsTokenKey + clientId)
 	}
 
 	internal func remove(clientId: String!) {
 		NSUserDefaults.standardUserDefaults().removeObjectForKey(TraktToken.userDefaultsTokenKey + clientId)
 	}
 
-	func data() -> Trakt.JSONHash {
+    private var data: JSONHash {
 		return [
 			"access_token": accessToken,
 			"token_type": tokenType,

@@ -11,15 +11,17 @@ import Foundation
 public typealias TraktIdentifier = Int
 
 public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
-    return lhs.id != nil && rhs.id != nil && lhs.id == rhs.id
+    return lhs.id != nil && rhs.id != nil && lhs.id == rhs.id && lhs.id != 0 && rhs.id != 0
 }
 
 public class TraktObject: CustomStringConvertible, Hashable {
 
 	public var ids: [TraktId: AnyObject] = [:]
+    
 	public var id: TraktIdentifier! {
 		return ids[TraktId.Trakt] as? TraktIdentifier
 	}
+
 	public var type: TraktType? {
 		if self is TraktEpisode {
 			return .Episodes
@@ -34,20 +36,20 @@ public class TraktObject: CustomStringConvertible, Hashable {
 	}
 
     public var hashValue: Int {
-        return id!
+        return id ?? 0
     }
 
 	public var images: [TraktImageType: [TraktImageSize: String]] = [:]
 
-	public init?(data: [String: AnyObject]!) {
+	public init?(data: JSONHash!) {
 		digest(data)
 	}
 
-	public func digest(data: [String: AnyObject]?) {
+	public func digest(data: JSONHash?) {
 		ids = TraktId.extractIds(data) ?? [:]
 
-		(data?["images"] as? [String: AnyObject])?.forEach { rawType, list in
-			if let type = TraktImageType(rawValue: rawType), listed = list as? [String: AnyObject] {
+		(data?["images"] as? JSONHash)?.forEach { rawType, list in
+			if let type = TraktImageType(rawValue: rawType), listed = list as? JSONHash {
 				listed.forEach { rawSize, uri in
 					if let size = TraktImageSize(rawValue: rawSize), u = uri as? String {
 						if images[type] == nil {
@@ -60,8 +62,8 @@ public class TraktObject: CustomStringConvertible, Hashable {
 		}
 	}
 
-	static func autoload(item: [String: AnyObject]!) -> TraktObject! {
-		guard let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? [String: AnyObject] else {
+	static func autoload(item: JSONHash!) -> TraktObject! {
+		guard let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? JSONHash else {
             return nil
         }
         switch type {
@@ -76,14 +78,6 @@ public class TraktObject: CustomStringConvertible, Hashable {
         case .Persons:
             return TraktPerson(data: data)
         }
-	}
-
-	static var timeFormatter: NSDateFormatter {
-		let df = NSDateFormatter()
-		df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
-		df.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-		df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
-		return df
 	}
 
     public func imageURL(type: TraktImageType, thatFits imageView: UIImageView?) -> NSURL? {
@@ -114,9 +108,4 @@ public class TraktObject: CustomStringConvertible, Hashable {
 	public var description: String {
 		return "TraktObject \(ids)"
 	}
-}
-extension CGSize {
-    var area: CGFloat {
-        return width * height
-    }
 }

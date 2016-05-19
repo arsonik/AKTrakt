@@ -32,7 +32,7 @@ public class TraktMovie: TraktWatchable {
 	/// Array of TraktRelease
 	public var releases: [TraktRelease]?
 
-	override public func digest(data: [String : AnyObject]?) {
+	override public func digest(data: JSONHash?) {
 		super.digest(data)
 
         rating = data?["rating"] as? Float ?? rating
@@ -41,20 +41,12 @@ public class TraktMovie: TraktWatchable {
 		genres = data?["genres"] as? [String] ?? genres
 		runtime = data?["runtime"] as? Int ?? runtime
 
-		let df = NSDateFormatter()
-		df.dateFormat = "yyyy'-'MM'-'dd"
-
-		if let r = data?["released"] as? String, d = df.dateFromString(r) {
+		if let r = data?["released"] as? String, d = Trakt.dateFormatter.dateFromString(r) {
 			release = d
-		} else {
-			release = nil
 		}
 
 		if let x = data?["trailer"] as? String, url = NSURL(string: x), params = url.query?.componentsSeparatedByString("v=") where params.count == 2 {
 			trailer = params[1]
-		} else {
-			trailer = nil
 		}
-
 	}
 }

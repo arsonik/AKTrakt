@@ -17,7 +17,7 @@ public class TraktEpisode: TraktWatchable {
 	public var loaded: Bool? = false
 	public var firstAired: NSDate?
 
-	override init?(data: [String : AnyObject]!) {
+	override init?(data: JSONHash!) {
 		guard let en = data?["number"] as? Int, sn = data?["season"] as? Int else {
 			return nil
 		}
@@ -27,10 +27,10 @@ public class TraktEpisode: TraktWatchable {
 		super.init(data: data)
 	}
 
-	override public func digest(data: [String : AnyObject]!) {
+	override public func digest(data: JSONHash!) {
 		super.digest(data)
 
-		if let fa = data["first_aired"] as? String, date = TraktObject.timeFormatter.dateFromString(fa) {
+		if let fa = data["first_aired"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
 			firstAired = date
 		}
 	}

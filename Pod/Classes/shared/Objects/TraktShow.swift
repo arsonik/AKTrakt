@@ -20,7 +20,7 @@ public class TraktShow: TraktWatchable {
 	/// Production year
 	public var year: Int?
 
-	override public func digest(data: [String : AnyObject]?) {
+	override public func digest(data: JSONHash?) {
 		super.digest(data)
 
 		year = data?["year"] as? Int ?? year

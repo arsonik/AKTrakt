@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias JSONHash = [String: AnyObject!]
+
 public extension String {
     var slug: String {
         var cp = self.lowercaseString.stringByTrimmingCharactersInSet(.whitespaceCharacterSet())
@@ -28,4 +30,10 @@ internal func delay(delay: Double, closure: ()->()) {
             Int64(delay * Double(NSEC_PER_SEC))
         ),
         dispatch_get_main_queue(), closure)
+}
+
+extension CGSize {
+    var area: CGFloat {
+        return width * height
+    }
 }

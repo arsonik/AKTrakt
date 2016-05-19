@@ -14,21 +14,18 @@ public class TraktPerson: TraktObject {
     public let birthday: NSDate!
     public let death: NSDate!
 
-    override init?(data: [String: AnyObject]!) {
+    override init?(data: JSONHash!) {
         if let n = data["name"] as? String {
             name = n
             biography = data["biography"] as? String
 
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy'-'MM'-'dd"
-
-            if let value = data["birthday"] as? String, date = dateFormatter.dateFromString(value) {
+            if let value = data["birthday"] as? String, date = Trakt.dateFormatter.dateFromString(value) {
                 birthday = date
             } else {
                 birthday = nil
             }
 
-            if let value = data["death"] as? String, date = dateFormatter.dateFromString(value) {
+            if let value = data["death"] as? String, date = Trakt.dateFormatter.dateFromString(value) {
                 death = date
             } else {
                 death = nil

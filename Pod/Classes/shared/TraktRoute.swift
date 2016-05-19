@@ -68,13 +68,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		return uniqid.hashValue
 	}
 
-	private var domain: String {
-		switch self {
-		default:
-			return "https://api-v2launch.trakt.tv"
-		}
-	}
-
 	private var method: String {
 		switch self {
 		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate, .RemoveFromWatchlist:
@@ -234,22 +227,14 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	}
 
 	public var URLRequest: NSMutableURLRequest {
-		let request = NSMutableURLRequest(URL: NSURL(string: "\(domain)\(path)")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "https://api-v2launch.trakt.tv\(path)")!)
 		request.HTTPMethod = method
 		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 		headers?.forEach { key, value in
 			request.setValue(value, forHTTPHeaderField: key)
-
 		}
 
-		switch self {
-		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .RemoveFromWatchlist, .Rate:
-			let encoding = Alamofire.ParameterEncoding.JSON
-			return encoding.encode(request, parameters: parameters).0
-		default:
-			let encoding = Alamofire.ParameterEncoding.URL
-			return encoding.encode(request, parameters: parameters).0
-		}
+        return (method == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(request, parameters: parameters).0
 	}
 
 	func retryOnFailure() -> Bool {

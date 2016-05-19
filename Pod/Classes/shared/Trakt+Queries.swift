@@ -198,7 +198,7 @@ extension Trakt {
 				guard let objectData = entry[type.single] as? JSONHash,
 					plays = entry["plays"] as? Int,
 					lastAt = entry["last_watched_at"] as? String,
-					lastWatchedAt = self.dateFormatter.dateFromString(lastAt) else {
+					lastWatchedAt = Trakt.datetimeFormatter.dateFromString(lastAt) else {
 						print(response.result.error)
 						return nil
 				}

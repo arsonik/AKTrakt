@@ -15,7 +15,7 @@ public class TraktWatchable: TraktObject {
     public var watched: Bool = false
     public var watchlist: Bool = false
 
-	override public func digest(data: [String : AnyObject]?) {
+	override public func digest(data: JSONHash?) {
 		super.digest(data)
 
 		title = data?["title"] as? String ?? title

@@ -20,15 +20,11 @@ public class TraktRelease: CustomStringConvertible {
 
 	public let note: String!
 
-	public init?(data: Trakt.JSONHash?) {
-
-		let df = NSDateFormatter()
-		df.dateFormat = "yyyy'-'MM'-'dd"
-
+	public init?(data: JSONHash?) {
 		guard
 			let country = data?["country"] as? String,
 			certification = data?["certification"] as? String,
-			release_date = data?["release_date"] as? String, date = df.dateFromString(release_date),
+			release_date = data?["release_date"] as? String, date = Trakt.dateFormatter.dateFromString(release_date),
 			release_type = data?["release_type"] as? String, type = TraktReleaseType(rawValue: release_type)
 			else {
 			return nil
