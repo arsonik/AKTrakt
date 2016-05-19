@@ -42,7 +42,7 @@ public class Trakt {
 	public func hasValidToken() -> Bool {
 		return token != nil
 	}
-	
+
 	public func clearToken() {
 		token?.remove(clientId)
 		token = nil

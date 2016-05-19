@@ -17,7 +17,7 @@ extension Trakt {
 				completion(aToken, nil)
 			} else {
 				let err: NSError?
-				if let error = (response.result.value as? [String: AnyObject])?["error_description"] as? String {
+				if let error = (response.result.value as? JSONHash)?["error_description"] as? String {
 					err = NSError(domain: "trakt.tv", code: 401, userInfo: [NSLocalizedDescriptionKey: error])
 				} else {
 					err = response.result.error
@@ -26,7 +26,7 @@ extension Trakt {
 			}
 		}
 	}
-	
+
 	public func generateCode(completion: (GeneratedCodeResponse?, NSError?) -> Void) -> Request {
 		return query(.GenerateCode(clientId: clientId)) { response in
 			guard
@@ -134,12 +134,12 @@ extension Trakt {
 
 	public func credits(person: TraktPerson, type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
 		return query(.Credits(person.id!, type)) { response in
-			if let result = response.result.value as? [String: AnyObject] {
+			if let result = response.result.value as? JSONHash {
 				var list: Set<TraktWatchable> = []
-				if let crew = result["crew"] as? [String: [[String: AnyObject]]] {
+				if let crew = result["crew"] as? [String: [JSONHash]] {
 					crew.flatMap({
 						return $0.1.flatMap({
-							guard let item = $0[type.single] as? [String: AnyObject] else {
+							guard let item = $0[type.single] as? JSONHash else {
 								return nil
 							}
 							return type == .Movies ? TraktMovie(data: item) : TraktShow(data: item)
@@ -148,9 +148,9 @@ extension Trakt {
 						list.insert($0)
 					})
 				}
-				if let cast = result["cast"] as? [[String: AnyObject]] {
+				if let cast = result["cast"] as? [JSONHash] {
 					cast.flatMap({
-						guard let item = $0[type.single] as? [String: AnyObject] else {
+						guard let item = $0[type.single] as? JSONHash else {
 							return nil
 						}
 						return type == .Movies ? TraktMovie(data: item) : TraktShow(data: item)
@@ -227,12 +227,12 @@ extension Trakt {
 
 	public func collection(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
 		return query(.Collection(type)) { response -> Void in
-			if let entries = response.result.value as? [[String: AnyObject]] {
+			if let entries = response.result.value as? [JSONHash] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Shows {
-						return TraktShow(data: $0[type.single] as? [String: AnyObject])
+						return TraktShow(data: $0[type.single] as? JSONHash)
 					} else if type == .Movies {
-						return TraktMovie(data: $0[type.single] as? [String: AnyObject])
+						return TraktMovie(data: $0[type.single] as? JSONHash)
 					} else {
 						return nil
 					}
@@ -246,12 +246,12 @@ extension Trakt {
 
 	public func trending(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
 		return query(.Trending(type, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
-			if let entries = response.result.value as? [[String: AnyObject]] {
+			if let entries = response.result.value as? [JSONHash] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Movies {
-						return TraktMovie(data: $0[type.single] as? [String: AnyObject])
+						return TraktMovie(data: $0[type.single] as? JSONHash)
 					} else if type == .Shows {
-						return TraktShow(data: $0[type.single] as? [String: AnyObject])
+						return TraktShow(data: $0[type.single] as? JSONHash)
 					} else {
 						return nil
 					}
@@ -265,7 +265,7 @@ extension Trakt {
 
 	public func recommendations(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
 		return query(.Recommandations(type, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
-			if let entries = response.result.value as? [[String: AnyObject]] {
+			if let entries = response.result.value as? [JSONHash] {
 				let list: [TraktWatchable] = entries.flatMap({
 					if type == .Movies {
 						return TraktMovie(data: $0)
@@ -284,7 +284,7 @@ extension Trakt {
 
 	public func rate(object: TraktWatchable, rate: Int, completion: (Bool, NSError?) -> Void) -> Request {
 		return query(.Rate(object, rate)) { response in
-			if let item = response.result.value as? [String: AnyObject], added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
+			if let item = response.result.value as? JSONHash, added = item["added"] as? [String: Int], n = added[object.type!.rawValue] where n > 0 {
 				completion(true, nil)
 			} else {
 				completion(false, response.result.error)
@@ -294,17 +294,17 @@ extension Trakt {
 
 	public func searchMovie(id: String, completion: (TraktMovie?, NSError?) -> Void) -> Request {
 		return query(.Movie(id: id)) { response in
-			guard let item = response.result.value as? [String: AnyObject], o = TraktMovie(data: item) else {
+			guard let item = response.result.value as? JSONHash, o = TraktMovie(data: item) else {
 				print("Cannot find movie \(id)")
 				return completion(nil, response.result.error)
 			}
 			completion(o, nil)
 		}
 	}
-    
+
     public func searchShow(id: String, completion: (TraktShow?, NSError?) -> Void) -> Request {
         return query(.Show(id: id)) { response in
-            guard let item = response.result.value as? [String: AnyObject], o = TraktShow(data: item) else {
+            guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
                 print("Cannot find show \(id)")
                 return completion(nil, response.result.error)
             }
@@ -314,7 +314,7 @@ extension Trakt {
 
 	public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
 		return query(.Episode(showId: id, season: season, episode: episode)) { response in
-			guard let item = response.result.value as? [String: AnyObject], o = TraktEpisode(data: item) else {
+			guard let item = response.result.value as? JSONHash, o = TraktEpisode(data: item) else {
 				print("Cannot find episode \(id)")
 				return completion(nil, response.result.error)
 			}
@@ -382,7 +382,7 @@ extension Trakt {
 	public func search(query: String, type: TraktType! = nil, year: Int! = nil, pagination: TraktPagination! = nil, completion: ((results: [TraktObject]?, error: NSError?) -> Void)) -> Request {
 		return self.query(.Search(query: query, type: type, year: year, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
 			let list: [TraktObject]?
-			if let items = response.result.value as? [[String: AnyObject]] {
+			if let items = response.result.value as? [JSONHash] {
 				list = items.flatMap({
 					TraktObject.autoload($0)
 				})

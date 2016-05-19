@@ -14,7 +14,7 @@ public class TraktShow: TraktWatchable {
 	public var seasons: [TraktSeason] {
 		return _seasons
 	}
-	
+
 	public var crew: [TraktCrew]?
 	public var casting: [TraktCharacter]?
 	/// Production year
@@ -40,7 +40,7 @@ public class TraktShow: TraktWatchable {
 	}
 
 	public var nextEpisode: TraktEpisode?
-	
+
 	public override var description: String {
 		return "TraktShow(\(title))"
 	}

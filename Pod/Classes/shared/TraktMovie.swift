@@ -55,6 +55,6 @@ public class TraktMovie: TraktWatchable {
 		} else {
 			trailer = nil
 		}
-		
+
 	}
 }

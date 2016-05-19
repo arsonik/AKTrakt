@@ -152,7 +152,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 			var p = pagination.value()
 			p["extended"] = "full,images"
 			return p
-			
+
 		case .Recommandations(_, let pagination):
 			var p = pagination.value()
 			p["extended"] = "full,images"
@@ -237,11 +237,11 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 		let request = NSMutableURLRequest(URL: NSURL(string: "\(domain)\(path)")!)
 		request.HTTPMethod = method
 		request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-		headers?.forEach{ key, value in
+		headers?.forEach { key, value in
 			request.setValue(value, forHTTPHeaderField: key)
 
 		}
-		
+
 		switch self {
 		case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .RemoveFromWatchlist, .Rate:
 			let encoding = Alamofire.ParameterEncoding.JSON

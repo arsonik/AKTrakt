@@ -98,7 +98,7 @@ public class TraktObject: CustomStringConvertible, Hashable {
 			if size.1.area >= area {
 				selectedSize = size.0
 				//print("Filling with \(size.0.rawValue) \(size.1) > \(image.frame.size)")
-				break;
+				break
 			}
 		}
 		if selectedSize == nil {
