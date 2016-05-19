@@ -301,6 +301,16 @@ extension Trakt {
 			completion(o, nil)
 		}
 	}
+    
+    public func searchShow(id: String, completion: (TraktShow?, NSError?) -> Void) -> Request {
+        return query(.Show(id: id)) { response in
+            guard let item = response.result.value as? [String: AnyObject], o = TraktShow(data: item) else {
+                print("Cannot find show \(id)")
+                return completion(nil, response.result.error)
+            }
+            completion(o, nil)
+        }
+    }
 
 	public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
 		return query(.Episode(showId: id, season: season, episode: episode)) { response in
