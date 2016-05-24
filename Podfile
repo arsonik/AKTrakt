@@ -2,7 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
 abstract_target 'Internal' do
-    pod "AKTrakt", :path => "../"
+    pod "AKTrakt", :path => "."
     pod "Alamofire"
     pod "AlamofireImage"
 

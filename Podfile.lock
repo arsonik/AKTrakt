@@ -6,19 +6,19 @@ PODS:
     - Alamofire (~> 3.3)
 
 DEPENDENCIES:
-  - AKTrakt (from `../`)
+  - AKTrakt (from `.`)
   - Alamofire
   - AlamofireImage
 
 EXTERNAL SOURCES:
   AKTrakt:
-    :path: "../"
+    :path: "."
 
 SPEC CHECKSUMS:
   AKTrakt: adf2d487a3296cf62e5be24e321c30048e2e0a32
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
 
-PODFILE CHECKSUM: 32a7c7eb458a00eb540e5fb01e960055ee159865
+PODFILE CHECKSUM: d9fb9cb92ef5b1d90e53ddff73153e7925e5bcd7
 
 COCOAPODS: 1.0.0
