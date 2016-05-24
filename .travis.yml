@@ -1,0 +1,4 @@
+language: objective-c
+osx_image: xcode7.3 
+xcode_workspace: Example/AKTrakt.xcworkspace
+xcode_scheme: tvOS
