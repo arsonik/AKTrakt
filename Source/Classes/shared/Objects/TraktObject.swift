@@ -24,41 +24,41 @@ public protocol TraktIdentifiable: class {
 
 public class TraktObject: CustomStringConvertible, Hashable {
 
-	public var ids: [TraktId: AnyObject] = [:]
-    
-	public var id: TraktIdentifier {
-		return ids[TraktId.Trakt] as? TraktIdentifier ?? 0
-	}
+    public var ids: [TraktId: AnyObject] = [:]
+
+    public var id: TraktIdentifier {
+        return ids[TraktId.Trakt] as? TraktIdentifier ?? 0
+    }
 
     public var hashValue: Int {
         return id
     }
 
-	public var images: [TraktImageType: [TraktImageSize: String]] = [:]
+    public var images: [TraktImageType: [TraktImageSize: String]] = [:]
 
-	public init?(data: JSONHash!) {
-		digest(data)
-	}
+    public init?(data: JSONHash!) {
+        digest(data)
+    }
 
-	public func digest(data: JSONHash?) {
-		ids = TraktId.extractIds(data) ?? [:]
+    public func digest(data: JSONHash?) {
+        ids = TraktId.extractIds(data) ?? [:]
 
-		(data?["images"] as? JSONHash)?.forEach { rawType, list in
-			if let type = TraktImageType(rawValue: rawType), listed = list as? JSONHash {
-				listed.forEach { rawSize, uri in
-					if let size = TraktImageSize(rawValue: rawSize), u = uri as? String {
-						if images[type] == nil {
-							images[type] = [:]
-						}
-						images[type]![size] = u
-					}
-				}
-			}
-		}
-	}
+        (data?["images"] as? JSONHash)?.forEach { rawType, list in
+            if let type = TraktImageType(rawValue: rawType), listed = list as? JSONHash {
+                listed.forEach { rawSize, uri in
+                    if let size = TraktImageSize(rawValue: rawSize), u = uri as? String {
+                        if images[type] == nil {
+                            images[type] = [:]
+                        }
+                        images[type]![size] = u
+                    }
+                }
+            }
+        }
+    }
 
-	static func autoload(item: JSONHash!) -> TraktObject! {
-		guard let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? JSONHash else {
+    static func autoload(item: JSONHash!) -> TraktObject! {
+        guard let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? JSONHash else {
             return nil
         }
         switch type {
@@ -73,34 +73,34 @@ public class TraktObject: CustomStringConvertible, Hashable {
         case .Persons:
             return TraktPerson(data: data)
         }
-	}
-
-    public func imageURL(type: TraktImageType, thatFits imageView: UIImageView?) -> NSURL? {
-		guard let image = imageView,
-			// sort by area ascending
-			sizes = TraktImageType.sizes[type]?.sort({$0.0.1.area < $0.1.1.area}) else {
-            return nil
-        }
-		let area = (image.frame.width * image.frame.height) * UIScreen.mainScreen().scale
-		var selectedSize: TraktImageSize! = nil
-		for size in sizes {
-			if size.1.area >= area {
-				selectedSize = size.0
-				//print("Filling with \(size.0.rawValue) \(size.1) > \(image.frame.size)")
-				break
-			}
-		}
-		if selectedSize == nil {
-			// use the largest image
-			selectedSize = sizes.last?.0
-		}
-		guard let aSize = selectedSize, uri = images[type]?[aSize] else {
-			return nil
-		}
-		return NSURL(string: uri)
     }
 
-	public var description: String {
-		return "TraktObject \(ids)"
-	}
+    public func imageURL(type: TraktImageType, thatFits imageView: UIImageView?) -> NSURL? {
+        guard let image = imageView,
+            // sort by area ascending
+            sizes = TraktImageType.sizes[type]?.sort({$0.0.1.area < $0.1.1.area}) else {
+                return nil
+        }
+        let area = (image.frame.width * image.frame.height) * UIScreen.mainScreen().scale
+        var selectedSize: TraktImageSize! = nil
+        for size in sizes {
+            if size.1.area >= area {
+                selectedSize = size.0
+                //print("Filling with \(size.0.rawValue) \(size.1) > \(image.frame.size)")
+                break
+            }
+        }
+        if selectedSize == nil {
+            // use the largest image
+            selectedSize = sizes.last?.0
+        }
+        guard let aSize = selectedSize, uri = images[type]?[aSize] else {
+            return nil
+        }
+        return NSURL(string: uri)
+    }
+
+    public var description: String {
+        return "TraktObject \(ids)"
+    }
 }

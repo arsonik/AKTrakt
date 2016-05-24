@@ -10,42 +10,42 @@ import Foundation
 
 public class TraktSeason: TraktWatchable, TraktIdentifiable {
 
-	public weak var show: TraktShow?
+    public weak var show: TraktShow?
 
-	public let number: Int
+    public let number: Int
 
-	private var _episodes: [TraktEpisode] = []
-	public var episodes: [TraktEpisode] {
-		return _episodes
+    private var _episodes: [TraktEpisode] = []
+    public var episodes: [TraktEpisode] {
+        return _episodes
     }
 
     public var type: TraktType {
         return .Seasons
     }
 
-	override init?(data: JSONHash!) {
-		guard let sn = data?["number"] as? Int else {
-			return nil
-		}
+    override init?(data: JSONHash!) {
+        guard let sn = data?["number"] as? Int else {
+            return nil
+        }
 
-		number = sn
-		super.init(data: data)
-	}
+        number = sn
+        super.init(data: data)
+    }
 
-	public var notCompleted: [TraktEpisode] {
-		return episodes.filter {$0.watched == false}
-	}
+    public var notCompleted: [TraktEpisode] {
+        return episodes.filter {$0.watched == false}
+    }
 
-	public func episode(number: Int) -> TraktEpisode? {
-		return episodes.filter {$0.number == number} . first
-	}
+    public func episode(number: Int) -> TraktEpisode? {
+        return episodes.filter {$0.number == number} . first
+    }
 
-	public func addEpisode(episode: TraktEpisode) {
-		episode.season = self
-		_episodes.append(episode)
-	}
+    public func addEpisode(episode: TraktEpisode) {
+        episode.season = self
+        _episodes.append(episode)
+    }
 
-	public override var description: String {
-		return "TraktSeason(\(number)) \(episodes.count-notCompleted.count)/\(episodes.count)"
-	}
+    public override var description: String {
+        return "TraktSeason(\(number)) \(episodes.count-notCompleted.count)/\(episodes.count)"
+    }
 }

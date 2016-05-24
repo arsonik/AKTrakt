@@ -44,10 +44,9 @@ public class TraktPerson: TraktObject {
         }
         let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
         let ageComponents = calendar.components(.Year,
-            fromDate: birthday!,
-            toDate: death ?? NSDate(),
-            options: [])
+                                                fromDate: birthday!,
+                                                toDate: death ?? NSDate(),
+                                                options: [])
         return ageComponents.year
-
     }
 }

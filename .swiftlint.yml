@@ -9,7 +9,11 @@ type_body_length:
 function_body_length:
     - 100 # warning
     - 400 # error
+type_name:
+    excluded:
+        - Tv
 variable_name:
     excluded:
+        - id
         - URLString
         - URLRequest

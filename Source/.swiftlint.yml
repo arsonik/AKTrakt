@@ -1,6 +1,0 @@
-line_length: 200
-variable_name:
-    excluded:
-        - id
-        - URLString
-        - URLRequest
