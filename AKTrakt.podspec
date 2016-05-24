@@ -8,9 +8,9 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = "https://github.com/arsonik/AKTrakt"
-  s.screenshots     = "https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/TVmovies.png", "https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/iOSmovies.png"
+  s.screenshots     = "https://raw.githubusercontent.com/arsonik/AKTrakt/master/Screenshots/TVmovies.png", "https://raw.githubusercontent.com/arsonik/AKTrakt/master/Screenshots/iOSmovies.png"
   s.license          = 'MIT'
-  s.author           = { "Florian Morello" => "arsonik@me.com" }
+  s.authors           = { "Florian Morello" => "arsonik@me.com" }
   s.source           = { :git => "https://github.com/arsonik/AKTrakt.git", :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.0'
