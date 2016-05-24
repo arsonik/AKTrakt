@@ -24,6 +24,6 @@ Pod::Spec.new do |s|
   s.tvos.resources = 'Source/Resources/tvos/*.{xib,png}'
 
   s.ios.frameworks = 'UIKit', 'Webkit'
-  s.dependency 'Alamofire'
+  s.dependency 'Alamofire', '~> 3.4.0'
 
 end
