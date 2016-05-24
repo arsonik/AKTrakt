@@ -6,4 +6,4 @@ before_install:
   - gem update cocoapods
   - pod repo update
 script:
-  - xcodebuild -workspace AKTrakt.xcworkspace -scheme tvOS -sdk appletvos9.2 CODE_SIGNING_REQUIRED=NO
+  - xctool -workspace AKTrakt.xcworkspace -scheme tvOS build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
