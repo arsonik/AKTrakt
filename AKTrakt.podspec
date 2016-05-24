@@ -18,10 +18,10 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes/shared/**/*'
-  s.ios.source_files = 'Pod/Classes/ios/**/*'
-  s.tvos.source_files = 'Pod/Classes/tvos/**/*'
-  s.tvos.resources = 'Pod/Resources/tvos/*.{xib,png}'
+  s.source_files = 'Source/Classes/shared/**/*'
+  s.ios.source_files = 'Source/Classes/ios/**/*'
+  s.tvos.source_files = 'Source/Classes/tvos/**/*'
+  s.tvos.resources = 'Source/Resources/tvos/*.{xib,png}'
 
   s.ios.frameworks = 'UIKit', 'Webkit'
   s.dependency 'Alamofire'
