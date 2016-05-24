@@ -8,18 +8,20 @@
 
 import Foundation
 
-public class TraktCrew {
-    public let job: String!
-    public let person: TraktPerson!
+public struct TraktCrew {
 
-    init?(data: [String : AnyObject]!) {
-        if let n = data["job"] as? String, p = data["person"] as? [String: AnyObject], pers = TraktPerson(data: p) {
-            job = n
-            person = pers
-        } else {
-            job = nil
-            person = nil
+    /// Person's job
+    public let job: String
+
+    /// Person's object
+    public let person: TraktPerson
+
+    init?(data: JSONHash) {
+        guard let n = data["job"] as? String, p = data["person"] as? JSONHash, pers = TraktPerson(data: p) else {
             return nil
         }
+
+        job = n
+        person = pers
     }
 }

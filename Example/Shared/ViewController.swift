@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 	var items: [TraktMovie] = []
 
 	lazy var trakt: Trakt = {
-		return Trakt(clientId: "37558e63c821f673801c2c0788f4f877f5ed626bf5ba4493626173b3ac19b594", clientSecret: "9a80ed5b84182af99be0a452696e68e525b2c629e6f2a9a7cd748e4147d85690", applicationId: 3695)
+		return Trakt.autoload()
 	} ()
 
 	override func viewDidAppear(animated: Bool) {
@@ -25,6 +25,8 @@ class ViewController: UIViewController {
 		if items.count == 0 {
 			load()
 		}
+
+
 		if trakt.hasValidToken() {
 			loadUser()
 		}
@@ -55,6 +57,12 @@ class ViewController: UIViewController {
 		trakt.clearToken()
 		title = "Trakt"
 	}
+
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let vc = segue.destinationViewController as? MovieViewController, movie = sender as? TraktMovie {
+            vc.movie = movie
+        }
+    }
 }
 
 extension ViewController: TraktAuthViewControllerDelegate {
@@ -84,7 +92,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 	}
 
 	func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-		// Here you have the selected movie
-		print(items[indexPath.row].title)
+        performSegueWithIdentifier("movie", sender: items[indexPath.row])
 	}
 }

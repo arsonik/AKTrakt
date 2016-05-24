@@ -47,14 +47,14 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 	///	Find an episode by its show id, season number, episode number
 	case Episode(showId: AnyObject, season: Int, episode: Int)
 	///	Find a movie by its id (slug...)
-	case Movie(id: String)
-    /// Find a show by its id(slug...)
-    case Show(id: String)
+	case Movie(String)
+    /// Find a show by its id (slug...)
+    case Show(String)
 	///	Search based on query with optional type, pagination
 	case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
 	/// Rate something from 1-10
 	case Rate(protocol<TraktIdentifiable, Watchable>, Int)
-	/// Load a user
+	/// Load user (retrieve current if nil argument)
 	case Profile(String!)
 	/// Get Movie Releases
 	case Releases(TraktMovie, countryCode: String!)
@@ -256,7 +256,7 @@ public func == (left: TraktRoute, right: TraktRoute) -> Bool {
 	return left.hashValue == right.hashValue
 }
 
-public class TraktPagination {
+public struct TraktPagination {
 	var page: Int = 1
 	var limit: Int = 10
 

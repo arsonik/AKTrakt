@@ -10,6 +10,8 @@
 		17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		17109D0B1C05EF0A007D3D16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17109D091C05EF0A007D3D16 /* Main.storyboard */; };
 		17109D0D1C05EF0A007D3D16 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17109D0C1C05EF0A007D3D16 /* Assets.xcassets */; };
+		17C504921CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
+		17C504931CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17F050011C91D789006F448F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		17F050031C91E044006F448F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		1916EB99410FD5C19C25C524 /* Pods_AKTrakt_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E35769ED395217FF0FD00A41 /* Pods_AKTrakt_Tests.framework */; };
@@ -41,6 +43,7 @@
 		17109D0A1C05EF0A007D3D16 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		17109D0C1C05EF0A007D3D16 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		17109D0E1C05EF0A007D3D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17C504911CF4480600CF368A /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		182C70A2E7B66212F11535CC /* Pods-Internal-AKTrakt iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-AKTrakt iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS.release.xcconfig"; sourceTree = "<group>"; };
 		23FEA1385334FF34EF4E2120 /* Pods-Internal-AKTrakt iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Internal-AKTrakt iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		245F7FCCBDB3759206111274 /* AKTrakt.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AKTrakt.podspec; path = ../AKTrakt.podspec; sourceTree = "<group>"; };
@@ -121,6 +124,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				17109D071C05EF0A007D3D16 /* ViewController.swift */,
+				17C504911CF4480600CF368A /* MovieViewController.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -529,6 +533,7 @@
 			files = (
 				17F050031C91E044006F448F /* AppDelegate.swift in Sources */,
 				17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */,
+				17C504931CF4480600CF368A /* MovieViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +543,7 @@
 			files = (
 				17F050011C91D789006F448F /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				17C504921CF4480600CF368A /* MovieViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

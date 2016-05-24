@@ -11,16 +11,31 @@ import Alamofire
 
 /// Main Class
 public class Trakt {
-	internal let clientId: String
+    // Client Id
+    internal let clientId: String
+
+    // Application Secret
     internal let clientSecret: String
+
+    // Application Id
     internal let applicationId: Int
+
+    // Trakt Token
 	private var token: TraktToken?
+
 	/// Delay between each attempt
 	internal var retryInterval: Double = 5
+
+    // Cache request attempts (in case of faileur/retry)
 	private var attempts = NSCache()
+
 	/// Number of attempt after getting 500 errors
 	internal var maximumAttempt: Int = 6
+
+    // Alamofire Manager
     private let manager: Manager
+
+    // Trakt api version
     public let traktApiVersion = 2
 
 	public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, verificationUrl: String, expiresAt: NSDate, interval: NSTimeInterval)

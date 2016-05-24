@@ -8,18 +8,19 @@
 
 import Foundation
 
-public class TraktCharacter {
-    public let character: String!
-    public let person: TraktPerson!
+public struct TraktCharacter {
+    
+    /// Character's name
+    public let character: String
 
-    init?(data: [String : AnyObject]!) {
-        if let n = data["character"] as? String, p = data["person"] as? [String: AnyObject], pers = TraktPerson(data: p) {
-            character = n
-			person = pers
-        } else {
-            character = nil
-            person = nil
+    /// Person's object
+    public let person: TraktPerson
+
+    init?(data: JSONHash) {
+        guard let n = data["character"] as? String, p = data["person"] as? JSONHash, pers = TraktPerson(data: p) else {
             return nil
         }
+        character = n
+        person = pers
     }
 }

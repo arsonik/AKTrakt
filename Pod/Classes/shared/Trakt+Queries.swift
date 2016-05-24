@@ -101,6 +101,7 @@ extension Trakt {
 		}
 	}
 
+    /// Load casting and crew for a given object
 	public func people(object: protocol<TraktIdentifiable, Castable>, completion: ((Bool, NSError?) -> Void)) -> Request {
 		return query(.People(object)) { response in
             guard let result = response.result.value as? JSONHash else {
@@ -121,6 +122,7 @@ extension Trakt {
 		}
 	}
 
+    /// Load credits for a given person, and media type
 	public func credits(person: TraktPerson, type: TraktType, completion: (([TraktWatchable]?, NSError?) -> Void)) -> Request {
 		return query(.Credits(person.id, type)) { response in
             guard let result = response.result.value as? JSONHash else {
@@ -165,7 +167,7 @@ extension Trakt {
 				case .Shows:
 					return TraktShow(data: v)
 				default:
-					print("Not handled \(type)")
+					fatalError("Not handled \(type)")
 				}
 				return nil
 			}
@@ -255,20 +257,19 @@ extension Trakt {
 
 	public func recommendations(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
 		return query(.Recommandations(type, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
-			if let entries = response.result.value as? [JSONHash] {
-				let list: [TraktWatchable] = entries.flatMap({
-					if type == .Movies {
-						return TraktMovie(data: $0)
-					} else if type == .Shows {
-						return TraktShow(data: $0)
-					} else {
-						return nil
-					}
-				})
-				completion(list, response.result.error)
-			} else {
-				completion(nil, response.result.error)
-			}
+            guard let entries = response.result.value as? [JSONHash] else {
+                return completion(nil, response.result.error)
+            }
+            let list: [TraktWatchable] = entries.flatMap({
+                if type == .Movies {
+                    return TraktMovie(data: $0)
+                } else if type == .Shows {
+                    return TraktShow(data: $0)
+                } else {
+                    return nil
+                }
+            })
+            completion(list, response.result.error)
 		}
 	}
 
@@ -282,7 +283,7 @@ extension Trakt {
 	}
 
 	public func searchMovie(id: String, completion: (TraktMovie?, NSError?) -> Void) -> Request {
-		return query(.Movie(id: id)) { response in
+		return query(.Movie(id)) { response in
 			guard let item = response.result.value as? JSONHash, o = TraktMovie(data: item) else {
 				print("Cannot find movie \(id)")
 				return completion(nil, response.result.error)
@@ -292,7 +293,7 @@ extension Trakt {
 	}
 
     public func searchShow(id: String, completion: (TraktShow?, NSError?) -> Void) -> Request {
-        return query(.Show(id: id)) { response in
+        return query(.Show(id)) { response in
             guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
                 print("Cannot find show \(id)")
                 return completion(nil, response.result.error)
@@ -370,15 +371,13 @@ extension Trakt {
 
 	public func search(query: String, type: TraktType? = nil, year: Int? = nil, pagination: TraktPagination? = nil, completion: (([TraktObject]?, NSError?) -> Void)) -> Request {
 		return self.query(.Search(query: query, type: type, year: year, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
-			let list: [TraktObject]?
-			if let items = response.result.value as? [JSONHash] {
-				list = items.flatMap({
-					TraktObject.autoload($0)
-				})
-			} else {
-				list = nil
-			}
-			completion(list, response.result.error)
+			guard let items = response.result.value as? [JSONHash] else {
+                return completion(nil, response.result.error)
+            }
+            let list: [TraktObject]? = items.flatMap({
+                TraktObject.autoload($0)
+            })
+            return completion(list, response.result.error)
 		}
 	}
 
@@ -390,14 +389,13 @@ extension Trakt {
 
 	public func releases(movie: TraktMovie, countryCode: String? = nil, completion: ([TraktRelease]?, NSError?) -> Void) -> Request {
 		return query(.Releases(movie, countryCode: countryCode)) { response in
-			if let data = response.result.value as? [JSONHash] {
-				movie.releases = data.flatMap {
-					TraktRelease(data: $0)
-				}
-				completion(movie.releases, response.result.error)
-			} else {
-				completion(nil, response.result.error)
-			}
+            guard let data = response.result.value as? [JSONHash] else {
+                return completion(nil, response.result.error)
+            }
+            movie.releases = data.flatMap {
+                TraktRelease(data: $0)
+            }
+            completion(movie.releases, response.result.error)
 		}
 	}
 }

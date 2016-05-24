@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol TraktAuthViewControllerDelegate : class {
+public protocol TraktAuthViewControllerDelegate: class {
     func TraktAuthViewControllerDidAuthenticate(controller: UIViewController)
     func TraktAuthViewControllerDidCancel(controller: UIViewController)
 }
