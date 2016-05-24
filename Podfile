@@ -13,9 +13,6 @@ abstract_target 'Internal' do
     target 'AKTrakt tvOS' do
         platform :tvos, '9.0'
     end
-
-    target 'AKTrakt_Tests' do
-    end
 end
 
 
