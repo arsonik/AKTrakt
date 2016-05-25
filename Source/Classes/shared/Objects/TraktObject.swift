@@ -23,12 +23,13 @@ public protocol TraktIdentifiable: class {
 }
 
 public class TraktObject: CustomStringConvertible, Hashable {
-
-    public var ids: [TraktId: AnyObject] = [:]
-
-    public var id: TraktIdentifier {
-        return ids[TraktId.Trakt] as? TraktIdentifier ?? 0
+    public var ids: [TraktId: AnyObject] = [:] {
+        didSet {
+            id = ids[TraktId.Trakt] as? TraktIdentifier ?? 0
+        }
     }
+
+    public var id: TraktIdentifier = 0
 
     public var hashValue: Int {
         return id
@@ -41,7 +42,7 @@ public class TraktObject: CustomStringConvertible, Hashable {
     }
 
     public func digest(data: JSONHash?) {
-        ids = TraktId.extractIds(data) ?? [:]
+        ids = TraktId.extractIds(data) ?? ids
 
         (data?["images"] as? JSONHash)?.forEach { rawType, list in
             if let type = TraktImageType(rawValue: rawType), listed = list as? JSONHash {

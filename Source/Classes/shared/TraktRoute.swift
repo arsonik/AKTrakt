@@ -14,22 +14,31 @@ import Alamofire
 public enum TraktRoute: URLRequestConvertible, Hashable {
     ///	Generate new device codes
     case GenerateCode(clientId: String)
+
     ///	Poll for the access_token
     case PollDevice(deviceCode: String, clientId: String, clientSecret: String)
+
     ///	Exchange code for access_token
     case Token(client: Trakt, pin: String)
+
     ///	Get Trending Movies/Shows
     case Trending(TraktType, TraktPagination)
+
     ///	Get Recommendations Movies/Shows
     case Recommandations(TraktType, TraktPagination)
+
     ///	Get Collection Movies/Shows
     case Collection(TraktType)
+
     ///	Get Watchlist Movies/Shows/Seasons/Episodes
     case Watchlist(TraktType)
+
+    ///	Get Character/Crew for a movie/show
+    case People(TraktType, TraktIdentifier)
+
     ///	Get Movies/Shows Credits for a person
-    case People(protocol<TraktIdentifiable, Castable>)
-    ///	Get Movies/Shows Credits
-    case Credits(TraktIdentifier, TraktType)
+    case Credits(TraktType, TraktIdentifier)
+
     ///	Get Watched Movies/Shows
     case Watched(TraktType)
     ///	Add to Watchlist Movies/Shows/Episodes
@@ -46,10 +55,14 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     case Progress(TraktShow)
     ///	Find an episode by its show id, season number, episode number
     case Episode(showId: AnyObject, season: Int, episode: Int)
-    ///	Find a movie by its id (slug...)
-    case Movie(String)
+    ///	Find a movie by its id (intmslug...)
+    case Movie(AnyObject)
     /// Find a show by its id (slug...)
-    case Show(String)
+    case Show(AnyObject)
+
+    /// Get seasons for a show (or single season if number passed)
+    case Season(AnyObject, Int?)
+
     ///	Search based on query with optional type, pagination
     case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
     /// Rate something from 1-10
@@ -86,6 +99,10 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         }
     }
 
+    private func anyObjectToId(id: AnyObject) -> String {
+        return "\(id)".stringByReplacingOccurrencesOfString(" ", withString: "-")
+    }
+
     private var path: String {
         switch self {
         case .PollDevice:						return "/oauth/device/token"
@@ -93,22 +110,23 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .Token:							return "/oauth/token"
         case .Trending(let type, _):			return "/\(type.rawValue)/trending"
         case .Recommandations(let type, _):		return "/recommendations/\(type.rawValue)"
-        case .Movie(let id):					return "/movies/\(id)"
-        case .Show(let id):                     return "/shows/\(id)"
+        case .Movie(let id):					return "/movies/\(anyObjectToId(id))"
+        case .Show(let id):                     return "/shows/\(anyObjectToId(id))"
+        case .Season(let id, let number):       return "/shows/\(anyObjectToId(id))/seasons\(number != nil ? "/\(number!)" : "")"
         case .Episode(let showId, let season, let episode):
 												return "/shows/\(showId)/seasons/\(season)/episodes/\(episode)"
         case .Collection(let type):				return "/sync/collection/\(type.rawValue)"
         case .Watchlist(let type):				return "/sync/watchlist/\(type.rawValue)"
         case .Watched(let type):				return "/sync/watched/\(type.rawValue)"
         case .Progress(let show):				return "/shows/\(show.id)/progress/watched"
-        case .People(let object):               return "/\(object.type.rawValue)/\(object.id)/people"
+        case .People(let type, let id):         return "/\(type.rawValue)/\(id)/people"
         case .AddToHistory:						return "/sync/history"
         case .RemoveFromHistory:				return "/sync/history/remove"
         case .AddToWatchlist:					return "/sync/watchlist"
         case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
         case .Search:							return "/search"
         case .Rate:								return "/sync/ratings"
-        case .Credits(let id, let type):        return "/people/\(id)/\(type.rawValue)"
+        case .Credits(let type, let id):        return "/people/\(id)/\(type.rawValue)"
         case .HideRecommendation(let object):   return "/recommendations/\(object.type.rawValue)/\(object.id)"
         case .Profile(let name):				return "/users/\((name ?? "me"))"
         case .Releases(let movie, let countryCode):
@@ -138,7 +156,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
                 "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
                 "grant_type": "authorization_code"
             ]
-        case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits, .Watched:
+        case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits, .Watched, .Season:
             return ["extended": "full,images"]
 
         case .Trending(_, let pagination):
@@ -214,7 +232,10 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     }
 
     public var URLRequest: NSMutableURLRequest {
-        let request = NSMutableURLRequest(URL: NSURL(string: "https://api-v2launch.trakt.tv\(path)")!)
+        guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(path)") else {
+            fatalError("Url with missing path ? \(path)")
+        }
+        let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         headers?.forEach { key, value in
@@ -242,7 +263,9 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
              .Credits,
              .Trending,
              .Movie,
+             .Show,
              .Episode,
+             .Season,
              .Search:
             return false
         default:

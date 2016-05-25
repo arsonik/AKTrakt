@@ -54,6 +54,7 @@ class AKTrakt_iOSTests: XCTestCase {
             }
 
             XCTAssertEqual(show.title, "Scandal")
+            XCTAssertEqual(show.id, 39105)
             XCTAssertEqual(show.year, 2012)
 
             expectation.fulfill()
@@ -68,27 +69,66 @@ class AKTrakt_iOSTests: XCTestCase {
     func testCasting() {
         let expectation = expectationWithDescription("Getting casting")
 
-        trakt.search("scandal", type: .Shows) { result, error in
-            guard let show = result?.first as? TraktShow else {
-                return XCTFail("Response was not a TraktShow")
+        trakt.people(.Shows, id: 39105) { characters, crews, error in
+            XCTAssertEqual(characters?.first?.character, "Olivia Pope")
+            XCTAssertEqual(characters?.first?.person.name, "Kerry Washington")
+
+            guard let producer = crews?.filter({ $0.job == "Executive Producer" }).first else {
+                return XCTFail("Executive Producer not found")
             }
+            XCTAssertEqual(producer.person.name, "Shonda Rhimes")
 
-            self.trakt.casting(TraktType.Shows, id: show.ids.first!) { casting, crew, error in
-
-                print(casting)
-                print(crew)
-                guard let character = casting?.first else {
-                    return XCTFail("Response was not ok")
-                }
-
-                XCTAssertEqual(character.character, "Olivia Pope")
-                XCTAssertEqual(character.person.name, "Kerry Washington")
-
-                expectation.fulfill()
-            }
-
+            expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(1) { error in
+        waitForExpectationsWithTimeout(5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func testImages() {
+        let expectation = expectationWithDescription("Getting movie")
+
+        trakt.movie("tron-legacy-2010") { movie, error in
+            XCTAssertTrue(movie?.images.count > 0)
+
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func testSeasons() {
+        let expectation = expectationWithDescription("Getting seasons")
+
+        trakt.seasons(39105) { seasons, error in
+            XCTAssertTrue(seasons?.count == 7)
+
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func testEpisodes() {
+        let expectation = expectationWithDescription("Getting episodes")
+
+        trakt.episodes(39105, seasonNumber: 5) { episodes, error in
+            XCTAssertTrue(episodes?.count == 21)
+            XCTAssertEqual(episodes?.last?.title, "That's My Girl")
+
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(5) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
