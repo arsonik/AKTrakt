@@ -45,6 +45,23 @@ class AKTrakt_iOSTests: XCTestCase {
         }
     }
 
+    func testRoute() {
+        let expectation = expectationWithDescription("Searching for a show")
+
+
+        trakt.show(39105) { (show, error) in
+            XCTAssertEqual(show?.title, "Scandal")
+            print(show?.overview)
+            expectation.fulfill()
+        }
+
+        waitForExpectationsWithTimeout(5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
     func testSearchShow() {
         let expectation = expectationWithDescription("Searching for a show")
 

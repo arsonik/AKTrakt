@@ -11,43 +11,7 @@ import Alamofire
 
 extension Trakt {
 
-    internal func exchangePinForToken(pin: String, completion: (TraktToken?, NSError?) -> Void) -> Request {
-        return query(.Token(client: self, pin: pin)) { response in
-            guard let aToken = TraktToken(data: response.result.value as? JSONHash) else {
-                let err: NSError?
-                if let error = (response.result.value as? JSONHash)?["error_description"] as? String {
-                    err = NSError(domain: "trakt.tv", code: 401, userInfo: [NSLocalizedDescriptionKey: error])
-                } else {
-                    err = response.result.error
-                }
-                return completion(nil, err)
-            }
-
-            completion(aToken, nil)
-        }
-    }
-
-    public func generateCode(completion: (GeneratedCodeResponse?, NSError?) -> Void) -> Request {
-        return query(.GenerateCode(clientId: clientId)) { response in
-            guard
-                let data = response.result.value as? JSONHash,
-                deviceCode = data["device_code"] as? String,
-                userCode = data["user_code"] as? String,
-                verificationUrl = data["verification_url"] as? String,
-                expiresIn = data["expires_in"] as? Double,
-                interval = data["interval"] as? Double else {
-                    return completion(nil, response.result.error)
-            }
-            completion((deviceCode: deviceCode, userCode: userCode, verificationUrl: verificationUrl, expiresAt: NSDate().dateByAddingTimeInterval(expiresIn), interval: interval), nil)
-        }
-    }
-
-    public func pollDevice(response: GeneratedCodeResponse, completion: (TraktToken?, NSError?) -> Void) -> Request {
-        return query(.PollDevice(deviceCode: response.deviceCode, clientId: clientId, clientSecret: clientSecret)) { response in
-            completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
-        }
-    }
-
+    
     public func watched(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.AddToHistory([object])) { response in
             guard let item = response.result.value as? JSONHash, added = item["added"] as? [String: Int], n = added[object.type.rawValue] where n > 0 else {
@@ -289,16 +253,6 @@ extension Trakt {
         }
     }
 
-    public func show(id: AnyObject, completion: (TraktShow?, NSError?) -> Void) -> Request {
-        return query(.Show(id)) { response in
-            guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
-                print("Cannot find show \(id)")
-                return completion(nil, response.result.error)
-            }
-            completion(o, nil)
-        }
-    }
-
     public func episodes(id: AnyObject, seasonNumber: Int, completion: ([TraktEpisode]?, NSError?) -> Void) -> Request {
         return query(.Season(id, seasonNumber)) { response in
             guard let items = response.result.value as? [JSONHash] else {
@@ -348,6 +302,7 @@ extension Trakt {
         }
         return nil
     }
+    
 
     public func progress(show: TraktShow, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.Progress(show)) { response in

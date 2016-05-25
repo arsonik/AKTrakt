@@ -9,18 +9,29 @@
 import Foundation
 import Alamofire
 
+
+public struct TraktRequestMovie: TraktRequestGET {
+    public var path: String = ""
+    public var params: JSONHash? = nil
+
+    init(id: AnyObject) {
+        path = "/movies/\(id)"
+    }
+}
+
+public struct TraktRequestProfile: TraktRequestGET, TraktRequestLogged {
+    public var path: String = ""
+    public var params: JSONHash? = nil
+
+    init(username: String? = nil) {
+        path = "/users/\((username ?? "me"))"
+    }
+}
+
+
 /// Trakt routes
 /// All the routes used in the main class
 public enum TraktRoute: URLRequestConvertible, Hashable {
-    ///	Generate new device codes
-    case GenerateCode(clientId: String)
-
-    ///	Poll for the access_token
-    case PollDevice(deviceCode: String, clientId: String, clientSecret: String)
-
-    ///	Exchange code for access_token
-    case Token(client: Trakt, pin: String)
-
     ///	Get Trending Movies/Shows
     case Trending(TraktType, TraktPagination)
 
@@ -83,19 +94,12 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var method: String {
         switch self {
-        case .GenerateCode, .PollDevice, .Token, .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate, .RemoveFromWatchlist:
+        case .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate, .RemoveFromWatchlist:
             return "POST"
         case .HideRecommendation:
             return "DELETE"
         default:
             return "GET"
-        }
-    }
-
-    private var headers: [String: String]? {
-        switch self {
-        default:
-            return nil
         }
     }
 
@@ -105,9 +109,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var path: String {
         switch self {
-        case .PollDevice:						return "/oauth/device/token"
-        case .GenerateCode:						return "/oauth/device/code"
-        case .Token:							return "/oauth/token"
         case .Trending(let type, _):			return "/\(type.rawValue)/trending"
         case .Recommandations(let type, _):		return "/recommendations/\(type.rawValue)"
         case .Movie(let id):					return "/movies/\(anyObjectToId(id))"
@@ -136,26 +137,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var parameters: [String: AnyObject]! {
         switch self {
-        case .PollDevice(let deviceCode, let clientId, let clientSecret):
-            return [
-                "client_id": clientId,
-                "client_secret": clientSecret,
-                "code": deviceCode,
-            ]
-
-        case .GenerateCode(let clientId):
-            return [
-                "client_id": clientId
-            ]
-
-        case .Token(let trakt, let pin):
-            return [
-                "code": pin,
-                "client_id": trakt.clientId,
-                "client_secret": trakt.clientSecret,
-                "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
-                "grant_type": "authorization_code"
-            ]
         case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits, .Watched, .Season:
             return ["extended": "full,images"]
 
@@ -238,28 +219,17 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        headers?.forEach { key, value in
-            request.setValue(value, forHTTPHeaderField: key)
-        }
+//        headers?.forEach { key, value in
+//            request.setValue(value, forHTTPHeaderField: key)
+//        }
 
         return (method == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(request, parameters: parameters).0
     }
 
-    func retryOnFailure() -> Bool {
-        switch self {
-        case .PollDevice:
-            return false
-        default:
-            return true
-        }
-    }
 
     internal func needAuthorization() -> Bool {
         switch self {
-        case .Token,
-             .GenerateCode,
-             .PollDevice,
-             .People,
+        case .People,
              .Credits,
              .Trending,
              .Movie,
