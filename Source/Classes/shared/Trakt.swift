@@ -23,7 +23,7 @@ public class Trakt {
     internal let applicationId: Int
 
     // Trakt Token
-    private var token: TraktToken?
+    internal var token: TraktToken?
 
     /// Delay between each attempt
     internal var retryInterval: Double = 5
@@ -35,7 +35,7 @@ public class Trakt {
     internal var maximumAttempt: Int = 6
 
     // Alamofire Manager
-    private let manager: Manager
+    internal let manager: Manager
 
     // Trakt api version
     public let traktApiVersion = 2
@@ -84,56 +84,6 @@ public class Trakt {
         df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
         return df
     }()
-
-    public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) -> Request? {
-        guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
-            fatalError("Url error ? \(request)")
-        }
-        let mRequest = NSMutableURLRequest(URL: url)
-        if request is TraktRequestGET {
-            mRequest.HTTPMethod = "GET"
-        } else if request is TraktRequestDELETE {
-            mRequest.HTTPMethod = "DELETE"
-        } else if request is TraktRequestPOST {
-            mRequest.HTTPMethod = "POST"
-        }
-        mRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        mRequest.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
-        mRequest.setValue(clientId, forHTTPHeaderField: "trakt-api-key")
-
-        if request is TraktRequestLogged {
-            if let accessToken = token?.accessToken {
-                mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-            } else {
-                print("You need an access token that call that resource")
-                return nil
-            }
-        }
-
-        let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: request.params).0
-
-        return manager.request(pRequest).responseJSON { [weak self] response in
-            guard let ss = self else {
-                completionHandler(response)
-                return
-            }
-//            if response.response?.statusCode >= 500 && !(request is TraktRequestOnlyOnce) {
-//                var attempt: Int = ss.attempts.objectForKey(key) as? Int ?? 0
-//                attempt += 1
-//                ss.attempts.setObject(attempt, forKey: key)
-//                if attempt < ss.maximumAttempt {
-//                    // try again after delay
-//                    return delay(ss.retryInterval) {
-//                        ss.query(route, completionHandler: completionHandler)
-//                    }
-//                } else {
-//                    print("Maximum attempt \(attempt)/\(ss.maximumAttempt) reached for request \(route)")
-//                }
-//            }
-//            ss.attempts.removeObjectForKey(key)
-            completionHandler(response)
-        }
-    }
 
     internal func query(route: TraktRoute, completionHandler: Response<AnyObject, NSError> -> Void) -> Request! {
         let request = route.URLRequest

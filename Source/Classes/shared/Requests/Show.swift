@@ -13,18 +13,18 @@ public struct TraktRequestShow: TraktRequestGET, TraktRequestExtended {
     public var path: String
     public var params: JSONHash?
 
-    public var extendedInfo: [TraktRequestExtendedInfo]?
+    public var extended: TraktRequestExtendedOptions?
 
-    init(id: AnyObject, extendedInfo: [TraktRequestExtendedInfo]? = nil) {
+    init(id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
         path = "/shows/\(id)"
-        self.extendedInfo = extendedInfo
+        self.extended = extended
     }
 }
 
 extension Trakt {
-    public func show(id: AnyObject, extendedInfo: [TraktRequestExtendedInfo]? = nil, completion: (TraktShow?, NSError?) -> Void) -> Request? {
+    public func show(id: AnyObject, extended: TraktRequestExtendedOptions? = nil, completion: (TraktShow?, NSError?) -> Void) -> Request? {
 
-        return request(TraktRequestShow(id: id, extendedInfo: extendedInfo)) { response in
+        return request(TraktRequestShow(id: id, extended: extended)) { response in
             guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
                 print("Cannot find show \(id)")
                 return completion(nil, response.result.error)
