@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "AKTrakt_Tests.xctest"
-               BlueprintName = "AKTrakt_Tests"
+               BlueprintIdentifier = "179029B31CF5945F00078265"
+               BuildableName = "AKTrakt iOSTests.xctest"
+               BlueprintName = "AKTrakt iOSTests"
                ReferencedContainer = "container:AKTrakt.xcodeproj">
             </BuildableReference>
          </TestableReference>
