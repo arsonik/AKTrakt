@@ -47,8 +47,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "179029B31CF5945F00078265"
-               BuildableName = "AKTrakt iOSTests.xctest"
-               BlueprintName = "AKTrakt iOSTests"
+               BuildableName = "Tests.xctest"
+               BlueprintName = "Tests"
                ReferencedContainer = "container:AKTrakt.xcodeproj">
             </BuildableReference>
          </TestableReference>

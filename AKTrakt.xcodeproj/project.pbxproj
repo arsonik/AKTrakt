@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		179029AF1CF4913D00078265 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 179029AE1CF4913D00078265 /* Default-568h@2x.png */; };
-		179029B71CF5945F00078265 /* AKTrakt_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* AKTrakt_iOSTests.swift */; };
+		179029B71CF5945F00078265 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* Tests.swift */; };
 		17C504921CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17C504931CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17CFD26D1CF45CE00050315A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17CFD26C1CF45CE00050315A /* Main.storyboard */; };
@@ -27,8 +27,8 @@
 		17109D071C05EF0A007D3D16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Example/Shared/ViewController.swift; sourceTree = "<group>"; };
 		17109D0E1C05EF0A007D3D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = Info.plist; path = Example/AKTrakt_TvOS_Example/Info.plist; sourceTree = "<group>"; };
 		179029AE1CF4913D00078265 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		179029B41CF5945F00078265 /* AKTrakt iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AKTrakt iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		179029B61CF5945F00078265 /* AKTrakt_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKTrakt_iOSTests.swift; sourceTree = "<group>"; };
+		179029B41CF5945F00078265 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		179029B61CF5945F00078265 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		179029B81CF5945F00078265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17C504911CF4480600CF368A /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieViewController.swift; path = Example/Shared/MovieViewController.swift; sourceTree = "<group>"; };
 		17CFD26C1CF45CE00050315A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Example/AKTrakt/Main.storyboard; sourceTree = SOURCE_ROOT; };
@@ -92,7 +92,7 @@
 		179029B51CF5945F00078265 /* AKTrakt iOSTests */ = {
 			isa = PBXGroup;
 			children = (
-				179029B61CF5945F00078265 /* AKTrakt_iOSTests.swift */,
+				179029B61CF5945F00078265 /* Tests.swift */,
 				179029B81CF5945F00078265 /* Info.plist */,
 			);
 			path = "AKTrakt iOSTests";
@@ -133,7 +133,7 @@
 			children = (
 				607FACD01AFB9204008FA782 /* AKTrakt iOS.app */,
 				17109D031C05EF0A007D3D16 /* AKTrakt tvOS.app */,
-				179029B41CF5945F00078265 /* AKTrakt iOSTests.xctest */,
+				179029B41CF5945F00078265 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,9 +192,9 @@
 			productReference = 17109D031C05EF0A007D3D16 /* AKTrakt tvOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		179029B31CF5945F00078265 /* AKTrakt iOSTests */ = {
+		179029B31CF5945F00078265 /* Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 179029BB1CF5945F00078265 /* Build configuration list for PBXNativeTarget "AKTrakt iOSTests" */;
+			buildConfigurationList = 179029BB1CF5945F00078265 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
 				F2FE2C09F5E60923809D5157 /* 📦 Check Pods Manifest.lock */,
 				179029B01CF5945F00078265 /* Sources */,
@@ -207,9 +207,9 @@
 			);
 			dependencies = (
 			);
-			name = "AKTrakt iOSTests";
+			name = Tests;
 			productName = "AKTrakt iOSTests";
-			productReference = 179029B41CF5945F00078265 /* AKTrakt iOSTests.xctest */;
+			productReference = 179029B41CF5945F00078265 /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		607FACCF1AFB9204008FA782 /* AKTrakt iOS */ = {
@@ -268,7 +268,7 @@
 			targets = (
 				607FACCF1AFB9204008FA782 /* AKTrakt iOS */,
 				17109D021C05EF0A007D3D16 /* AKTrakt tvOS */,
-				179029B31CF5945F00078265 /* AKTrakt iOSTests */,
+				179029B31CF5945F00078265 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -467,7 +467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				179029B71CF5945F00078265 /* AKTrakt_iOSTests.swift in Sources */,
+				179029B71CF5945F00078265 /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,7 +661,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		179029BB1CF5945F00078265 /* Build configuration list for PBXNativeTarget "AKTrakt iOSTests" */ = {
+		179029BB1CF5945F00078265 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				179029BC1CF5945F00078265 /* Debug */,

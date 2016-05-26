@@ -65,57 +65,6 @@ extension Trakt {
         }
     }
 
-    /// Load casting and crew for a given type/id (movie,show)
-    public func people(type: TraktType, id: TraktIdentifier, completion: (([TraktCharacter]?, [TraktCrew]?, NSError?) -> Void)) -> Request {
-        return query(.People(type, id)) { response in
-            guard let result = response.result.value as? JSONHash else {
-                return completion(nil, nil, response.result.error)
-            }
-
-            let casting = (result["cast"] as? [JSONHash])?.flatMap {
-                TraktCharacter(data: $0)
-            }
-            // possible keys: production, art, crew, costume & make-up, directing, writing, sound, and camera
-            let crew = (result["crew"] as? [String: [JSONHash]])?.values.flatMap({$0}).flatMap {
-                TraktCrew(data: $0)
-            }
-            completion(casting, crew, response.result.error)
-        }
-    }
-
-    /// Load credits for a given person, and media type
-    public func credits(person: TraktPerson, type: TraktType, completion: (([TraktWatchable]?, NSError?) -> Void)) -> Request {
-        return query(.Credits(type, person.id)) { response in
-            guard let result = response.result.value as? JSONHash else {
-                return completion(nil, response.result.error)
-            }
-            var list: Set<TraktWatchable> = []
-            if let crew = result["crew"] as? [String: [JSONHash]] {
-                crew.flatMap({
-                    return $0.1.flatMap({
-                        guard let item = $0[type.single] as? JSONHash else {
-                            return nil
-                        }
-                        return type == .Movies ? TraktMovie(data: item) : TraktShow(data: item)
-                    })
-                }).forEach({
-                    list.insert($0)
-                })
-            }
-            if let cast = result["cast"] as? [JSONHash] {
-                cast.flatMap({
-                    guard let item = $0[type.single] as? JSONHash else {
-                        return nil
-                    }
-                    return type == .Movies ? TraktMovie(data: item) : TraktShow(data: item)
-                }).forEach({
-                    list.insert($0)
-                })
-            }
-            completion(Array(list), response.result.error)
-        }
-    }
-
     public func watchList(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
         return query(.Watchlist(type)) { response in
             let list: [TraktWatchable]? = (response.result.value as? [JSONHash])?.flatMap { entry in
@@ -240,16 +189,6 @@ extension Trakt {
                 return completion(false, response.result.error)
             }
             completion(true, nil)
-        }
-    }
-
-    public func movie(id: AnyObject, completion: (TraktMovie?, NSError?) -> Void) -> Request {
-        return query(.Movie(id)) { response in
-            guard let item = response.result.value as? JSONHash, o = TraktMovie(data: item) else {
-                print("Cannot find movie \(id)")
-                return completion(nil, response.result.error)
-            }
-            completion(o, nil)
         }
     }
 

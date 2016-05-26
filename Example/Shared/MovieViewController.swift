@@ -27,7 +27,7 @@ class MovieViewController: UIViewController {
     }
 
     func loadCasting() {
-        trakt.people(.Movies, id: movie.id) { casting, crew, error in
+        trakt.peoples(.Movies, id: movie.id) { casting, crew, error in
             print(casting)
         }
     }

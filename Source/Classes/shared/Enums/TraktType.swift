@@ -8,6 +8,15 @@
 
 import Foundation
 
+public enum TraktMediaType: String {
+    case Movies = "movies"
+    case Shows = "shows"
+
+    public var single: String {
+        return self == .Movies ? "movie" : "show"
+    }
+}
+
 public enum TraktType: String {
     case Movies = "movies"
     case Shows = "shows"
@@ -33,4 +42,15 @@ public enum TraktType: String {
     public var single: String {
         return TraktType.singularMap.filter({ $0.1 == self }).first!.0
     }
+}
+
+public enum TraktCrewPosition: String {
+    case Production = "production"
+    case Art = "art"
+    case Crew = "crew"
+    case CostumeMakeUp = "costume & make-up"
+    case Directing = "directing"
+    case Writing = "writing"
+    case Sound = "sound"
+    case Camera = "camera"
 }

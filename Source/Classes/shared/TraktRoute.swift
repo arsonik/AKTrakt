@@ -9,16 +9,6 @@
 import Foundation
 import Alamofire
 
-
-public struct TraktRequestMovie: TraktRequestGET {
-    public var path: String = ""
-    public var params: JSONHash? = nil
-
-    init(id: AnyObject) {
-        path = "/movies/\(id)"
-    }
-}
-
 public struct TraktRequestProfile: TraktRequestGET, TraktRequestLogged {
     public var path: String = ""
     public var params: JSONHash? = nil
@@ -44,9 +34,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     ///	Get Watchlist Movies/Shows/Seasons/Episodes
     case Watchlist(TraktType)
 
-    ///	Get Character/Crew for a movie/show
-    case People(TraktType, TraktIdentifier)
-
     ///	Get Movies/Shows Credits for a person
     case Credits(TraktType, TraktIdentifier)
 
@@ -66,10 +53,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     case Progress(TraktShow)
     ///	Find an episode by its show id, season number, episode number
     case Episode(showId: AnyObject, season: Int, episode: Int)
-    ///	Find a movie by its id (intmslug...)
-    case Movie(AnyObject)
-    /// Find a show by its id (slug...)
-    case Show(AnyObject)
 
     /// Get seasons for a show (or single season if number passed)
     case Season(AnyObject, Int?)
@@ -111,8 +94,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         switch self {
         case .Trending(let type, _):			return "/\(type.rawValue)/trending"
         case .Recommandations(let type, _):		return "/recommendations/\(type.rawValue)"
-        case .Movie(let id):					return "/movies/\(anyObjectToId(id))"
-        case .Show(let id):                     return "/shows/\(anyObjectToId(id))"
         case .Season(let id, let number):       return "/shows/\(anyObjectToId(id))/seasons\(number != nil ? "/\(number!)" : "")"
         case .Episode(let showId, let season, let episode):
 												return "/shows/\(showId)/seasons/\(season)/episodes/\(episode)"
@@ -120,7 +101,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .Watchlist(let type):				return "/sync/watchlist/\(type.rawValue)"
         case .Watched(let type):				return "/sync/watched/\(type.rawValue)"
         case .Progress(let show):				return "/shows/\(show.id)/progress/watched"
-        case .People(let type, let id):         return "/\(type.rawValue)/\(id)/people"
         case .AddToHistory:						return "/sync/history"
         case .RemoveFromHistory:				return "/sync/history/remove"
         case .AddToWatchlist:					return "/sync/watchlist"
@@ -137,7 +117,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var parameters: [String: AnyObject]! {
         switch self {
-        case .Watchlist, .Collection, .Progress, .Episode, .Movie, .People, .Credits, .Watched, .Season:
+        case .Watchlist, .Collection, .Progress, .Episode, .Credits, .Watched, .Season:
             return ["extended": "full,images"]
 
         case .Trending(_, let pagination):
@@ -229,11 +209,8 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     internal func needAuthorization() -> Bool {
         switch self {
-        case .People,
-             .Credits,
+        case .Credits,
              .Trending,
-             .Movie,
-             .Show,
              .Episode,
              .Season,
              .Search:
