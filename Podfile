@@ -14,7 +14,7 @@ abstract_target 'Internal' do
         platform :tvos, '9.0'
     end
 
-    target 'AKTrakt iOSTests' do
+    target 'Tests' do
     end
 end
 
