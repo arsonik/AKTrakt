@@ -93,25 +93,28 @@ extension Trakt {
 
         let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: params).0
 
+        let key = pRequest.hashDescription()
         return manager.request(pRequest).responseJSON { [weak self] response in
             guard let ss = self else {
                 completionHandler(response)
                 return
             }
-            //            if response.response?.statusCode >= 500 && !(request is TraktRequestOnlyOnce) {
-            //                var attempt: Int = ss.attempts.objectForKey(key) as? Int ?? 0
-            //                attempt += 1
-            //                ss.attempts.setObject(attempt, forKey: key)
-            //                if attempt < ss.maximumAttempt {
-            //                    // try again after delay
-            //                    return delay(ss.retryInterval) {
-            //                        ss.query(route, completionHandler: completionHandler)
-            //                    }
-            //                } else {
-            //                    print("Maximum attempt \(attempt)/\(ss.maximumAttempt) reached for request \(route)")
-            //                }
-            //            }
-            //            ss.attempts.removeObjectForKey(key)
+
+            if response.response?.statusCode >= 500 && !(request is TraktRequestOnlyOnce) {
+                var attempt: Int = ss.attempts.objectForKey(key) as? Int ?? 0
+                attempt += 1
+                ss.attempts.setObject(attempt, forKey: key)
+                if attempt < ss.maximumAttempt {
+                    // try again after delay
+                    return delay(ss.retryInterval) {
+                        ss.request(request, completionHandler: completionHandler)
+                    }
+                } else {
+                    print("Maximum attempt \(attempt)/\(ss.maximumAttempt) reached for request \(request)")
+                }
+            }
+            ss.attempts.removeObjectForKey(key)
+
             completionHandler(response)
         }
     }

@@ -9,8 +9,6 @@
 import Foundation
 import Alamofire
 
-
-
 /// Main Class
 public class Trakt {
     // Client Id
@@ -29,7 +27,7 @@ public class Trakt {
     internal var retryInterval: Double = 5
 
     // Cache request attempts (in case of faileur/retry)
-    private var attempts = NSCache()
+    internal var attempts = NSCache()
 
     /// Number of attempt after getting 500 errors
     internal var maximumAttempt: Int = 6
