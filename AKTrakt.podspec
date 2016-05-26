@@ -16,12 +16,10 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
 
-  s.requires_arc = true
-
-  s.source_files = 'Source/Classes/shared/**/*'
-  s.ios.source_files = 'Source/Classes/ios/**/*'
-  s.tvos.source_files = 'Source/Classes/tvos/**/*'
-  s.tvos.resources = 'Source/Resources/tvos/*.{xib,png}'
+  s.source_files = 'Source/shared/**/*.swift'
+  s.ios.source_files = 'Source/ios/**/*.swift'
+  s.tvos.source_files = 'Source/tvos/**/*.swift'
+  s.tvos.resources = 'Source/tvos/*.{xib,png}'
 
   s.ios.frameworks = 'UIKit', 'Webkit'
   s.dependency 'Alamofire', '~> 3.4.0'
