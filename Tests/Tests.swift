@@ -25,6 +25,23 @@ class Tests: XCTestCase {
         super.tearDown()
     }
 
+    func testNewWay() {
+        let expectation = expectationWithDescription("Searching for a movie")
+
+        TraktRequestWatched(type: .Movies) { objects, error in
+            XCTAssertEqual(objects?.count, 10)
+            expectation.fulfill()
+        } .request(trakt)
+
+
+        waitForExpectationsWithTimeout(5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+
+    }
+
     func testSearchMovie() {
         let expectation = expectationWithDescription("Searching for a movie")
         trakt.search("avatar", type: .Movies) { result, error in

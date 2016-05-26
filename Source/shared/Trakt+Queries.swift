@@ -9,9 +9,7 @@
 import Foundation
 import Alamofire
 
-extension Trakt {
-
-    
+extension Trakt {    
     public func watched(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.AddToHistory([object])) { response in
             guard let item = response.result.value as? JSONHash, added = item["added"] as? [String: Int], n = added[object.type.rawValue] where n > 0 else {

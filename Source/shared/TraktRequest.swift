@@ -13,6 +13,7 @@ import Alamofire
 public protocol TraktRequest {
     var path: String { get }
     var params: JSONHash? { get }
+//    func completion(response: Response<AnyObject, NSError>) -> AnyObject?
 }
 
 // Define a GET request
@@ -42,10 +43,11 @@ public struct TraktRequestExtendedOptions: OptionSetType {
         self.rawValue = rawValue
     }
 
-    public static let None = TraktRequestExtendedOptions(rawValue: 0)
     public static let Images = TraktRequestExtendedOptions(rawValue: 1 << 0)
     public static let Full = TraktRequestExtendedOptions(rawValue: 1 << 1)
     public static let Metadata = TraktRequestExtendedOptions(rawValue: 1 << 2)
+    public static let NoSeasons = TraktRequestExtendedOptions(rawValue: 1 << 3)
+
 }
 
 
