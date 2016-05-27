@@ -83,6 +83,7 @@ public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
     public static let Full = TraktRequestExtendedOptions(rawValue: 1 << 1)
     public static let Metadata = TraktRequestExtendedOptions(rawValue: 1 << 2)
     public static let NoSeasons = TraktRequestExtendedOptions(rawValue: 1 << 3)
+    public static let Episodes = TraktRequestExtendedOptions(rawValue: 1 << 4)
 
     public func value() -> JSONHash {
         var list: [String] = []
@@ -97,6 +98,9 @@ public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
         }
         if contains(.NoSeasons) {
             list.append("noseasons")
+        }
+        if contains(.Episodes) {
+            list.append("episodes")
         }
         return ["extended": list.joinWithSeparator(",")]
     }
