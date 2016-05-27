@@ -55,63 +55,22 @@ public class TraktRequestGetWatchlistShows: TraktRequest, TraktRequest_Completio
     }
 }
 
-public class TraktRequestGetWatchedMovies: TraktRequest, TraktRequest_Completion {
-    public init(extended: TraktRequestExtendedOptions? = nil) {
-        super.init(path: "/sync/watched/movies", oAuth: true, params: extended?.value())
+public class TraktRequestGetWatched: TraktRequest, TraktRequest_Completion {
+    let type: TraktMediaType
+    public init(type: TraktMediaType, extended: TraktRequestExtendedOptions? = nil) {
+        self.type = type
+        super.init(path: "/sync/watched/\(type.rawValue)", oAuth: true, params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([(plays: UInt, lastWatchedAt: NSDate, movie: TraktMovie)]?, NSError?) -> Void) throws -> Request? {
+    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) throws -> Request? {
         return try trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
             completion(entries.flatMap {
-                guard let date = $0["last_watched_at"] as? String,
-                    lastWatchedAt = Trakt.datetimeFormatter.dateFromString(date),
-                    plays = $0["plays"] as? UInt,
-                    movie = TraktMovie(data: $0["movie"] as? JSONHash) else {
-                        return nil
-                }
-                return (plays: plays, lastWatchedAt: lastWatchedAt, movie: movie)
+                let media: TraktObject? = self.type == TraktMediaType.Shows ? TraktShow(data: $0["show"] as? JSONHash) : TraktMovie(data: $0["show"] as? JSONHash)
+                return media
             }, nil)
-        }
-    }
-}
-
-public class TraktRequestGetWatchedShows: TraktRequest, TraktRequest_Completion {
-    public init(extended: TraktRequestExtendedOptions? = nil) {
-        super.init(path: "/sync/watched/shows", oAuth: true, params: extended?.value())
-    }
-
-    public func request(trakt: Trakt, completion: ([(plays: UInt, lastWatchedAt: NSDate, show: TraktShow, seasons: [(season: TraktSeason, episodes: [(episode: TraktEpisode, plays: UInt, lastWatchedAt: NSDate)])]?)]?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
-            guard let entries = response.result.value as? [JSONHash] else {
-                return completion(nil, response.result.error)
-            }
-            completion(entries.flatMap {
-                guard let date = $0["last_watched_at"] as? String,
-                    lastWatchedAt = Trakt.datetimeFormatter.dateFromString(date),
-                    plays = $0["plays"] as? UInt,
-                    show = TraktShow(data: $0["show"] as? JSONHash) else {
-                        return nil
-                }
-                return (plays: plays, lastWatchedAt: lastWatchedAt, show: show, seasons: ($0["seasons"] as? [JSONHash])?.flatMap {
-                    guard let season = TraktSeason(data: $0),
-                        episodesData = $0["episodes"] as? [JSONHash]
-                        else {
-                            return nil
-                    }
-                    return (season: season, episodes: episodesData.flatMap({
-                        guard let episode = TraktEpisode(data: $0),
-                            date = $0["last_watched_at"] as? String,
-                            plays = $0["plays"] as? UInt,
-                            lastWatchedAt = Trakt.datetimeFormatter.dateFromString(date) else {
-                                return nil
-                        }
-                        return (episode: episode, plays: plays, lastWatchedAt: lastWatchedAt)
-                    }))
-                    })
-                }, nil)
         }
     }
 }
