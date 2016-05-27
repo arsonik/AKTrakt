@@ -12,18 +12,22 @@ public class TraktEpisode: TraktWatchable {
 
     public weak var season: TraktSeason?
 
-    public let number: Int
-    public var seasonNumber: Int?
+    public let number: UInt
+    public var seasonNumber: UInt?
     public var loaded: Bool? = false
     public var firstAired: NSDate?
 
+
+    var lastWatchedAt: NSDate? = nil
+    var plays: UInt? = nil
+
     required public init?(data: JSONHash!) {
-        guard let en = data?["number"] as? Int else {
+        guard let en = data?["number"] as? UInt else {
             return nil
         }
 
         number = en
-        seasonNumber = data?["season"] as? Int
+        seasonNumber = data?["season"] as? UInt
         super.init(data: data)
     }
 
@@ -32,6 +36,12 @@ public class TraktEpisode: TraktWatchable {
 
         if let fa = data["first_aired"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
             firstAired = date
+        }
+        if let fa = data["last_watched_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
+            lastWatchedAt = date
+        }
+        if let pls = data["plays"] as? UInt {
+            plays = pls
         }
     }
 
