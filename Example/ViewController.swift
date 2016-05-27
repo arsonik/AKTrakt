@@ -51,12 +51,11 @@ class ViewController: UIViewController {
 	}
 
 	func loadUser() {
-		trakt.profile(nil) { user, error in
-			self.title = user?["username"] as? String
-		}
-
         do {
-            try TraktRequestAddRatings(ratings: [.Movies: [(traktId: 45665465456456454, rating: 0, ratedAt: NSDate())]]).request(trakt) { objects, error in
+            try TraktRequestProfile().request(trakt) { user, error in
+                self.title = user?["username"] as? String
+            }
+            try TraktRequestGetWatchedMovies().request(trakt) { objects, error in
                 print(objects)
             }
         } catch {

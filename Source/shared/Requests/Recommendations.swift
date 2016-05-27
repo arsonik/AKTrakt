@@ -22,7 +22,6 @@ public class TraktRequestRecommendations: TraktRequest, TraktRequest_Completion 
 
     public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) throws -> Request? {
         return try trakt.request(self) { response in
-            print(response.result.error)
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }

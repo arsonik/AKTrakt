@@ -69,3 +69,15 @@ public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
         }
     }
 }
+
+public class TraktRequestProfile: TraktRequest, TraktRequest_Completion {
+    public init(username: String = "me") {
+        super.init(path: "/users/\(username)", tokenRequired: true)
+    }
+
+    public func request(trakt: Trakt, completion: (JSONHash?, NSError?) -> Void) throws -> Request? {
+        return try trakt.request(self) { response in
+            completion(response.result.value as? JSONHash, response.result.error)
+        }
+    }
+}

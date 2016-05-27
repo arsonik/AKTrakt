@@ -15,14 +15,16 @@ public class TraktRequest {
     public let path: String
     public let params: JSONHash?
     public let tokenRequired: Bool
+    public let headers: [String: String]?
 
     public var attemptLeft: Int = 5
 
-    public init(method: String = "GET", path: String, params: JSONHash? = nil, tokenRequired: Bool = false) {
+    public init(method: String = "GET", path: String, params: JSONHash? = nil, tokenRequired: Bool = false, headers: [String: String]? = [:]) {
         self.method = method
         self.path = path
         self.params = params
         self.tokenRequired = tokenRequired
+        self.headers = headers
     }
 }
 
@@ -34,6 +36,22 @@ public protocol TraktRequest_Completion {
 
 public protocol TraktURLParameters {
     func value() -> JSONHash
+}
+
+public protocol TraktRequestHeaders {
+    func value() -> [String: String]
+}
+
+public struct TraktSortHeaders: TraktRequestHeaders {
+    public let sortBy: String = "rank"
+    public let sortHow: String = "asc"
+
+    public func value() -> [String : String] {
+        return [
+            "X-Sort-By": sortBy,
+            "X-Sort-How": sortHow
+        ]
+    }
 }
 
 public struct TraktPagination: TraktURLParameters {
@@ -106,6 +124,10 @@ extension Trakt {
             } else {
                 throw TraktError.TokenRequired
             }
+        }
+
+        request.headers?.forEach {
+            mRequest.setValue($0.1, forHTTPHeaderField: $0.0)
         }
 
         let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: request.params).0

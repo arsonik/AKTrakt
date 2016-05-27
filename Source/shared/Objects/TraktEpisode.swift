@@ -13,7 +13,7 @@ public class TraktEpisode: TraktWatchable, TraktIdentifiable {
     public weak var season: TraktSeason?
 
     public let number: Int
-    public let seasonNumber: Int
+    public var seasonNumber: Int?
     public var loaded: Bool? = false
     public var firstAired: NSDate?
 
@@ -22,12 +22,12 @@ public class TraktEpisode: TraktWatchable, TraktIdentifiable {
     }
 
     override init?(data: JSONHash!) {
-        guard let en = data?["number"] as? Int, sn = data?["season"] as? Int else {
+        guard let en = data?["number"] as? Int else {
             return nil
         }
 
         number = en
-        seasonNumber = sn
+        seasonNumber = data?["season"] as? Int
         super.init(data: data)
     }
 

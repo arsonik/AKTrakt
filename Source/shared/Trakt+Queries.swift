@@ -10,17 +10,6 @@ import Foundation
 import Alamofire
 
 extension Trakt {
-    public func watched(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
-        return query(.AddToHistory([object])) { response in
-            guard let item = response.result.value as? JSONHash, added = item["added"] as? [String: Int], n = added[object.type.rawValue] where n > 0 else {
-                return completion(false, response.result.error)
-            }
-
-            object.watched = true
-            completion(true, nil)
-        }
-    }
-
     public func unWatch(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.RemoveFromHistory([object])) { response in
             guard let item = response.result.value as? JSONHash, added = item["deleted"] as? [String: Int], n = added[object.type.rawValue] where n > 0 else {
@@ -37,19 +26,6 @@ extension Trakt {
         }
     }
 
-    public func addToWatchlist(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
-        return query(.AddToWatchlist([object])) { response in
-            guard let result = response.result.value as? JSONHash,
-                added = result["added"] as? [String: Int],
-                success = added[object.type.rawValue]
-                where success == 1 else {
-                    return completion(false, response.result.error)
-            }
-            object.watchlist = true
-            completion(true, nil)
-        }
-    }
-
     public func removeFromWatchlist(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.RemoveFromWatchlist([object])) { response in
             guard let result = response.result.value as? JSONHash,
@@ -63,86 +39,7 @@ extension Trakt {
         }
     }
 
-    public func watchList(type: TraktType, completion: ((result: [TraktWatchable]?, error: NSError?) -> Void)) -> Request {
-        return query(.Watchlist(type)) { response in
-            let list: [TraktWatchable]? = (response.result.value as? [JSONHash])?.flatMap { entry in
-                guard let t = entry["type"] as? String, v = entry[t] as? JSONHash else {
-                    return nil
-                }
-                switch type {
-                case .Movies:
-                    return TraktMovie(data: v)
-                case .Shows:
-                    return TraktShow(data: v)
-                default:
-                    fatalError("Not handled \(type)")
-                }
-                return nil
-            }
-            list?.forEach {
-                $0.watchlist = true
-            }
-            completion(result: list, error: nil)
-        }
-    }
-
     public typealias WatchedReturn = (object: TraktWatchable, plays: Int, lastWatchedAt: NSDate)
-
-    public func watched(type: TraktType, completion: (([WatchedReturn]?, NSError?) -> Void)) -> Request {
-        return query(.Watched(type)) { response in
-            guard let data = (response.result.value as? [JSONHash]) else {
-                return completion(nil, response.result.error)
-            }
-
-            let list: [WatchedReturn]? = data.flatMap { entry in
-                guard let objectData = entry[type.single] as? JSONHash,
-                    plays = entry["plays"] as? Int,
-                    lastAt = entry["last_watched_at"] as? String,
-                    lastWatchedAt = Trakt.datetimeFormatter.dateFromString(lastAt) else {
-                        print(response.result.error)
-                        return nil
-                }
-
-                let object: TraktWatchable?
-                switch type {
-                case .Movies:
-                    object = TraktMovie(data: objectData)
-                case .Shows:
-                    object = TraktShow(data: objectData)
-                default:
-                    fatalError("Not handled \(type)")
-                }
-                if object != nil {
-                    return (object: object!, plays: plays, lastWatchedAt: lastWatchedAt)
-                } else {
-                    return nil
-                }
-            }
-            list?.forEach {
-                $0.object.watched = true
-            }
-            completion(list, nil)
-        }
-    }
-
-    public func collection(type: TraktType, completion: (([TraktWatchable]?, NSError?) -> Void)) -> Request {
-        return query(.Collection(type)) { response -> Void in
-            guard let entries = response.result.value as? [JSONHash] else {
-                return completion(nil, response.result.error)
-            }
-
-            let list: [TraktWatchable] = entries.flatMap {
-                if type == .Shows {
-                    return TraktShow(data: $0[type.single] as? JSONHash)
-                } else if type == .Movies {
-                    return TraktMovie(data: $0[type.single] as? JSONHash)
-                } else {
-                    return nil
-                }
-            }
-            completion(list, nil)
-        }
-    }
 
     public func episodes(id: AnyObject, seasonNumber: Int, completion: ([TraktEpisode]?, NSError?) -> Void) -> Request {
         return query(.Season(id, seasonNumber)) { response in
@@ -215,8 +112,8 @@ extension Trakt {
 
             if let nxt = data["next_episode"] as? JSONHash, next = TraktEpisode(data: nxt) {
                 show.nextEpisode = next
-                if show.season(next.seasonNumber)?.episode(next.number) == nil {
-                    if let season = show.season(next.seasonNumber) {
+                if show.season(next.seasonNumber!)?.episode(next.number) == nil {
+                    if let season = show.season(next.seasonNumber!) {
                         season.addEpisode(next)
                     } else if let season = TraktSeason(data: ["number": next.seasonNumber]) {
                         season.addEpisode(next)
@@ -238,12 +135,6 @@ extension Trakt {
                 TraktObject.autoload($0)
             })
             return completion(list, response.result.error)
-        }
-    }
-
-    public func profile(name: String!, completion: (JSONHash?, NSError?) -> Void) -> Request {
-        return query(.Profile(name)) { response in
-            completion(response.result.value as? JSONHash, response.result.error)
         }
     }
 
