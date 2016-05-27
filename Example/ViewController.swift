@@ -26,7 +26,6 @@ class ViewController: UIViewController {
 			load()
 		}
 
-
 		if trakt.hasValidToken() {
 			loadUser()
 		}
@@ -39,18 +38,34 @@ class ViewController: UIViewController {
 	}
 
 	func load() {
-		trakt.trending(.Movies) { [weak self] objects, error in
-			if let movies = objects as? [TraktMovie] {
-				self?.items = movies
-				self?.collectionView.reloadData()
-			}
-		}
+        do {
+            try TraktRequestTrending(type: .Movies, extended: .Images).request(trakt) { [weak self] objects, error in
+                if let movies = objects?.flatMap({ $0.media as? TraktMovie }) {
+                    self?.items = movies
+                    self?.collectionView.reloadData()
+                }
+            }
+        } catch {
+            print("Error load()")
+        }
 	}
 
 	func loadUser() {
 		trakt.profile(nil) { user, error in
 			self.title = user?["username"] as? String
 		}
+
+        // Recommendations
+        do {
+            try TraktRequestRecommendations(type: .Movies, extended: .Images).request(trakt) { [weak self] objects, error in
+                if let movies = objects as? [TraktMovie] {
+                    self?.items = movies
+                    self?.collectionView.reloadData()
+                }
+            }
+        } catch {
+            print("Error load()")
+        }
 	}
 
 	@IBAction func clearToken(sender: AnyObject) {
@@ -87,7 +102,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
 	func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
 		if let image = (cell.viewWithTag(1) as? UIImageView), url = items[indexPath.row].imageURL(.Poster, thatFits: image) {
-			image.af_setImageWithURL(url)
+			image.af_setImageWithURL(url, placeholderImage: nil)
 		}
 	}
 

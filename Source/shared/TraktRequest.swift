@@ -121,7 +121,7 @@ extension Trakt {
                 if request.attemptLeft > 0 {
                     // try again after delay
                     return delay(ss.retryInterval) {
-                        try! ss.request(request, completionHandler: completionHandler)
+                        try! ss.request(request, completionHandler: completionHandler) // swiftlint:disable:this force_try
                         return
                     }
                 } else {

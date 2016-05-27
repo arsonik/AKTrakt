@@ -46,15 +46,19 @@ public class TraktAuthenticationViewController: UIViewController {
 	private func getNewCode() {
 		activity.startAnimating()
 
-        TraktRequestGenerateCode(clientId: trakt.clientId).request(trakt) { [weak self] data, error in
-			self?.responseCode = data
-			self?.activity.stopAnimating()
-			if data == nil {
-				let ac = UIAlertController(title: "Trakt Error", message: error?.localizedDescription, preferredStyle: .Alert)
-				ac.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-				self?.presentViewController(ac, animated: true, completion: nil)
-			}
-		}
+        do {
+            try TraktRequestGenerateCode(clientId: trakt.clientId).request(trakt) { [weak self] data, error in
+                self?.responseCode = data
+                self?.activity.stopAnimating()
+                if data == nil {
+                    let ac = UIAlertController(title: "Trakt Error", message: error?.localizedDescription, preferredStyle: .Alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+                    self?.presentViewController(ac, animated: true, completion: nil)
+                }
+            }
+        } catch {
+
+        }
 	}
 
     static var bundle: NSBundle? {
@@ -68,14 +72,18 @@ public class TraktAuthenticationViewController: UIViewController {
 		} else {
 			activity.startAnimating()
 
-            TraktRequestPollDevice(trakt: trakt, deviceCode: responseCode!.deviceCode).request(trakt) { [weak self] token, error in
-				self?.activity.stopAnimating()
-				if token != nil {
-					timer.invalidate()
-					self?.trakt.saveToken(token!)
-					self?.delegate?.TraktAuthViewControllerDidAuthenticate(self!)
-				}
-			}
+            do {
+                try TraktRequestPollDevice(trakt: trakt, deviceCode: responseCode!.deviceCode).request(trakt) { [weak self] token, error in
+                    self?.activity.stopAnimating()
+                    if token != nil {
+                        timer.invalidate()
+                        self?.trakt.saveToken(token!)
+                        self?.delegate?.TraktAuthViewControllerDidAuthenticate(self!)
+                    }
+                }
+            } catch {
+                
+            }
 		}
 	}
 

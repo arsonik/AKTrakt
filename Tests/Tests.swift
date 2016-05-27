@@ -8,7 +8,7 @@
 
 import XCTest
 import AKTrakt
-
+// swiftlint:disable force_try
 class Tests: XCTestCase {
 
     let trakt = Trakt(clientId: "37558e63c821f673801c2c0788f4f877f5ed626bf5ba4493626173b3ac19b594",
@@ -104,7 +104,7 @@ class Tests: XCTestCase {
         }
     }
 
-    func testRecommendations() {
+    func testTokenFailure() {
         let expectation = expectationWithDescription("Getting recommendations without token")
         do {
             try TraktRequestRecommendations(type: .Shows, extended: .Images, pagination: TraktPagination(page: 1, limit: 14)).request(trakt) { objects, error in
@@ -229,3 +229,4 @@ class Tests: XCTestCase {
         }
     }
 }
+// swiftlint:enable force_try
