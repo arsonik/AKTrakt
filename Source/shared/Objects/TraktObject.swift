@@ -37,7 +37,7 @@ public class TraktObject: CustomStringConvertible, Hashable {
 
     public var images: [TraktImageType: [TraktImageSize: String]] = [:]
 
-    public init?(data: JSONHash!) {
+    public required init?(data: JSONHash!) {
         digest(data)
     }
 
@@ -55,24 +55,6 @@ public class TraktObject: CustomStringConvertible, Hashable {
                     }
                 }
             }
-        }
-    }
-
-    static func autoload(item: JSONHash!) -> TraktObject! {
-        guard let it = item?["type"] as? String, type = TraktType(single: it), data = item[type.single] as? JSONHash else {
-            return nil
-        }
-        switch type {
-        case .Shows:
-            return TraktShow(data: data)
-        case .Movies:
-            return TraktMovie(data: data)
-        case .Seasons:
-            return TraktSeason(data: data)
-        case .Episodes:
-            return TraktEpisode(data: data)
-        case .Persons:
-            return TraktPerson(data: data)
         }
     }
 

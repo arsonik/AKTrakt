@@ -55,7 +55,7 @@ class ViewController: UIViewController {
             try TraktRequestProfile().request(trakt) { user, error in
                 self.title = user?["username"] as? String
             }
-            try TraktRequestGetWatchedMovies().request(trakt) { objects, error in
+            try TraktRequestSearch(query: "star wars", type: .Movie).request(trakt) { objects, error in
                 print(objects)
             }
         } catch {

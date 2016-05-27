@@ -24,9 +24,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     /// Get seasons for a show (or single season if number passed)
     case Season(AnyObject, Int?)
 
-    ///	Search based on query with optional type, pagination
-    case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
-
     /// Get Movie Releases
     case Releases(TraktMovie, countryCode: String!)
 
@@ -60,7 +57,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .Progress(let show):				return "/shows/\(show.id)/progress/watched"
         case .RemoveFromHistory:				return "/sync/history/remove"
         case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
-        case .Search:							return "/search"
         case .HideRecommendation(let object):   return "/recommendations/\(object.type.rawValue)/\(object.id)"
         case .Releases(let movie, let countryCode):
             return "/movies/\((movie.id))/releases/\((countryCode ?? ""))"
@@ -89,17 +85,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
             }
             return p
 
-        case .Search(let query, let type, let year, let pagination):
-            var p = pagination.value()
-            p["query"] = query
-            if let v = type {
-                p["type"] = v.single
-            }
-            if let v = year {
-                p["year"] = v
-            }
-            return p
-
         default:
             return nil
         }
@@ -117,8 +102,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     internal func needAuthorization() -> Bool {
         switch self {
-        case .Season,
-             .Search:
+        case .Season:
             return false
         default:
             return true

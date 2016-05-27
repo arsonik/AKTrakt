@@ -14,7 +14,7 @@ public class TraktPerson: TraktObject {
     public let birthday: NSDate?
     public let death: NSDate?
 
-    override init?(data: JSONHash!) {
+    required public init?(data: JSONHash!) {
 
         guard let n = data["name"] as? String else {
             return nil

@@ -94,18 +94,6 @@ extension Trakt {
         }
     }
 
-    public func search(query: String, type: TraktType? = nil, year: Int? = nil, pagination: TraktPagination? = nil, completion: (([TraktObject]?, NSError?) -> Void)) -> Request {
-        return self.query(.Search(query: query, type: type, year: year, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
-            guard let items = response.result.value as? [JSONHash] else {
-                return completion(nil, response.result.error)
-            }
-            let list: [TraktObject]? = items.flatMap({
-                TraktObject.autoload($0)
-            })
-            return completion(list, response.result.error)
-        }
-    }
-
     public func releases(movie: TraktMovie, countryCode: String? = nil, completion: ([TraktRelease]?, NSError?) -> Void) -> Request {
         return query(.Releases(movie, countryCode: countryCode)) { response in
             guard let data = response.result.value as? [JSONHash] else {

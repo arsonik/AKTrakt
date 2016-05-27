@@ -23,7 +23,7 @@ public class TraktSeason: TraktWatchable, TraktIdentifiable {
         return .Seasons
     }
 
-    override init?(data: JSONHash!) {
+    required public init?(data: JSONHash!) {
         guard let sn = data?["number"] as? Int else {
             return nil
         }

@@ -21,7 +21,7 @@ public class TraktEpisode: TraktWatchable, TraktIdentifiable {
         return .Episodes
     }
 
-    override init?(data: JSONHash!) {
+    required public init?(data: JSONHash!) {
         guard let en = data?["number"] as? Int else {
             return nil
         }
