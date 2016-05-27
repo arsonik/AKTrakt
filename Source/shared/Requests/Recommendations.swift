@@ -17,7 +17,7 @@ public class TraktRequestRecommendations: TraktRequest, TraktRequest_Completion 
         var params: JSONHash = [:]
         params += extended.value()
         params += pagination.value()
-        super.init(path: "/recommendations/\(type.rawValue)", params: params, tokenRequired: true)
+        super.init(path: "/recommendations/\(type.rawValue)", params: params, oAuth: true)
     }
 
     public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) throws -> Request? {

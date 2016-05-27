@@ -11,7 +11,7 @@ import Alamofire
 
 public class TraktRequestGetMovieCollection: TraktRequest, TraktRequest_Completion {
     public init(extended: TraktRequestExtendedOptions = .Min) {
-        super.init(path: "/sync/collection/movies", params: extended.value(), tokenRequired: true)
+        super.init(path: "/sync/collection/movies", params: extended.value(), oAuth: true)
     }
 
     public func request(trakt: Trakt, completion: ([(collectedAt: NSDate, movie: TraktMovie)]?, NSError?) -> Void) throws -> Request? {
@@ -35,7 +35,7 @@ public class TraktRequestGetMovieCollection: TraktRequest, TraktRequest_Completi
 
 public class TraktRequestGetShowCollection: TraktRequest, TraktRequest_Completion {
     public init(extended: TraktRequestExtendedOptions = .Min) {
-        super.init(path: "/sync/collection/shows", params: extended.value(), tokenRequired: true)
+        super.init(path: "/sync/collection/shows", params: extended.value(), oAuth: true)
     }
 
     public func request(trakt: Trakt, completion: ([(lastCollectedAt: NSDate, show: TraktShow, seasons: [(season: TraktSeason, episodes: [(episode: TraktEpisode, collectedAt: NSDate)])]?)]?, NSError?) -> Void) throws -> Request? {

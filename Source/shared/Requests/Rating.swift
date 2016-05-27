@@ -23,7 +23,7 @@ public class TraktRequestAddRatings: TraktRequest, TraktRequest_Completion {
                 ]
             }
         }
-        super.init(method: "POST", path: "/sync/ratings", params: params, tokenRequired: true)
+        super.init(method: "POST", path: "/sync/ratings", params: params, oAuth: true)
     }
 
     public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) throws -> Request? {

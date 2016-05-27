@@ -11,7 +11,7 @@ import Alamofire
 
 public class TraktRequestGetWatchlistMovies: TraktRequest, TraktRequest_Completion {
     public init(extended: TraktRequestExtendedOptions? = nil, sort: TraktSortHeaders? = nil) {
-        super.init(path: "/sync/watchlist/movies", tokenRequired: true, params: extended?.value(), headers: sort?.value())
+        super.init(path: "/sync/watchlist/movies", oAuth: true, params: extended?.value(), headers: sort?.value())
     }
 
     public func request(trakt: Trakt, completion: ([(listedAt: NSDate, movie: TraktMovie)]?, NSError?) -> Void) throws -> Request? {
@@ -34,7 +34,7 @@ public class TraktRequestGetWatchlistMovies: TraktRequest, TraktRequest_Completi
 
 public class TraktRequestGetWatchlistShows: TraktRequest, TraktRequest_Completion {
     public init(extended: TraktRequestExtendedOptions? = nil, sort: TraktSortHeaders? = nil) {
-        super.init(path: "/sync/watchlist/shows", tokenRequired: true, params: extended?.value(), headers: sort?.value())
+        super.init(path: "/sync/watchlist/shows", oAuth: true, params: extended?.value(), headers: sort?.value())
     }
 
     public func request(trakt: Trakt, completion: ([(listedAt: NSDate, show: TraktShow)]?, NSError?) -> Void) throws -> Request? {
@@ -57,7 +57,7 @@ public class TraktRequestGetWatchlistShows: TraktRequest, TraktRequest_Completio
 
 public class TraktRequestGetWatchedMovies: TraktRequest, TraktRequest_Completion {
     public init(extended: TraktRequestExtendedOptions? = nil) {
-        super.init(path: "/sync/watched/movies", tokenRequired: true, params: extended?.value())
+        super.init(path: "/sync/watched/movies", oAuth: true, params: extended?.value())
     }
 
     public func request(trakt: Trakt, completion: ([(plays: UInt, lastWatchedAt: NSDate, movie: TraktMovie)]?, NSError?) -> Void) throws -> Request? {
@@ -80,7 +80,7 @@ public class TraktRequestGetWatchedMovies: TraktRequest, TraktRequest_Completion
 
 public class TraktRequestGetWatchedShows: TraktRequest, TraktRequest_Completion {
     public init(extended: TraktRequestExtendedOptions? = nil) {
-        super.init(path: "/sync/watched/shows", tokenRequired: true, params: extended?.value())
+        super.init(path: "/sync/watched/shows", oAuth: true, params: extended?.value())
     }
 
     public func request(trakt: Trakt, completion: ([(plays: UInt, lastWatchedAt: NSDate, show: TraktShow, seasons: [(season: TraktSeason, episodes: [(episode: TraktEpisode, plays: UInt, lastWatchedAt: NSDate)])]?)]?, NSError?) -> Void) throws -> Request? {
@@ -129,7 +129,7 @@ public class TraktRequestAddToHistory: TraktRequest, TraktRequest_Completion {
                 ]
             }
         }
-        super.init(method: "POST", path: "/sync/history", params: params, tokenRequired: true)
+        super.init(method: "POST", path: "/sync/history", params: params, oAuth: true)
     }
 
     public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) throws -> Request? {
@@ -180,7 +180,7 @@ public class TraktRequestAddToWatchlist: TraktRequest, TraktRequest_Completion {
                 ]
             }
         }
-        super.init(method: "POST", path: "/sync/watchlist", params: params, tokenRequired: true)
+        super.init(method: "POST", path: "/sync/watchlist", params: params, oAuth: true)
     }
 
     public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, existing: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) throws -> Request? {

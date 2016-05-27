@@ -14,16 +14,16 @@ public class TraktRequest {
     public let method: String
     public let path: String
     public let params: JSONHash?
-    public let tokenRequired: Bool
+    public let oAuth: Bool
     public let headers: [String: String]?
 
     public var attemptLeft: Int = 5
 
-    public init(method: String = "GET", path: String, params: JSONHash? = nil, tokenRequired: Bool = false, headers: [String: String]? = [:]) {
+    public init(method: String = "GET", path: String, params: JSONHash? = nil, oAuth: Bool = false, headers: [String: String]? = [:]) {
         self.method = method
         self.path = path
         self.params = params
-        self.tokenRequired = tokenRequired
+        self.oAuth = oAuth
         self.headers = headers
     }
 }
@@ -118,7 +118,7 @@ extension Trakt {
         mRequest.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
         mRequest.setValue(clientId, forHTTPHeaderField: "trakt-api-key")
 
-        if request.tokenRequired {
+        if request.oAuth {
             if let accessToken = token?.accessToken {
                 mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             } else {
