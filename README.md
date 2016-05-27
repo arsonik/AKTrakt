@@ -4,16 +4,19 @@
 [![Version](https://img.shields.io/cocoapods/v/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
 [![License](https://img.shields.io/cocoapods/l/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
 [![Platform](https://img.shields.io/cocoapods/p/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
+[![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/AKTrakt.svg?style=flat)](http://cocoadocs.org/docsets/AKTrakt/)
 
 ## Usage
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+To run the example project: clone the repo, execute `pod install`, open AKTrakt.xcworkspace and build !
 
-## Requirements
+## Dependencies
+
+- Alamofire
 
 ## Installation
 
-AKTrakt is available through [CocoaPods](http://cocoapods.org). To install
+AKTrakt is available through [CocoaPods](https://cocoapods.org/?q=AKTrakt). To install
 it, simply add the following line to your Podfile:
 
 ```ruby

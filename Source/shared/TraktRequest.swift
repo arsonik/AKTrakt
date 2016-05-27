@@ -76,9 +76,6 @@ extension Trakt {
         mRequest.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
         mRequest.setValue(clientId, forHTTPHeaderField: "trakt-api-key")
 
-        // filter nil values :\
-        var params = request.params
-
         if request is TraktRequest_RequireToken {
             if let accessToken = token?.accessToken {
                 mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
@@ -88,7 +85,7 @@ extension Trakt {
             }
         }
 
-        let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: params).0
+        let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: request.params).0
 
         request.attemptLeft -= 1
         return manager.request(pRequest).responseJSON { [weak self] response in
