@@ -19,9 +19,6 @@ public class TraktRequestProfile: TraktRequest {
 /// Trakt routes
 /// All the routes used in the main class
 public enum TraktRoute: URLRequestConvertible, Hashable {
-    ///	Get Recommendations Movies/Shows
-    case Recommandations(TraktType, TraktPagination)
-
     ///	Get Collection Movies/Shows
     case Collection(TraktType)
 
@@ -50,8 +47,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     ///	Search based on query with optional type, pagination
     case Search(query: String, type: TraktType!, year: Int!, TraktPagination)
-    /// Rate something from 1-10
-    case Rate(protocol<TraktIdentifiable, Watchable>, Int)
+
     /// Load user (retrieve current if nil argument)
     case Profile(String!)
     /// Get Movie Releases
@@ -68,7 +64,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var method: String {
         switch self {
-        case .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .Rate, .RemoveFromWatchlist:
+        case .AddToHistory, .RemoveFromHistory, .AddToWatchlist, .RemoveFromWatchlist:
             return "POST"
         case .HideRecommendation:
             return "DELETE"
@@ -83,7 +79,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var path: String {
         switch self {
-        case .Recommandations(let type, _):		return "/recommendations/\(type.rawValue)"
         case .Season(let id, let number):       return "/shows/\(anyObjectToId(id))/seasons\(number != nil ? "/\(number!)" : "")"
         case .Episode(let showId, let season, let episode):
 												return "/shows/\(showId)/seasons/\(season)/episodes/\(episode)"
@@ -96,7 +91,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .AddToWatchlist:					return "/sync/watchlist"
         case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
         case .Search:							return "/search"
-        case .Rate:								return "/sync/ratings"
         case .HideRecommendation(let object):   return "/recommendations/\(object.type.rawValue)/\(object.id)"
         case .Profile(let name):				return "/users/\((name ?? "me"))"
         case .Releases(let movie, let countryCode):
@@ -108,11 +102,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         switch self {
         case .Watchlist, .Collection, .Progress, .Episode, .Watched, .Season:
             return ["extended": "full,images"]
-
-        case .Recommandations(_, let pagination):
-            var p = pagination.value()
-            p["extended"] = "full,images"
-            return p
 
         case .AddToWatchlist(let objects):
             var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
@@ -162,15 +151,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
             }
             return p
 
-        case .Rate(let object, let rate):
-            var p: [String: [AnyObject]] = [:]
-            let e: [String: AnyObject] = [
-                "rating": rate,
-                "ids": ["trakt": object.id]
-            ]
-            p["\(object.type.rawValue)"] = [e]
-            return p
-
         default:
             return nil
         }
@@ -201,4 +181,3 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 public func == (left: TraktRoute, right: TraktRoute) -> Bool {
     return left.hashValue == right.hashValue
 }
-

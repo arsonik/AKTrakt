@@ -144,33 +144,6 @@ extension Trakt {
         }
     }
 
-    public func recommendations(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
-        return query(.Recommandations(type, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
-            guard let entries = response.result.value as? [JSONHash] else {
-                return completion(nil, response.result.error)
-            }
-            let list: [TraktWatchable] = entries.flatMap({
-                if type == .Movies {
-                    return TraktMovie(data: $0)
-                } else if type == .Shows {
-                    return TraktShow(data: $0)
-                } else {
-                    return nil
-                }
-            })
-            completion(list, response.result.error)
-        }
-    }
-
-    public func rate(object: protocol<TraktIdentifiable, Watchable>, rate: Int, completion: (Bool, NSError?) -> Void) -> Request {
-        return query(.Rate(object, rate)) { response in
-            guard let item = response.result.value as? JSONHash, added = item["added"] as? [String: Int], n = added[object.type.rawValue] where n > 0 else {
-                return completion(false, response.result.error)
-            }
-            completion(true, nil)
-        }
-    }
-
     public func episodes(id: AnyObject, seasonNumber: Int, completion: ([TraktEpisode]?, NSError?) -> Void) -> Request {
         return query(.Season(id, seasonNumber)) { response in
             guard let items = response.result.value as? [JSONHash] else {

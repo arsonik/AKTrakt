@@ -55,6 +55,14 @@ class ViewController: UIViewController {
 			self.title = user?["username"] as? String
 		}
 
+        do {
+            try TraktRequestAddRatings(ratings: [.Movies: [(traktId: 45665465456456454, rating: 0, ratedAt: NSDate())]]).request(trakt) { objects, error in
+                print(objects)
+            }
+        } catch {
+            print("Error load()")
+        }
+
         // Recommendations
         do {
             try TraktRequestRecommendations(type: .Movies, extended: .Images).request(trakt) { [weak self] objects, error in
