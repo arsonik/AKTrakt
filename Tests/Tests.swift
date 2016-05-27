@@ -203,9 +203,8 @@ class Tests: XCTestCase {
 
     func testSeasons() {
         let expectation = expectationWithDescription("Getting seasons")
-        trakt.seasons(39105) { seasons, error in
-            XCTAssertTrue(seasons?.count == 7)
-
+        try! TraktRequestSeason(showId: "game-of-thrones", seasonNumber: 1).request(trakt) { episodes, error in
+            XCTAssertEqual(episodes?.count, 10)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(5) { error in

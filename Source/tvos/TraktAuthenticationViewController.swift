@@ -82,7 +82,6 @@ public class TraktAuthenticationViewController: UIViewController {
                     }
                 }
             } catch {
-                
             }
 		}
 	}

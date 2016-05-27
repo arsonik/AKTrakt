@@ -81,42 +81,4 @@ public class Trakt {
         df.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.000Z'"
         return df
     }()
-
-    internal func query(route: TraktRoute, completionHandler: Response<AnyObject, NSError> -> Void) -> Request! {
-        let request = route.URLRequest
-        request.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
-        request.setValue(clientId, forHTTPHeaderField: "trakt-api-key")
-
-        if route.needAuthorization() {
-            if let accessToken = token?.accessToken {
-                request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-            } else {
-                print("You need an access token that call that resource")
-                return nil
-            }
-        }
-
-        let key = route.hashValue
-        return manager.request(request).responseJSON { [weak self] response in
-            guard let ss = self else {
-                completionHandler(response)
-                return
-            }
-            if response.response?.statusCode >= 500 {
-                var attempt: Int = ss.attempts.objectForKey(key) as? Int ?? 0
-                attempt += 1
-                ss.attempts.setObject(attempt, forKey: key)
-                if attempt < ss.maximumAttempt {
-                    // try again after delay
-                    return delay(ss.retryInterval) {
-                        ss.query(route, completionHandler: completionHandler)
-                    }
-                } else {
-                    print("Maximum attempt \(attempt)/\(ss.maximumAttempt) reached for request \(route)")
-                }
-            }
-            ss.attempts.removeObjectForKey(key)
-            completionHandler(response)
-        }
-    }
 }

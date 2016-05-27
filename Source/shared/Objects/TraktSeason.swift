@@ -32,6 +32,16 @@ public class TraktSeason: TraktWatchable, TraktIdentifiable {
         super.init(data: data)
     }
 
+    override public func digest(data: JSONHash?) {
+        super.digest(data)
+
+        if let eps = data?["episodes"] as? [JSONHash] {
+            _episodes = eps.flatMap {
+                TraktEpisode(data: $0)
+            }
+        }
+    }
+
     public var notCompleted: [TraktEpisode] {
         return episodes.filter {$0.watched == false}
     }

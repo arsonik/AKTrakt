@@ -10,11 +10,8 @@ import Foundation
 import Alamofire
 
 public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
-    public var extended: TraktRequestExtendedOptions?
-
-    public init(id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
-        super.init(path: "/shows/\(id)", params: extended.value())
-        self.extended = extended
+    public init(id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
+        super.init(path: "/shows/\(id)", params: extended?.value())
     }
 
     public func request(trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) throws -> Request? {
@@ -23,6 +20,31 @@ public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
                 return completion(nil, response.result.error)
             }
             completion(o, nil)
+        }
+    }
+}
+
+public class TraktRequestShowProgress: TraktRequest, TraktRequest_Completion {
+    public init(showId: AnyObject, extended: TraktRequestExtendedOptions? = nil, hidden: Bool = false, specials: Bool = false) {
+        var params: JSONHash = [
+            "hidden": hidden,
+            "specials": specials
+        ]
+        if extended != nil {
+            params += extended!.value()
+        }
+        super.init(path: "/shows/\(showId)/progress/watched", params: params, oAuth: true)
+    }
+
+    public func request(trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void
+        ) throws -> Request? {
+        return try trakt.request(self) { [weak self] response in
+            guard let data = response.result.value as? JSONHash, seasons = data["seasons"] as? [JSONHash] else {
+                return completion(nil, response.result.error)
+            }
+            completion(seasons.flatMap {
+                TraktSeason(data: $0)
+            }, nil)
         }
     }
 }

@@ -32,7 +32,6 @@ class MovieViewController: UIViewController {
                 print(casting)
             }
         } catch {
-            
         }
     }
 }
