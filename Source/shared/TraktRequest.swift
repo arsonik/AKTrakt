@@ -104,12 +104,13 @@ public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
 
 public enum TraktError: ErrorType {
     case TokenRequired
+    case UrlError
 }
 
 extension Trakt {
     public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) throws -> Request? {
         guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
-            fatalError("Url error ? \(request)")
+            throw TraktError.UrlError
         }
         let mRequest = NSMutableURLRequest(URL: url)
         mRequest.HTTPMethod = request.method
