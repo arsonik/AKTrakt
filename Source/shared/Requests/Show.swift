@@ -17,8 +17,8 @@ public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
         self.extended = extended
     }
 
-    public func request(trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { [weak self] response in
+    public func request(trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) throws -> Request? {
+        return try trakt.request(self) { [weak self] response in
             guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
                 return completion(nil, response.result.error)
             }

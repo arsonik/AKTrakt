@@ -14,8 +14,8 @@ public class TraktRequestMovie: TraktRequest, TraktRequest_Completion {
         super.init(method: "GET", path: "/movies/\(id)", params: extended.value())
     }
 
-    public func request(trakt: Trakt, completion: (TraktMovie?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: (TraktMovie?, NSError?) -> Void) throws -> Request? {
+        return try trakt.request(self) { response in
             completion(TraktMovie(data: response.result.value as? JSONHash), response.result.error)
         }
     }

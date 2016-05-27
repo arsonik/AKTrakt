@@ -29,7 +29,7 @@ public class TraktRequest {
 // Define a request that handle a completion closure
 public protocol TraktRequest_Completion {
     typealias T
-    func request(trakt: Trakt, completion: T) -> Request?
+    func request(trakt: Trakt, completion: T) throws -> Request?
 }
 
 public protocol TraktURLParameters {
@@ -84,8 +84,12 @@ public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
     }
 }
 
+public enum TraktError: ErrorType {
+    case TokenRequired
+}
+
 extension Trakt {
-    public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) -> Request? {
+    public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) throws -> Request? {
         guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
             fatalError("Url error ? \(request)")
         }
@@ -100,8 +104,7 @@ extension Trakt {
             if let accessToken = token?.accessToken {
                 mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             } else {
-                print("You need an access token that call that resource")
-                return nil
+                throw TraktError.TokenRequired
             }
         }
 
@@ -118,7 +121,8 @@ extension Trakt {
                 if request.attemptLeft > 0 {
                     // try again after delay
                     return delay(ss.retryInterval) {
-                        ss.request(request, completionHandler: completionHandler)
+                        try! ss.request(request, completionHandler: completionHandler)
+                        return
                     }
                 } else {
                     print("Maximum attempt reached for request \(request)")

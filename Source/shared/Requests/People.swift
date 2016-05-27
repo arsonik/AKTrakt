@@ -15,8 +15,8 @@ public class TraktRequestMediaPeople: TraktRequest, TraktRequest_Completion {
         super.init(path: "/\(type.rawValue)/\(id)/people", params: extended.value())
     }
 
-    public func request(trakt: Trakt, completion: ([TraktCharacter]?, [TraktCrewPosition: [TraktCrew]]?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: ([TraktCharacter]?, [TraktCrewPosition: [TraktCrew]]?, NSError?) -> Void) throws -> Request? {
+        return try trakt.request(self) { response in
             guard let result = response.result.value as? JSONHash else {
                 return completion(nil, nil, response.result.error)
             }
@@ -47,8 +47,8 @@ public class TraktRequestPeople: TraktRequest, TraktRequest_Completion {
         super.init(path: "/people/\(id)", params: extended.value())
     }
 
-    public func request(trakt: Trakt, completion: (TraktPerson?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: (TraktPerson?, NSError?) -> Void) throws -> Request? {
+        return try trakt.request(self) { response in
             completion(TraktPerson(data: response.result.value as? JSONHash), response.result.error)
         }
     }
@@ -65,8 +65,8 @@ public class TraktRequestPeopleCredits: TraktRequest, TraktRequest_Completion {
         super.init(path: "/people/\(id)/\(type.rawValue)", params: extended.value())
     }
 
-    public func request(trakt: Trakt, completion: (CreditsCompletionObject?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: (CreditsCompletionObject?, NSError?) -> Void) throws -> Request? {
+        return try trakt.request(self) { response in
             guard let result = response.result.value as? JSONHash else {
                 return completion(nil, response.result.error)
             }

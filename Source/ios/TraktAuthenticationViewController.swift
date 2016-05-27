@@ -67,7 +67,7 @@ public class TraktAuthenticationViewController: UIViewController, WKNavigationDe
         if let pin = pinFromNavigation(navigationAction) {
             decisionHandler(.Cancel)
 
-            TraktRequestToken(trakt: trakt, pin: pin).request(trakt) { token, error in
+            try! TraktRequestToken(trakt: trakt, pin: pin).request(trakt) { token, error in
                 guard token != nil else {
                     UIAlertView(title: "", message: "Failed to get a valid token", delegate: nil, cancelButtonTitle: "OK").show()
                     self.initWebview()
