@@ -144,25 +144,6 @@ extension Trakt {
         }
     }
 
-    public func trending(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
-        return query(.Trending(type, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
-            guard let entries = response.result.value as? [JSONHash] else {
-                return completion(nil, response.result.error)
-            }
-
-            let list: [TraktWatchable] = entries.flatMap {
-                if type == .Movies {
-                    return TraktMovie(data: $0[type.single] as? JSONHash)
-                } else if type == .Shows {
-                    return TraktShow(data: $0[type.single] as? JSONHash)
-                } else {
-                    return nil
-                }
-            }
-            completion(list, response.result.error)
-        }
-    }
-
     public func recommendations(type: TraktType, pagination: TraktPagination! = nil, completion: ([TraktWatchable]?, NSError?) -> Void) -> Request {
         return query(.Recommandations(type, pagination ?? TraktPagination(page: 1, limit: 100))) { response in
             guard let entries = response.result.value as? [JSONHash] else {

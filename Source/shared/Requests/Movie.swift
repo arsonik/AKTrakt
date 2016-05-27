@@ -11,7 +11,7 @@ import Alamofire
 
 public class TraktRequestMovie: TraktRequest, TraktRequest_Completion {
     public init(id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
-        super.init(method: "GET", path: "/movies/\(id)", params: ["extended": extended.paramValue()])
+        super.init(method: "GET", path: "/movies/\(id)", params: extended.value())
     }
 
     public func request(trakt: Trakt, completion: (TraktMovie?, NSError?) -> Void) -> Request? {

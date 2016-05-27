@@ -13,7 +13,7 @@ public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
     public var extended: TraktRequestExtendedOptions?
 
     public init(id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
-        super.init(path: "/shows/\(id)", params: ["extended": extended.paramValue()])
+        super.init(path: "/shows/\(id)", params: extended.value())
         self.extended = extended
     }
 

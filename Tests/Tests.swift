@@ -88,6 +88,22 @@ class Tests: XCTestCase {
         }
     }
 
+    func testTrending() {
+        let expectation = expectationWithDescription("Getting trending")
+        TraktRequestTrending(type: .Movies, extended: .Images, pagination: TraktPagination(page: 1, limit: 28)).request(trakt) { objects, error in
+            XCTAssertTrue(objects?.first?.watchers > 0)
+            XCTAssertTrue(objects?.first?.media is TraktMovie)
+            XCTAssertTrue((objects?.first?.media as? TraktMovie)?.images.count > 0)
+            XCTAssertEqual(objects?.count, 28)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
     func testMovie() {
         let expectation = expectationWithDescription("Getting a movie by id")
         TraktRequestMovie(id: 1235).request(trakt) { movie, error in

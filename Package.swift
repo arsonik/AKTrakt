@@ -11,3 +11,9 @@ import PackageDescription
 let package = Package(
     name: "AKTrakt"
 )
+
+#if os(tvOS)
+#endif
+
+#if os(iOS)
+#endif

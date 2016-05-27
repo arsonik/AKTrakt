@@ -9,9 +9,9 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestProfile: TraktRequest, TraktRequest_RequireToken {
+public class TraktRequestProfile: TraktRequest {
     init(username: String? = nil) {
-        super.init(path: "/users/\((username ?? "me"))")
+        super.init(path: "/users/\((username ?? "me"))", tokenRequired: true)
     }
 }
 
@@ -19,9 +19,6 @@ public class TraktRequestProfile: TraktRequest, TraktRequest_RequireToken {
 /// Trakt routes
 /// All the routes used in the main class
 public enum TraktRoute: URLRequestConvertible, Hashable {
-    ///	Get Trending Movies/Shows
-    case Trending(TraktType, TraktPagination)
-
     ///	Get Recommendations Movies/Shows
     case Recommandations(TraktType, TraktPagination)
 
@@ -86,7 +83,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var path: String {
         switch self {
-        case .Trending(let type, _):			return "/\(type.rawValue)/trending"
         case .Recommandations(let type, _):		return "/recommendations/\(type.rawValue)"
         case .Season(let id, let number):       return "/shows/\(anyObjectToId(id))/seasons\(number != nil ? "/\(number!)" : "")"
         case .Episode(let showId, let season, let episode):
@@ -112,11 +108,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         switch self {
         case .Watchlist, .Collection, .Progress, .Episode, .Watched, .Season:
             return ["extended": "full,images"]
-
-        case .Trending(_, let pagination):
-            var p = pagination.value()
-            p["extended"] = "full,images"
-            return p
 
         case .Recommandations(_, let pagination):
             var p = pagination.value()
@@ -197,8 +188,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     internal func needAuthorization() -> Bool {
         switch self {
-        case .Trending,
-             .Episode,
+        case .Episode,
              .Season,
              .Search:
             return false
@@ -212,19 +202,3 @@ public func == (left: TraktRoute, right: TraktRoute) -> Bool {
     return left.hashValue == right.hashValue
 }
 
-public struct TraktPagination {
-    var page: Int = 1
-    var limit: Int = 10
-
-    public init(page: Int, limit: Int) {
-        self.page = page
-        self.limit = limit
-    }
-
-    func value() -> [String: AnyObject] {
-        return [
-            "page": page,
-            "limit": limit
-        ]
-    }
-}

@@ -12,7 +12,7 @@ import Alamofire
 /// Get all people for an TraktMediaType object
 public class TraktRequestMediaPeople: TraktRequest, TraktRequest_Completion {
     public init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
-        super.init(path: "/\(type.rawValue)/\(id)/people", params: ["extended": extended.paramValue()])
+        super.init(path: "/\(type.rawValue)/\(id)/people", params: extended.value())
     }
 
     public func request(trakt: Trakt, completion: ([TraktCharacter]?, [TraktCrewPosition: [TraktCrew]]?, NSError?) -> Void) -> Request? {
@@ -44,7 +44,7 @@ public class TraktRequestMediaPeople: TraktRequest, TraktRequest_Completion {
 /// Get a single person
 public class TraktRequestPeople: TraktRequest, TraktRequest_Completion {
     public init(id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
-        super.init(path: "/people/\(id)", params: ["extended": extended.paramValue()])
+        super.init(path: "/people/\(id)", params: extended.value())
     }
 
     public func request(trakt: Trakt, completion: (TraktPerson?, NSError?) -> Void) -> Request? {
@@ -62,7 +62,7 @@ public class TraktRequestPeopleCredits: TraktRequest, TraktRequest_Completion {
 
     public init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
         self.type = type
-        super.init(path: "/people/\(id)/\(type.rawValue)", params: ["extended": extended.paramValue()])
+        super.init(path: "/people/\(id)/\(type.rawValue)", params: extended.value())
     }
 
     public func request(trakt: Trakt, completion: (CreditsCompletionObject?, NSError?) -> Void) -> Request? {

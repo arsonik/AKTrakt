@@ -14,13 +14,15 @@ public class TraktRequest {
     public let method: String
     public let path: String
     public let params: JSONHash?
+    public let tokenRequired: Bool
 
     public var attemptLeft: Int = 5
 
-    init(method: String = "GET", path: String, params: JSONHash? = nil) {
+    public init(method: String = "GET", path: String, params: JSONHash? = nil, tokenRequired: Bool = false) {
         self.method = method
         self.path = path
         self.params = params
+        self.tokenRequired = tokenRequired
     }
 }
 
@@ -30,10 +32,28 @@ public protocol TraktRequest_Completion {
     func request(trakt: Trakt, completion: T) -> Request?
 }
 
-// Define a request that should not be retried on failure
-public protocol TraktRequest_RequireToken {}
+public protocol TraktURLParameters {
+    func value() -> JSONHash
+}
 
-public struct TraktRequestExtendedOptions: OptionSetType {
+public struct TraktPagination: TraktURLParameters {
+    var page: Int = 1
+    var limit: Int = 10
+
+    public init(page: Int, limit: Int) {
+        self.page = page
+        self.limit = limit
+    }
+
+    public func value() -> JSONHash {
+        return [
+            "page": page,
+            "limit": limit
+        ]
+    }
+}
+
+public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
     public let rawValue: Int
 
     public init(rawValue: Int) {
@@ -46,7 +66,7 @@ public struct TraktRequestExtendedOptions: OptionSetType {
     public static let Metadata = TraktRequestExtendedOptions(rawValue: 1 << 2)
     public static let NoSeasons = TraktRequestExtendedOptions(rawValue: 1 << 3)
 
-    public func paramValue() -> String {
+    public func value() -> JSONHash {
         var list: [String] = []
         if contains(.Full) {
             list.append("full")
@@ -60,7 +80,7 @@ public struct TraktRequestExtendedOptions: OptionSetType {
         if contains(.NoSeasons) {
             list.append("noseasons")
         }
-        return list.joinWithSeparator(",")
+        return ["extended": list.joinWithSeparator(",")]
     }
 }
 
@@ -76,7 +96,7 @@ extension Trakt {
         mRequest.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
         mRequest.setValue(clientId, forHTTPHeaderField: "trakt-api-key")
 
-        if request is TraktRequest_RequireToken {
+        if request.tokenRequired {
             if let accessToken = token?.accessToken {
                 mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             } else {
