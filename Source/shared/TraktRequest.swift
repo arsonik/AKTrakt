@@ -10,31 +10,28 @@ import Foundation
 import Alamofire
 
 // Define a protocol request used by the api
-public protocol TraktRequest {
-    var path: String { get }
-    var params: JSONHash? { get }
-//    func completion(response: Response<AnyObject, NSError>) -> AnyObject?
+public class TraktRequest {
+    public let method: String
+    public let path: String
+    public let params: JSONHash?
+
+    public var attemptLeft: Int = 5
+
+    init(method: String = "GET", path: String, params: JSONHash? = nil) {
+        self.method = method
+        self.path = path
+        self.params = params
+    }
 }
 
-// Define a GET request
-public protocol TraktRequestGET: TraktRequest {}
-
-// Define a POST request
-public protocol TraktRequestPOST: TraktRequest {}
-
-// Define a DELETE request
-public protocol TraktRequestDELETE: TraktRequest {}
-
-// Define a request that need a logged user
-public protocol TraktRequestLogged {}
+// Define a request that handle a completion closure
+public protocol TraktRequest_Completion {
+    typealias T
+    func request(trakt: Trakt, completion: T) -> Request?
+}
 
 // Define a request that should not be retried on failure
-public protocol TraktRequestOnlyOnce {}
-
-// Define a request that can have extended arguments like (full, images)
-public protocol TraktRequestExtended {
-    var extended: TraktRequestExtendedOptions? { get }
-}
+public protocol TraktRequest_RequireToken {}
 
 public struct TraktRequestExtendedOptions: OptionSetType {
     public let rawValue: Int
@@ -43,13 +40,29 @@ public struct TraktRequestExtendedOptions: OptionSetType {
         self.rawValue = rawValue
     }
 
+    public static let Min = TraktRequestExtendedOptions(rawValue: 0)
     public static let Images = TraktRequestExtendedOptions(rawValue: 1 << 0)
     public static let Full = TraktRequestExtendedOptions(rawValue: 1 << 1)
     public static let Metadata = TraktRequestExtendedOptions(rawValue: 1 << 2)
     public static let NoSeasons = TraktRequestExtendedOptions(rawValue: 1 << 3)
 
+    public func paramValue() -> String {
+        var list: [String] = []
+        if contains(.Full) {
+            list.append("full")
+        }
+        if contains(.Images) {
+            list.append("images")
+        }
+        if contains(.Metadata) {
+            list.append("metadata")
+        }
+        if contains(.NoSeasons) {
+            list.append("noseasons")
+        }
+        return list.joinWithSeparator(",")
+    }
 }
-
 
 extension Trakt {
     public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) -> Request? {
@@ -57,20 +70,16 @@ extension Trakt {
             fatalError("Url error ? \(request)")
         }
         let mRequest = NSMutableURLRequest(URL: url)
-        if request is TraktRequestGET {
-            mRequest.HTTPMethod = "GET"
-        } else if request is TraktRequestDELETE {
-            mRequest.HTTPMethod = "DELETE"
-        } else if request is TraktRequestPOST {
-            mRequest.HTTPMethod = "POST"
-        }
+        mRequest.HTTPMethod = request.method
+
         mRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         mRequest.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
         mRequest.setValue(clientId, forHTTPHeaderField: "trakt-api-key")
 
+        // filter nil values :\
         var params = request.params
 
-        if request is TraktRequestLogged {
+        if request is TraktRequest_RequireToken {
             if let accessToken = token?.accessToken {
                 mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             } else {
@@ -79,44 +88,25 @@ extension Trakt {
             }
         }
 
-        if let ext = (request as? TraktRequestExtended)?.extended {
-            if params == nil {
-                params = [:]
-            }
-            var list: [String] = []
-            if ext.contains(.Full) {
-                list.append("full")
-            }
-            if ext.contains(.Images) {
-                list.append("images")
-            }
-            params!["extended"] = list.joinWithSeparator(",")
-        }
-
         let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: params).0
 
-        let key = pRequest.hashDescription()
+        request.attemptLeft -= 1
         return manager.request(pRequest).responseJSON { [weak self] response in
             guard let ss = self else {
                 completionHandler(response)
                 return
             }
 
-            if response.response?.statusCode >= 500 && !(request is TraktRequestOnlyOnce) {
-                var attempt: Int = ss.attempts.objectForKey(key) as? Int ?? 0
-                attempt += 1
-                ss.attempts.setObject(attempt, forKey: key)
-                if attempt < ss.maximumAttempt {
+            if response.response?.statusCode >= 500 {
+                if request.attemptLeft > 0 {
                     // try again after delay
                     return delay(ss.retryInterval) {
                         ss.request(request, completionHandler: completionHandler)
                     }
                 } else {
-                    print("Maximum attempt \(attempt)/\(ss.maximumAttempt) reached for request \(request)")
+                    print("Maximum attempt reached for request \(request)")
                 }
             }
-            ss.attempts.removeObjectForKey(key)
-
             completionHandler(response)
         }
     }

@@ -12,7 +12,7 @@ import Alamofire
 /// Main Class
 public class Trakt {
     // Client Id
-    internal let clientId: String
+    public let clientId: String
 
     // Application Secret
     internal let clientSecret: String
@@ -38,7 +38,6 @@ public class Trakt {
     // Trakt api version
     public let traktApiVersion = 2
 
-    public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, verificationUrl: String, expiresAt: NSDate, interval: NSTimeInterval)
 
     public init(clientId: String, clientSecret: String, applicationId: Int) {
         self.clientId = clientId

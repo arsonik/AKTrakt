@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-extension Trakt {    
+extension Trakt {
     public func watched(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.AddToHistory([object])) { response in
             guard let item = response.result.value as? JSONHash, added = item["added"] as? [String: Int], n = added[object.type.rawValue] where n > 0 else {
@@ -195,7 +195,7 @@ extension Trakt {
             guard let items = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
-            completion(items.flatMap{ TraktEpisode(data: $0) }, response.result.error)
+            completion(items.flatMap { TraktEpisode(data: $0) }, response.result.error)
         }
     }
 
@@ -204,7 +204,7 @@ extension Trakt {
             guard let items = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
-            completion(items.flatMap{ TraktSeason(data: $0) }, response.result.error)
+            completion(items.flatMap { TraktSeason(data: $0) }, response.result.error)
         }
     }
 
@@ -239,7 +239,6 @@ extension Trakt {
         }
         return nil
     }
-    
 
     public func progress(show: TraktShow, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.Progress(show)) { response in

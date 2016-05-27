@@ -25,23 +25,6 @@ class Tests: XCTestCase {
         super.tearDown()
     }
 
-    func testNewWay() {
-        let expectation = expectationWithDescription("Searching for a movie")
-
-        TraktRequestWatched(type: .Movies) { objects, error in
-            XCTAssertEqual(objects?.count, 10)
-            expectation.fulfill()
-        } .request(trakt)
-
-
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
-
-    }
-
     func testSearchMovie() {
         let expectation = expectationWithDescription("Searching for a movie")
         trakt.search("avatar", type: .Movies) { result, error in
@@ -63,7 +46,7 @@ class Tests: XCTestCase {
 
     func testRoute() {
         let expectation = expectationWithDescription("Searching for a show")
-        trakt.show(39105) { (show, error) in
+        TraktRequestShow(id: 39105).request(trakt) { show, error in
             XCTAssertNil(show?.overview)
             expectation.fulfill()
         }
@@ -76,7 +59,7 @@ class Tests: XCTestCase {
 
     func testRouteExtended() {
         let expectation = expectationWithDescription("Searching for a show extended")
-        trakt.show(39105, extended: .Full) { (show, error) in
+        TraktRequestShow(id: 39105, extended: .Full).request(trakt) { (show, error) in
             XCTAssertNotNil(show?.overview)
             expectation.fulfill()
         }
@@ -107,9 +90,8 @@ class Tests: XCTestCase {
 
     func testMovie() {
         let expectation = expectationWithDescription("Getting a movie by id")
-        trakt.movie(1235) { movie, error in
+        TraktRequestMovie(id: 1235).request(trakt) { movie, error in
             XCTAssertEqual(movie?.title, "Cervantes")
-
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(5) { error in
@@ -117,12 +99,25 @@ class Tests: XCTestCase {
                 print("Error: \(error.localizedDescription)")
             }
         }
+    }
 
+    func testPerson() {
+        let expectation = expectationWithDescription("Getting a movie by id")
+        TraktRequestPeople(id: "mel-gibson", extended: .Full).request(trakt) { person, error in
+            XCTAssertEqual(person?.name, "Mel Gibson")
+            XCTAssertEqual(person?.birthday?.description.containsString("1956-01-03"), true)
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
 
     func testCasting() {
         let expectation = expectationWithDescription("Getting casting")
-        trakt.peoples(.Shows, id: 39105) { characters, crew, error in
+        TraktRequestMediaPeople(type: .Shows, id: 39105).request(trakt) { characters, crew, error in
             XCTAssertEqual(characters?.first?.character, "Olivia Pope")
             XCTAssertEqual(characters?.first?.person.name, "Kerry Washington")
 
@@ -142,7 +137,8 @@ class Tests: XCTestCase {
 
     func testCredits() {
         let expectation = expectationWithDescription("Getting person's credits")
-        trakt.credits("mel-gibson", inMedia: .Movies) { tuple, error in
+
+        TraktRequestPeopleCredits(type: .Movies, id: "mel-gibson").request(trakt) { tuple, error in
             guard let role = tuple?.cast?.filter({ $0.character == "Driver" }).first else {
                 return XCTFail("Cannot find actor character")
             }
@@ -158,7 +154,7 @@ class Tests: XCTestCase {
 
     func testImages() {
         let expectation = expectationWithDescription("Getting movie")
-        trakt.movie("tron-legacy-2010", extended: .Images) { movie, error in
+        TraktRequestMovie(id: "tron-legacy-2010", extended: .Images).request(trakt) { movie, error in
             XCTAssertTrue(movie?.images.count > 0)
 
             expectation.fulfill()

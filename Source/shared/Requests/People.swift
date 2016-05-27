@@ -10,47 +10,13 @@ import Foundation
 import Alamofire
 
 /// Get all people for an TraktMediaType object
-public struct TraktRequestMediaPeople: TraktRequestGET, TraktRequestExtended {
-    public var path: String
-    public var params: JSONHash?
-
-    public var extended: TraktRequestExtendedOptions?
-
-    init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
-        path = "/\(type.rawValue)/\(id)/people"
-        self.extended = extended
+public class TraktRequestMediaPeople: TraktRequest, TraktRequest_Completion {
+    public init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
+        super.init(path: "/\(type.rawValue)/\(id)/people", params: ["extended": extended.paramValue()])
     }
-}
 
-/// Get a single person
-public struct TraktRequestPeople: TraktRequestGET, TraktRequestExtended {
-    public var path: String
-    public var params: JSONHash?
-
-    public var extended: TraktRequestExtendedOptions?
-
-    init(id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
-        path = "/people/\(id)"
-        self.extended = extended
-    }
-}
-
-/// Get a person credits in a media type
-public struct TraktRequestPeopleCredits: TraktRequestGET, TraktRequestExtended {
-    public var path: String
-    public var params: JSONHash?
-
-    public var extended: TraktRequestExtendedOptions?
-
-    init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
-        path = "/people/\(id)/\(type.rawValue)"
-        self.extended = extended
-    }
-}
-
-extension Trakt {
-    public func peoples(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions? = nil, completion: ([TraktCharacter]?, [TraktCrewPosition: [TraktCrew]]?, NSError?) -> Void) -> Request? {
-        return request(TraktRequestMediaPeople(type: type, id: id, extended: extended)) { response in
+    public func request(trakt: Trakt, completion: ([TraktCharacter]?, [TraktCrewPosition: [TraktCrew]]?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
             guard let result = response.result.value as? JSONHash else {
                 return completion(nil, nil, response.result.error)
             }
@@ -73,15 +39,34 @@ extension Trakt {
             completion(casting, crew, response.result.error)
         }
     }
+}
 
-    public typealias CreditsCompletionObject = (cast: [(character: String, media: TraktObject)]?, crew: [TraktCrewPosition: [(job: String, media: TraktObject)]]?)
+/// Get a single person
+public class TraktRequestPeople: TraktRequest, TraktRequest_Completion {
+    public init(id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
+        super.init(path: "/people/\(id)", params: ["extended": extended.paramValue()])
+    }
 
-    public func credits(id: AnyObject,
-                        inMedia type: TraktMediaType,
-                        extended: TraktRequestExtendedOptions? = nil,
-                        completion: (CreditsCompletionObject?, NSError?) -> Void) -> Request? {
-        return request(TraktRequestPeopleCredits(type: type, id: id, extended: extended)) { response in
+    public func request(trakt: Trakt, completion: (TraktPerson?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
+            completion(TraktPerson(data: response.result.value as? JSONHash), response.result.error)
+        }
+    }
+}
 
+/// Get a person credits in a media type
+
+public typealias CreditsCompletionObject = (cast: [(character: String, media: TraktObject)]?, crew: [TraktCrewPosition: [(job: String, media: TraktObject)]]?)
+public class TraktRequestPeopleCredits: TraktRequest, TraktRequest_Completion {
+    let type: TraktMediaType
+
+    public init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
+        self.type = type
+        super.init(path: "/people/\(id)/\(type.rawValue)", params: ["extended": extended.paramValue()])
+    }
+
+    public func request(trakt: Trakt, completion: (CreditsCompletionObject?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
             guard let result = response.result.value as? JSONHash else {
                 return completion(nil, response.result.error)
             }
@@ -94,11 +79,11 @@ extension Trakt {
                 }
                 tuple.crew![position] = values.flatMap {
                     guard let job = $0["job"] as? String,
-                        mediaData = $0[type.single] as? JSONHash,
-                        media = (type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)) as? TraktObject?
+                        mediaData = $0[self.type.single] as? JSONHash,
+                        media = (self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)) as? TraktObject?
                         where media != nil else {
-                        print("cannot find job or media")
-                        return nil
+                            print("cannot find job or media")
+                            return nil
                     }
                     return (job: job, media: media!)
                 }
@@ -106,10 +91,10 @@ extension Trakt {
             // Cast
             tuple.cast = (result["cast"] as? [JSONHash])?.flatMap {
                 guard let character = $0["character"] as? String,
-                    mediaData = $0[type.single] as? JSONHash,
-                    media = (type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)) as? TraktObject?
+                    mediaData = $0[self.type.single] as? JSONHash,
+                    media = (self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)) as? TraktObject?
                     where media != nil else {
-                    return nil
+                        return nil
                 }
                 return (character: character, media: media!)
             }

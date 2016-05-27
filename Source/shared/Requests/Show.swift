@@ -9,23 +9,17 @@
 import Foundation
 import Alamofire
 
-public struct TraktRequestShow: TraktRequestGET, TraktRequestExtended {
-    public var path: String
-    public var params: JSONHash?
-
+public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
     public var extended: TraktRequestExtendedOptions?
 
-    init(id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
-        path = "/shows/\(id)"
+    public init(id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
+        super.init(path: "/shows/\(id)", params: ["extended": extended.paramValue()])
         self.extended = extended
     }
-}
 
-extension Trakt {
-    public func show(id: AnyObject, extended: TraktRequestExtendedOptions? = nil, completion: (TraktShow?, NSError?) -> Void) -> Request? {
-        return request(TraktRequestShow(id: id, extended: extended)) { response in
+    public func request(trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { [weak self] response in
             guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
-                print("Cannot find object with id \(id)")
                 return completion(nil, response.result.error)
             }
             completion(o, nil)

@@ -9,65 +9,16 @@
 import Foundation
 import Alamofire
 
+public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, verificationUrl: String, expiresAt: NSDate, interval: NSTimeInterval)
+
 ///	Generate new device codes
-public struct TraktRequestGenerateCode: TraktRequestPOST {
-    public var path: String = "/oauth/device/code"
-    public var params: JSONHash? = nil
-
-    init(clientId: String) {
-        params = ["client_id": clientId]
-    }
-}
-
-///	Poll for the access_token
-public struct TraktRequestPollDevice: TraktRequestPOST, TraktRequestOnlyOnce {
-    public var path: String = "/oauth/device/token"
-    public var params: JSONHash? = nil
-
-    init(deviceCode: String, clientId: String, clientSecret: String) {
-        params = [
-            "client_id": clientId,
-            "client_secret": clientSecret,
-            "code": deviceCode,
-        ]
-    }
-}
-
-///	Exchange code for access_token
-public struct TraktRequestToken: TraktRequestPOST {
-    public var path: String = "/oauth/token"
-    public var params: JSONHash? = nil
-
-    init(trakt: Trakt, pin: String) {
-        params = [
-            "code": pin,
-            "client_id": trakt.clientId,
-            "client_secret": trakt.clientSecret,
-            "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
-            "grant_type": "authorization_code"
-        ]
-    }
-}
-
-extension Trakt {
-    internal func exchangePinForToken(pin: String, completion: (TraktToken?, NSError?) -> Void) -> Request? {
-        return request(TraktRequestToken(trakt: self, pin: pin)) { response in
-            guard let aToken = TraktToken(data: response.result.value as? JSONHash) else {
-                let err: NSError?
-                if let error = (response.result.value as? JSONHash)?["error_description"] as? String {
-                    err = NSError(domain: "trakt.tv", code: 401, userInfo: [NSLocalizedDescriptionKey: error])
-                } else {
-                    err = response.result.error
-                }
-                return completion(nil, err)
-            }
-
-            completion(aToken, nil)
-        }
+public class TraktRequestGenerateCode: TraktRequest, TraktRequest_Completion {
+    public init(clientId: String) {
+        super.init(method: "POST", path: "/oauth/device/code", params: ["client_id": clientId])
     }
 
-    public func generateCode(completion: (GeneratedCodeResponse?, NSError?) -> Void) -> Request? {
-        return request(TraktRequestGenerateCode(clientId: clientId)) { response in
+    public func request(trakt: Trakt, completion: (GeneratedCodeResponse?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
             guard
                 let data = response.result.value as? JSONHash,
                 deviceCode = data["device_code"] as? String,
@@ -80,9 +31,40 @@ extension Trakt {
             completion((deviceCode: deviceCode, userCode: userCode, verificationUrl: verificationUrl, expiresAt: NSDate().dateByAddingTimeInterval(expiresIn), interval: interval), nil)
         }
     }
+}
 
-    public func pollDevice(response: GeneratedCodeResponse, completion: (TraktToken?, NSError?) -> Void) -> Request? {
-        return request(TraktRequestPollDevice(deviceCode: response.deviceCode, clientId: clientId, clientSecret: clientSecret)) { response in
+///	Poll for the access_token
+public class TraktRequestPollDevice: TraktRequest, TraktRequest_Completion {
+    public init(trakt: Trakt, deviceCode: String) {
+        super.init(method: "POST", path: "/oauth/device/token", params: [
+            "client_id": trakt.clientId,
+            "client_secret": trakt.clientSecret,
+            "code": deviceCode,
+            ])
+        attemptLeft = 1
+    }
+
+    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
+            completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
+        }
+    }
+}
+
+///	Exchange code for access_token
+public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
+    public init(trakt: Trakt, pin: String) {
+        super.init(method: "POST", path: "/oauth/token", params: [
+            "code": pin,
+            "client_id": trakt.clientId,
+            "client_secret": trakt.clientSecret,
+            "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
+            "grant_type": "authorization_code"
+            ])
+    }
+
+    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
             completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
         }
     }

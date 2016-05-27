@@ -9,26 +9,14 @@
 import Foundation
 import Alamofire
 
-public struct TraktRequestMovie: TraktRequestGET, TraktRequestExtended {
-    public var path: String
-    public var params: JSONHash?
-
-    public var extended: TraktRequestExtendedOptions?
-
-    init(id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
-        path = "/movies/\(id)"
-        self.extended = extended
+public class TraktRequestMovie: TraktRequest, TraktRequest_Completion {
+    public init(id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
+        super.init(method: "GET", path: "/movies/\(id)", params: ["extended": extended.paramValue()])
     }
-}
 
-extension Trakt {
-    public func movie(id: AnyObject, extended: TraktRequestExtendedOptions? = nil, completion: (TraktMovie?, NSError?) -> Void) -> Request? {
-        return request(TraktRequestMovie(id: id, extended: extended)) { response in
-            guard let item = response.result.value as? JSONHash, o = TraktMovie(data: item) else {
-                print("Cannot find object with id \(id)")
-                return completion(nil, response.result.error)
-            }
-            completion(o, nil)
+    public func request(trakt: Trakt, completion: (TraktMovie?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
+            completion(TraktMovie(data: response.result.value as? JSONHash), response.result.error)
         }
     }
 }

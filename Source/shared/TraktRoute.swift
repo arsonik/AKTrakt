@@ -9,12 +9,9 @@
 import Foundation
 import Alamofire
 
-public struct TraktRequestProfile: TraktRequestGET, TraktRequestLogged {
-    public var path: String = ""
-    public var params: JSONHash? = nil
-
+public class TraktRequestProfile: TraktRequest, TraktRequest_RequireToken {
     init(username: String? = nil) {
-        path = "/users/\((username ?? "me"))"
+        super.init(path: "/users/\((username ?? "me"))")
     }
 }
 
@@ -33,9 +30,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     ///	Get Watchlist Movies/Shows/Seasons/Episodes
     case Watchlist(TraktType)
-
-    ///	Get Movies/Shows Credits for a person
-    case Credits(TraktType, TraktIdentifier)
 
     ///	Get Watched Movies/Shows
     case Watched(TraktType)
@@ -107,7 +101,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
         case .Search:							return "/search"
         case .Rate:								return "/sync/ratings"
-        case .Credits(let type, let id):        return "/people/\(id)/\(type.rawValue)"
         case .HideRecommendation(let object):   return "/recommendations/\(object.type.rawValue)/\(object.id)"
         case .Profile(let name):				return "/users/\((name ?? "me"))"
         case .Releases(let movie, let countryCode):
@@ -117,7 +110,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var parameters: [String: AnyObject]! {
         switch self {
-        case .Watchlist, .Collection, .Progress, .Episode, .Credits, .Watched, .Season:
+        case .Watchlist, .Collection, .Progress, .Episode, .Watched, .Season:
             return ["extended": "full,images"]
 
         case .Trending(_, let pagination):
@@ -199,18 +192,12 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        headers?.forEach { key, value in
-//            request.setValue(value, forHTTPHeaderField: key)
-//        }
-
         return (method == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(request, parameters: parameters).0
     }
 
-
     internal func needAuthorization() -> Bool {
         switch self {
-        case .Credits,
-             .Trending,
+        case .Trending,
              .Episode,
              .Season,
              .Search:
@@ -221,7 +208,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     }
 }
 
-/// TraktRoute Equatable function
 public func == (left: TraktRoute, right: TraktRoute) -> Bool {
     return left.hashValue == right.hashValue
 }

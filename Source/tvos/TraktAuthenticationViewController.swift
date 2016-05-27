@@ -19,7 +19,7 @@ public class TraktAuthenticationViewController: UIViewController {
     internal var trakt: Trakt!
 
 	var intervalTimer: NSTimer?
-	var responseCode: Trakt.GeneratedCodeResponse? {
+	var responseCode: GeneratedCodeResponse? {
 		didSet {
 			intervalTimer?.invalidate()
 			if responseCode != nil {
@@ -45,7 +45,8 @@ public class TraktAuthenticationViewController: UIViewController {
 
 	private func getNewCode() {
 		activity.startAnimating()
-		trakt.generateCode { [weak self] data, error in
+
+        TraktRequestGenerateCode(clientId: trakt.clientId).request(trakt) { [weak self] data, error in
 			self?.responseCode = data
 			self?.activity.stopAnimating()
 			if data == nil {
@@ -66,14 +67,15 @@ public class TraktAuthenticationViewController: UIViewController {
 			getNewCode()
 		} else {
 			activity.startAnimating()
-			trakt.pollDevice(responseCode!, completion: { [weak self] token, error in
+
+            TraktRequestPollDevice(trakt: trakt, deviceCode: responseCode!.deviceCode).request(trakt) { [weak self] token, error in
 				self?.activity.stopAnimating()
 				if token != nil {
 					timer.invalidate()
 					self?.trakt.saveToken(token!)
 					self?.delegate?.TraktAuthViewControllerDidAuthenticate(self!)
 				}
-			})
+			}
 		}
 	}
 
