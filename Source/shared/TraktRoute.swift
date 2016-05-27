@@ -24,9 +24,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     /// Get seasons for a show (or single season if number passed)
     case Season(AnyObject, Int?)
 
-    /// Get Movie Releases
-    case Releases(TraktMovie, countryCode: String!)
-
     /// Create a unique identifier for that route
     public var hashValue: Int {
         var uniqid = method + path
@@ -58,8 +55,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .RemoveFromHistory:				return "/sync/history/remove"
         case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
         case .HideRecommendation(let object):   return "/recommendations/\(object.type.rawValue)/\(object.id)"
-        case .Releases(let movie, let countryCode):
-            return "/movies/\((movie.id))/releases/\((countryCode ?? ""))"
         }
     }
 

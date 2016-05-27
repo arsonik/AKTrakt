@@ -8,6 +8,7 @@
 
 import XCTest
 import AKTrakt
+
 // swiftlint:disable force_try
 class Tests: XCTestCase {
 
@@ -27,7 +28,7 @@ class Tests: XCTestCase {
 
     func testSearchMovie() {
         let expectation = expectationWithDescription("Searching for a movie")
-        trakt.search("avatar", type: .Movies) { result, error in
+        try! TraktRequestSearch(query: "avatar", type: .Movie).request(trakt) { result, error in
             guard let movie = result?.first as? TraktMovie else {
                 return XCTFail("Response was not a TraktMovie")
             }
@@ -72,7 +73,7 @@ class Tests: XCTestCase {
 
     func testSearchShow() {
         let expectation = expectationWithDescription("Searching for a show")
-        trakt.search("scandal", type: .Shows) { result, error in
+        try! TraktRequestSearch(query: "scandal", type: .Show).request(trakt) { result, error in
             guard let show = result?.first as? TraktShow else {
                 return XCTFail("Response was not a TraktShow")
             }
@@ -220,6 +221,19 @@ class Tests: XCTestCase {
             XCTAssertTrue(episodes?.count == 21)
             XCTAssertEqual(episodes?.last?.title, "That's My Girl")
 
+            expectation.fulfill()
+        }
+        waitForExpectationsWithTimeout(5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func testReleases() {
+        let expectation = expectationWithDescription("Getting releases")
+        try! TraktRequestMovieReleases(id: "tron-legacy-2010", country: "fr").request(trakt) { releases, error in
+            XCTAssertEqual(releases?.count, 1)
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(5) { error in

@@ -93,16 +93,4 @@ extension Trakt {
             return completion(true, response.result.error)
         }
     }
-
-    public func releases(movie: TraktMovie, countryCode: String? = nil, completion: ([TraktRelease]?, NSError?) -> Void) -> Request {
-        return query(.Releases(movie, countryCode: countryCode)) { response in
-            guard let data = response.result.value as? [JSONHash] else {
-                return completion(nil, response.result.error)
-            }
-            movie.releases = data.flatMap {
-                TraktRelease(data: $0)
-            }
-            completion(movie.releases, response.result.error)
-        }
-    }
 }
