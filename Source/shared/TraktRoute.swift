@@ -12,10 +12,6 @@ import Alamofire
 /// Trakt routes
 /// All the routes used in the main class
 public enum TraktRoute: URLRequestConvertible, Hashable {
-    ///	Remove From Watchlist Movies/Shows/Episodes
-    case RemoveFromWatchlist([protocol<TraktIdentifiable, Watchable>])
-    ///	Remove from Watched History Movies/Shows/Episodes
-    case RemoveFromHistory([protocol<TraktIdentifiable, Watchable>])
     ///	Get Progress for a show
     case Progress(TraktShow)
 
@@ -33,8 +29,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var method: String {
         switch self {
-        case .RemoveFromHistory, .RemoveFromWatchlist:
-            return "POST"
         default:
             return "GET"
         }
@@ -48,8 +42,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         switch self {
         case .Season(let id, let number):       return "/shows/\(anyObjectToId(id))/seasons\(number != nil ? "/\(number!)" : "")"
         case .Progress(let show):				return "/shows/\(show.id)/progress/watched"
-        case .RemoveFromHistory:				return "/sync/history/remove"
-        case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
         }
     }
 
@@ -57,23 +49,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         switch self {
         case .Progress, .Season:
             return ["extended": "full,images"]
-
-        case .RemoveFromWatchlist(let objects):
-            var p: [String: [[String: [String: TraktIdentifier]]]] = [:]
-            objects.forEach { object in
-                if p[object.type.rawValue] == nil {
-                    p[object.type.rawValue] = []
-                }
-                p[object.type.rawValue]?.append(["ids": [TraktId.Trakt.rawValue: object.id]])
-            }
-            return p
-
-        case .RemoveFromHistory(let objects):
-            var p: [String: [[String: AnyObject]]] = [:]
-            for object in objects {
-                p[object.type.rawValue]?.append(["ids": ["trakt": object.id]])
-            }
-            return p
 
         default:
             return nil

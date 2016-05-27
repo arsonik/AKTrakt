@@ -10,30 +10,6 @@ import Foundation
 import Alamofire
 
 extension Trakt {
-    public func unWatch(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
-        return query(.RemoveFromHistory([object])) { response in
-            guard let item = response.result.value as? JSONHash, added = item["deleted"] as? [String: Int], n = added[object.type.rawValue] where n > 0 else {
-                return completion(false, response.result.error)
-            }
-            object.watched = false
-            completion(true, nil)
-        }
-    }
-
-    public func removeFromWatchlist(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
-        return query(.RemoveFromWatchlist([object])) { response in
-            guard let result = response.result.value as? JSONHash,
-                added = result["deleted"] as? [String: Int],
-                success = added[object.type.rawValue]
-                where success == 1 else {
-                    return completion(false, response.result.error)
-            }
-            object.watchlist = false
-            completion(true, nil)
-        }
-    }
-
-    public typealias WatchedReturn = (object: TraktWatchable, plays: Int, lastWatchedAt: NSDate)
 
     public func episodes(id: AnyObject, seasonNumber: Int, completion: ([TraktEpisode]?, NSError?) -> Void) -> Request {
         return query(.Season(id, seasonNumber)) { response in
