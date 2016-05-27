@@ -20,12 +20,6 @@ extension Trakt {
         }
     }
 
-    public func hideFromRecommendations(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)? = nil) -> Request {
-        return query(.HideRecommendation(object)) { response in
-            completion?((response.response?.statusCode == 204) ?? false, response.result.error)
-        }
-    }
-
     public func removeFromWatchlist(object: protocol<TraktIdentifiable, Watchable>, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.RemoveFromWatchlist([object])) { response in
             guard let result = response.result.value as? JSONHash,

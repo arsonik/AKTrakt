@@ -36,3 +36,15 @@ public class TraktRequestRecommendations: TraktRequest, TraktRequest_Completion 
         }
     }
 }
+
+public class TraktRequestRecommendationsHide: TraktRequest, TraktRequest_Completion {
+    public init(type: TraktMediaType, id: AnyObject) {
+        super.init(method: "DELETE", path: "/recommendations/\(type.rawValue)/\(id)", oAuth: true)
+    }
+
+    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) throws -> Request? {
+        return try trakt.request(self) { response in
+            completion(response.response?.statusCode == 204, response.result.error)
+        }
+    }
+}

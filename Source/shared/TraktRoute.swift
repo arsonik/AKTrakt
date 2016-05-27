@@ -16,8 +16,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     case RemoveFromWatchlist([protocol<TraktIdentifiable, Watchable>])
     ///	Remove from Watched History Movies/Shows/Episodes
     case RemoveFromHistory([protocol<TraktIdentifiable, Watchable>])
-    ///	Hide from recommendations Movies/Shows
-    case HideRecommendation(protocol<TraktIdentifiable, Watchable>)
     ///	Get Progress for a show
     case Progress(TraktShow)
 
@@ -37,8 +35,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         switch self {
         case .RemoveFromHistory, .RemoveFromWatchlist:
             return "POST"
-        case .HideRecommendation:
-            return "DELETE"
         default:
             return "GET"
         }
@@ -54,7 +50,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
         case .Progress(let show):				return "/shows/\(show.id)/progress/watched"
         case .RemoveFromHistory:				return "/sync/history/remove"
         case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
-        case .HideRecommendation(let object):   return "/recommendations/\(object.type.rawValue)/\(object.id)"
         }
     }
 
