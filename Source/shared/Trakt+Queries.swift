@@ -59,38 +59,6 @@ extension Trakt {
         }
     }
 
-    public func searchEpisode(id: AnyObject, season: Int, episode: Int, completion: (TraktEpisode?, NSError?) -> Void) -> Request {
-        return query(.Episode(showId: id, season: season, episode: episode)) { response in
-            guard let item = response.result.value as? JSONHash, o = TraktEpisode(data: item) else {
-                print("Cannot find episode \(id)")
-                return completion(nil, response.result.error)
-            }
-            completion(o, nil)
-        }
-    }
-
-    public func episode(episode: TraktEpisode, completion: (Bool, NSError?) -> Void) -> Request? {
-        if episode.loaded != nil && episode.loaded == false {
-            episode.loaded = nil
-            return query(.Episode(showId: episode.season!.show!.id, season: episode.season!.number, episode: episode.number)) { response in
-                guard let data = response.result.value as? JSONHash else {
-                    episode.loaded = false
-                    if response.result.error?.code != NSURLErrorCancelled {
-                        print("Cannot load episode \(episode) \(response.result.error) \(response.result.value)")
-                    }
-                    return completion(episode.loaded != nil && episode.loaded == true, response.result.error)
-                }
-
-                episode.digest(data)
-                episode.loaded = true
-                completion(true, nil)
-            }
-        } else {
-            completion(episode.loaded != nil && episode.loaded == true, nil)
-        }
-        return nil
-    }
-
     public func progress(show: TraktShow, completion: ((Bool, NSError?) -> Void)) -> Request {
         return query(.Progress(show)) { response in
             guard let data = response.result.value as? JSONHash else {

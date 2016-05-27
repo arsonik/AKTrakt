@@ -20,8 +20,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     case HideRecommendation(protocol<TraktIdentifiable, Watchable>)
     ///	Get Progress for a show
     case Progress(TraktShow)
-    ///	Find an episode by its show id, season number, episode number
-    case Episode(showId: AnyObject, season: Int, episode: Int)
 
     /// Get seasons for a show (or single season if number passed)
     case Season(AnyObject, Int?)
@@ -59,8 +57,6 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
     private var path: String {
         switch self {
         case .Season(let id, let number):       return "/shows/\(anyObjectToId(id))/seasons\(number != nil ? "/\(number!)" : "")"
-        case .Episode(let showId, let season, let episode):
-												return "/shows/\(showId)/seasons/\(season)/episodes/\(episode)"
         case .Progress(let show):				return "/shows/\(show.id)/progress/watched"
         case .RemoveFromHistory:				return "/sync/history/remove"
         case .RemoveFromWatchlist:				return "/sync/watchlist/remove"
@@ -73,7 +69,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     private var parameters: [String: AnyObject]! {
         switch self {
-        case .Progress, .Episode, .Season:
+        case .Progress, .Season:
             return ["extended": "full,images"]
 
         case .RemoveFromWatchlist(let objects):
@@ -121,8 +117,7 @@ public enum TraktRoute: URLRequestConvertible, Hashable {
 
     internal func needAuthorization() -> Bool {
         switch self {
-        case .Episode,
-             .Season,
+        case .Season,
              .Search:
             return false
         default:
