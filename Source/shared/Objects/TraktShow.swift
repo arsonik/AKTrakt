@@ -9,11 +9,7 @@
 import Foundation
 
 public class TraktShow: TraktWatchable, Castable {
-
-    private var _seasons: [TraktSeason] = []
-    public var seasons: [TraktSeason] {
-        return _seasons
-    }
+    public var seasons: [TraktSeason] = []
 
     public var crew: [TraktCrew]?
     public var casting: [TraktCharacter]?
@@ -36,11 +32,6 @@ public class TraktShow: TraktWatchable, Castable {
 
     public func season(number: Int) -> TraktSeason? {
         return seasons.filter {$0.number == number} . first
-    }
-
-    public func addSeason(season: TraktSeason) {
-        season.show = self
-        _seasons.append(season)
     }
 
     public var nextEpisode: TraktEpisode?

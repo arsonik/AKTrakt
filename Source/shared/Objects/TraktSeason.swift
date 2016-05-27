@@ -14,10 +14,7 @@ public class TraktSeason: TraktWatchable {
 
     public let number: Int
 
-    private var _episodes: [TraktEpisode] = []
-    public var episodes: [TraktEpisode] {
-        return _episodes
-    }
+    public var episodes: [TraktEpisode] = []
 
     required public init?(data: JSONHash!) {
         guard let sn = data?["number"] as? Int else {
@@ -32,7 +29,7 @@ public class TraktSeason: TraktWatchable {
         super.digest(data)
 
         if let eps = data?["episodes"] as? [JSONHash] {
-            _episodes = eps.flatMap {
+            episodes = eps.flatMap {
                 TraktEpisode(data: $0)
             }
         }
@@ -44,11 +41,6 @@ public class TraktSeason: TraktWatchable {
 
     public func episode(number: Int) -> TraktEpisode? {
         return episodes.filter {$0.number == number} . first
-    }
-
-    public func addEpisode(episode: TraktEpisode) {
-        episode.season = self
-        _episodes.append(episode)
     }
 
     public override var description: String {

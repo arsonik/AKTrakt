@@ -19,7 +19,6 @@ public protocol Watchable: class {
 }
 
 public class TraktWatchable: TraktObject, Watchable {
-
     public var title: String?
     public var overview: String?
     public var watched: Bool = false

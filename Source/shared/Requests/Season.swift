@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 
-/// Returns all episodes for a specific season of a show.
 public class TraktRequestSeason: TraktRequest, TraktRequest_Completion {
     public init(showId: AnyObject, seasonNumber: UInt, extended: TraktRequestExtendedOptions? = nil) {
         super.init(path: "/shows/\(showId)/seasons/\(seasonNumber)", params: extended?.value())
