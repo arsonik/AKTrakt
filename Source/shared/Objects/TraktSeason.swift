@@ -12,12 +12,12 @@ public class TraktSeason: TraktWatchable {
 
     public weak var show: TraktShow?
 
-    public let number: Int
+    public let number: UInt
 
     public var episodes: [TraktEpisode] = []
 
     required public init?(data: JSONHash!) {
-        guard let sn = data?["number"] as? Int else {
+        guard let sn = data?["number"] as? UInt else {
             return nil
         }
 
@@ -39,7 +39,7 @@ public class TraktSeason: TraktWatchable {
         return episodes.filter {$0.watched == false}
     }
 
-    public func episode(number: Int) -> TraktEpisode? {
+    public func episode(number: UInt) -> TraktEpisode? {
         return episodes.filter {$0.number == number} . first
     }
 
