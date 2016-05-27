@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TraktSeason: TraktWatchable, TraktIdentifiable {
+public class TraktSeason: TraktWatchable {
 
     public weak var show: TraktShow?
 
@@ -17,10 +17,6 @@ public class TraktSeason: TraktWatchable, TraktIdentifiable {
     private var _episodes: [TraktEpisode] = []
     public var episodes: [TraktEpisode] {
         return _episodes
-    }
-
-    public var type: TraktType {
-        return .Seasons
     }
 
     required public init?(data: JSONHash!) {

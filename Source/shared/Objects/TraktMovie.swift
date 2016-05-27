@@ -9,7 +9,7 @@
 import Foundation
 
 /// 🎥 TraktMovie
-public class TraktMovie: TraktWatchable, Castable, TraktIdentifiable {
+public class TraktMovie: TraktWatchable, Castable {
 
     /// Youtube video name ex: _1MDrwqjeGo
     public var trailer: String?

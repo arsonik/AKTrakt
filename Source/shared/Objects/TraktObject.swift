@@ -14,14 +14,6 @@ public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
     return lhs.id == rhs.id && lhs.id != 0 && rhs.id != 0
 }
 
-public protocol TraktIdentifiable: class {
-    /// Trakt Identifier
-    var id: TraktIdentifier { get }
-
-    /// Trakt Type
-    var type: TraktType { get }
-}
-
 public class TraktObject: CustomStringConvertible, Hashable {
     public var ids: [TraktId: AnyObject] = [:] {
         didSet {
