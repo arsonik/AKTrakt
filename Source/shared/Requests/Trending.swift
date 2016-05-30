@@ -20,8 +20,8 @@ public class TraktRequestTrending: TraktRequest, TraktRequest_Completion {
         super.init(path: "/\(type.rawValue)/trending", params: params)
     }
 
-    public func request(trakt: Trakt, completion: ([(watchers: Int, media: TraktObject)]?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: ([(watchers: Int, media: TraktObject)]?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }

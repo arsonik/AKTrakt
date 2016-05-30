@@ -25,8 +25,8 @@ public class TraktRequestAddToHistory: TraktRequest, TraktRequest_Completion {
         super.init(method: "POST", path: "/sync/history", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash, added = items["added"] as? [String: Int], notFound = items["not_found"] as? [String: [JSONHash]] else {
                 return completion(nil, response.result.error)
             }
@@ -76,8 +76,8 @@ public class TraktRequestRemoveFromHistory: TraktRequest, TraktRequest_Completio
         super.init(method: "POST", path: "/sync/history/remove", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((deleted: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: ((deleted: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 deleted = items["deleted"] as? [String: Int],
                 notFound = items["not_found"] as? [String: [JSONHash]] else {

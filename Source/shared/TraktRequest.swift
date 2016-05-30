@@ -31,7 +31,7 @@ public class TraktRequest {
 // Define a request that handle a completion closure
 public protocol TraktRequest_Completion {
     typealias T
-    func request(trakt: Trakt, completion: T) throws -> Request?
+    func request(trakt: Trakt, completion: T) -> Request?
 }
 
 public protocol TraktURLParameters {
@@ -108,9 +108,10 @@ public enum TraktError: ErrorType {
 }
 
 extension Trakt {
-    public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) throws -> Request? {
+    public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) -> Request? {
         guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
-            throw TraktError.UrlError
+            TraktError.UrlError
+            return nil
         }
         let mRequest = NSMutableURLRequest(URL: url)
         mRequest.HTTPMethod = request.method
@@ -123,7 +124,8 @@ extension Trakt {
             if let accessToken = token?.accessToken {
                 mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
             } else {
-                throw TraktError.TokenRequired
+                TraktError.TokenRequired
+                return nil
             }
         }
 

@@ -14,8 +14,8 @@ public class TraktRequestSeason: TraktRequest, TraktRequest_Completion {
         super.init(path: "/shows/\(showId)/seasons/\(seasonNumber)", params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([TraktEpisode]?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { [weak self] response in
+    public func request(trakt: Trakt, completion: ([TraktEpisode]?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { [weak self] response in
             guard let items = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }

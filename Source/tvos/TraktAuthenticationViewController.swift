@@ -47,7 +47,7 @@ public class TraktAuthenticationViewController: UIViewController {
 		activity.startAnimating()
 
         do {
-            try TraktRequestGenerateCode(clientId: trakt.clientId).request(trakt) { [weak self] data, error in
+            TraktRequestGenerateCode(clientId: trakt.clientId).request(trakt) { [weak self] data, error in
                 self?.responseCode = data
                 self?.activity.stopAnimating()
                 if data == nil {
@@ -73,7 +73,7 @@ public class TraktAuthenticationViewController: UIViewController {
 			activity.startAnimating()
 
             do {
-                try TraktRequestPollDevice(trakt: trakt, deviceCode: responseCode!.deviceCode).request(trakt) { [weak self] token, error in
+                TraktRequestPollDevice(trakt: trakt, deviceCode: responseCode!.deviceCode).request(trakt) { [weak self] token, error in
                     self?.activity.stopAnimating()
                     if token != nil {
                         timer.invalidate()

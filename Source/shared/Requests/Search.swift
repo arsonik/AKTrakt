@@ -47,8 +47,8 @@ public class TraktRequestSearch: TraktRequest, TraktRequest_Completion {
         super.init(path: "/search", params: params)
     }
 
-    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }

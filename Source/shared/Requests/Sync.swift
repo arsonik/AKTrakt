@@ -14,8 +14,8 @@ public class TraktRequestGetMovieCollection: TraktRequest, TraktRequest_Completi
         super.init(path: "/sync/collection/movies", params: extended.value(), oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ([(collectedAt: NSDate, movie: TraktMovie)]?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: ([(collectedAt: NSDate, movie: TraktMovie)]?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
@@ -38,8 +38,8 @@ public class TraktRequestGetShowCollection: TraktRequest, TraktRequest_Completio
         super.init(path: "/sync/collection/shows", params: extended.value(), oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ([(lastCollectedAt: NSDate, show: TraktShow, seasons: [(season: TraktSeason, episodes: [(episode: TraktEpisode, collectedAt: NSDate)])]?)]?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: ([(lastCollectedAt: NSDate, show: TraktShow, seasons: [(season: TraktSeason, episodes: [(episode: TraktEpisode, collectedAt: NSDate)])]?)]?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }

@@ -17,8 +17,8 @@ public class TraktRequestGenerateCode: TraktRequest, TraktRequest_Completion {
         super.init(method: "POST", path: "/oauth/device/code", params: ["client_id": clientId])
     }
 
-    public func request(trakt: Trakt, completion: (GeneratedCodeResponse?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: (GeneratedCodeResponse?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             guard
                 let data = response.result.value as? JSONHash,
                 deviceCode = data["device_code"] as? String,
@@ -44,8 +44,8 @@ public class TraktRequestPollDevice: TraktRequest, TraktRequest_Completion {
         attemptLeft = 1
     }
 
-    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
         }
     }
@@ -63,8 +63,8 @@ public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
             ])
     }
 
-    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
         }
     }
@@ -75,8 +75,8 @@ public class TraktRequestProfile: TraktRequest, TraktRequest_Completion {
         super.init(path: "/users/\(username)", oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: (JSONHash?, NSError?) -> Void) throws -> Request? {
-        return try trakt.request(self) { response in
+    public func request(trakt: Trakt, completion: (JSONHash?, NSError?) -> Void)-> Request? {
+        return trakt.request(self) { response in
             completion(response.result.value as? JSONHash, response.result.error)
         }
     }
