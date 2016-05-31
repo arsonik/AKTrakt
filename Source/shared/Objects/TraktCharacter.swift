@@ -9,7 +9,6 @@
 import Foundation
 
 public struct TraktCharacter {
-
     /// Character's name
     public let character: String
 

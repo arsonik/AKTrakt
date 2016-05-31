@@ -16,7 +16,7 @@ public struct TraktSeason {
         self.number = number
     }
 
-    public var notCompleted: [TraktEpisode] {
+    public var notCompleted: [Watchable] {
         return episodes.filter {$0.watched == false}
     }
 

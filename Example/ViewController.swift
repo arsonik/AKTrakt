@@ -100,7 +100,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             image.af_setImageWithURL(url, placeholderImage: nil)
         }
     }
-    
+
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("movie", sender: items[indexPath.row])
     }

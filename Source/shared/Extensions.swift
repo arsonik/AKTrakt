@@ -33,24 +33,3 @@ extension CGSize {
         return width * height
     }
 }
-
-extension NSURLRequest {
-    public func hashDescription() -> String {
-        var result = "" + (HTTPMethod ?? "nil") + "; (URL); timeoutInterval=" + String(format: "%.1fs", timeoutInterval) + "> {"
-
-        // Add header fields.
-        if let headers = allHTTPHeaderFields {
-            result += "\nallHTTPHeaderFields {"
-            for (key, value) in headers {
-                result += "\n\t\(key) : '\(value)'"
-            }
-            result += "\n}"
-        }
-
-        if let body = HTTPBody {
-            result += "\nHTTPBody {\n " + ((NSString(data: body, encoding: NSASCIIStringEncoding) ?? "") as String) + "}"
-        }
-
-        return result + "\n}"
-    }
-}

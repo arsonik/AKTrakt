@@ -9,7 +9,6 @@
 import Foundation
 
 public struct TraktCrew {
-
     /// Person's job
     public let job: String
 

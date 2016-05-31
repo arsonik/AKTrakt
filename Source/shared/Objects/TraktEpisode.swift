@@ -8,10 +8,9 @@
 
 import Foundation
 
-public class TraktEpisode: TraktObject, Descriptable, Watchable {
+public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
     public let number: UInt
     public var seasonNumber: UInt?
-    public var loaded: Bool? = false
     public var firstAired: NSDate?
 
     /// Descriptable conformance
@@ -23,6 +22,9 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable {
     public var watchlist: Bool = false
     public var lastWatchedAt: NSDate?
     public var plays: UInt?
+
+    /// Collectable conformance
+    public var collectedAt: NSDate?
 
     required public init?(data: JSONHash!) {
         guard let en = data?["number"] as? UInt else {
@@ -47,6 +49,10 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable {
         plays = data?["plays"] as? UInt ?? plays
         if let fa = data["last_watched_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
             lastWatchedAt = date
+        }
+
+        if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(string) {
+            collectedAt = date
         }
     }
 

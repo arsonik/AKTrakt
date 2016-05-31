@@ -113,51 +113,53 @@ public enum TraktError: ErrorType {
 
 extension Trakt {
     public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) -> Request? {
-        guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
-            TraktError.UrlError
-            return nil
-        }
-        let mRequest = NSMutableURLRequest(URL: url)
-        mRequest.HTTPMethod = request.method
-
-        mRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        mRequest.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
-        mRequest.setValue(clientId, forHTTPHeaderField: "trakt-api-key")
-
-        if request.oAuth {
-            if let accessToken = token?.accessToken {
-                mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-            } else {
-                TraktError.TokenRequired
-                return nil
+        do {
+            guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
+                throw TraktError.UrlError
             }
-        }
+            let mRequest = NSMutableURLRequest(URL: url)
+            mRequest.HTTPMethod = request.method
 
-        request.headers?.forEach {
-            mRequest.setValue($0.1, forHTTPHeaderField: $0.0)
-        }
+            mRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            mRequest.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
+            mRequest.setValue(clientId, forHTTPHeaderField: "trakt-api-key")
 
-        let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: request.params).0
-
-        request.attemptLeft -= 1
-        return manager.request(pRequest).responseJSON { [weak self] response in
-            guard let ss = self else {
-                completionHandler(response)
-                return
-            }
-
-            if response.response?.statusCode >= 500 {
-                if request.attemptLeft > 0 {
-                    // try again after delay
-                    return delay(ss.retryInterval) {
-                        try! ss.request(request, completionHandler: completionHandler) // swiftlint:disable:this force_try
-                        return
-                    }
+            if request.oAuth {
+                if let accessToken = token?.accessToken {
+                    mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
                 } else {
-                    print("Maximum attempt reached for request \(request)")
+                    throw TraktError.TokenRequired
                 }
             }
-            completionHandler(response)
+
+            request.headers?.forEach {
+                mRequest.setValue($0.1, forHTTPHeaderField: $0.0)
+            }
+
+            let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: request.params).0
+
+            request.attemptLeft -= 1
+            return manager.request(pRequest).responseJSON { [weak self] response in
+                guard let ss = self else {
+                    completionHandler(response)
+                    return
+                }
+
+                if response.response?.statusCode >= 500 {
+                    if request.attemptLeft > 0 {
+                        // try again after delay
+                        return delay(ss.retryInterval) {
+                            ss.request(request, completionHandler: completionHandler)
+                            return
+                        }
+                    } else {
+                        print("Maximum attempt reached for request \(request)")
+                    }
+                }
+                completionHandler(response)
+            }
+        } catch {
+            return nil
         }
     }
 }

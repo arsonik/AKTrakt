@@ -8,10 +8,7 @@
 
 import Foundation
 
-public class TraktShow: TraktObject, Descriptable, Castable {
-    public var seasons: [TraktSeason] = []
-    public var crew: [TraktCrew]?
-    public var casting: [TraktCharacter]?
+public class TraktShow: TraktObject, Descriptable {
     /// Production year
     public var year: UInt?
 
@@ -19,9 +16,7 @@ public class TraktShow: TraktObject, Descriptable, Castable {
     public var title: String?
     public var overview: String?
 
-    public var type: TraktType {
-        return .Shows
-    }
+    public var seasons: [TraktSeason] = []
 
     override public func digest(data: JSONHash?) {
         super.digest(data)
@@ -41,8 +36,13 @@ public class TraktShow: TraktObject, Descriptable, Castable {
         overview = data?["overview"] as? String ?? overview
     }
 
-    public var notCompleted: [TraktEpisode] {
-        return seasons.flatMap { $0.notCompleted }.sort {$0.0.seasonNumber < $0.1.seasonNumber && $0.0.number < $0.1.number}
+    public var notCompleted: [Watchable] {
+        let episodes: [TraktEpisode] = seasons.flatMap({
+            $0.notCompleted as? TraktEpisode
+        })
+        return episodes.sort({
+            $0.0.seasonNumber < $0.1.seasonNumber && $0.0.number < $0.1.number
+        })
     }
 
     public func season(number: UInt) -> TraktSeason? {

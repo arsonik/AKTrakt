@@ -9,8 +9,7 @@
 import Foundation
 
 /// 🎥 TraktMovie
-public class TraktMovie: TraktObject, Castable, Descriptable, Watchable, Collectable {
-
+public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable {
     /// Youtube video name ex: _1MDrwqjeGo
     public var trailer: String?
     /// Rating between 0-10
@@ -25,11 +24,6 @@ public class TraktMovie: TraktObject, Castable, Descriptable, Watchable, Collect
     public var runtime: Int?
     /// Array of genres
     public var genres: [String]?
-
-    /// Array of TraktCrew
-    public var crew: [TraktCrew]?
-    /// Array of TraktCharacter
-    public var casting: [TraktCharacter]?
 
     /// Array of TraktRelease
     public var releases: [TraktRelease]?
@@ -47,10 +41,6 @@ public class TraktMovie: TraktObject, Castable, Descriptable, Watchable, Collect
     /// Collectable conformance
     public var collectedAt: NSDate?
 
-    public var type: TraktType {
-        return .Movies
-    }
-
     override public func digest(data: JSONHash?) {
         super.digest(data)
 
@@ -67,7 +57,7 @@ public class TraktMovie: TraktObject, Castable, Descriptable, Watchable, Collect
         if let x = data?["trailer"] as? String, url = NSURL(string: x), params = url.query?.componentsSeparatedByString("v=") where params.count == 2 {
             trailer = params[1]
         }
-        
+
         title = data?["title"] as? String ?? title
         overview = data?["overview"] as? String ?? overview
 

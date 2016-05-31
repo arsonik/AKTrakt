@@ -40,7 +40,7 @@ public class TraktRequestPollDevice: TraktRequest, TraktRequest_Completion {
             "client_id": trakt.clientId,
             "client_secret": trakt.clientSecret,
             "code": deviceCode,
-            ])
+        ])
         attemptLeft = 1
     }
 
@@ -60,7 +60,7 @@ public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
             "client_secret": trakt.clientSecret,
             "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
             "grant_type": "authorization_code"
-            ])
+        ])
     }
 
     public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
