@@ -8,8 +8,11 @@
 
 import Foundation
 
+public typealias TraktEpisodeNumber = UInt
 public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
-    public let number: UInt
+    public weak var season: TraktSeason?
+
+    public let number: TraktEpisodeNumber
     public var seasonNumber: UInt?
     public var firstAired: NSDate?
 

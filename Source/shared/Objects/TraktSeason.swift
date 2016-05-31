@@ -8,12 +8,13 @@
 
 import Foundation
 
+public typealias TraktSeasonNumber = UInt
 public class TraktSeason: TraktObject {
-    public let number: UInt
+    public let number: TraktSeasonNumber
     public var episodes: [TraktEpisode] = []
 
     public required init?(data: JSONHash!) {
-        guard let number = data?["number"] as? UInt else {
+        guard let number = data?["number"] as? TraktSeasonNumber else {
             return nil
         }
         self.number = number
@@ -36,7 +37,7 @@ public class TraktSeason: TraktObject {
         return episodes.filter {$0.watched == false}
     }
 
-    public func episode(number: UInt) -> TraktEpisode? {
+    public func episode(number: TraktEpisodeNumber) -> TraktEpisode? {
         return episodes.filter {$0.number == number} . first
     }
 }
