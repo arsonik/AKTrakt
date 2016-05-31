@@ -26,7 +26,7 @@ public class TraktRequestAddRatings: TraktRequest, TraktRequest_Completion {
         super.init(method: "POST", path: "/sync/ratings", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash, added = items["added"] as? [String: Int], notFound = items["not_found"] as? [String: [JSONHash]] else {
                 return completion(nil, response.result.error)
@@ -48,7 +48,7 @@ public class TraktRequestAddRatings: TraktRequest, TraktRequest_Completion {
                     return
                 }
                 nItems?[type] = $0.1.flatMap { object in
-                    (object["ids"] as? [String: Int])?["trakt"]
+                    (object["ids"] as? [String: TraktIdentifier])?["trakt"]
                 }
                 if nItems?[type]?.count == 0 {
                     nItems?.removeValueForKey(type)

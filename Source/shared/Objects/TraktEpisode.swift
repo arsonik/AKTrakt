@@ -8,18 +8,21 @@
 
 import Foundation
 
-public class TraktEpisode: TraktWatchable {
-
-    public weak var season: TraktSeason?
-
+public class TraktEpisode: TraktObject, Descriptable, Watchable {
     public let number: UInt
     public var seasonNumber: UInt?
     public var loaded: Bool? = false
     public var firstAired: NSDate?
 
+    /// Descriptable conformance
+    public var title: String?
+    public var overview: String?
 
-    var lastWatchedAt: NSDate? = nil
-    var plays: UInt? = nil
+    /// Watchable conformance
+    public var watched: Bool = false
+    public var watchlist: Bool = false
+    public var lastWatchedAt: NSDate?
+    public var plays: UInt?
 
     required public init?(data: JSONHash!) {
         guard let en = data?["number"] as? UInt else {
@@ -37,15 +40,17 @@ public class TraktEpisode: TraktWatchable {
         if let fa = data["first_aired"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
             firstAired = date
         }
+
+        title = data?["title"] as? String ?? title
+        overview = data?["overview"] as? String ?? overview
+        watched = data?["completed"] as? Bool ?? watched
+        plays = data?["plays"] as? UInt ?? plays
         if let fa = data["last_watched_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
             lastWatchedAt = date
-        }
-        if let pls = data["plays"] as? UInt {
-            plays = pls
         }
     }
 
     public override var description: String {
-        return "TraktEpisode id\(id) \(season?.title) \(seasonNumber):\(number)) completed \(watched)"
+        return "TraktEpisode id\(id) \(seasonNumber):\(number)) completed \(watched)"
     }
 }

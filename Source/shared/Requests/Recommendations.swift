@@ -20,7 +20,7 @@ public class TraktRequestRecommendations: TraktRequest, TraktRequest_Completion 
         super.init(path: "/recommendations/\(type.rawValue)", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
@@ -42,7 +42,7 @@ public class TraktRequestRecommendationsHide: TraktRequest, TraktRequest_Complet
         super.init(method: "DELETE", path: "/recommendations/\(type.rawValue)/\(id)", oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(response.response?.statusCode == 204, response.result.error)
         }

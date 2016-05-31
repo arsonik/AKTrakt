@@ -14,7 +14,7 @@ public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
         super.init(path: "/shows/\(id)", params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: (TraktShow?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { [weak self] response in
             guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
                 return completion(nil, response.result.error)
@@ -36,16 +36,19 @@ public class TraktRequestShowProgress: TraktRequest, TraktRequest_Completion {
         super.init(path: "/shows/\(showId)/progress/watched", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: (TraktEpisode?, [TraktSeason]?, NSError?) -> Void
-        )-> Request? {
+    public func request(trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { [weak self] response in
             guard let data = response.result.value as? JSONHash,
                 nextEpisode = data["next_episode"] as? JSONHash,
                 seasons = data["seasons"] as? [JSONHash] else {
-                return completion(nil, nil, response.result.error)
+                return completion(nil, response.result.error)
             }
-            completion(TraktEpisode(data: nextEpisode), seasons.flatMap {
-                TraktSeason(data: $0)
+            // TraktEpisode(data: nextEpisode),
+            completion(seasons.flatMap {
+                guard let number = $0["number"] as? UInt else {
+                    return nil
+                }
+                return TraktSeason(number: number)
             }, nil)
         }
     }

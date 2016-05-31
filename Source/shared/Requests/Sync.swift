@@ -38,7 +38,7 @@ public class TraktRequestGetShowCollection: TraktRequest, TraktRequest_Completio
         super.init(path: "/sync/collection/shows", params: extended.value(), oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ([(lastCollectedAt: NSDate, show: TraktShow, seasons: [(season: TraktSeason, episodes: [(episode: TraktEpisode, collectedAt: NSDate)])]?)]?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: ([(lastCollectedAt: NSDate, show: TraktShow, seasons: [(season: TraktSeason, episodes: [(episode: TraktEpisode, collectedAt: NSDate)])]?)]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
@@ -50,11 +50,12 @@ public class TraktRequestGetShowCollection: TraktRequest, TraktRequest_Completio
                         return nil
                 }
                 return (lastCollectedAt: lastCollectedAt, show: show, seasons: ($0["seasons"] as? [JSONHash])?.flatMap {
-                    guard let season = TraktSeason(data: $0),
+                    guard let seasonNumber = $0["number"] as? UInt,
                         episodesData = $0["episodes"] as? [JSONHash]
                         else {
                             return nil
                     }
+                    let season = TraktSeason(number: seasonNumber)
                     return (season: season, episodes: episodesData.flatMap({
                         guard let episode = TraktEpisode(data: $0),
                             date = $0["collected_at"] as? String,

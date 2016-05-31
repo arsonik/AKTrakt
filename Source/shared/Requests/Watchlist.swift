@@ -16,7 +16,7 @@ public class TraktRequestGetWatchlist: TraktRequest, TraktRequest_Completion {
         super.init(path: "/sync/watchlist/\(type.rawValue)", oAuth: true, params: extended?.value(), headers: sort?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([(listedAt: NSDate, media: TraktObject)]?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: ([(listedAt: NSDate, media: TraktObject)]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
@@ -41,7 +41,7 @@ public class TraktRequestGetWatched: TraktRequest, TraktRequest_Completion {
         super.init(path: "/sync/watched/\(type.rawValue)", oAuth: true, params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
@@ -70,7 +70,7 @@ public class TraktRequestAddToWatchlist: TraktRequest, TraktRequest_Completion {
         super.init(method: "POST", path: "/sync/watchlist", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, existing: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, existing: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 added = items["added"] as? [String: Int],
@@ -105,7 +105,7 @@ public class TraktRequestAddToWatchlist: TraktRequest, TraktRequest_Completion {
                     return
                 }
                 nItems?[type] = $0.1.flatMap { object in
-                    (object["ids"] as? [String: Int])?["trakt"]
+                    (object["ids"] as? [String: TraktIdentifier])?["trakt"]
                 }
                 if nItems?[type]?.count == 0 {
                     nItems?.removeValueForKey(type)
@@ -135,7 +135,7 @@ public class TraktRequestRemoveFromWatchlist: TraktRequest, TraktRequest_Complet
         super.init(method: "POST", path: "/sync/watchlist/remove", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((deleted: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void)-> Request? {
+    public func request(trakt: Trakt, completion: ((deleted: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 deleted = items["deleted"] as? [String: Int],
@@ -159,7 +159,7 @@ public class TraktRequestRemoveFromWatchlist: TraktRequest, TraktRequest_Complet
                     return
                 }
                 nItems?[type] = $0.1.flatMap { object in
-                    (object["ids"] as? [String: Int])?["trakt"]
+                    (object["ids"] as? [String: TraktIdentifier])?["trakt"]
                 }
                 if nItems?[type]?.count == 0 {
                     nItems?.removeValueForKey(type)

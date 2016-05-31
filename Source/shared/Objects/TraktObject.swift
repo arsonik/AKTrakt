@@ -8,10 +8,31 @@
 
 import Foundation
 
-public typealias TraktIdentifier = Int
+public typealias TraktIdentifier = UInt
 
 public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
     return lhs.id == rhs.id && lhs.id != 0 && rhs.id != 0
+}
+
+public protocol Castable {
+    var crew: [TraktCrew]? { get set }
+    var casting: [TraktCharacter]? { get set }
+}
+
+public protocol Descriptable {
+    var title: String? { get set }
+    var overview: String? { get set }
+}
+
+public protocol Watchable {
+    var watched: Bool { get set }
+    var watchlist: Bool { get set }
+    var lastWatchedAt: NSDate? { get set }
+    var plays: UInt? { get set }
+}
+
+public protocol Collectable {
+    var collectedAt: NSDate? { get set }
 }
 
 public class TraktObject: CustomStringConvertible, Hashable {
@@ -24,7 +45,7 @@ public class TraktObject: CustomStringConvertible, Hashable {
     public var id: TraktIdentifier = 0
 
     public var hashValue: Int {
-        return id
+        return Int(id)
     }
 
     public var images: [TraktImageType: [TraktImageSize: String]] = [:]

@@ -9,7 +9,7 @@
 import Foundation
 
 /// 🎥 TraktMovie
-public class TraktMovie: TraktWatchable, Castable {
+public class TraktMovie: TraktObject, Castable, Descriptable, Watchable, Collectable {
 
     /// Youtube video name ex: _1MDrwqjeGo
     public var trailer: String?
@@ -34,6 +34,19 @@ public class TraktMovie: TraktWatchable, Castable {
     /// Array of TraktRelease
     public var releases: [TraktRelease]?
 
+    /// Descriptable conformance
+    public var title: String?
+    public var overview: String?
+
+    /// Watchable conformance
+    public var watched: Bool = false
+    public var watchlist: Bool = false
+    public var lastWatchedAt: NSDate? = nil
+    public var plays: UInt?
+
+    /// Collectable conformance
+    public var collectedAt: NSDate?
+
     public var type: TraktType {
         return .Movies
     }
@@ -53,6 +66,19 @@ public class TraktMovie: TraktWatchable, Castable {
 
         if let x = data?["trailer"] as? String, url = NSURL(string: x), params = url.query?.componentsSeparatedByString("v=") where params.count == 2 {
             trailer = params[1]
+        }
+        
+        title = data?["title"] as? String ?? title
+        overview = data?["overview"] as? String ?? overview
+
+        watched = data?["completed"] as? Bool ?? watched
+        plays = data?["plays"] as? UInt ?? plays
+        if let fa = data?["last_watched_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
+            lastWatchedAt = date
+        }
+
+        if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(string) {
+            collectedAt = date
         }
     }
 }

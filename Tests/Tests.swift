@@ -9,7 +9,6 @@
 import XCTest
 import AKTrakt
 
-// swiftlint:disable force_try
 class Tests: XCTestCase {
 
     let trakt = Trakt(clientId: "37558e63c821f673801c2c0788f4f877f5ed626bf5ba4493626173b3ac19b594",
@@ -28,7 +27,7 @@ class Tests: XCTestCase {
 
     func testSearchMovie() {
         let expectation = expectationWithDescription("Searching for a movie")
-        try! TraktRequestSearch(query: "avatar", type: .Movie).request(trakt) { result, error in
+        TraktRequestSearch(query: "avatar", type: .Movie).request(trakt) { result, error in
             guard let movie = result?.first as? TraktMovie else {
                 return XCTFail("Response was not a TraktMovie")
             }
@@ -47,7 +46,7 @@ class Tests: XCTestCase {
 
     func testRoute() {
         let expectation = expectationWithDescription("Searching for a show")
-        try! TraktRequestShow(id: 39105).request(trakt) { show, error in
+        TraktRequestShow(id: 39105).request(trakt) { show, error in
             XCTAssertNil(show?.overview)
             expectation.fulfill()
         }
@@ -60,7 +59,7 @@ class Tests: XCTestCase {
 
     func testRouteExtended() {
         let expectation = expectationWithDescription("Searching for a show extended")
-        try! TraktRequestShow(id: 39105, extended: .Full).request(trakt) { (show, error) in
+        TraktRequestShow(id: 39105, extended: .Full).request(trakt) { (show, error) in
             XCTAssertNotNil(show?.overview)
             expectation.fulfill()
         }
@@ -73,7 +72,7 @@ class Tests: XCTestCase {
 
     func testSearchShow() {
         let expectation = expectationWithDescription("Searching for a show")
-        try! TraktRequestSearch(query: "scandal", type: .Show).request(trakt) { result, error in
+        TraktRequestSearch(query: "scandal", type: .Show).request(trakt) { result, error in
             guard let show = result?.first as? TraktShow else {
                 return XCTFail("Response was not a TraktShow")
             }
@@ -91,7 +90,7 @@ class Tests: XCTestCase {
 
     func testTrending() {
         let expectation = expectationWithDescription("Getting trending")
-        try! TraktRequestTrending(type: .Movies, extended: .Images, pagination: TraktPagination(page: 1, limit: 28)).request(trakt) { objects, error in
+        TraktRequestTrending(type: .Movies, extended: .Images, pagination: TraktPagination(page: 1, limit: 28)).request(trakt) { objects, error in
             XCTAssertTrue(objects?.first?.watchers > 0)
             XCTAssertTrue(objects?.first?.media is TraktMovie)
             XCTAssertTrue((objects?.first?.media as? TraktMovie)?.images.count > 0)
@@ -106,26 +105,14 @@ class Tests: XCTestCase {
     }
 
     func testTokenFailure() {
-        let expectation = expectationWithDescription("Getting recommendations without token")
-        do {
-            try TraktRequestRecommendations(type: .Shows, extended: .Images, pagination: TraktPagination(page: 1, limit: 14)).request(trakt) { objects, error in
-                XCTFail()
-            }
-        } catch TraktError.TokenRequired {
-            expectation.fulfill()
-        } catch {
-            XCTFail()
-        }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        XCTAssertNil(TraktRequestRecommendations(type: .Shows, extended: .Images, pagination: TraktPagination(page: 1, limit: 14)).request(trakt) { _, error in
+
+        })
     }
 
     func testMovie() {
         let expectation = expectationWithDescription("Getting a movie by id")
-        try! TraktRequestMovie(id: 1235).request(trakt) { movie, error in
+        TraktRequestMovie(id: 1235).request(trakt) { movie, error in
             XCTAssertEqual(movie?.title, "Cervantes")
             expectation.fulfill()
         }
@@ -152,7 +139,7 @@ class Tests: XCTestCase {
 
     func testCasting() {
         let expectation = expectationWithDescription("Getting casting")
-        try! TraktRequestMediaPeople(type: .Shows, id: 39105).request(trakt) { characters, crew, error in
+        TraktRequestMediaPeople(type: .Shows, id: 39105).request(trakt) { characters, crew, error in
             XCTAssertEqual(characters?.first?.character, "Olivia Pope")
             XCTAssertEqual(characters?.first?.person.name, "Kerry Washington")
 
@@ -173,7 +160,7 @@ class Tests: XCTestCase {
     func testCredits() {
         let expectation = expectationWithDescription("Getting person's credits")
 
-        try! TraktRequestPeopleCredits(type: .Movies, id: "mel-gibson").request(trakt) { tuple, error in
+        TraktRequestPeopleCredits(type: .Movies, id: "mel-gibson").request(trakt) { tuple, error in
             guard let role = tuple?.cast?.filter({ $0.character == "Driver" }).first else {
                 return XCTFail("Cannot find actor character")
             }
@@ -189,7 +176,7 @@ class Tests: XCTestCase {
 
     func testImages() {
         let expectation = expectationWithDescription("Getting movie")
-        try! TraktRequestMovie(id: "tron-legacy-2010", extended: .Images).request(trakt) { movie, error in
+        TraktRequestMovie(id: "tron-legacy-2010", extended: .Images).request(trakt) { movie, error in
             XCTAssertTrue(movie?.images.count > 0)
 
             expectation.fulfill()
@@ -203,7 +190,7 @@ class Tests: XCTestCase {
 
     func testSeasons() {
         let expectation = expectationWithDescription("Getting seasons")
-        try! TraktRequestSeason(showId: "game-of-thrones", seasonNumber: 1).request(trakt) { episodes, error in
+        TraktRequestSeason(showId: "game-of-thrones", seasonNumber: 1).request(trakt) { episodes, error in
             XCTAssertEqual(episodes?.count, 10)
             expectation.fulfill()
         }
@@ -216,7 +203,7 @@ class Tests: XCTestCase {
 
     func testEpisodes() {
         let expectation = expectationWithDescription("Getting episodes")
-        trakt.episodes(39105, seasonNumber: 5) { episodes, error in
+        TraktRequestSeason(showId: 39105, seasonNumber: 5).request(trakt) { episodes, error in
             XCTAssertTrue(episodes?.count == 21)
             XCTAssertEqual(episodes?.last?.title, "That's My Girl")
 
@@ -231,7 +218,7 @@ class Tests: XCTestCase {
 
     func testReleases() {
         let expectation = expectationWithDescription("Getting releases")
-        try! TraktRequestMovieReleases(id: "tron-legacy-2010", country: "fr").request(trakt) { releases, error in
+        TraktRequestMovieReleases(id: "tron-legacy-2010", country: "fr").request(trakt) { releases, error in
             XCTAssertEqual(releases?.count, 1)
             expectation.fulfill()
         }
@@ -242,4 +229,3 @@ class Tests: XCTestCase {
         }
     }
 }
-// swiftlint:enable force_try
