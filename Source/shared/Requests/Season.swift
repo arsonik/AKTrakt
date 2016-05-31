@@ -21,7 +21,26 @@ public class TraktRequestSeason: TraktRequest, TraktRequest_Completion {
             }
             completion(items.flatMap {
                 TraktEpisode(data: $0)
-            }, nil)
+                }, nil)
+        }
+    }
+}
+
+public class TraktRequestSeasons: TraktRequest, TraktRequest_Completion {
+    public init(showId: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
+        super.init(path: "/shows/\(showId)/seasons/", params: extended?.value())
+    }
+
+    public func request(trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { [weak self] response in
+            guard let items = response.result.value as? [JSONHash] else {
+                return completion(nil, response.result.error)
+            }
+            completion(items.flatMap {
+                TraktSeason(data: $0)
+                }.sort {
+                    $0.number < $1.number
+                }, nil)
         }
     }
 }

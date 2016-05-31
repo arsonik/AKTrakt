@@ -45,10 +45,7 @@ public class TraktRequestShowProgress: TraktRequest, TraktRequest_Completion {
             }
             // TraktEpisode(data: nextEpisode),
             completion(seasons.flatMap {
-                guard let number = $0["number"] as? UInt else {
-                    return nil
-                }
-                return TraktSeason(number: number)
+                TraktSeason(data: $0)
             }, nil)
         }
     }

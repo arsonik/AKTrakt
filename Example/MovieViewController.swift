@@ -23,6 +23,10 @@ class MovieViewController: UIViewController {
 
         title = movie.title
 
+        if let image = view.viewWithTag(1) as? UIImageView, url = movie.imageURL(.FanArt, thatFits: image) {
+            image.af_setImageWithURL(url, placeholderImage: nil)
+        }
+
         loadCasting()
     }
 

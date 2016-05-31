@@ -12,11 +12,15 @@ import Alamofire
 public class TraktRequestTrending: TraktRequest, TraktRequest_Completion {
     var type: TraktMediaType
 
-    public init(type: TraktMediaType, extended: TraktRequestExtendedOptions = .Min, pagination: TraktPagination = TraktPagination(page: 1, limit: 100)) {
+    public init(type: TraktMediaType, extended: TraktRequestExtendedOptions? = nil, pagination: TraktPagination? = nil) {
         self.type = type
         var params: JSONHash = [:]
-        params += extended.value()
-        params += pagination.value()
+        if extended != nil {
+            params += extended!.value()
+        }
+        if pagination != nil {
+            params += pagination!.value()
+        }
         super.init(path: "/\(type.rawValue)/trending", params: params)
     }
 

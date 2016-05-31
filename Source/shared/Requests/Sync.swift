@@ -50,16 +50,7 @@ public class TraktRequestGetShowCollection: TraktRequest, TraktRequest_Completio
                         return nil
                 }
                 show.seasons = seasonsData.flatMap {
-                    guard let seasonNumber = $0["number"] as? UInt,
-                        episodesData = $0["episodes"] as? [JSONHash]
-                        else {
-                            return nil
-                    }
-                    var season = TraktSeason(number: seasonNumber)
-                    season.episodes = episodesData.flatMap {
-                        TraktEpisode(data: $0)
-                    }
-                    return season
+                    TraktSeason(data: $0)
                 }
                 return show
             }, nil)

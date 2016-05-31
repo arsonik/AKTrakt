@@ -10,32 +10,31 @@ import Foundation
 
 public class TraktPerson: TraktObject {
     public let name: String
-    public let biography: String?
-    public let birthday: NSDate?
-    public let death: NSDate?
+    public var biography: String?
+    public var birthday: NSDate?
+    public var death: NSDate?
 
     required public init?(data: JSONHash!) {
-
         guard let n = data["name"] as? String else {
             return nil
         }
-
         name = n
-        biography = data["biography"] as? String
-
-        if let value = data["birthday"] as? String, date = Trakt.dateFormatter.dateFromString(value) {
-            birthday = date
-        } else {
-            birthday = nil
-        }
-
-        if let value = data["death"] as? String, date = Trakt.dateFormatter.dateFromString(value) {
-            death = date
-        } else {
-            death = nil
-        }
 
         super.init(data: data)
+    }
+
+    public override func digest(data: JSONHash?) {
+        super.digest(data)
+
+        biography = data?["biography"] as? String
+
+        if let value = data?["birthday"] as? String, date = Trakt.dateFormatter.dateFromString(value) {
+            birthday = date
+        }
+
+        if let value = data?["death"] as? String, date = Trakt.dateFormatter.dateFromString(value) {
+            death = date
+        }
     }
 
     public func age() -> Int? {

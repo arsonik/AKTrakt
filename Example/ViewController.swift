@@ -13,16 +13,20 @@ import AlamofireImage
 class ViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
-    var items: [TraktMovie] = []
+
+    var movies: [TraktMovie] = []
+    var shows: [TraktShow] = []
 
     lazy var trakt: Trakt = {
         return Trakt.autoload()
     } ()
 
+    var loadedOnce: Bool = false
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        if items.count == 0 {
+        if !loadedOnce {
             load()
         }
 
@@ -38,10 +42,17 @@ class ViewController: UIViewController {
     }
 
     func load() {
+        loadedOnce = true
         TraktRequestTrending(type: .Movies, extended: .Images).request(trakt) { [weak self] objects, error in
             if let movies = objects?.flatMap({ $0.media as? TraktMovie }) {
-                self?.items = movies
-                self?.collectionView.reloadData()
+                self?.movies = movies
+                self?.collectionView.reloadSections(NSIndexSet(index: 0))
+            }
+        }
+        TraktRequestTrending(type: .Shows, extended: .Images, pagination: TraktPagination(page: 1, limit: 20)).request(trakt) { [weak self] objects, error in
+            if let shows = objects?.flatMap({ $0.media as? TraktShow }) {
+                self?.shows = shows
+                self?.collectionView.reloadSections(NSIndexSet(index: 1))
             }
         }
     }
@@ -49,17 +60,6 @@ class ViewController: UIViewController {
     func loadUser() {
         TraktRequestProfile().request(trakt) { user, error in
             self.title = user?["username"] as? String
-        }
-        TraktRequestShowProgress(showId: "game-of-thrones").request(trakt) { objects, error in
-            print(objects)
-        }
-
-        // Recommendations
-        TraktRequestRecommendations(type: .Movies, extended: .Images).request(trakt) { [weak self] objects, error in
-            if let movies = objects as? [TraktMovie] {
-                self?.items = movies
-                self?.collectionView.reloadData()
-            }
         }
     }
 
@@ -71,6 +71,8 @@ class ViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let vc = segue.destinationViewController as? MovieViewController, movie = sender as? TraktMovie {
             vc.movie = movie
+        } else if let vc = segue.destinationViewController as? ShowViewController, show = sender as? TraktShow {
+            vc.show = show
         }
     }
 }
@@ -87,8 +89,11 @@ extension ViewController: TraktAuthViewControllerDelegate {
 }
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 2
+    }
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.count
+        return section == 0 ? movies.count : shows.count
     }
 
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -96,12 +101,20 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     }
 
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if let image = (cell.viewWithTag(1) as? UIImageView), url = items[indexPath.row].imageURL(.Poster, thatFits: image) {
+        if indexPath.section == 0 {
+            if let image = (cell.viewWithTag(1) as? UIImageView), url = movies[indexPath.row].imageURL(.Poster, thatFits: image) {
+                image.af_setImageWithURL(url, placeholderImage: nil)
+            }
+        } else if let image = (cell.viewWithTag(1) as? UIImageView), url = shows[indexPath.row].imageURL(.Poster, thatFits: image) where indexPath.section == 1 {
             image.af_setImageWithURL(url, placeholderImage: nil)
         }
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("movie", sender: items[indexPath.row])
+        if indexPath.section == 0 {
+            performSegueWithIdentifier("movie", sender: movies[indexPath.row])
+        } else {
+            performSegueWithIdentifier("show", sender: shows[indexPath.row])
+        }
     }
 }

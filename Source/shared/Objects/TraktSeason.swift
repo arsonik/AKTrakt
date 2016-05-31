@@ -8,12 +8,28 @@
 
 import Foundation
 
-public struct TraktSeason {
+public class TraktSeason: TraktObject {
     public let number: UInt
     public var episodes: [TraktEpisode] = []
 
-    public init(number: UInt) {
+    public required init?(data: JSONHash!) {
+        guard let number = data?["number"] as? UInt else {
+            return nil
+        }
         self.number = number
+        super.init(data: data)
+    }
+
+    public override func digest(data: JSONHash?) {
+        super.digest(data)
+
+        if let episodes = data?["episodes"] as? [JSONHash] {
+            self.episodes = episodes.flatMap {
+                TraktEpisode(data: $0)
+            }.sort {
+                $0.number < $1.number
+            }
+        }
     }
 
     public var notCompleted: [Watchable] {

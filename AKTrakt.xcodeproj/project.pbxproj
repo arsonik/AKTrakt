@@ -10,6 +10,8 @@
 		17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		179029AF1CF4913D00078265 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 179029AE1CF4913D00078265 /* Default-568h@2x.png */; };
 		179029B71CF5945F00078265 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* Tests.swift */; };
+		17B1BC941CFD8E580044C7A1 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */; };
+		17B1BC951CFD8E580044C7A1 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */; };
 		17C504921CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17C504931CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17CFD26D1CF45CE00050315A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17CFD26C1CF45CE00050315A /* Main.storyboard */; };
@@ -32,6 +34,7 @@
 		179029B81CF5945F00078265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17A0DC851CF8328000A063BF /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		17B1BC921CFD7D150044C7A1 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 		17C504911CF4480600CF368A /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieViewController.swift; path = Example/MovieViewController.swift; sourceTree = "<group>"; };
 		17CFD26C1CF45CE00050315A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		17CFD2721CF45DB90050315A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				17109D071C05EF0A007D3D16 /* ViewController.swift */,
 				17C504911CF4480600CF368A /* MovieViewController.swift */,
+				17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* iOS */,
 				17109D041C05EF0A007D3D16 /* tvOS */,
@@ -470,6 +474,7 @@
 				17F050031C91E044006F448F /* AppDelegate.swift in Sources */,
 				17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */,
 				17C504931CF4480600CF368A /* MovieViewController.swift in Sources */,
+				17B1BC951CFD8E580044C7A1 /* ShowViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +493,7 @@
 				17F050011C91D789006F448F /* ViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				17C504921CF4480600CF368A /* MovieViewController.swift in Sources */,
+				17B1BC941CFD8E580044C7A1 /* ShowViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

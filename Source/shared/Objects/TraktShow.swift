@@ -25,10 +25,7 @@ public class TraktShow: TraktObject, Descriptable {
 
         if let sdata = data?["seasons"] as? [JSONHash] {
             seasons = sdata.flatMap {
-                guard let number = $0["number"] as? UInt else {
-                    return nil
-                }
-                return TraktSeason(number: number)
+                TraktSeason(data: $0)
             }
         }
 

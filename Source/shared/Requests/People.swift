@@ -11,8 +11,8 @@ import Alamofire
 
 /// Get all people for an TraktMediaType object
 public class TraktRequestMediaPeople: TraktRequest, TraktRequest_Completion {
-    public init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
-        super.init(path: "/\(type.rawValue)/\(id)/people", params: extended.value())
+    public init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
+        super.init(path: "/\(type.rawValue)/\(id)/people", params: extended?.value())
     }
 
     public func request(trakt: Trakt, completion: ([TraktCharacter]?, [TraktCrewPosition: [TraktCrew]]?, NSError?) -> Void) -> Request? {
