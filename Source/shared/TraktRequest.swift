@@ -40,10 +40,6 @@ public class TraktRequest {
         self.oAuth = oAuth
         self.headers = headers
     }
-
-    public func query<T, U>(trakt: Trakt, completion: (T, U) -> Void) -> Request? {
-        return nil
-    }
 }
 
 /// Represents the sorting headers used by Trakt

@@ -29,7 +29,7 @@ class Tests: XCTestCase {
         let expectation = expectationWithDescription("Searching for a movie")
         TraktRequestSearch(query: "avatar", type: .Movies).request(trakt) { result, error in
             guard let movie = result?.first as? TraktMovie else {
-                return XCTFail("Response was not a TraktMovie")
+                return XCTFail("Response was not a TraktMovie: \(result), error \(error)")
             }
 
             XCTAssertEqual(movie.title, "Avatar")
@@ -90,10 +90,11 @@ class Tests: XCTestCase {
 
     func testTrending() {
         let expectation = expectationWithDescription("Getting trending")
-        TraktRequestTrending(type: .Movies, extended: .Images, pagination: TraktPagination(page: 1, limit: 28)).request(trakt) { objects, error in
+        TraktRequestTrending(type: TraktMovie.self, extended: .Images, pagination: TraktPagination(page: 1, limit: 28)).request(trakt) { objects, error in
+            print(objects)
             XCTAssertTrue(objects?.first?.watchers > 0)
-            XCTAssertTrue(objects?.first?.media is TraktMovie)
-            XCTAssertTrue((objects?.first?.media as? TraktMovie)?.images.count > 0)
+            XCTAssertNotNil(objects?.first?.media)
+            XCTAssertTrue(objects?.first?.media.images.count > 0)
             XCTAssertEqual(objects?.count, 28)
             expectation.fulfill()
         }

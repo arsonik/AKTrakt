@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a tv show
-public class TraktShow: TraktObject, Descriptable {
+public class TraktShow: TraktObject, Descriptable, Trending, Watchlist {
     /// Production year
     public var year: UInt?
     /// Descriptable conformance
@@ -60,6 +60,15 @@ public class TraktShow: TraktObject, Descriptable {
 
     /// next episode to watch
     public var nextEpisode: TraktEpisode?
+
+    public static var listName: String {
+        return "shows"
+    }
+
+    public static var objectName: String {
+        return "show"
+    }
+
 
     /// CustomStringConvertible conformance
     public override var description: String {

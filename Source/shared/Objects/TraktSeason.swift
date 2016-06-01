@@ -12,7 +12,7 @@ import Foundation
 public typealias TraktSeasonNumber = UInt
 
 /// Represents a tv show season
-public class TraktSeason: TraktObject {
+public class TraktSeason: TraktObject, Watchlist {
     /// Season number
     public let number: TraktSeasonNumber
     /// Season episodes
@@ -60,5 +60,13 @@ public class TraktSeason: TraktObject {
      */
     public func episode(number: TraktEpisodeNumber) -> TraktEpisode? {
         return episodes.filter {$0.number == number} . first
+    }
+
+    public static var listName: String {
+        return "seasons"
+    }
+
+    public static var objectName: String {
+        return "season"
     }
 }

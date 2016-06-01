@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a movie
-public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable {
+public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Trending, Watchlist {
     /// Youtube video name ex: _1MDrwqjeGo
     public var trailer: String?
     /// Rating between 0-10
@@ -75,6 +75,14 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable {
         if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(string) {
             collectedAt = date
         }
+    }
+
+    public static var listName: String {
+        return "movies"
+    }
+
+    public static var objectName: String {
+        return "movie"
     }
 
     /// CustomStringConvertible conformance

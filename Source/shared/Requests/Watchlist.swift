@@ -9,45 +9,45 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestGetWatchlist: TraktRequest {
-    let type: TraktType
-    public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil, sort: TraktSortHeaders? = nil) {
+
+public class TraktRequestGetWatchlist<T: TraktObject where T: protocol<Watchlist>>: TraktRequest {
+    let type: T.Type
+    public init(type: T.Type, extended: TraktRequestExtendedOptions? = nil, sort: TraktSortHeaders? = nil) {
         self.type = type
-        super.init(path: "/sync/watchlist/\(type.rawValue)", oAuth: true, params: extended?.value(), headers: sort?.value())
+        super.init(path: "/sync/watchlist/\(type.listName)", oAuth: true, params: extended?.value(), headers: sort?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([(listedAt: NSDate, media: TraktObject)]?, NSError?) -> Void) -> Request? {
+    public func request(trakt: Trakt, completion: ([(listedAt: NSDate, media: T)]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
 
             completion(entries.flatMap {
-                let media: TraktObject? = self.type == .Movies ? TraktMovie(data: $0[self.type.single] as? JSONHash) : TraktShow(data: $0[self.type.single] as? JSONHash)
+                let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
                 guard let date = $0["listed_at"] as? String, listedAt = Trakt.datetimeFormatter.dateFromString(date) where media != nil else {
                     return nil
                 }
                 return (listedAt: listedAt, media: media!)
-                }, nil)
+            }, nil)
         }
     }
 }
 
-public class TraktRequestGetWatched: TraktRequest {
-    let type: TraktType
-    public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil) {
+public class TraktRequestGetWatched<T: TraktObject where T: protocol<Watchlist>>: TraktRequest {
+    let type: T.Type
+    public init(type: T.Type, extended: TraktRequestExtendedOptions? = nil) {
         self.type = type
-        super.init(path: "/sync/watched/\(type.rawValue)", oAuth: true, params: extended?.value())
+        super.init(path: "/sync/watched/\(type.listName)", oAuth: true, params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) -> Request? {
+    public func request(trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
             completion(entries.flatMap {
-                let media: TraktObject? = self.type == .Shows ? TraktShow(data: $0["show"] as? JSONHash) : TraktMovie(data: $0["show"] as? JSONHash)
-                return media
+                self.type.init(data: $0[self.type.objectName] as? JSONHash)
             }, nil)
         }
     }
