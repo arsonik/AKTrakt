@@ -30,7 +30,7 @@ public class TraktRequest {
 
 // Define a request that handle a completion closure
 public protocol TraktRequest_Completion {
-    typealias T
+    associatedtype T
     func request(trakt: Trakt, completion: T) -> Request?
 }
 

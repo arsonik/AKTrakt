@@ -25,12 +25,12 @@ public class TraktRequestRecommendations: TraktRequest, TraktRequest_Completion 
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
-
             let list: [TraktObject] = entries.flatMap {
-                guard let media = self.type == .Movies ? TraktMovie(data: $0 as? JSONHash) : TraktShow(data: $0 as? JSONHash) as? TraktObject else {
-                    return nil
+                if self.type == TraktMediaType.Shows {
+                    return TraktShow(data: $0)
+                } else {
+                    return TraktMovie(data: $0)
                 }
-                return media
             }
             completion(list, response.result.error)
         }

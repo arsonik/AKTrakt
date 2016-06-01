@@ -66,19 +66,15 @@ public class TraktAuthenticationViewController: UIViewController, WKNavigationDe
     public func webView(webView: WKWebView, decidePolicyForNavigationAction navigationAction: WKNavigationAction, decisionHandler: (WKNavigationActionPolicy) -> Void) {
         if let pin = pinFromNavigation(navigationAction) {
             decisionHandler(.Cancel)
-            do {
-                TraktRequestToken(trakt: trakt, pin: pin).request(trakt) { token, error in
-                    guard token != nil else {
-                        UIAlertView(title: "", message: "Failed to get a valid token", delegate: nil, cancelButtonTitle: "OK").show()
-                        self.initWebview()
-                        return
-                    }
-
-                    self.trakt.saveToken(token!)
-                    self.delegate?.TraktAuthViewControllerDidAuthenticate(self)
+            TraktRequestToken(trakt: trakt, pin: pin).request(trakt) { token, error in
+                guard token != nil else {
+                    UIAlertView(title: "", message: "Failed to get a valid token", delegate: nil, cancelButtonTitle: "OK").show()
+                    self.initWebview()
+                    return
                 }
-            } catch {
 
+                self.trakt.saveToken(token!)
+                self.delegate?.TraktAuthViewControllerDidAuthenticate(self)
             }
             return ()
         }

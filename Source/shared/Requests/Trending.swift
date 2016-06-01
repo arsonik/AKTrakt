@@ -31,12 +31,12 @@ public class TraktRequestTrending: TraktRequest, TraktRequest_Completion {
             }
 
             let list: [(watchers: UInt, media: TraktObject)] = entries.flatMap {
-                guard let watchers = $0["watchers"] as? UInt,
-                    data = $0[self.type.single] as? JSONHash,
-                    media = self.type == .Movies ? TraktMovie(data: data) : TraktShow(data: data) as? TraktObject else {
+                let mediaData = $0[self.type.single] as? JSONHash
+                let media: TraktObject? = self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)
+                guard let watchers = $0["watchers"] as? UInt where media != nil else {
                     return nil
                 }
-                return (watchers: watchers, media: media)
+                return (watchers: watchers, media: media!)
             }
             completion(list, response.result.error)
         }

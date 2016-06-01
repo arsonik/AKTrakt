@@ -78,23 +78,22 @@ public class TraktRequestPeopleCredits: TraktRequest, TraktRequest_Completion {
                     return
                 }
                 tuple.crew![position] = values.flatMap {
-                    guard let job = $0["job"] as? String,
-                        mediaData = $0[self.type.single] as? JSONHash,
-                        media = (self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)) as? TraktObject?
-                        where media != nil else {
-                            print("cannot find job or media")
-                            return nil
+                    let mediaData = $0[self.type.single] as? JSONHash
+                    let media: TraktObject? = self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)
+
+                    guard let job = $0["job"] as? String where media != nil else {
+                        print("cannot find job or media")
+                        return nil
                     }
                     return (job: job, media: media!)
                 }
             }
             // Cast
             tuple.cast = (result["cast"] as? [JSONHash])?.flatMap {
-                guard let character = $0["character"] as? String,
-                    mediaData = $0[self.type.single] as? JSONHash,
-                    media = (self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)) as? TraktObject?
-                    where media != nil else {
-                        return nil
+                let mediaData = $0[self.type.single] as? JSONHash
+                let media: TraktObject? = self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)
+                guard let character = $0["character"] as? String where media != nil else {
+                    return nil
                 }
                 return (character: character, media: media!)
             }

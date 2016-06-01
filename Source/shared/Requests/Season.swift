@@ -15,13 +15,13 @@ public class TraktRequestSeason: TraktRequest, TraktRequest_Completion {
     }
 
     public func request(trakt: Trakt, completion: ([TraktEpisode]?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { [weak self] response in
+        return trakt.request(self) { response in
             guard let items = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
             completion(items.flatMap {
                 TraktEpisode(data: $0)
-                }, nil)
+            }, nil)
         }
     }
 }
@@ -32,15 +32,15 @@ public class TraktRequestSeasons: TraktRequest, TraktRequest_Completion {
     }
 
     public func request(trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { [weak self] response in
+        return trakt.request(self) { response in
             guard let items = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
             completion(items.flatMap {
                 TraktSeason(data: $0)
-                }.sort {
-                    $0.number < $1.number
-                }, nil)
+            }.sort {
+                $0.number < $1.number
+            }, nil)
         }
     }
 }

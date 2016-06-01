@@ -33,10 +33,10 @@ public class TraktShow: TraktObject, Descriptable {
         overview = data?["overview"] as? String ?? overview
     }
 
-    public var notCompleted: [Watchable] {
-        let episodes: [TraktEpisode] = seasons.flatMap({
-            $0.notCompleted as? TraktEpisode
-        })
+    public var notCompleted: [TraktEpisode] {
+        let episodes: [TraktEpisode] = seasons.flatMap {
+            $0.notCompleted.flatMap{ $0 }
+        }
         return episodes.sort({
             $0.0.seasonNumber < $0.1.seasonNumber && $0.0.number < $0.1.number
         })

@@ -15,7 +15,7 @@ public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
     }
 
     public func request(trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { [weak self] response in
+        return trakt.request(self) { response in
             guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
                 return completion(nil, response.result.error)
             }
@@ -37,9 +37,9 @@ public class TraktRequestShowProgress: TraktRequest, TraktRequest_Completion {
     }
 
     public func request(trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
-        return trakt.request(self) { [weak self] response in
+        return trakt.request(self) { response in
             guard let data = response.result.value as? JSONHash,
-                nextEpisode = data["next_episode"] as? JSONHash,
+//                nextEpisode = data["next_episode"] as? JSONHash,
                 seasons = data["seasons"] as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }

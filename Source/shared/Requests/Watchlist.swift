@@ -23,10 +23,9 @@ public class TraktRequestGetWatchlist: TraktRequest, TraktRequest_Completion {
             }
 
             completion(entries.flatMap {
-                guard let date = $0["listed_at"] as? String,
-                    listedAt = Trakt.datetimeFormatter.dateFromString(date),
-                    media = (self.type == .Movies ? TraktMovie(data: $0["movie"] as? JSONHash) : TraktShow(data: $0["show"] as? JSONHash)) as? TraktObject? where media != nil else {
-                        return nil
+                let media: TraktObject? = self.type == .Movies ? TraktMovie(data: $0[self.type.single] as? JSONHash) : TraktShow(data: $0[self.type.single] as? JSONHash)
+                guard let date = $0["listed_at"] as? String, listedAt = Trakt.datetimeFormatter.dateFromString(date) where media != nil else {
+                    return nil
                 }
                 return (listedAt: listedAt, media: media!)
                 }, nil)
