@@ -1,6 +1,4 @@
-<p align="center">
-    ![alt tag](logo-swift-trakt.png)
-</p>
+![alt tag](logo-swift-trakt.png)
 
 # AKTrakt
 
@@ -31,9 +29,9 @@ pod "AKTrakt"
 
 ## Screenshots
 
-![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/TVlogin.png)
-![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/TVmovies.png)
-![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Example/Screenshots/iOSmovies.png)
+![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Screenshots/TVlogin.png)
+![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Screenshots/TVmovies.png)
+![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Screenshots/iOSmovies.png)
 
 ## Code
 
