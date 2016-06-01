@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a person
 public class TraktPerson: TraktObject {
     /// Person's name
     public let name: String
@@ -18,6 +19,7 @@ public class TraktPerson: TraktObject {
     /// Person's death
     public var death: NSDate?
 
+    /// - seealso: TraktObject.init?(data: JSONHash!)
     required public init?(data: JSONHash!) {
         guard let n = data["name"] as? String else {
             return nil
@@ -27,6 +29,7 @@ public class TraktPerson: TraktObject {
         super.init(data: data)
     }
 
+    /// - seealso: digest(data: JSONHash!)
     public override func digest(data: JSONHash?) {
         super.digest(data)
 

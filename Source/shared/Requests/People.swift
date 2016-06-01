@@ -9,9 +9,9 @@
 import Foundation
 import Alamofire
 
-/// Get all people for an TraktMediaType object
+/// Get all people for an TraktType object
 public class TraktRequestMediaPeople: TraktRequest, TraktRequest_Completion {
-    public init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
+    public init(type: TraktType, id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
         super.init(path: "/\(type.rawValue)/\(id)/people", params: extended?.value())
     }
 
@@ -58,9 +58,9 @@ public class TraktRequestPeople: TraktRequest, TraktRequest_Completion {
 
 public typealias CreditsCompletionObject = (cast: [(character: String, media: TraktObject)]?, crew: [TraktCrewPosition: [(job: String, media: TraktObject)]]?)
 public class TraktRequestPeopleCredits: TraktRequest, TraktRequest_Completion {
-    let type: TraktMediaType
+    let type: TraktType
 
-    public init(type: TraktMediaType, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
+    public init(type: TraktType, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
         self.type = type
         super.init(path: "/people/\(id)/\(type.rawValue)", params: extended.value())
     }

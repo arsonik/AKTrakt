@@ -8,7 +8,10 @@
 
 import Foundation
 
+/// Episode number alias
 public typealias TraktEpisodeNumber = UInt
+
+/// Represents a tv show episode
 public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
     /// Episode's number
     public let number: TraktEpisodeNumber
@@ -16,12 +19,10 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
     public var seasonNumber: UInt?
     /// Episode's first aired date
     public var firstAired: NSDate?
-
     /// Descriptable conformance
     public var title: String?
     /// Descriptable conformance
     public var overview: String?
-
     /// Watchable conformance
     public var watched: Bool = false
     /// Watchable conformance
@@ -30,10 +31,10 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
     public var lastWatchedAt: NSDate?
     /// Watchable conformance
     public var plays: UInt?
-
     /// Collectable conformance
     public var collectedAt: NSDate?
 
+    /// - seealso: TraktObject.init?(data: JSONHash!)
     required public init?(data: JSONHash!) {
         guard let en = data?["number"] as? UInt else {
             return nil
@@ -44,6 +45,7 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
         super.init(data: data)
     }
 
+    /// - seealso: digest(data: JSONHash!)
     override public func digest(data: JSONHash!) {
         super.digest(data)
 

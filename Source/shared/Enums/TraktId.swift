@@ -8,14 +8,28 @@
 
 import Foundation
 
+/// Represents an object identifier
 public enum TraktId: String {
+    /// Imdb identifier
     case Imdb = "imdb"
+    /// Slug identifier (trakt)
     case Slug = "slug"
+    /// Tmdb identifier
     case Tmdb = "tmdb"
+    /// Trakt identifier
     case Trakt = "trakt"
+    /// Tvdb identifier
     case Tvdb = "tvdb"
+    /// Tvrage identifier
     case Tvrage = "tvrage"
 
+    /**
+     Extract identifiers: value from trakt data
+
+     - parameter data: JSONHash
+
+     - returns: parsed key:value
+     */
     static func extractIds(data: JSONHash?) -> [TraktId: AnyObject]? {
         var ids: [TraktId: AnyObject] = [:]
         (data?["ids"] as? JSONHash)?.forEach { id, value in

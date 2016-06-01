@@ -13,10 +13,23 @@ public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, 
 
 ///	Generate new device codes
 public class TraktRequestGenerateCode: TraktRequest, TraktRequest_Completion {
+    /**
+     Init with a clientID
+
+     - parameter clientId: clientId
+     */
     public init(clientId: String) {
         super.init(method: "POST", path: "/oauth/device/code", params: ["client_id": clientId])
     }
 
+    /**
+     Execute request
+
+     - parameter trakt:      trakt client
+     - parameter completion: closure GeneratedCodeResponse, NSError
+
+     - returns: Alamofire.Request
+     */
     public func request(trakt: Trakt, completion: (GeneratedCodeResponse?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard
@@ -35,6 +48,12 @@ public class TraktRequestGenerateCode: TraktRequest, TraktRequest_Completion {
 
 ///	Poll for the access_token
 public class TraktRequestPollDevice: TraktRequest, TraktRequest_Completion {
+    /**
+     Init
+
+     - parameter trakt:      trakt client
+     - parameter deviceCode: deviceCode
+     */
     public init(trakt: Trakt, deviceCode: String) {
         super.init(method: "POST", path: "/oauth/device/token", params: [
             "client_id": trakt.clientId,
@@ -44,6 +63,14 @@ public class TraktRequestPollDevice: TraktRequest, TraktRequest_Completion {
         attemptLeft = 1
     }
 
+    /**
+     Request
+
+     - parameter trakt:      trakt
+     - parameter completion: closure TraktToken?, NSError?
+
+     - returns: Alamofire.Request
+     */
     public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
@@ -53,6 +80,12 @@ public class TraktRequestPollDevice: TraktRequest, TraktRequest_Completion {
 
 ///	Exchange code for access_token
 public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
+    /**
+     Init
+
+     - parameter trakt: trakt client
+     - parameter pin:   pin string
+     */
     public init(trakt: Trakt, pin: String) {
         super.init(method: "POST", path: "/oauth/token", params: [
             "code": pin,
@@ -63,6 +96,14 @@ public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
         ])
     }
 
+    /**
+     Request
+
+     - parameter trakt:      trakt client
+     - parameter completion: closure TraktToken?, NSError?
+
+     - returns: Alamofire.Request
+     */
     public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
@@ -72,10 +113,23 @@ public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
 
 ///	Get a user profile
 public class TraktRequestProfile: TraktRequest, TraktRequest_Completion {
+    /**
+     Init
+
+     - parameter username: username or self("me") if nil
+     */
     public init(username: String = "me") {
         super.init(path: "/users/\(username)", oAuth: true)
     }
 
+    /**
+     Request
+
+     - parameter trakt:      trakt client
+     - parameter completion: closure JSONHash?, NSError?
+
+     - returns: Alamofire.Request
+     */
     public func request(trakt: Trakt, completion: (JSONHash?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(response.result.value as? JSONHash, response.result.error)

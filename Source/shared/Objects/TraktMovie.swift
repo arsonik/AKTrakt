@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// 🎥 TraktMovie
+/// Represents a movie
 public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable {
     /// Youtube video name ex: _1MDrwqjeGo
     public var trailer: String?
@@ -24,23 +24,24 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable {
     public var runtime: Int?
     /// Array of genres
     public var genres: [String]?
-
     /// Array of TraktRelease
     public var releases: [TraktRelease]?
-
     /// Descriptable conformance
     public var title: String?
     public var overview: String?
-
     /// Watchable conformance
     public var watched: Bool = false
+    /// Watchable conformance
     public var watchlist: Bool = false
+    /// Watchable conformance
     public var lastWatchedAt: NSDate? = nil
+    /// Watchable conformance
     public var plays: UInt?
 
     /// Collectable conformance
     public var collectedAt: NSDate?
 
+    /// - seealso: digest(data: JSONHash!)
     override public func digest(data: JSONHash?) {
         super.digest(data)
 
@@ -70,5 +71,10 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable {
         if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(string) {
             collectedAt = date
         }
+    }
+
+    /// CustomStringConvertible conformance
+    public override var description: String {
+        return "TraktMovie(\(title))"
     }
 }

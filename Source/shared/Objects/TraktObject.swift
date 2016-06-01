@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// Trakt identifier type
+/// Trakt identifier alias
 public typealias TraktIdentifier = UInt
 
 /**
@@ -23,20 +23,27 @@ public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
 
 /// Descriptable protocol
 public protocol Descriptable {
+    /// object title
     var title: String? { get set }
+    /// object overview
     var overview: String? { get set }
 }
 
 /// Watchable protocol
 public protocol Watchable {
+    /// boolean indicating if the object has been watched
     var watched: Bool { get set }
+    /// boolean indicating if the object is in watchlist
     var watchlist: Bool { get set }
+    /// date of the last play
     var lastWatchedAt: NSDate? { get set }
+    /// number of times this object has been played
     var plays: UInt? { get set }
 }
 
 /// Collectable protocol
 public protocol Collectable {
+    /// date added to collection
     var collectedAt: NSDate? { get set }
 }
 
@@ -48,18 +55,19 @@ public class TraktObject: CustomStringConvertible, Hashable {
             id = ids[TraktId.Trakt] as? TraktIdentifier ?? id
         }
     }
-
     /// Object trakt.tv identifier
     public var id: TraktIdentifier = 0
-
     /// Hashable conformance
     public var hashValue: Int {
         return Int(id)
     }
-
     /// Images's URL by type and size
     public var images: [TraktImageType: [TraktImageSize: NSURL]] = [:]
 
+    /**
+     Init object with data
+     - parameter data: JSONHash
+     */
     public required init?(data: JSONHash!) {
         digest(data)
     }
@@ -91,12 +99,8 @@ public class TraktObject: CustomStringConvertible, Hashable {
      - parameter thatFits: the image view to be filled
      - returns: An optional NSURL
      */
-    public func imageURL(type: TraktImageType, thatFits imageView: UIImageView?) -> NSURL? {
-        guard let image = imageView,
-            // sort by area ascending
-            sizes = TraktImageType.sizes[type]?.sort({$0.0.1.area < $0.1.1.area}) else {
-                return nil
-        }
+    public func imageURL(type: TraktImageType, thatFits image: UIImageView) -> NSURL? {
+        let sizes = type.sizes.sort({$0.0.1.area < $0.1.1.area})
         let area = (image.frame.width * image.frame.height) * UIScreen.mainScreen().scale
         var selectedSize: TraktImageSize! = nil
         for size in sizes {

@@ -10,9 +10,9 @@ import Foundation
 import Alamofire
 
 public class TraktRequestTrending: TraktRequest, TraktRequest_Completion {
-    var type: TraktMediaType
+    var type: TraktType
 
-    public init(type: TraktMediaType, extended: TraktRequestExtendedOptions? = nil, pagination: TraktPagination? = nil) {
+    public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil, pagination: TraktPagination? = nil) {
         self.type = type
         var params: JSONHash = [:]
         if extended != nil {

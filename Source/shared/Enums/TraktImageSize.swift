@@ -8,8 +8,12 @@
 
 import Foundation
 
+/// Represents the possible image size
 public enum TraktImageSize: String {
+    /// Full
     case Full = "full"
+    /// Medium
     case Medium = "medium"
+    /// Thumb
     case Thumb = "thumb"
 }

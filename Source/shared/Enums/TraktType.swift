@@ -8,23 +8,21 @@
 
 import Foundation
 
-public enum TraktMediaType: String {
-    case Movies = "movies"
-    case Shows = "shows"
-
-    public var single: String {
-        return self == .Movies ? "movie" : "show"
-    }
-}
-
+/// Represents a trakt object type
 public enum TraktType: String {
+    /// Movies
     case Movies = "movies"
+    /// Shows
     case Shows = "shows"
+    /// Seasons
     case Seasons = "seasons"
+    /// Episodes
     case Episodes = "episodes"
+    /// Persons
     case Persons = "person"
 
-    public static let singularMap: [String: TraktType] = [
+    /// Singular values foreach type
+    static let singularMap: [String: TraktType] = [
         "movie": .Movies,
         "show":	.Shows,
         "season": .Seasons,
@@ -32,6 +30,11 @@ public enum TraktType: String {
         "people": .Persons
     ]
 
+    /**
+     Init with a singular type
+
+     - parameter single: singular type
+     */
     public init?(single: String) {
         guard let type = TraktType.singularMap[single] else {
             return nil
@@ -39,18 +42,9 @@ public enum TraktType: String {
         self = type
     }
 
+    /// Get singular string value
     public var single: String {
         return TraktType.singularMap.filter({ $0.1 == self }).first!.0
     }
 }
 
-public enum TraktCrewPosition: String {
-    case Production = "production"
-    case Art = "art"
-    case Crew = "crew"
-    case CostumeMakeUp = "costume & make-up"
-    case Directing = "directing"
-    case Writing = "writing"
-    case Sound = "sound"
-    case Camera = "camera"
-}

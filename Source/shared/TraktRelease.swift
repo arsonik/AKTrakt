@@ -8,23 +8,24 @@
 
 import Foundation
 
+/// Represents a movie release
 public struct TraktRelease: CustomStringConvertible {
-
     /// Country code
     public let countryCode: String
-
     /// Certification
     public let certification: String
-
     /// Date
     public let date: NSDate
-
     /// Type
     public let type: TraktReleaseType
-
     /// Note
     public let note: String!
 
+    /**
+     Init with data
+
+     - parameter data: data
+     */
     public init?(data: JSONHash?) {
         guard
             let country = data?["country"] as? String,
@@ -44,18 +45,8 @@ public struct TraktRelease: CustomStringConvertible {
         self.note = data?["note"] as? String
     }
 
+    /// CustomStringConvertible conformance
     public var description: String {
         return "TraktRelease \(countryCode) \(type.rawValue) \(date) \(note) \(certification)"
     }
-}
-
-
-public enum TraktReleaseType: String {
-    case Unknown = "unknown"
-    case Premiere = "premiere"
-    case Limited = "limited"
-    case Theatrical = "theatrical"
-    case Digital = "digital"
-    case Physical = "physical"
-    case Tv = "tv"
 }

@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 public class TraktRequestGetWatchlist: TraktRequest, TraktRequest_Completion {
-    let type: TraktMediaType
-    public init(type: TraktMediaType, extended: TraktRequestExtendedOptions? = nil, sort: TraktSortHeaders? = nil) {
+    let type: TraktType
+    public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil, sort: TraktSortHeaders? = nil) {
         self.type = type
         super.init(path: "/sync/watchlist/\(type.rawValue)", oAuth: true, params: extended?.value(), headers: sort?.value())
     }
@@ -34,8 +34,8 @@ public class TraktRequestGetWatchlist: TraktRequest, TraktRequest_Completion {
 }
 
 public class TraktRequestGetWatched: TraktRequest, TraktRequest_Completion {
-    let type: TraktMediaType
-    public init(type: TraktMediaType, extended: TraktRequestExtendedOptions? = nil) {
+    let type: TraktType
+    public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil) {
         self.type = type
         super.init(path: "/sync/watched/\(type.rawValue)", oAuth: true, params: extended?.value())
     }
@@ -46,7 +46,7 @@ public class TraktRequestGetWatched: TraktRequest, TraktRequest_Completion {
                 return completion(nil, response.result.error)
             }
             completion(entries.flatMap {
-                let media: TraktObject? = self.type == TraktMediaType.Shows ? TraktShow(data: $0["show"] as? JSONHash) : TraktMovie(data: $0["show"] as? JSONHash)
+                let media: TraktObject? = self.type == .Shows ? TraktShow(data: $0["show"] as? JSONHash) : TraktMovie(data: $0["show"] as? JSONHash)
                 return media
             }, nil)
         }

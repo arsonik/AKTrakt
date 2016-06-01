@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a character with the person related to it
 public struct TraktCharacter {
     /// Character's name
     public let character: String
@@ -15,6 +16,10 @@ public struct TraktCharacter {
     /// Person's object
     public let person: TraktPerson
 
+    /*
+    Init with data
+    - parameter data: JSONHash
+    */
     init?(data: JSONHash) {
         guard let n = data["character"] as? String, p = data["person"] as? JSONHash, pers = TraktPerson(data: p) else {
             return nil

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a crew member with the person related to it
 public struct TraktCrew {
     /// Person's job
     public let job: String
@@ -15,6 +16,10 @@ public struct TraktCrew {
     /// Person's object
     public let person: TraktPerson
 
+    /*
+     Init with data
+     - parameter data: JSONHash
+     */
     init?(data: JSONHash) {
         guard let n = data["job"] as? String, p = data["person"] as? JSONHash, pers = TraktPerson(data: p) else {
             return nil
