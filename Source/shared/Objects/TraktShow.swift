@@ -19,7 +19,11 @@ public class TraktShow: TraktObject, Descriptable {
     /// Seasons
     public var seasons: [TraktSeason] = []
 
-    /// - seealso: digest(data: JSONHash!)
+    /**
+     Digest data
+
+     - parameter data: data
+     */
     override public func digest(data: JSONHash?) {
         super.digest(data)
 

@@ -4,8 +4,17 @@ After the revision 1.0.0
 
 ---
 
+# 1.0.1
+
+### Added
+- Code documentation
+#### Updated
+- enum TraktMediaType removed use TraktType instead
+
+---
+
 # 1.0.0
-Almost everything has been refactored in this version.
+- Almost everything has been refactored in this version.
 Please look at the example project and tests for more info.
 
 ---

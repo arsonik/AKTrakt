@@ -9,16 +9,30 @@
 import Foundation
 import Alamofire
 
-// Define a protocol request used by the api
+// Define a request (abstract) used by the api
 public class TraktRequest {
+    /// HTTP Method
     public let method: String
+    /// Path
     public let path: String
+    /// Params
     public let params: JSONHash?
+    /// OAuth required ?
     public let oAuth: Bool
+    /// HTTP Headers
     public let headers: [String: String]?
-
+    /// Numbers of attemps in case of failure
     public var attemptLeft: Int = 5
 
+    /**
+     Init
+
+     - parameter method:  method
+     - parameter path:    path
+     - parameter params:  params
+     - parameter oAuth:   oAuth
+     - parameter headers: headers
+     */
     public init(method: String = "GET", path: String, params: JSONHash? = nil, oAuth: Bool = false, headers: [String: String]? = [:]) {
         self.method = method
         self.path = path
@@ -26,26 +40,22 @@ public class TraktRequest {
         self.oAuth = oAuth
         self.headers = headers
     }
+
+    public func query<T, U>(trakt: Trakt, completion: (T, U) -> Void) -> Request? {
+        return nil
+    }
 }
 
-// Define a request that handle a completion closure
-public protocol TraktRequest_Completion {
-    associatedtype T
-    func request(trakt: Trakt, completion: T) -> Request?
-}
-
-public protocol TraktURLParameters {
-    func value() -> JSONHash
-}
-
-public protocol TraktRequestHeaders {
-    func value() -> [String: String]
-}
-
+/// Represents the sorting headers used by Trakt
 public struct TraktSortHeaders: TraktRequestHeaders {
     public let sortBy: String = "rank"
     public let sortHow: String = "asc"
 
+    /**
+     Get values according to protocol
+
+     - returns: JSONHash
+     */
     public func value() -> [String : String] {
         return [
             "X-Sort-By": sortBy,
@@ -54,15 +64,29 @@ public struct TraktSortHeaders: TraktRequestHeaders {
     }
 }
 
+/// Represents the pagination params used by Trakt
 public struct TraktPagination: TraktURLParameters {
+    /// current page
     var page: Int = 1
+    /// current limit
     var limit: Int = 10
 
+    /**
+     Init
+
+     - parameter page:  page
+     - parameter limit: limit
+     */
     public init(page: Int, limit: Int) {
         self.page = page
         self.limit = limit
     }
 
+    /**
+     Get values according to protocol
+
+     - returns: JSONHash
+     */
     public func value() -> JSONHash {
         return [
             "page": page,
@@ -71,6 +95,7 @@ public struct TraktPagination: TraktURLParameters {
     }
 }
 
+/// Represents the extended params used by Trakt
 public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
     public let rawValue: Int
 
@@ -85,6 +110,11 @@ public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
     public static let NoSeasons = TraktRequestExtendedOptions(rawValue: 1 << 3)
     public static let Episodes = TraktRequestExtendedOptions(rawValue: 1 << 4)
 
+    /**
+     Get values according to protocol
+
+     - returns: JSONHash
+     */
     public func value() -> JSONHash {
         var list: [String] = []
         if contains(.Full) {
@@ -106,12 +136,15 @@ public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
     }
 }
 
-public enum TraktError: ErrorType {
-    case TokenRequired
-    case UrlError
-}
-
 extension Trakt {
+    /**
+     Execute a request within the client
+
+     - parameter request:           request to be executed
+     - parameter completionHandler: completion handler
+
+     - returns: Alamofire.Request
+     */
     public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) -> Request? {
         do {
             guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(request.path)") else {

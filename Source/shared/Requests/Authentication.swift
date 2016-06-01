@@ -12,7 +12,7 @@ import Alamofire
 public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, verificationUrl: String, expiresAt: NSDate, interval: NSTimeInterval)
 
 ///	Generate new device codes
-public class TraktRequestGenerateCode: TraktRequest, TraktRequest_Completion {
+public class TraktRequestGenerateCode: TraktRequest {
     /**
      Init with a clientID
 
@@ -47,7 +47,7 @@ public class TraktRequestGenerateCode: TraktRequest, TraktRequest_Completion {
 }
 
 ///	Poll for the access_token
-public class TraktRequestPollDevice: TraktRequest, TraktRequest_Completion {
+public class TraktRequestPollDevice: TraktRequest {
     /**
      Init
 
@@ -79,7 +79,7 @@ public class TraktRequestPollDevice: TraktRequest, TraktRequest_Completion {
 }
 
 ///	Exchange code for access_token
-public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
+public class TraktRequestToken: TraktRequest {
     /**
      Init
 
@@ -112,7 +112,7 @@ public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
 }
 
 ///	Get a user profile
-public class TraktRequestProfile: TraktRequest, TraktRequest_Completion {
+public class TraktRequestProfile: TraktRequest {
     /**
      Init
 

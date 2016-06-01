@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestAddToHistory: TraktRequest, TraktRequest_Completion {
+public class TraktRequestAddToHistory: TraktRequest {
     public init(list: [TraktType: [(traktId: TraktIdentifier, watchedAt: NSDate)]]) {
         var params: JSONHash = [:]
         list.forEach { type, values in
@@ -61,7 +61,7 @@ public class TraktRequestAddToHistory: TraktRequest, TraktRequest_Completion {
     }
 }
 
-public class TraktRequestRemoveFromHistory: TraktRequest, TraktRequest_Completion {
+public class TraktRequestRemoveFromHistory: TraktRequest {
     public init(list: [TraktType: [TraktIdentifier]]) {
         var params: JSONHash = [:]
         list.forEach { type, values in

@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestTrending: TraktRequest, TraktRequest_Completion {
-    var type: TraktType
+public class TraktRequestTrending: TraktRequest {
+    let type: TraktType
 
     public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil, pagination: TraktPagination? = nil) {
         self.type = type

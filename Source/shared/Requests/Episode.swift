@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestEpisode: TraktRequest, TraktRequest_Completion {
+public class TraktRequestEpisode: TraktRequest {
     public init(showId: AnyObject, seasonNumber: UInt, episodeNumber: UInt, extended: TraktRequestExtendedOptions? = nil) {
         super.init(path: "/shows/\(showId)/seasons/\(seasonNumber)/episodes/\(episodeNumber)", params: extended?.value())
     }

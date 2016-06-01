@@ -9,8 +9,8 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestRecommendations: TraktRequest, TraktRequest_Completion {
-    var type: TraktType
+public class TraktRequestRecommendations: TraktRequest {
+    let type: TraktType
 
     public init(type: TraktType, extended: TraktRequestExtendedOptions = .Min, pagination: TraktPagination = TraktPagination(page: 1, limit: 100)) {
         self.type = type
@@ -37,7 +37,7 @@ public class TraktRequestRecommendations: TraktRequest, TraktRequest_Completion 
     }
 }
 
-public class TraktRequestRecommendationsHide: TraktRequest, TraktRequest_Completion {
+public class TraktRequestRecommendationsHide: TraktRequest {
     public init(type: TraktType, id: AnyObject) {
         super.init(method: "DELETE", path: "/recommendations/\(type.rawValue)/\(id)", oAuth: true)
     }

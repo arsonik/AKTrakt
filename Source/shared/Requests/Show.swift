@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
+public class TraktRequestShow: TraktRequest {
     public init(id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
         super.init(path: "/shows/\(id)", params: extended?.value())
     }
@@ -24,7 +24,7 @@ public class TraktRequestShow: TraktRequest, TraktRequest_Completion {
     }
 }
 
-public class TraktRequestShowProgress: TraktRequest, TraktRequest_Completion {
+public class TraktRequestShowProgress: TraktRequest {
     public init(showId: AnyObject, extended: TraktRequestExtendedOptions? = nil, hidden: Bool = false, specials: Bool = false) {
         var params: JSONHash = [
             "hidden": hidden,

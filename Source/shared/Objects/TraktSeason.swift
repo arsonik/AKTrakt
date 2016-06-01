@@ -18,7 +18,11 @@ public class TraktSeason: TraktObject {
     /// Season episodes
     public var episodes: [TraktEpisode] = []
 
-    /// - seealso: TraktObject.init?(data: JSONHash!)
+    /**
+     Init with data
+
+     - parameter data: data
+     */
     public required init?(data: JSONHash!) {
         guard let number = data?["number"] as? TraktSeasonNumber else {
             return nil
@@ -27,7 +31,11 @@ public class TraktSeason: TraktObject {
         super.init(data: data)
     }
 
-    /// - seealso: digest(data: JSONHash!)
+    /**
+     Digest data
+
+     - parameter data: data
+     */
     public override func digest(data: JSONHash?) {
         super.digest(data)
 

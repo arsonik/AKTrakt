@@ -19,7 +19,11 @@ public class TraktPerson: TraktObject {
     /// Person's death
     public var death: NSDate?
 
-    /// - seealso: TraktObject.init?(data: JSONHash!)
+    /**
+     Init with data
+
+     - parameter data: data
+     */
     required public init?(data: JSONHash!) {
         guard let n = data["name"] as? String else {
             return nil
@@ -29,7 +33,11 @@ public class TraktPerson: TraktObject {
         super.init(data: data)
     }
 
-    /// - seealso: digest(data: JSONHash!)
+    /**
+     Digest data
+
+     - parameter data: data
+     */
     public override func digest(data: JSONHash?) {
         super.digest(data)
 

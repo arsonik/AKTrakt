@@ -9,29 +9,8 @@
 import Foundation
 import Alamofire
 
-public enum TraktRequestSearchType: String {
-    case Movie = "movie"
-    case Show = "show"
-    case Episode = "episode"
-    case Person = "person"
-    // case List = "list" // Todo
-
-    var classType: TraktObject.Type? {
-        switch self {
-        case .Movie:
-            return TraktMovie.self
-        case .Show:
-            return TraktShow.self
-        case .Person:
-            return TraktPerson.self
-        case .Episode:
-            return TraktEpisode.self
-        }
-    }
-}
-
-public class TraktRequestSearch: TraktRequest, TraktRequest_Completion {
-    public init(query: String, type: TraktRequestSearchType? = nil, year: UInt? = nil, pagination: TraktPagination? = nil) {
+public class TraktRequestSearch: TraktRequest {
+    public init(query: String, type: TraktType? = nil, year: UInt? = nil, pagination: TraktPagination? = nil) {
         var params: JSONHash = [
             "query": query
         ]
@@ -39,7 +18,7 @@ public class TraktRequestSearch: TraktRequest, TraktRequest_Completion {
             params["year"] = year!
         }
         if type != nil {
-            params["type"] = type!.rawValue
+            params["type"] = type!.single
         }
         if pagination != nil {
             params += pagination!.value()
@@ -54,7 +33,7 @@ public class TraktRequestSearch: TraktRequest, TraktRequest_Completion {
             }
 
             completion(entries.flatMap {
-                guard let type = TraktRequestSearchType(rawValue: $0["type"] as? String ?? "") else {
+                guard let type = TraktType(rawValue: $0["type"] as? String ?? "") else {
                     return nil
                 }
                 return type.classType?.init(data: $0[type.rawValue] as? JSONHash)

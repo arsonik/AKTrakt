@@ -41,7 +41,11 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable {
     /// Collectable conformance
     public var collectedAt: NSDate?
 
-    /// - seealso: digest(data: JSONHash!)
+    /**
+     Digest data
+
+     - parameter data: data
+     */
     override public func digest(data: JSONHash?) {
         super.digest(data)
 

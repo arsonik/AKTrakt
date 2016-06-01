@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Key: Value typealias dictionary
 public typealias JSONHash = [String: AnyObject!]
 
 // Allow to merge JSONHash

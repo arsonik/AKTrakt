@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestMovie: TraktRequest, TraktRequest_Completion {
+public class TraktRequestMovie: TraktRequest {
     public init(id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
         super.init(path: "/movies/\(id)", params: extended?.value())
     }
@@ -22,7 +22,7 @@ public class TraktRequestMovie: TraktRequest, TraktRequest_Completion {
 }
 
 
-public class TraktRequestMovieReleases: TraktRequest, TraktRequest_Completion {
+public class TraktRequestMovieReleases: TraktRequest {
     public init(id: AnyObject, country: String? = nil, extended: TraktRequestExtendedOptions? = nil) {
         super.init(path: "/movies/\(id)/releases" + (country != nil ? "/\(country!)" : ""), params: extended?.value())
     }

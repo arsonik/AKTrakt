@@ -46,5 +46,20 @@ public enum TraktType: String {
     public var single: String {
         return TraktType.singularMap.filter({ $0.1 == self }).first!.0
     }
-}
 
+    /// Associated TraktObject type
+    public var classType: TraktObject.Type? {
+        switch self {
+        case .Movies:
+            return TraktMovie.self
+        case .Shows:
+            return TraktShow.self
+        case .Seasons:
+            return TraktSeason.self
+        case .Persons:
+            return TraktPerson.self
+        case .Episodes:
+            return TraktEpisode.self
+        }
+    }
+}

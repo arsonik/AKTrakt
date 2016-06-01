@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestGetMovieCollection: TraktRequest, TraktRequest_Completion {
+public class TraktRequestGetMovieCollection: TraktRequest {
     public init(extended: TraktRequestExtendedOptions = .Min) {
         super.init(path: "/sync/collection/movies", params: extended.value(), oAuth: true)
     }
@@ -34,7 +34,7 @@ public class TraktRequestGetMovieCollection: TraktRequest, TraktRequest_Completi
     }
 }
 
-public class TraktRequestGetShowCollection: TraktRequest, TraktRequest_Completion {
+public class TraktRequestGetShowCollection: TraktRequest {
     public init(extended: TraktRequestExtendedOptions = .Min) {
         super.init(path: "/sync/collection/shows", params: extended.value(), oAuth: true)
     }

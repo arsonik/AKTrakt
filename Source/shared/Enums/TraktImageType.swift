@@ -29,7 +29,7 @@ public enum TraktImageType: String {
     /// Screenshot
     case Screenshot = "screenshot"
 
-    /// Return available size for type
+    /// Return available sizes for type
     var sizes: [TraktImageSize: CGSize] {
         switch self {
         case .Poster:

@@ -34,7 +34,11 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
     /// Collectable conformance
     public var collectedAt: NSDate?
 
-    /// - seealso: TraktObject.init?(data: JSONHash!)
+    /**
+     Init with data
+
+     - parameter data: data
+     */
     required public init?(data: JSONHash!) {
         guard let en = data?["number"] as? UInt else {
             return nil
@@ -45,7 +49,11 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
         super.init(data: data)
     }
 
-    /// - seealso: digest(data: JSONHash!)
+    /**
+     Digest data
+
+     - parameter data: data
+     */
     override public func digest(data: JSONHash!) {
         super.digest(data)
 

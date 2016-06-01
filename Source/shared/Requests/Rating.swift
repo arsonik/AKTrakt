@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestAddRatings: TraktRequest, TraktRequest_Completion {
+public class TraktRequestAddRatings: TraktRequest {
     public init(ratings: [TraktType: [(traktId: TraktIdentifier, rating: UInt, ratedAt: NSDate)]]) {
         var params: JSONHash = [:]
         ratings.forEach { type, values in

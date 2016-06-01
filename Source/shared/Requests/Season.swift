@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestSeason: TraktRequest, TraktRequest_Completion {
+public class TraktRequestSeason: TraktRequest {
     public init(showId: AnyObject, seasonNumber: UInt, extended: TraktRequestExtendedOptions? = nil) {
         super.init(path: "/shows/\(showId)/seasons/\(seasonNumber)", params: extended?.value())
     }
@@ -26,7 +26,7 @@ public class TraktRequestSeason: TraktRequest, TraktRequest_Completion {
     }
 }
 
-public class TraktRequestSeasons: TraktRequest, TraktRequest_Completion {
+public class TraktRequestSeasons: TraktRequest {
     public init(showId: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
         super.init(path: "/shows/\(showId)/seasons/", params: extended?.value())
     }

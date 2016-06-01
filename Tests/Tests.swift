@@ -27,7 +27,7 @@ class Tests: XCTestCase {
 
     func testSearchMovie() {
         let expectation = expectationWithDescription("Searching for a movie")
-        TraktRequestSearch(query: "avatar", type: .Movie).request(trakt) { result, error in
+        TraktRequestSearch(query: "avatar", type: .Movies).request(trakt) { result, error in
             guard let movie = result?.first as? TraktMovie else {
                 return XCTFail("Response was not a TraktMovie")
             }
@@ -72,7 +72,7 @@ class Tests: XCTestCase {
 
     func testSearchShow() {
         let expectation = expectationWithDescription("Searching for a show")
-        TraktRequestSearch(query: "scandal", type: .Show).request(trakt) { result, error in
+        TraktRequestSearch(query: "scandal", type: .Shows).request(trakt) { result, error in
             guard let show = result?.first as? TraktShow else {
                 return XCTFail("Response was not a TraktShow")
             }

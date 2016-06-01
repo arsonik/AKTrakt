@@ -9,36 +9,34 @@
 import Foundation
 import Alamofire
 
-/// Main Class
+/// Trakt client
 public class Trakt {
     // Client Id
     public let clientId: String
-
     // Application Secret
     internal let clientSecret: String
-
     // Application Id
     internal let applicationId: Int
-
     // Trakt Token
     internal var token: TraktToken?
-
     /// Delay between each attempt
     internal var retryInterval: Double = 5
-
     // Cache request attempts (in case of faileur/retry)
     internal var attempts = NSCache()
-
     /// Number of attempt after getting 500 errors
     internal var maximumAttempt: Int = 6
-
     // Alamofire Manager
     internal let manager: Manager
-
     // Trakt api version
     public let traktApiVersion = 2
 
+    /**
+     Init
 
+     - parameter clientId:      clientId
+     - parameter clientSecret:  clientSecret
+     - parameter applicationId: applicationId
+     */
     public init(clientId: String, clientSecret: String, applicationId: Int) {
         self.clientId = clientId
         self.clientSecret = clientSecret
@@ -52,20 +50,32 @@ public class Trakt {
         }
     }
 
+    /**
+     Check if client has a current valid token
+
+     - returns: bool
+     */
     public func hasValidToken() -> Bool {
         return token != nil
     }
 
+    /// Clear current token
     public func clearToken() {
         token?.remove(clientId)
         token = nil
     }
 
+    /**
+     Save token
+
+     - parameter token: token
+     */
     public func saveToken(token: TraktToken) {
         token.save(clientId)
         self.token = token
     }
 
+    /// Date formatter (trakt style)
     public static let dateFormatter: NSDateFormatter = {
         let df = NSDateFormatter()
         df.locale = NSLocale(localeIdentifier: "en_US_POSIX")
@@ -74,6 +84,7 @@ public class Trakt {
         return df
     }()
 
+    /// Datetime formatter (trakt style)
     public static let datetimeFormatter: NSDateFormatter = {
         let df = NSDateFormatter()
         df.locale = NSLocale(localeIdentifier: "en_US_POSIX")

@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestGetWatchlist: TraktRequest, TraktRequest_Completion {
+public class TraktRequestGetWatchlist: TraktRequest {
     let type: TraktType
     public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil, sort: TraktSortHeaders? = nil) {
         self.type = type
@@ -33,7 +33,7 @@ public class TraktRequestGetWatchlist: TraktRequest, TraktRequest_Completion {
     }
 }
 
-public class TraktRequestGetWatched: TraktRequest, TraktRequest_Completion {
+public class TraktRequestGetWatched: TraktRequest {
     let type: TraktType
     public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil) {
         self.type = type
@@ -54,7 +54,7 @@ public class TraktRequestGetWatched: TraktRequest, TraktRequest_Completion {
 }
 
 
-public class TraktRequestAddToWatchlist: TraktRequest, TraktRequest_Completion {
+public class TraktRequestAddToWatchlist: TraktRequest {
     public init(list: [TraktType: [TraktIdentifier]]) {
         var params: JSONHash = [:]
         list.forEach { type, values in
@@ -119,7 +119,7 @@ public class TraktRequestAddToWatchlist: TraktRequest, TraktRequest_Completion {
 }
 
 
-public class TraktRequestRemoveFromWatchlist: TraktRequest, TraktRequest_Completion {
+public class TraktRequestRemoveFromWatchlist: TraktRequest {
     public init(list: [TraktType: [TraktIdentifier]]) {
         var params: JSONHash = [:]
         list.forEach { type, values in
