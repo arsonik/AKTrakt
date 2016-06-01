@@ -1,4 +1,6 @@
-->![alt tag](logo-swift-trakt.png)<-
+<p align="center">
+    ![alt tag](logo-swift-trakt.png)
+</p>
 
 # AKTrakt
 
@@ -7,6 +9,8 @@
 [![License](https://img.shields.io/cocoapods/l/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
 [![Platform](https://img.shields.io/cocoapods/p/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/AKTrakt.svg?style=flat)](http://cocoadocs.org/docsets/AKTrakt/)
+
+AKTrakt is a trakt.tv client library written in Swift.
 
 ## Usage
 

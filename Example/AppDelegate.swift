@@ -11,19 +11,15 @@ import AKTrakt
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
 }
 
-
+/// Extends Trakt to create an autoload
 extension Trakt {
-
     static private var loaded: Trakt?
 
     static func autoload() -> Trakt {

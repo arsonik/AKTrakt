@@ -43,16 +43,20 @@ class ViewController: UIViewController {
 
     func load() {
         loadedOnce = true
-        TraktRequestTrending(type: .Movies, extended: .Images).request(trakt) { [weak self] objects, error in
+        TraktRequestTrending(type: .Movies, extended: .Images, pagination: TraktPagination(page: 1, limit: 10)).request(trakt) { [weak self] objects, error in
             if let movies = objects?.flatMap({ $0.media as? TraktMovie }) {
                 self?.movies = movies
                 self?.collectionView.reloadSections(NSIndexSet(index: 0))
+            } else {
+                print(error)
             }
         }
         TraktRequestTrending(type: .Shows, extended: .Images, pagination: TraktPagination(page: 1, limit: 20)).request(trakt) { [weak self] objects, error in
             if let shows = objects?.flatMap({ $0.media as? TraktShow }) {
                 self?.shows = shows
                 self?.collectionView.reloadSections(NSIndexSet(index: 1))
+            } else {
+                print(error)
             }
         }
     }
