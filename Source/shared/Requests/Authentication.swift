@@ -70,6 +70,7 @@ public class TraktRequestToken: TraktRequest, TraktRequest_Completion {
     }
 }
 
+///	Get a user profile
 public class TraktRequestProfile: TraktRequest, TraktRequest_Completion {
     public init(username: String = "me") {
         super.init(path: "/users/\(username)", oAuth: true)
