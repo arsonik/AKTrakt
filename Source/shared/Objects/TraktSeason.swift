@@ -10,7 +10,9 @@ import Foundation
 
 public typealias TraktSeasonNumber = UInt
 public class TraktSeason: TraktObject {
+    /// Season number
     public let number: TraktSeasonNumber
+    /// Season episodes
     public var episodes: [TraktEpisode] = []
 
     public required init?(data: JSONHash!) {
@@ -33,10 +35,19 @@ public class TraktSeason: TraktObject {
         }
     }
 
-    public var notCompleted: [Watchable] {
+    /**
+     Get not completed episodes
+     - returns: episode array
+     */
+    public var notCompleted: [TraktEpisode] {
         return episodes.filter {$0.watched == false}
     }
 
+    /**
+     Get an episode by its number
+     - parameter number: Episode number
+     - returns: episode array
+     */
     public func episode(number: TraktEpisodeNumber) -> TraktEpisode? {
         return episodes.filter {$0.number == number} . first
     }

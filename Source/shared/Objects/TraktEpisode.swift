@@ -10,20 +10,25 @@ import Foundation
 
 public typealias TraktEpisodeNumber = UInt
 public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
-    public weak var season: TraktSeason?
-
+    /// Episode's number
     public let number: TraktEpisodeNumber
+    /// Episode's season number
     public var seasonNumber: UInt?
+    /// Episode's first aired date
     public var firstAired: NSDate?
 
     /// Descriptable conformance
     public var title: String?
+    /// Descriptable conformance
     public var overview: String?
 
     /// Watchable conformance
     public var watched: Bool = false
+    /// Watchable conformance
     public var watchlist: Bool = false
+    /// Watchable conformance
     public var lastWatchedAt: NSDate?
+    /// Watchable conformance
     public var plays: UInt?
 
     /// Collectable conformance
@@ -59,6 +64,7 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable {
         }
     }
 
+    /// CustomStringConvertible conformance
     public override var description: String {
         return "TraktEpisode id\(id) \(seasonNumber):\(number)) completed \(watched)"
     }

@@ -1,3 +1,5 @@
+->![alt tag](logo-swift-trakt.png)<-
+
 # AKTrakt
 
 [![CI Status](http://img.shields.io/travis/arsonik/AKTrakt.svg?style=flat)](https://travis-ci.org/arsonik/AKTrakt)

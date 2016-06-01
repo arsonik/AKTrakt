@@ -16,7 +16,7 @@ public enum TraktId: String {
     case Tvdb = "tvdb"
     case Tvrage = "tvrage"
 
-    static func extractIds(data: JSONHash!) -> [TraktId: AnyObject]! {
+    static func extractIds(data: JSONHash?) -> [TraktId: AnyObject]? {
         var ids: [TraktId: AnyObject] = [:]
         (data?["ids"] as? JSONHash)?.forEach { id, value in
             if let identifier = TraktId(rawValue: id) {

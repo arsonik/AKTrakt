@@ -9,9 +9,13 @@
 import Foundation
 
 public class TraktPerson: TraktObject {
+    /// Person's name
     public let name: String
+    /// Person's biography
     public var biography: String?
+    /// Person's birthday
     public var birthday: NSDate?
+    /// Person's death
     public var death: NSDate?
 
     required public init?(data: JSONHash!) {
@@ -37,6 +41,10 @@ public class TraktPerson: TraktObject {
         }
     }
 
+    /**
+     Get the age of a person
+     - returns: Age
+     */
     public func age() -> Int? {
         guard birthday != nil else {
             return nil

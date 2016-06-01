@@ -11,7 +11,12 @@ import Foundation
 /// Trakt identifier type
 public typealias TraktIdentifier = UInt
 
-/// Equatable conformance
+/**
+ Compare two TraktObject by their ids
+ - parameter lhs: first object
+ - parameter rhs: second object
+ - returns: Are they true
+ */
 public func == (lhs: TraktObject, rhs: TraktObject) -> Bool {
     return lhs.id == rhs.id && lhs.id != 0 && rhs.id != 0
 }
@@ -35,6 +40,7 @@ public protocol Collectable {
     var collectedAt: NSDate? { get set }
 }
 
+/// TraktObject (abstract) class
 public class TraktObject: CustomStringConvertible, Hashable {
     /// Object identifiers
     public var ids: [TraktId: AnyObject] = [:] {
@@ -58,7 +64,10 @@ public class TraktObject: CustomStringConvertible, Hashable {
         digest(data)
     }
 
-    /// Digest data
+    /**
+     Digest the data passed
+     - parameter data: String: Value Dictionary
+     */
     public func digest(data: JSONHash?) {
         ids = TraktId.extractIds(data) ?? ids
 
@@ -76,7 +85,12 @@ public class TraktObject: CustomStringConvertible, Hashable {
         }
     }
 
-    /// Retrieve an image url that fits a given imageview
+    /**
+     Retrieve an image url that fits a given UIImageview base on its (retina) size
+     - parameter type: the image type requested
+     - parameter thatFits: the image view to be filled
+     - returns: An optional NSURL
+     */
     public func imageURL(type: TraktImageType, thatFits imageView: UIImageView?) -> NSURL? {
         guard let image = imageView,
             // sort by area ascending

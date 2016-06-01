@@ -19,7 +19,6 @@ public enum TraktImageType: String {
     case Avatar = "avatar"
     case Screenshot = "screenshot"
 
-
     static var sizes: [TraktImageType: [TraktImageSize: CGSize]] = [
         .Poster: [
             .Full: CGSize(width: 1000, height: 1500),
