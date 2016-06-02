@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a person
-public class TraktPerson: TraktObject {
+public class TraktPerson: TraktObject, Searchable {
     /// Person's name
     public let name: String
     /// Person's biography
@@ -66,5 +66,9 @@ public class TraktPerson: TraktObject {
                                                 toDate: death ?? NSDate(),
                                                 options: [])
         return ageComponents.year
+    }
+
+    public static var objectName: String {
+        return "person"
     }
 }

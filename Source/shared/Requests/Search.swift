@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 /// Serarch request
-public class TraktRequestSearch: TraktRequest {
+public class TraktRequestSearch<T: TraktObject where T: protocol<Searchable>>: TraktRequest {
     /**
      Init
 
@@ -19,7 +19,7 @@ public class TraktRequestSearch: TraktRequest {
      - parameter year:       optional year
      - parameter pagination: optional pagination
      */
-    public init(query: String, type: TraktType? = nil, year: UInt? = nil, pagination: TraktPagination? = nil) {
+    public init(query: String, type: T.Type? = nil, year: UInt? = nil, pagination: TraktPagination? = nil) {
         var params: JSONHash = [
             "query": query
         ]
@@ -27,7 +27,7 @@ public class TraktRequestSearch: TraktRequest {
             params["year"] = year!
         }
         if type != nil {
-            params["type"] = type!.single
+            params["type"] = type!.objectName
         }
         if pagination != nil {
             params += pagination!.value()

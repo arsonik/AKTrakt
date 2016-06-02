@@ -29,6 +29,10 @@ public protocol Trending: ListType, ObjectType {
 public protocol Credits: ListType, ObjectType {
 }
 
+/// Define a searchable protocol for TraktObject
+public protocol Searchable: ObjectType {
+}
+
 /// Define a list protocol for TraktObject
 public protocol ListType {
     static var listName: String { get }

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a movie
-public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Trending, Watchlist, Credits {
+public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Trending, Watchlist, Credits, Searchable {
     /// Youtube video name ex: _1MDrwqjeGo
     public var trailer: String?
     /// Rating between 0-10

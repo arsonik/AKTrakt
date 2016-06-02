@@ -12,7 +12,7 @@ import Foundation
 public typealias TraktEpisodeNumber = UInt
 
 /// Represents a tv show episode
-public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Watchlist {
+public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Watchlist, Searchable {
     /// Episode's number
     public let number: TraktEpisodeNumber
     /// Episode's season number
