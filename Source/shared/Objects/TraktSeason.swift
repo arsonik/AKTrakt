@@ -41,7 +41,11 @@ public class TraktSeason: TraktObject, Watchlist {
 
         if let episodes = data?["episodes"] as? [JSONHash] {
             self.episodes = episodes.flatMap {
-                TraktEpisode(data: $0)
+                guard let episode = TraktEpisode(data: $0) else {
+                    return nil
+                }
+                episode.seasonNumber = number ?? episode.seasonNumber
+                return episode
             }.sort {
                 $0.number < $1.number
             }

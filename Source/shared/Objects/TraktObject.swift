@@ -32,9 +32,9 @@ public protocol Descriptable {
 /// Watchable protocol
 public protocol Watchable {
     /// boolean indicating if the object has been watched
-    var watched: Bool { get set }
+    var watched: Bool? { get set }
     /// boolean indicating if the object is in watchlist
-    var watchlist: Bool { get set }
+    var watchlist: Bool? { get set }
     /// date of the last play
     var lastWatchedAt: NSDate? { get set }
     /// number of times this object has been played
@@ -47,8 +47,13 @@ public protocol Collectable {
     var collectedAt: NSDate? { get set }
 }
 
+public protocol Extendable {
+    associatedtype T
+    func extend(with: T)
+}
+
 /// TraktObject (abstract) class
-public class TraktObject: CustomStringConvertible, Hashable {
+public class TraktObject: CustomStringConvertible, Hashable, Extendable {
     /// Object identifiers
     public var ids: [TraktId: AnyObject] = [:] {
         didSet {
@@ -123,5 +128,30 @@ public class TraktObject: CustomStringConvertible, Hashable {
     /// CustomStringConvertible conformance
     public var description: String {
         return "TraktObject \(ids)"
+    }
+
+    /**
+     Allow to extend an object with another one
+     Useful when you retrieve data fron multiple request but you want to keep reference to one object
+
+     - parameter with: Object of the same type
+     */
+    public func extend(with: TraktObject) {
+        ids = with.ids ?? ids
+        images = with.images ?? images
+
+        if var me = self as? Descriptable, him = with as? Descriptable {
+            me.title = him.title ?? me.title
+            me.overview = him.overview ?? me.overview
+        }
+        if var me = self as? Watchable, him = with as? Watchable {
+            me.watched = him.watched ?? me.watched
+            me.watchlist = him.watchlist ?? me.watchlist
+            me.lastWatchedAt = him.lastWatchedAt ?? me.lastWatchedAt
+            me.plays = him.plays ?? me.plays
+        }
+        if var me = self as? Collectable, him = with as? Collectable {
+            me.collectedAt = him.collectedAt ?? me.collectedAt
+        }
     }
 }

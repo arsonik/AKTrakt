@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 public class TraktRequestEpisode: TraktRequest {
-    public init(showId: AnyObject, seasonNumber: UInt, episodeNumber: UInt, extended: TraktRequestExtendedOptions? = nil) {
-        super.init(path: "/shows/\(showId)/seasons/\(seasonNumber)/episodes/\(episodeNumber)", params: extended?.value())
+    public init(showId: AnyObject, season: TraktSeasonNumber, episode: TraktEpisodeNumber, extended: TraktRequestExtendedOptions? = nil) {
+        super.init(path: "/shows/\(showId)/seasons/\(season)/episodes/\(episode)", params: extended?.value())
     }
 
     public func request(trakt: Trakt, completion: (TraktEpisode?, NSError?) -> Void) -> Request? {

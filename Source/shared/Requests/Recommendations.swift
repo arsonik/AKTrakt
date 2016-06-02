@@ -12,11 +12,15 @@ import Alamofire
 public class TraktRequestRecommendations: TraktRequest {
     let type: TraktType
 
-    public init(type: TraktType, extended: TraktRequestExtendedOptions = .Min, pagination: TraktPagination = TraktPagination(page: 1, limit: 100)) {
+    public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil, pagination: TraktPagination? = nil) {
         self.type = type
         var params: JSONHash = [:]
-        params += extended.value()
-        params += pagination.value()
+        if extended != nil {
+            params += extended!.value()
+        }
+        if pagination != nil {
+            params += pagination!.value()
+        }
         super.init(path: "/recommendations/\(type.rawValue)", params: params, oAuth: true)
     }
 

@@ -16,7 +16,7 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
     /// Episode's number
     public let number: TraktEpisodeNumber
     /// Episode's season number
-    public var seasonNumber: UInt?
+    public var seasonNumber: TraktSeasonNumber?
     /// Episode's first aired date
     public var firstAired: NSDate?
     /// Descriptable conformance
@@ -24,9 +24,9 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
     /// Descriptable conformance
     public var overview: String?
     /// Watchable conformance
-    public var watched: Bool = false
+    public var watched: Bool?
     /// Watchable conformance
-    public var watchlist: Bool = false
+    public var watchlist: Bool?
     /// Watchable conformance
     public var lastWatchedAt: NSDate?
     /// Watchable conformance
@@ -40,12 +40,11 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
      - parameter data: data
      */
     required public init?(data: JSONHash!) {
-        guard let en = data?["number"] as? UInt else {
+        guard let en = data?["number"] as? TraktEpisodeNumber else {
             return nil
         }
 
         number = en
-        seasonNumber = data?["season"] as? UInt
         super.init(data: data)
     }
 
@@ -57,6 +56,7 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
     override public func digest(data: JSONHash!) {
         super.digest(data)
 
+        seasonNumber = data?["season"] as? TraktSeasonNumber ?? seasonNumber
         if let fa = data["first_aired"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
             firstAired = date
         }
@@ -85,5 +85,17 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
 
     public static var objectName: String {
         return "episode"
+    }
+
+    /**
+     Extend an episode with another
+
+     - parameter with: TraktEpisode
+     */
+    public func extend(with: TraktEpisode) {
+        super.extend(with)
+
+        firstAired = with.firstAired ?? firstAired
+        seasonNumber = with.seasonNumber ?? seasonNumber
     }
 }

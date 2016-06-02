@@ -30,9 +30,9 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Tren
     public var title: String?
     public var overview: String?
     /// Watchable conformance
-    public var watched: Bool = false
+    public var watched: Bool?
     /// Watchable conformance
-    public var watchlist: Bool = false
+    public var watchlist: Bool?
     /// Watchable conformance
     public var lastWatchedAt: NSDate? = nil
     /// Watchable conformance

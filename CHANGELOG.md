@@ -8,6 +8,7 @@ After the revision 1.0.0
 
 ### Added
 - Code documentation
+- Allow TraktObject to be extended with another one of the same type
 #### Updated
 - enum TraktMediaType removed use TraktType instead
 

@@ -74,4 +74,10 @@ public class TraktShow: TraktObject, Descriptable, Trending, Watchlist {
     public override var description: String {
         return "TraktShow(\(title))"
     }
+
+    public func extend(with: TraktShow) {
+        super.extend(with)
+
+        year = with.year ?? year
+    }
 }
