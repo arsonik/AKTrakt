@@ -59,7 +59,9 @@ public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits,
     }
 
     /// next episode to watch
-    public var nextEpisode: TraktEpisode?
+    public var nextEpisode: TraktEpisode? {
+        return notCompleted.first
+    }
 
     public static var listName: String {
         return "shows"

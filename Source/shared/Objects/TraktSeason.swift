@@ -54,7 +54,7 @@ public class TraktSeason: TraktObject, Watchlist {
 
     /// Get not watched episodes
     public var notCompleted: [TraktEpisode] {
-        return episodes.filter {$0.watched == false}
+        return episodes.filter {$0.watched != true}
     }
 
     /**

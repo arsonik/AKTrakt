@@ -44,16 +44,33 @@ public class TraktRequestShowProgress: TraktRequest {
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (TraktEpisode?, [TraktSeason]?, NSError?) -> Void) -> Request? {
+    public func request(trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let data = response.result.value as? JSONHash,
-                nextEpisode = TraktEpisode(data: data["next_episode"] as? JSONHash),
-                seasons = data["seasons"] as? [JSONHash] else {
-                return completion(nil, nil, response.result.error)
+                seasonsData = data["seasons"] as? [JSONHash] else {
+                return completion(nil, response.result.error)
             }
-            completion(nextEpisode, seasons.flatMap {
+            var seasons = seasonsData.flatMap {
                 TraktSeason(data: $0)
-            }, nil)
+            }
+            // extend next episode
+            if let nextEpisode = TraktEpisode(data: data["next_episode"] as? JSONHash) where nextEpisode.seasonNumber != nil {
+                let season: TraktSeason
+                if let foundSeason = seasons.filter({ $0.number == nextEpisode.seasonNumber! }).first {
+                    season = foundSeason
+                    if season.episode(nextEpisode.number) == nil {
+                        season.episodes.append(nextEpisode)
+                    } else {
+                        season.episode(nextEpisode.number)?.extend(nextEpisode)
+                    }
+                } else {
+                    season = TraktSeason(data: ["number": nextEpisode.seasonNumber!])!
+                    season.episodes = [nextEpisode]
+                    seasons.append(season)
+                }
+            }
+
+            completion(seasons, nil)
         }
     }
 }
