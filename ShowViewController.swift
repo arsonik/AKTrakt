@@ -51,7 +51,7 @@ class ShowViewController: UIViewController {
     }
 
     func loadCasting() {
-        TraktRequestMediaPeople(type: .Shows, id: show.id, extended: .Images).request(trakt) { [weak self] casting, _, error in
+        TraktRequestMediaPeople(type: TraktShow.self, id: show.id, extended: .Images).request(trakt) { [weak self] casting, _, error in
             guard casting != nil else {
                 return
             }

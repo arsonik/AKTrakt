@@ -71,7 +71,6 @@ public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits,
         return "show"
     }
 
-
     /// CustomStringConvertible conformance
     public override var description: String {
         return "TraktShow(\(title))"

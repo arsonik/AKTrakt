@@ -27,7 +27,7 @@ class Tests: XCTestCase {
 
     func testSearchMovie() {
         let expectation = expectationWithDescription("Searching for a movie")
-        TraktRequestSearch(query: "avatar", type: .Movies).request(trakt) { result, error in
+        TraktRequestSearch(query: "avatar", type: TraktMovie.self).request(trakt) { result, error in
             guard let movie = result?.first as? TraktMovie else {
                 return XCTFail("Response was not a TraktMovie: \(result), error \(error)")
             }
@@ -72,7 +72,7 @@ class Tests: XCTestCase {
 
     func testSearchShow() {
         let expectation = expectationWithDescription("Searching for a show")
-        TraktRequestSearch(query: "scandal", type: .Shows).request(trakt) { result, error in
+        TraktRequestSearch(query: "scandal", type: TraktShow.self).request(trakt) { result, error in
             guard let show = result?.first as? TraktShow else {
                 return XCTFail("Response was not a TraktShow")
             }
@@ -140,7 +140,7 @@ class Tests: XCTestCase {
 
     func testCasting() {
         let expectation = expectationWithDescription("Getting casting")
-        TraktRequestMediaPeople(type: .Shows, id: 39105).request(trakt) { characters, crew, error in
+        TraktRequestMediaPeople(type: TraktShow.self, id: 39105).request(trakt) { characters, crew, error in
             XCTAssertEqual(characters?.first?.character, "Olivia Pope")
             XCTAssertEqual(characters?.first?.person.name, "Kerry Washington")
 
@@ -161,11 +161,11 @@ class Tests: XCTestCase {
     func testCredits() {
         let expectation = expectationWithDescription("Getting person's credits")
 
-        TraktRequestPeopleCredits(type: .Movies, id: "mel-gibson").request(trakt) { tuple, error in
+        TraktRequestPeopleCredits(type: TraktMovie.self, id: "mel-gibson").request(trakt) { tuple, error in
             guard let role = tuple?.cast?.filter({ $0.character == "Driver" }).first else {
                 return XCTFail("Cannot find actor character")
             }
-            XCTAssertEqual((role.media as? TraktMovie)?.title, "Get the Gringo")
+            XCTAssertEqual(role.media.title, "Get the Gringo")
             expectation.fulfill()
         }
         waitForExpectationsWithTimeout(5) { error in
