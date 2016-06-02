@@ -9,10 +9,10 @@
 import Foundation
 import Alamofire
 
-/// Get all people for an TraktType object
-public class TraktRequestMediaPeople: TraktRequest {
-    public init(type: TraktType, id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
-        super.init(path: "/\(type.rawValue)/\(id)/people", params: extended?.value())
+/// Get all people related an object
+public class TraktRequestMediaPeople<T: TraktObject where T: protocol<Credits>>: TraktRequest {
+    public init(type: T.Type, id: AnyObject, extended: TraktRequestExtendedOptions? = nil) {
+        super.init(path: "/\(type.listName)/\(id)/people", params: extended?.value())
     }
 
     public func request(trakt: Trakt, completion: ([TraktCharacter]?, [TraktCrewPosition: [TraktCrew]]?, NSError?) -> Void) -> Request? {
@@ -56,14 +56,15 @@ public class TraktRequestPeople: TraktRequest {
 
 /// Get a person credits in a media type
 
-public typealias CreditsCompletionObject = (cast: [(character: String, media: TraktObject)]?, crew: [TraktCrewPosition: [(job: String, media: TraktObject)]]?)
-public class TraktRequestPeopleCredits: TraktRequest {
-    let type: TraktType
+public class TraktRequestPeopleCredits<T: TraktObject where T: protocol<Credits>>: TraktRequest {
+    let type: T.Type
 
-    public init(type: TraktType, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
+    public init(type: T.Type, id: AnyObject, extended: TraktRequestExtendedOptions = .Min) {
         self.type = type
-        super.init(path: "/people/\(id)/\(type.rawValue)", params: extended.value())
+        super.init(path: "/people/\(id)/\(type.listName)", params: extended.value())
     }
+
+    public typealias CreditsCompletionObject = (cast: [(character: String, media: T)]?, crew: [TraktCrewPosition: [(job: String, media: T)]]?)
 
     public func request(trakt: Trakt, completion: (CreditsCompletionObject?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
@@ -78,8 +79,7 @@ public class TraktRequestPeopleCredits: TraktRequest {
                     return
                 }
                 tuple.crew![position] = values.flatMap {
-                    let mediaData = $0[self.type.single] as? JSONHash
-                    let media: TraktObject? = self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)
+                    let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
 
                     guard let job = $0["job"] as? String where media != nil else {
                         print("cannot find job or media")
@@ -90,8 +90,7 @@ public class TraktRequestPeopleCredits: TraktRequest {
             }
             // Cast
             tuple.cast = (result["cast"] as? [JSONHash])?.flatMap {
-                let mediaData = $0[self.type.single] as? JSONHash
-                let media: TraktObject? = self.type == .Shows ? TraktShow(data: mediaData) : TraktMovie(data: mediaData)
+                let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
                 guard let character = $0["character"] as? String where media != nil else {
                     return nil
                 }

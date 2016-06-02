@@ -19,18 +19,22 @@ public protocol TraktRequestHeaders {
 }
 
 /// Define a watchlist protocol for TraktObject
-public protocol Watchlist: ListName, ObjectName {}
+public protocol Watchlist: ListType, ObjectType {}
 
 /// Define a trending protocol for TraktObject
-public protocol Trending: ListName, ObjectName {
+public protocol Trending: ListType, ObjectType {
+}
+
+/// Define a credits protocol for TraktObject
+public protocol Credits: ListType, ObjectType {
 }
 
 /// Define a list protocol for TraktObject
-public protocol ListName {
+public protocol ListType {
     static var listName: String { get }
 }
 
 /// Define an object protocol for TraktObject
-public protocol ObjectName {
+public protocol ObjectType {
     static var objectName: String { get }
 }

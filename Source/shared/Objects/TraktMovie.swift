@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a movie
-public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Trending, Watchlist {
+public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Trending, Watchlist, Credits {
     /// Youtube video name ex: _1MDrwqjeGo
     public var trailer: String?
     /// Rating between 0-10
@@ -37,7 +37,6 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Tren
     public var lastWatchedAt: NSDate? = nil
     /// Watchable conformance
     public var plays: UInt?
-
     /// Collectable conformance
     public var collectedAt: NSDate?
 
