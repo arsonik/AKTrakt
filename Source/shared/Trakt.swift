@@ -19,12 +19,10 @@ public class Trakt {
     internal let applicationId: Int
     // Trakt Token
     internal var token: TraktToken?
-    /// Delay between each attempt
+    /// Delay between each re attempt in seconds
     internal var retryInterval: Double = 5
     // Cache request attempts (in case of faileur/retry)
     internal var attempts = NSCache()
-    /// Number of attempt after getting 500 errors
-    internal var maximumAttempt: Int = 6
     // Alamofire Manager
     internal let manager: Manager
     // Trakt api version

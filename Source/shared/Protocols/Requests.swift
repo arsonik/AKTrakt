@@ -25,6 +25,10 @@ public protocol Watchlist: ListType, ObjectType {}
 public protocol Trending: ListType, ObjectType {
 }
 
+/// Define a Recommandable protocol for TraktObject
+public protocol Recommandable: ListType, ObjectType {
+}
+
 /// Define a credits protocol for TraktObject
 public protocol Credits: ListType, ObjectType {
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 /// Represents a tv show
-public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits, Searchable {
+public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits, Searchable, Recommandable {
     /// Production year
     public var year: UInt?
     /// Descriptable conformance

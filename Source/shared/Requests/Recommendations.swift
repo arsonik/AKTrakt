@@ -9,10 +9,10 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestRecommendations: TraktRequest {
-    let type: TraktType
+public class TraktRequestRecommendations<T: TraktObject where T: protocol<Trending>>: TraktRequest {
+    let type: T.Type
 
-    public init(type: TraktType, extended: TraktRequestExtendedOptions? = nil, pagination: TraktPagination? = nil) {
+    public init(type: T.Type, extended: TraktRequestExtendedOptions? = nil, pagination: TraktPagination? = nil) {
         self.type = type
         var params: JSONHash = [:]
         if extended != nil {
@@ -21,22 +21,17 @@ public class TraktRequestRecommendations: TraktRequest {
         if pagination != nil {
             params += pagination!.value()
         }
-        super.init(path: "/recommendations/\(type.rawValue)", params: params, oAuth: true)
+        super.init(path: "/recommendations/\(type.listName)", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) -> Request? {
+    public func request(trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
-            let list: [TraktObject] = entries.flatMap {
-                if self.type == TraktType.Shows {
-                    return TraktShow(data: $0)
-                } else {
-                    return TraktMovie(data: $0)
-                }
-            }
-            completion(list, response.result.error)
+            completion(entries.flatMap {
+                self.type.init(data: $0[self.type.objectName] as? JSONHash)
+            }, response.result.error)
         }
     }
 }
