@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestRecommendations<T: TraktObject where T: protocol<Trending>>: TraktRequest {
+public class TraktRequestRecommendations<T: TraktObject where T: protocol<Recommandable>>: TraktRequest {
     let type: T.Type
 
     public init(type: T.Type, extended: TraktRequestExtendedOptions? = nil, pagination: TraktPagination? = nil) {
@@ -30,15 +30,15 @@ public class TraktRequestRecommendations<T: TraktObject where T: protocol<Trendi
                 return completion(nil, response.result.error)
             }
             completion(entries.flatMap {
-                self.type.init(data: $0[self.type.objectName] as? JSONHash)
+                self.type.init(data: $0)
             }, response.result.error)
         }
     }
 }
 
-public class TraktRequestRecommendationsHide: TraktRequest {
-    public init(type: TraktType, id: AnyObject) {
-        super.init(method: "DELETE", path: "/recommendations/\(type.rawValue)/\(id)", oAuth: true)
+public class TraktRequestRecommendationsHide<T: TraktObject where T: protocol<Recommandable>>: TraktRequest {
+    public init(type: T.Type, id: AnyObject) {
+        super.init(method: "DELETE", path: "/recommendations/\(type.listName)/\(id)", oAuth: true)
     }
 
     public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {

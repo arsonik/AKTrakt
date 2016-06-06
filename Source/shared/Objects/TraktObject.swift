@@ -127,7 +127,7 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
 
     /// CustomStringConvertible conformance
     public var description: String {
-        return "TraktObject \(ids)"
+        return "\(self.dynamicType) \(ids)"
     }
 
     /**
