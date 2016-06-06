@@ -9,6 +9,8 @@ After the revision 1.0.0
 ### Added
 - Code documentation
 - Allow TraktObject to be extended with another one of the same type
+### Fixed
+- #8 Empty seasons in TraktShow
 #### Updated
 - enum TraktMediaType removed use TraktType instead
 
