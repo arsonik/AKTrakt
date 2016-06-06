@@ -47,13 +47,18 @@ public class TraktRequestGetWatched<T: TraktObject where T: protocol<Watchlist>>
                 return completion(nil, response.result.error)
             }
             completion(entries.flatMap {
-                self.type.init(data: $0[self.type.objectName] as? JSONHash)
+                let media = self.type.init(data: $0[self.type.objectName] as? JSONHash)
+                if let show = media as? TraktShow, sData = $0["seasons"] as? [JSONHash] {
+                    show.seasons = sData.flatMap { TraktSeason(data: $0) }
+                }
+                return media
             }, nil)
         }
     }
 }
 
 
+/// Request to add object to your watchlist
 public class TraktRequestAddToWatchlist: TraktRequest {
     public init(list: [TraktType: [TraktIdentifier]]) {
         var params: JSONHash = [:]
