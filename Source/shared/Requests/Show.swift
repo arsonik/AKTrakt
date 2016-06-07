@@ -79,11 +79,12 @@ public class TraktRequestShowProgress: TraktRequest {
             }
             // extend next episode
             if let nextEpisode = TraktEpisode(data: data["next_episode"] as? JSONHash) where nextEpisode.seasonNumber != nil {
-                if let foundSeason = seasons.filter({ $0.number == nextEpisode.seasonNumber! }).first {
-                    if foundSeason.episode(nextEpisode.number) == nil {
-                        foundSeason.episodes.append(nextEpisode)
+                nextEpisode.watched = false
+                if let season = seasons.filter({ $0.number == nextEpisode.seasonNumber! }).first {
+                    if season.episode(nextEpisode.number) == nil {
+                        season.episodes.append(nextEpisode)
                     } else {
-                        foundSeason.episode(nextEpisode.number)?.extend(nextEpisode)
+                        season.episode(nextEpisode.number)?.extend(nextEpisode)
                     }
                 } else {
                     let season = TraktSeason(data: ["number": nextEpisode.seasonNumber!])!

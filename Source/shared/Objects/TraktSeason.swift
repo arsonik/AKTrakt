@@ -75,4 +75,8 @@ public class TraktSeason: TraktObject, Watchlist {
     public static var objectName: String {
         return "season"
     }
+
+    override public var description: String {
+        return "\(super.description) season:\(number) episodesCount:\(episodes.count)"
+    }
 }
