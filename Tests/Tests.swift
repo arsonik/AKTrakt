@@ -106,7 +106,7 @@ class Tests: XCTestCase {
     }
 
     func testTokenFailure() {
-        XCTAssertNil(TraktRequestRecommendations(type: .Shows, extended: .Images, pagination: TraktPagination(page: 1, limit: 14)).request(trakt) { _, error in
+        XCTAssertNil(TraktRequestRecommendations(type: TraktShow.self, extended: .Images, pagination: TraktPagination(page: 1, limit: 14)).request(trakt) { _, error in
 
         })
     }
