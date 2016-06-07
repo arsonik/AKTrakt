@@ -9,9 +9,10 @@
 import Foundation
 import Alamofire
 
-
+/// Trending request show/movies
 public class TraktRequestTrending<T: TraktObject where T: protocol<Trending>>: TraktRequest {
-    let type: T.Type
+    /// request type
+    private let type: T.Type
 
     /**
      Init request

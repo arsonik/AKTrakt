@@ -33,8 +33,6 @@ public protocol Descriptable {
 public protocol Watchable {
     /// boolean indicating if the object has been watched
     var watched: Bool? { get set }
-    /// boolean indicating if the object is in watchlist
-    var watchlist: Bool? { get set }
     /// date of the last play
     var lastWatchedAt: NSDate? { get set }
     /// number of times this object has been played
@@ -96,6 +94,26 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
                 }
             }
         }
+
+        if var me = self as? Descriptable {
+            me.title = data?["title"] as? String ?? me.title
+            me.overview = data?["overview"] as? String ?? me.overview
+        }
+
+        if var me = self as? Watchable {
+            me.watched = data?["completed"] as? Bool ?? me.watched
+            me.plays = data?["plays"] as? UInt ?? me.plays
+            if let fa = data?["last_watched_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
+                me.lastWatchedAt = date
+                me.watched = true
+            }
+        }
+
+        if var me = self as? Collectable {
+            if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(string) {
+                me.collectedAt = date
+            }
+        }
     }
 
     /**
@@ -146,9 +164,11 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
         }
         if var me = self as? Watchable, him = with as? Watchable {
             me.watched = him.watched ?? me.watched
-            me.watchlist = him.watchlist ?? me.watchlist
             me.lastWatchedAt = him.lastWatchedAt ?? me.lastWatchedAt
             me.plays = him.plays ?? me.plays
+        }
+        if var me = self as? Watchlist, him = with as? Watchlist {
+            me.watchlist = him.watchlist ?? me.watchlist
         }
         if var me = self as? Collectable, him = with as? Collectable {
             me.collectedAt = him.collectedAt ?? me.collectedAt

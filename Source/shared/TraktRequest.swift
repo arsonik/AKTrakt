@@ -25,7 +25,7 @@ public class TraktRequest {
     public var attemptLeft: Int = 5
 
     /**
-     Init
+     Init a request with given values
 
      - parameter method:  method
      - parameter path:    path
@@ -44,7 +44,9 @@ public class TraktRequest {
 
 /// Represents the sorting headers used by Trakt
 public struct TraktSortHeaders: TraktRequestHeaders {
+    /// Sort by param
     public let sortBy: String = "rank"
+    /// Sort how param
     public let sortHow: String = "asc"
 
     /**
@@ -63,9 +65,9 @@ public struct TraktSortHeaders: TraktRequestHeaders {
 /// Represents the pagination params used by Trakt
 public struct TraktPagination: TraktURLParameters {
     /// current page
-    var page: Int = 1
+    public var page: Int = 1
     /// current limit
-    var limit: Int = 10
+    public var limit: Int = 10
 
     /**
      Init
@@ -128,7 +130,11 @@ public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
         if contains(.Episodes) {
             list.append("episodes")
         }
-        return ["extended": list.joinWithSeparator(",")]
+        if list.count > 0 {
+            return ["extended": list.joinWithSeparator(",")]
+        } else {
+            return [:]
+        }
     }
 }
 

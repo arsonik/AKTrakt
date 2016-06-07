@@ -17,6 +17,8 @@ public class TraktSeason: TraktObject, Watchlist {
     public let number: TraktSeasonNumber
     /// Season episodes
     public var episodes: [TraktEpisode] = []
+    /// Watchlist conformance
+    public var watchlist: Bool?
 
     /**
      Init with data
@@ -54,7 +56,7 @@ public class TraktSeason: TraktObject, Watchlist {
 
     /// Get not watched episodes
     public var notCompleted: [TraktEpisode] {
-        return episodes.filter {$0.watched != true}
+        return episodes.filter { $0.watched == false }
     }
 
     /**

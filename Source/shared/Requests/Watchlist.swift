@@ -24,7 +24,8 @@ public class TraktRequestGetWatchlist<T: TraktObject where T: protocol<Watchlist
             }
 
             completion(entries.flatMap {
-                let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
+                var media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
+                media?.watchlist = true
                 guard let date = $0["listed_at"] as? String, listedAt = Trakt.datetimeFormatter.dateFromString(date) where media != nil else {
                     return nil
                 }
@@ -48,9 +49,8 @@ public class TraktRequestGetWatched<T: TraktObject where T: protocol<Watchlist>>
             }
             completion(entries.flatMap {
                 let media = self.type.init(data: $0[self.type.objectName] as? JSONHash)
-                if let show = media as? TraktShow, sData = $0["seasons"] as? [JSONHash] {
-                    show.seasons = sData.flatMap { TraktSeason(data: $0) }
-                }
+                /// Digest other data like plays, last watched at ...
+                media?.digest($0)
                 return media
             }, nil)
         }

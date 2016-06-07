@@ -19,7 +19,10 @@ public protocol TraktRequestHeaders {
 }
 
 /// Define a watchlist protocol for TraktObject
-public protocol Watchlist: ListType, ObjectType {}
+public protocol Watchlist: ListType, ObjectType {
+    /// boolean indicating if the object is in watchlist
+    var watchlist: Bool? { get set }
+}
 
 /// Define a trending protocol for TraktObject
 public protocol Trending: ListType, ObjectType {

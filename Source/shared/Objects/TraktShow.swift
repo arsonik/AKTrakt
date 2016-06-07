@@ -18,6 +18,8 @@ public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits,
     public var overview: String?
     /// Seasons
     public var seasons: [TraktSeason] = []
+    /// Watchlist conformance
+    public var watchlist: Bool?
 
     /**
      Digest data
@@ -34,19 +36,13 @@ public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits,
                 TraktSeason(data: $0)
             }
         }
-
-        title = data?["title"] as? String ?? title
-        overview = data?["overview"] as? String ?? overview
     }
 
     /// list of non watched episodes
     public var notCompleted: [TraktEpisode] {
-        let episodes: [TraktEpisode] = seasons.flatMap {
+        return seasons.flatMap {
             $0.notCompleted.flatMap { $0 }
         }
-        return episodes.sort({
-            $0.0.seasonNumber < $0.1.seasonNumber && $0.0.number < $0.1.number
-        })
     }
 
     /**

@@ -25,7 +25,7 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
     public var overview: String?
     /// Watchable conformance
     public var watched: Bool?
-    /// Watchable conformance
+    /// Watchlist conformance
     public var watchlist: Bool?
     /// Watchable conformance
     public var lastWatchedAt: NSDate?
@@ -59,18 +59,6 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
         seasonNumber = data?["season"] as? TraktSeasonNumber ?? seasonNumber
         if let fa = data["first_aired"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
             firstAired = date
-        }
-
-        title = data?["title"] as? String ?? title
-        overview = data?["overview"] as? String ?? overview
-        watched = data?["completed"] as? Bool ?? watched
-        plays = data?["plays"] as? UInt ?? plays
-        if let fa = data["last_watched_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
-            lastWatchedAt = date
-        }
-
-        if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(string) {
-            collectedAt = date
         }
     }
 

@@ -10,7 +10,7 @@ import Foundation
 
 /// Represents a trakt token
 public class TraktToken {
-    internal static var userDefaultsTokenKey = "traktToken"
+    private static var userDefaultsTokenKey = "traktToken"
     /// The access token
     public let accessToken: String!
     /// Expiration date
