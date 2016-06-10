@@ -9,9 +9,10 @@
 /* Begin PBXBuildFile section */
 		17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		179029AF1CF4913D00078265 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 179029AE1CF4913D00078265 /* Default-568h@2x.png */; };
-		179029B71CF5945F00078265 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* Tests.swift */; };
+		179029B71CF5945F00078265 /* PublicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* PublicTests.swift */; };
 		17B1BC941CFD8E580044C7A1 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */; };
 		17B1BC951CFD8E580044C7A1 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */; };
+		17C322E01D09B28A003BFFA4 /* LoggedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */; };
 		17C504921CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17C504931CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17CFD26D1CF45CE00050315A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17CFD26C1CF45CE00050315A /* Main.storyboard */; };
@@ -30,11 +31,12 @@
 		17109D0E1C05EF0A007D3D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		179029AE1CF4913D00078265 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		179029B41CF5945F00078265 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		179029B61CF5945F00078265 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		179029B61CF5945F00078265 /* PublicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicTests.swift; sourceTree = "<group>"; };
 		179029B81CF5945F00078265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17A0DC851CF8328000A063BF /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		17B1BC921CFD7D150044C7A1 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
+		17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedTests.swift; sourceTree = "<group>"; };
 		17C504911CF4480600CF368A /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieViewController.swift; path = Example/MovieViewController.swift; sourceTree = "<group>"; };
 		17CFD26C1CF45CE00050315A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		17CFD2721CF45DB90050315A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -100,7 +102,8 @@
 		179029B51CF5945F00078265 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				179029B61CF5945F00078265 /* Tests.swift */,
+				17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */,
+				179029B61CF5945F00078265 /* PublicTests.swift */,
 				179029B81CF5945F00078265 /* Info.plist */,
 			);
 			path = Tests;
@@ -190,12 +193,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17109D0F1C05EF0A007D3D16 /* Build configuration list for PBXNativeTarget "AKTrakt tvOS" */;
 			buildPhases = (
-				80474D58DC9AC96AB3211A7C /* 📦 Check Pods Manifest.lock */,
+				80474D58DC9AC96AB3211A7C /* [CP] Check Pods Manifest.lock */,
 				17109CFF1C05EF0A007D3D16 /* Sources */,
 				17109D001C05EF0A007D3D16 /* Frameworks */,
 				17109D011C05EF0A007D3D16 /* Resources */,
-				0DC09246E258DEDF7C6EDC1B /* 📦 Embed Pods Frameworks */,
-				C22FD465AC972ECF977EEDBE /* 📦 Copy Pods Resources */,
+				0DC09246E258DEDF7C6EDC1B /* [CP] Embed Pods Frameworks */,
+				C22FD465AC972ECF977EEDBE /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -210,12 +213,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 179029BB1CF5945F00078265 /* Build configuration list for PBXNativeTarget "Tests" */;
 			buildPhases = (
-				F2FE2C09F5E60923809D5157 /* 📦 Check Pods Manifest.lock */,
+				F2FE2C09F5E60923809D5157 /* [CP] Check Pods Manifest.lock */,
 				179029B01CF5945F00078265 /* Sources */,
 				179029B11CF5945F00078265 /* Frameworks */,
 				179029B21CF5945F00078265 /* Resources */,
-				0A7D5F0AEC20A2CC98BBECF6 /* 📦 Embed Pods Frameworks */,
-				DA00051DA37E0DC1EA80DD29 /* 📦 Copy Pods Resources */,
+				0A7D5F0AEC20A2CC98BBECF6 /* [CP] Embed Pods Frameworks */,
+				DA00051DA37E0DC1EA80DD29 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -230,12 +233,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AKTrakt iOS" */;
 			buildPhases = (
-				85B7E2163FDFA45D4502C5DA /* 📦 Check Pods Manifest.lock */,
+				85B7E2163FDFA45D4502C5DA /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				5DD668363034103C97473FB9 /* 📦 Embed Pods Frameworks */,
-				0F092E49AE63FBC26918D9E4 /* 📦 Copy Pods Resources */,
+				5DD668363034103C97473FB9 /* [CP] Embed Pods Frameworks */,
+				0F092E49AE63FBC26918D9E4 /* [CP] Copy Pods Resources */,
 				174FE9251C85917000FA2EAE /* 🛡 Swift lint */,
 			);
 			buildRules = (
@@ -315,14 +318,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A7D5F0AEC20A2CC98BBECF6 /* 📦 Embed Pods Frameworks */ = {
+		0A7D5F0AEC20A2CC98BBECF6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,14 +333,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-Tests/Pods-Internal-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0DC09246E258DEDF7C6EDC1B /* 📦 Embed Pods Frameworks */ = {
+		0DC09246E258DEDF7C6EDC1B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,14 +348,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt tvOS/Pods-Internal-AKTrakt tvOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		0F092E49AE63FBC26918D9E4 /* 📦 Copy Pods Resources */ = {
+		0F092E49AE63FBC26918D9E4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,14 +377,14 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		5DD668363034103C97473FB9 /* 📦 Embed Pods Frameworks */ = {
+		5DD668363034103C97473FB9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,14 +392,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		80474D58DC9AC96AB3211A7C /* 📦 Check Pods Manifest.lock */ = {
+		80474D58DC9AC96AB3211A7C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,14 +407,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		85B7E2163FDFA45D4502C5DA /* 📦 Check Pods Manifest.lock */ = {
+		85B7E2163FDFA45D4502C5DA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -419,14 +422,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C22FD465AC972ECF977EEDBE /* 📦 Copy Pods Resources */ = {
+		C22FD465AC972ECF977EEDBE /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,14 +437,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt tvOS/Pods-Internal-AKTrakt tvOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA00051DA37E0DC1EA80DD29 /* 📦 Copy Pods Resources */ = {
+		DA00051DA37E0DC1EA80DD29 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,14 +452,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-Tests/Pods-Internal-Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F2FE2C09F5E60923809D5157 /* 📦 Check Pods Manifest.lock */ = {
+		F2FE2C09F5E60923809D5157 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -482,7 +485,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				179029B71CF5945F00078265 /* Tests.swift in Sources */,
+				179029B71CF5945F00078265 /* PublicTests.swift in Sources */,
+				17C322E01D09B28A003BFFA4 /* LoggedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,6 +8,12 @@
 
 import Foundation
 
+/**
+ Represents a trakt client error type
+
+ - TokenRequired: Cannot make request without token
+ - UrlError:      Unable to prepare url
+ */
 public enum TraktError: ErrorType {
     case TokenRequired
     case UrlError

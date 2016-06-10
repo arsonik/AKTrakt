@@ -1,6 +1,6 @@
 //
-//  Tests.swift
-//  Tests
+//  PublicTests.swift
+//  AKTrakt
 //
 //  Created by Florian Morello on 25/05/16.
 //  Copyright © 2016 CocoaPods. All rights reserved.
@@ -9,21 +9,11 @@
 import XCTest
 import AKTrakt
 
-class Tests: XCTestCase {
+class PublicTests: XCTestCase {
 
     let trakt = Trakt(clientId: "37558e63c821f673801c2c0788f4f877f5ed626bf5ba4493626173b3ac19b594",
                       clientSecret: "9a80ed5b84182af99be0a452696e68e525b2c629e6f2a9a7cd748e4147d85690",
                       applicationId: 3695)
-
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
 
     func testSearchMovie() {
         let expectation = expectationWithDescription("Searching for a movie")
@@ -37,11 +27,7 @@ class Tests: XCTestCase {
 
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testRoute() {
@@ -50,11 +36,7 @@ class Tests: XCTestCase {
             XCTAssertNil(show?.overview)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testRouteExtended() {
@@ -63,11 +45,7 @@ class Tests: XCTestCase {
             XCTAssertNotNil(show?.overview)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testSearchShow() {
@@ -81,28 +59,19 @@ class Tests: XCTestCase {
             XCTAssertEqual(show.year, 2012)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testTrending() {
         let expectation = expectationWithDescription("Getting trending")
         TraktRequestTrending(type: TraktMovie.self, extended: .Images, pagination: TraktPagination(page: 1, limit: 28)).request(trakt) { objects, error in
-            print(objects)
             XCTAssertTrue(objects?.first?.watchers > 0)
             XCTAssertNotNil(objects?.first?.media)
             XCTAssertTrue(objects?.first?.media.images.count > 0)
             XCTAssertEqual(objects?.count, 28)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testTokenFailure() {
@@ -117,11 +86,7 @@ class Tests: XCTestCase {
             XCTAssertEqual(movie?.title, "Cervantes")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testPerson() {
@@ -131,11 +96,7 @@ class Tests: XCTestCase {
             XCTAssertEqual(person?.birthday?.description.containsString("1956-01-03"), true)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testCasting() {
@@ -151,11 +112,7 @@ class Tests: XCTestCase {
 
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testCredits() {
@@ -168,11 +125,7 @@ class Tests: XCTestCase {
             XCTAssertEqual(role.media.title, "Get the Gringo")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testImages() {
@@ -182,11 +135,7 @@ class Tests: XCTestCase {
 
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testSeasons() {
@@ -195,11 +144,7 @@ class Tests: XCTestCase {
             XCTAssertEqual(episodes?.count, 10)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testEpisodes() {
@@ -210,11 +155,7 @@ class Tests: XCTestCase {
 
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 
     func testReleases() {
@@ -223,10 +164,6 @@ class Tests: XCTestCase {
             XCTAssertEqual(releases?.count, 1)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
+        waitForExpectationsWithTimeout(5, handler: nil)
     }
 }

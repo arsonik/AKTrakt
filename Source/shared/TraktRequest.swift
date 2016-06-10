@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-// Define a request (abstract) used by the api
+/// Define a request (abstract) used by the api
 public class TraktRequest {
     /// HTTP Method
     public let method: String
@@ -193,7 +193,11 @@ extension Trakt {
                 }
                 completionHandler(response)
             }
+        } catch TraktError.TokenRequired {
+            print("ERROR TokenRequired")
+            return nil
         } catch {
+            print("ERROR")
             return nil
         }
     }

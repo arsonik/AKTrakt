@@ -18,15 +18,17 @@ public class Trakt {
     // Application Id
     internal let applicationId: Int
     // Trakt Token
-    internal var token: TraktToken?
+    public var token: TraktToken?
     /// Delay between each re attempt in seconds
     internal var retryInterval: Double = 5
     // Cache request attempts (in case of faileur/retry)
     internal var attempts = NSCache()
     // Alamofire Manager
-    internal let manager: Manager
+    internal let manager = Manager()
     // Trakt api version
     public let traktApiVersion = 2
+    // NSUserDefaults key
+    private var userDefaultsTokenKey: String
 
     /**
      Init
@@ -39,38 +41,51 @@ public class Trakt {
         self.clientId = clientId
         self.clientSecret = clientSecret
         self.applicationId = applicationId
-
-        manager = Manager()
+        userDefaultsTokenKey = "trakt_token_" + clientId
 
         // autoload token
-        if let storedToken = TraktToken.load(clientId) {
-            token = storedToken
-        }
+        token = loadTokenFromDefaults()
     }
 
     /**
-     Check if client has a current valid token
+     Attempt to load token from NSUserDefaults
 
-     - returns: bool
+     - returns: TraktToken
      */
-    public func hasValidToken() -> Bool {
-        return token != nil
-    }
-
-    /// Clear current token
-    public func clearToken() {
-        token?.remove(clientId)
-        token = nil
+    private func loadTokenFromDefaults() -> TraktToken? {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        guard let data = defaults.objectForKey(userDefaultsTokenKey) as? NSData,
+            token = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? TraktToken else {
+            return nil
+        }
+        return token
     }
 
     /**
      Save token
 
-     - parameter token: token
+     - parameter token: TraktToken
      */
     public func saveToken(token: TraktToken) {
-        token.save(clientId)
         self.token = token
+
+        let data = NSKeyedArchiver.archivedDataWithRootObject(token)
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: userDefaultsTokenKey)
+    }
+
+    /// Remove token from NSUserDefaults
+    public func clearToken() {
+        NSUserDefaults.standardUserDefaults().removeObjectForKey(userDefaultsTokenKey)
+        token = nil
+    }
+
+    /**
+     Check if client has a non expired token
+
+     - returns: bool
+     */
+    public func hasValidToken() -> Bool {
+        return token?.expiresAt.compare(NSDate()) == .OrderedDescending
     }
 
     /// Date formatter (trakt style)

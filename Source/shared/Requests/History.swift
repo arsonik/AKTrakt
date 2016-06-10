@@ -9,107 +9,96 @@
 import Foundation
 import Alamofire
 
-public class TraktRequestAddToHistory: TraktRequest {
-    public init(list: [TraktType: [(traktId: TraktIdentifier, watchedAt: NSDate)]]) {
-        var params: JSONHash = [:]
-        list.forEach { type, values in
-            params[type.rawValue] = values.flatMap { value in
+/// Add an object to watched history
+public class TraktRequestAddToHistory<T: TraktObject where T: protocol<ObjectType>, T: protocol<ListType>>: TraktRequest {
+    private var type: T.Type
+    /**
+     Init request
+
+     - parameter type:      type (ex: TraktMovie.self)
+     - parameter id:        id
+     - parameter watchedAt: optional date (default to now)
+     */
+    public init(type: T.Type, id: TraktIdentifier, watchedAt: NSDate = NSDate()) {
+        self.type = type
+        let params: JSONHash = [
+            type.listName: [
                 [
-                    "watched_at": Trakt.datetimeFormatter.stringFromDate(value.watchedAt),
                     "ids": [
-                        "trakt": value.traktId
+                        "trakt": id
                     ],
+                    "watched_at": Trakt.datetimeFormatter.stringFromDate(watchedAt)
                 ]
-            }
-        }
+            ]
+        ]
         super.init(method: "POST", path: "/sync/history", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) -> Request? {
+
+    /**
+     Execute request
+
+     - parameter trakt:      trakt client
+     - parameter completion: closure (bool: added, NSError?)
+
+     - returns: Alamofire.Request
+     */
+    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
-            guard let items = response.result.value as? JSONHash, added = items["added"] as? [String: Int], notFound = items["not_found"] as? [String: [JSONHash]] else {
+            guard let items = response.result.value as? JSONHash,
+                added = items["added"] as? [String: Int],
+                value = added[self.type.listName]
+                else {
                 return completion(nil, response.result.error)
             }
 
-            var aItems: [TraktType: Int]? = [:]
-            var nItems: [TraktType: [TraktIdentifier]]? = [:]
-            added.forEach {
-                guard let type = TraktType(rawValue: $0.0) where $0.1 > 0 else {
-                    return
-                }
-                aItems?[type] = $0.1
-            }
-            if aItems?.count == 0 {
-                aItems = nil
-            }
-            notFound.forEach {
-                guard let type = TraktType(rawValue: $0.0) else {
-                    return
-                }
-                nItems?[type] = $0.1.flatMap { object in
-                    (object["ids"] as? [String: TraktIdentifier])?["trakt"]
-                }
-                if nItems?[type]?.count == 0 {
-                    nItems?.removeValueForKey(type)
-                }
-            }
-            if nItems?.count == 0 {
-                nItems = nil
-            }
-            completion((added: aItems, notFound: nItems), response.result.error)
+            completion(value == 1, response.result.error)
         }
     }
 }
 
-public class TraktRequestRemoveFromHistory: TraktRequest {
-    public init(list: [TraktType: [TraktIdentifier]]) {
-        var params: JSONHash = [:]
-        list.forEach { type, values in
-            params[type.rawValue] = values.flatMap { value in
+/// Remove an object from watched history
+public class TraktRequestRemoveFromHistory<T: TraktObject where T: protocol<ObjectType>, T: protocol<ListType>>: TraktRequest {
+    private var type: T.Type
+
+    /**
+     Init request
+
+     - parameter type:      type (ex: TraktMovie.self)
+     - parameter id:        id
+     */
+    public init(type: T.Type, id: TraktIdentifier) {
+        self.type = type
+        let params: JSONHash = [
+            type.listName: [
                 [
                     "ids": [
-                        "trakt": value
+                        "trakt": id
                     ],
                 ]
-            }
-        }
+            ]
+        ]
         super.init(method: "POST", path: "/sync/history/remove", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((deleted: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) -> Request? {
+    /**
+     Execute request
+
+     - parameter trakt:      trakt client
+     - parameter completion: closure (bool: deleted, NSError?)
+
+     - returns: Alamofire.Request
+     */
+    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
-                deleted = items["deleted"] as? [String: Int],
-                notFound = items["not_found"] as? [String: [JSONHash]] else {
+                added = items["deleted"] as? [String: Int],
+                value = added[self.type.listName]
+                else {
                     return completion(nil, response.result.error)
             }
 
-            var dItems: [TraktType: Int]? = [:]
-            var nItems: [TraktType: [TraktIdentifier]]? = [:]
-            deleted.forEach {
-                guard let type = TraktType(rawValue: $0.0) where $0.1 > 0 else {
-                    return
-                }
-                dItems?[type] = $0.1
-            }
-            if dItems?.count == 0 {
-                dItems = nil
-            }
-            notFound.forEach {
-                guard let type = TraktType(rawValue: $0.0) else {
-                    return
-                }
-                nItems?[type] = $0.1.flatMap { object in
-                    (object["ids"] as? [String: TraktIdentifier])?["trakt"]
-                }
-                if nItems?[type]?.count == 0 {
-                    nItems?.removeValueForKey(type)
-                }
-            }
-            if nItems?.count == 0 {
-                nItems = nil
-            }
-            completion((deleted: dItems, notFound: nItems), response.result.error)
+            completion(value == 1, response.result.error)
         }
     }
 }

@@ -18,7 +18,12 @@ func += (inout left: JSONHash, right: JSONHash) {
     }
 }
 
-// Delay closure
+/**
+ Delay closure
+
+ - parameter delay:   time in seconds
+ - parameter closure: closure to exec
+ */
 internal func delay(delay: Double, closure: () ->()) {
     dispatch_after(
         dispatch_time(

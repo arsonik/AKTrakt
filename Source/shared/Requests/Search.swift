@@ -9,6 +9,36 @@
 import Foundation
 import Alamofire
 
+/// Represents trakt search object type
+private enum TraktSearchType: String {
+    /// Movie
+    case Movie = "movie"
+    /// Show
+    case Show = "show"
+    /// Season
+    case Season = "season"
+    /// Episode
+    case Episode = "episode"
+    /// Person
+    case Person = "person"
+
+    /// Associated TraktObject type
+    public var classType: TraktObject.Type? {
+        switch self {
+        case .Movie:
+            return TraktMovie.self
+        case .Show:
+            return TraktShow.self
+        case .Season:
+            return TraktSeason.self
+        case .Person:
+            return TraktPerson.self
+        case .Episode:
+            return TraktEpisode.self
+        }
+    }
+}
+
 /// Serarch request
 public class TraktRequestSearch<T: TraktObject where T: protocol<Searchable>>: TraktRequest {
     /**
@@ -50,10 +80,10 @@ public class TraktRequestSearch<T: TraktObject where T: protocol<Searchable>>: T
             }
 
             completion(entries.flatMap {
-                guard let type = TraktType.init(single: $0["type"] as? String ?? "") else {
+                guard let type = TraktSearchType(rawValue: $0["type"] as? String ?? "") else {
                     return nil
                 }
-                return type.classType?.init(data: $0[type.single] as? JSONHash)
+                return type.classType?.init(data: $0[type.rawValue] as? JSONHash)
             }, nil)
         }
     }

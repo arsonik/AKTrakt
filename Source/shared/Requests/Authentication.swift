@@ -93,6 +93,39 @@ public class TraktRequestToken: TraktRequest {
             "client_secret": trakt.clientSecret,
             "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
             "grant_type": "authorization_code"
+            ])
+    }
+
+    /**
+     Request
+
+     - parameter trakt:      trakt client
+     - parameter completion: closure TraktToken?, NSError?
+
+     - returns: Alamofire.Request
+     */
+    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
+        return trakt.request(self) { response in
+            completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
+        }
+    }
+}
+
+///	Refresh token request
+public class TraktRequestRefreshToken: TraktRequest {
+    /**
+     Init
+
+     - parameter trakt: trakt client
+     - parameter pin:   pin string
+     */
+    public init(trakt: Trakt, token: TraktToken) {
+        super.init(method: "POST", path: "/oauth/token", params: [
+            "refresh_token": token.refreshToken,
+            "client_id": trakt.clientId,
+            "client_secret": trakt.clientSecret,
+            "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
+            "grant_type": "refresh_token"
         ])
     }
 

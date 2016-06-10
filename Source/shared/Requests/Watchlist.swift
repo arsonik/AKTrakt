@@ -59,120 +59,72 @@ public class TraktRequestGetWatched<T: TraktObject where T: protocol<Watchlist>>
 
 
 /// Request to add object to your watchlist
-public class TraktRequestAddToWatchlist: TraktRequest {
-    public init(list: [TraktType: [TraktIdentifier]]) {
-        var params: JSONHash = [:]
-        list.forEach { type, values in
-            params[type.rawValue] = values.flatMap { value in
+public class TraktRequestAddToWatchlist<T: TraktObject where T: protocol<ObjectType>, T: protocol<ListType>>: TraktRequest {
+    private let type: T.Type
+    public init(type: T.Type, id: TraktIdentifier) {
+        self.type = type
+
+        let params: JSONHash = [
+            type.listName: [
                 [
                     "ids": [
-                        "trakt": value
+                        "trakt": id
                     ],
                 ]
-            }
-        }
+            ]
+        ]
         super.init(method: "POST", path: "/sync/watchlist", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((added: [TraktType: Int]?, existing: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) -> Request? {
+    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 added = items["added"] as? [String: Int],
-                existing = items["existing"] as? [String: Int],
-                notFound = items["not_found"] as? [String: [JSONHash]] else {
-                return completion(nil, response.result.error)
+                value = added[self.type.listName]
+                else {
+                    return completion(nil, response.result.error)
             }
 
-            var aItems: [TraktType: Int]? = [:]
-            var eItems: [TraktType: Int]? = [:]
-            var nItems: [TraktType: [TraktIdentifier]]? = [:]
-            added.forEach {
-                guard let type = TraktType(rawValue: $0.0) where $0.1 > 0 else {
-                    return
-                }
-                aItems?[type] = $0.1
-            }
-            if aItems?.count == 0 {
-                aItems = nil
-            }
-            existing.forEach {
-                guard let type = TraktType(rawValue: $0.0) where $0.1 > 0 else {
-                    return
-                }
-                eItems?[type] = $0.1
-            }
-            if eItems?.count == 0 {
-                eItems = nil
-            }
-            notFound.forEach {
-                guard let type = TraktType(rawValue: $0.0) else {
-                    return
-                }
-                nItems?[type] = $0.1.flatMap { object in
-                    (object["ids"] as? [String: TraktIdentifier])?["trakt"]
-                }
-                if nItems?[type]?.count == 0 {
-                    nItems?.removeValueForKey(type)
-                }
-            }
-            if nItems?.count == 0 {
-                nItems = nil
-            }
-            completion((added: aItems, existing: eItems, notFound: nItems), response.result.error)
+            completion(value == 1, response.result.error)
         }
     }
 }
 
-
-public class TraktRequestRemoveFromWatchlist: TraktRequest {
-    public init(list: [TraktType: [TraktIdentifier]]) {
-        var params: JSONHash = [:]
-        list.forEach { type, values in
-            params[type.rawValue] = values.flatMap { value in
+/// Request to remove an object from watchlist
+public class TraktRequestRemoveFromWatchlist<T: TraktObject where T: protocol<ObjectType>, T: protocol<ListType>>: TraktRequest {
+    private let type: T.Type
+    public init(type: T.Type, id: TraktIdentifier) {
+        self.type = type
+        let params: JSONHash = [
+            type.listName: [
                 [
                     "ids": [
-                        "trakt": value
+                        "trakt": id
                     ],
                 ]
-            }
-        }
+            ]
+        ]
         super.init(method: "POST", path: "/sync/watchlist/remove", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ((deleted: [TraktType: Int]?, notFound: [TraktType: [TraktIdentifier]]?)?, NSError?) -> Void) -> Request? {
+    /**
+     Execute request
+
+     - parameter trakt:      trakt client
+     - parameter completion: closure (bool: deleted, NSError?)
+
+     - returns: Alamofire.Request
+     */
+    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
-                deleted = items["deleted"] as? [String: Int],
-                notFound = items["not_found"] as? [String: [JSONHash]] else {
+                added = items["deleted"] as? [String: Int],
+                value = added[self.type.listName]
+                else {
                     return completion(nil, response.result.error)
             }
 
-            var dItems: [TraktType: Int]? = [:]
-            var nItems: [TraktType: [TraktIdentifier]]? = [:]
-            deleted.forEach {
-                guard let type = TraktType(rawValue: $0.0) where $0.1 > 0 else {
-                    return
-                }
-                dItems?[type] = $0.1
-            }
-            if dItems?.count == 0 {
-                dItems = nil
-            }
-            notFound.forEach {
-                guard let type = TraktType(rawValue: $0.0) else {
-                    return
-                }
-                nItems?[type] = $0.1.flatMap { object in
-                    (object["ids"] as? [String: TraktIdentifier])?["trakt"]
-                }
-                if nItems?[type]?.count == 0 {
-                    nItems?.removeValueForKey(type)
-                }
-            }
-            if nItems?.count == 0 {
-                nItems = nil
-            }
-            completion((deleted: dItems, notFound: nItems), response.result.error)
+            completion(value == 1, response.result.error)
         }
     }
 }
