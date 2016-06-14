@@ -26,7 +26,7 @@ public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits,
 
      - parameter data: data
      */
-    override public func digest(data: JSONHash?) {
+    override public func digest(_ data: JSONHash?) {
         super.digest(data)
 
         year = data?["year"] as? UInt ?? year
@@ -50,7 +50,7 @@ public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits,
      - parameter number: season number
      - returns: seasons
      */
-    public func season(number: TraktSeasonNumber) -> TraktSeason? {
+    public func season(_ number: TraktSeasonNumber) -> TraktSeason? {
         return seasons.filter {$0.number == number} . first
     }
 
@@ -72,7 +72,7 @@ public class TraktShow: TraktObject, Descriptable, Trending, Watchlist, Credits,
         return "TraktShow(\(title))"
     }
 
-    public func extend(with: TraktShow) {
+    public func extend(_ with: TraktShow) {
         super.extend(with)
 
         year = with.year ?? year

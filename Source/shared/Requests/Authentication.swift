@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, verificationUrl: String, expiresAt: NSDate, interval: NSTimeInterval)
+public typealias GeneratedCodeResponse = (deviceCode: String, userCode: String, verificationUrl: String, expiresAt: Date, interval: TimeInterval)
 
 ///	Generate new device codes
 public class TraktRequestGenerateCode: TraktRequest {
@@ -30,7 +30,7 @@ public class TraktRequestGenerateCode: TraktRequest {
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (GeneratedCodeResponse?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (GeneratedCodeResponse?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard
                 let data = response.result.value as? JSONHash,
@@ -71,7 +71,7 @@ public class TraktRequestPollDevice: TraktRequest {
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
         }
@@ -104,7 +104,7 @@ public class TraktRequestToken: TraktRequest {
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
         }
@@ -137,7 +137,7 @@ public class TraktRequestRefreshToken: TraktRequest {
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (TraktToken?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(TraktToken(data: response.result.value as? JSONHash), response.result.error)
         }
@@ -163,7 +163,7 @@ public class TraktRequestProfile: TraktRequest {
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (JSONHash?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (JSONHash?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(response.result.value as? JSONHash, response.result.error)
         }

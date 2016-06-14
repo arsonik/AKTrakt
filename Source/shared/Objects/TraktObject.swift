@@ -34,7 +34,7 @@ public protocol Watchable {
     /// boolean indicating if the object has been watched
     var watched: Bool? { get set }
     /// date of the last play
-    var lastWatchedAt: NSDate? { get set }
+    var lastWatchedAt: Date? { get set }
     /// number of times this object has been played
     var plays: UInt? { get set }
 }
@@ -42,12 +42,12 @@ public protocol Watchable {
 /// Collectable protocol
 public protocol Collectable {
     /// date added to collection
-    var collectedAt: NSDate? { get set }
+    var collectedAt: Date? { get set }
 }
 
 public protocol Extendable {
     associatedtype T
-    func extend(with: T)
+    func extend(_ with: T)
 }
 
 /// TraktObject (abstract) class
@@ -65,7 +65,7 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
         return Int(id)
     }
     /// Images's URL by type and size
-    public var images: [TraktImageType: [TraktImageSize: NSURL]] = [:]
+    public var images: [TraktImageType: [TraktImageSize: URL]] = [:]
 
     /**
      Init object with data
@@ -79,13 +79,13 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
      Digest the data passed
      - parameter data: String: Value Dictionary
      */
-    public func digest(data: JSONHash?) {
+    public func digest(_ data: JSONHash?) {
         ids = TraktId.extractIds(data) ?? ids
 
         (data?["images"] as? JSONHash)?.forEach { rawType, list in
             if let type = TraktImageType(rawValue: rawType), listed = list as? JSONHash {
                 listed.forEach { rawSize, uri in
-                    if let size = TraktImageSize(rawValue: rawSize), u = uri as? String, url = NSURL(string: u) {
+                    if let size = TraktImageSize(rawValue: rawSize), u = uri as? String, url = URL(string: u) {
                         if images[type] == nil {
                             images[type] = [:]
                         }
@@ -103,14 +103,14 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
         if var me = self as? Watchable {
             me.watched = data?["completed"] as? Bool ?? me.watched
             me.plays = data?["plays"] as? UInt ?? me.plays
-            if let fa = data?["last_watched_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
+            if let fa = data?["last_watched_at"] as? String, date = Trakt.datetimeFormatter.date(from: fa) {
                 me.lastWatchedAt = date
                 me.watched = true
             }
         }
 
         if var me = self as? Collectable {
-            if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.dateFromString(string) {
+            if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.date(from: string) {
                 me.collectedAt = date
             }
         }
@@ -122,9 +122,9 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
      - parameter thatFits: the image view to be filled
      - returns: An optional NSURL
      */
-    public func imageURL(type: TraktImageType, thatFits image: UIImageView) -> NSURL? {
-        let sizes = type.sizes.sort({$0.0.1.area < $0.1.1.area})
-        let area = (image.frame.width * image.frame.height) * UIScreen.mainScreen().scale
+    public func imageURL(_ type: TraktImageType, thatFits image: UIImageView) -> URL? {
+        let sizes = type.sizes.sorted(isOrderedBefore: {$0.0.1.area < $0.1.1.area})
+        let area = (image.frame.width * image.frame.height) * UIScreen.main().scale
         var selectedSize: TraktImageSize! = nil
         for size in sizes {
             if size.1.area >= area {
@@ -154,7 +154,7 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
 
      - parameter with: Object of the same type
      */
-    public func extend(with: TraktObject) {
+    public func extend(_ with: TraktObject) {
         ids = with.ids ?? ids
         images = with.images ?? images
 

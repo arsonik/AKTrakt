@@ -38,7 +38,7 @@ public class TraktSeason: TraktObject, Watchlist {
 
      - parameter data: data
      */
-    public override func digest(data: JSONHash?) {
+    public override func digest(_ data: JSONHash?) {
         super.digest(data)
 
         if let episodes = data?["episodes"] as? [JSONHash] {
@@ -48,7 +48,7 @@ public class TraktSeason: TraktObject, Watchlist {
                 }
                 episode.seasonNumber = number ?? episode.seasonNumber
                 return episode
-            }.sort {
+            }.sorted {
                 $0.number < $1.number
             }
         }
@@ -64,7 +64,7 @@ public class TraktSeason: TraktObject, Watchlist {
      - parameter number: Episode number
      - returns: episode array
      */
-    public func episode(number: TraktEpisodeNumber) -> TraktEpisode? {
+    public func episode(_ number: TraktEpisodeNumber) -> TraktEpisode? {
         return episodes.filter {$0.number == number} . first
     }
 

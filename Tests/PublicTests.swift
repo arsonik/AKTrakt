@@ -16,7 +16,7 @@ class PublicTests: XCTestCase {
                       applicationId: 3695)
 
     func testSearchMovie() {
-        let expectation = expectationWithDescription("Searching for a movie")
+        let expectation = self.expectation(withDescription: "Searching for a movie")
         TraktRequestSearch(query: "avatar", type: TraktMovie.self).request(trakt) { result, error in
             guard let movie = result?.first as? TraktMovie else {
                 return XCTFail("Response was not a TraktMovie: \(result), error \(error)")
@@ -27,29 +27,29 @@ class PublicTests: XCTestCase {
 
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testRoute() {
-        let expectation = expectationWithDescription("Searching for a show")
+        let expectation = self.expectation(withDescription: "Searching for a show")
         TraktRequestShow(id: 39105).request(trakt) { show, error in
             XCTAssertNil(show?.overview)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testRouteExtended() {
-        let expectation = expectationWithDescription("Searching for a show extended")
+        let expectation = self.expectation(withDescription: "Searching for a show extended")
         TraktRequestShow(id: 39105, extended: .Full).request(trakt) { (show, error) in
             XCTAssertNotNil(show?.overview)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testSearchShow() {
-        let expectation = expectationWithDescription("Searching for a show")
+        let expectation = self.expectation(withDescription: "Searching for a show")
         TraktRequestSearch(query: "scandal", type: TraktShow.self).request(trakt) { result, error in
             guard let show = result?.first as? TraktShow else {
                 return XCTFail("Response was not a TraktShow")
@@ -59,11 +59,11 @@ class PublicTests: XCTestCase {
             XCTAssertEqual(show.year, 2012)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testTrending() {
-        let expectation = expectationWithDescription("Getting trending")
+        let expectation = self.expectation(withDescription: "Getting trending")
         TraktRequestTrending(type: TraktMovie.self, extended: .Images, pagination: TraktPagination(page: 1, limit: 28)).request(trakt) { objects, error in
             XCTAssertTrue(objects?.first?.watchers > 0)
             XCTAssertNotNil(objects?.first?.media)
@@ -71,7 +71,7 @@ class PublicTests: XCTestCase {
             XCTAssertEqual(objects?.count, 28)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testTokenFailure() {
@@ -81,26 +81,26 @@ class PublicTests: XCTestCase {
     }
 
     func testMovie() {
-        let expectation = expectationWithDescription("Getting a movie by id")
+        let expectation = self.expectation(withDescription: "Getting a movie by id")
         TraktRequestMovie(id: 1235).request(trakt) { movie, error in
             XCTAssertEqual(movie?.title, "Cervantes")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testPerson() {
-        let expectation = expectationWithDescription("Getting a movie by id")
+        let expectation = self.expectation(withDescription: "Getting a movie by id")
         TraktRequestPeople(id: "mel-gibson", extended: .Full).request(trakt) { person, error in
             XCTAssertEqual(person?.name, "Mel Gibson")
             XCTAssertEqual(person?.birthday?.description.containsString("1956-01-03"), true)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testCasting() {
-        let expectation = expectationWithDescription("Getting casting")
+        let expectation = self.expectation(withDescription: "Getting casting")
         TraktRequestMediaPeople(type: TraktShow.self, id: 39105).request(trakt) { characters, crew, error in
             XCTAssertEqual(characters?.first?.character, "Olivia Pope")
             XCTAssertEqual(characters?.first?.person.name, "Kerry Washington")
@@ -112,11 +112,11 @@ class PublicTests: XCTestCase {
 
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testCredits() {
-        let expectation = expectationWithDescription("Getting person's credits")
+        let expectation = self.expectation(withDescription: "Getting person's credits")
 
         TraktRequestPeopleCredits(type: TraktMovie.self, id: "mel-gibson").request(trakt) { tuple, error in
             guard let role = tuple?.cast?.filter({ $0.character == "Driver" }).first else {
@@ -125,45 +125,45 @@ class PublicTests: XCTestCase {
             XCTAssertEqual(role.media.title, "Get the Gringo")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testImages() {
-        let expectation = expectationWithDescription("Getting movie")
+        let expectation = self.expectation(withDescription: "Getting movie")
         TraktRequestMovie(id: "tron-legacy-2010", extended: .Images).request(trakt) { movie, error in
             XCTAssertTrue(movie?.images.count > 0)
 
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testSeasons() {
-        let expectation = expectationWithDescription("Getting seasons")
+        let expectation = self.expectation(withDescription: "Getting seasons")
         TraktRequestSeason(showId: "game-of-thrones", seasonNumber: 1).request(trakt) { episodes, error in
             XCTAssertEqual(episodes?.count, 10)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testEpisodes() {
-        let expectation = expectationWithDescription("Getting episodes")
+        let expectation = self.expectation(withDescription: "Getting episodes")
         TraktRequestSeason(showId: 39105, seasonNumber: 5).request(trakt) { episodes, error in
             XCTAssertTrue(episodes?.count == 21)
             XCTAssertEqual(episodes?.last?.title, "That's My Girl")
 
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testReleases() {
-        let expectation = expectationWithDescription("Getting releases")
+        let expectation = self.expectation(withDescription: "Getting releases")
         TraktRequestMovieReleases(id: "tron-legacy-2010", country: "fr").request(trakt) { releases, error in
             XCTAssertEqual(releases?.count, 1)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 }

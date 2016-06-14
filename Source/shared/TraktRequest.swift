@@ -94,7 +94,7 @@ public struct TraktPagination: TraktURLParameters {
 }
 
 /// Represents the extended params used by Trakt
-public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
+public struct TraktRequestExtendedOptions: OptionSet, TraktURLParameters {
     public let rawValue: Int
 
     public init(rawValue: Int) {
@@ -131,7 +131,7 @@ public struct TraktRequestExtendedOptions: OptionSetType, TraktURLParameters {
             list.append("episodes")
         }
         if list.count > 0 {
-            return ["extended": list.joinWithSeparator(",")]
+            return ["extended": list.joined(separator: ",")]
         } else {
             return [:]
         }
@@ -147,10 +147,10 @@ extension Trakt {
 
      - returns: Alamofire.Request
      */
-    public func request(request: TraktRequest, completionHandler: Response<AnyObject, NSError> -> Void) -> Request? {
+    public func request(_ request: TraktRequest, completionHandler: (Response<AnyObject, NSError>) -> Void) -> Request? {
         do {
-            guard let url = NSURL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
-                throw TraktError.UrlError
+            guard let url = URL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
+                throw TraktError.urlError
             }
             let mRequest = NSMutableURLRequest(URL: url)
             mRequest.HTTPMethod = request.method
@@ -163,7 +163,7 @@ extension Trakt {
                 if let accessToken = token?.accessToken {
                     mRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
                 } else {
-                    throw TraktError.TokenRequired
+                    throw TraktError.tokenRequired
                 }
             }
 
@@ -193,7 +193,7 @@ extension Trakt {
                 }
                 completionHandler(response)
             }
-        } catch TraktError.TokenRequired {
+        } catch TraktError.tokenRequired {
             print("ERROR TokenRequired")
             return nil
         } catch {

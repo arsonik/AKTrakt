@@ -33,7 +33,7 @@ public class TraktRequestGetCollection<T: TraktObject where T: ListType, T: Obje
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)

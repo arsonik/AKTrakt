@@ -18,7 +18,7 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
     /// Episode's season number
     public var seasonNumber: TraktSeasonNumber?
     /// Episode's first aired date
-    public var firstAired: NSDate?
+    public var firstAired: Date?
     /// Descriptable conformance
     public var title: String?
     /// Descriptable conformance
@@ -28,11 +28,11 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
     /// Watchlist conformance
     public var watchlist: Bool?
     /// Watchable conformance
-    public var lastWatchedAt: NSDate?
+    public var lastWatchedAt: Date?
     /// Watchable conformance
     public var plays: UInt?
     /// Collectable conformance
-    public var collectedAt: NSDate?
+    public var collectedAt: Date?
 
     /**
      Init with data
@@ -53,11 +53,11 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
 
      - parameter data: data
      */
-    override public func digest(data: JSONHash!) {
+    override public func digest(_ data: JSONHash!) {
         super.digest(data)
 
         seasonNumber = data?["season"] as? TraktSeasonNumber ?? seasonNumber
-        if let fa = data["first_aired"] as? String, date = Trakt.datetimeFormatter.dateFromString(fa) {
+        if let fa = data["first_aired"] as? String, date = Trakt.datetimeFormatter.date(from: fa) {
             firstAired = date
         }
     }
@@ -80,7 +80,7 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
 
      - parameter with: TraktEpisode
      */
-    public func extend(with: TraktEpisode) {
+    public func extend(_ with: TraktEpisode) {
         super.extend(with)
 
         firstAired = with.firstAired ?? firstAired

@@ -29,7 +29,7 @@ public class TraktRequestShow: TraktRequest {
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
                 return completion(nil, response.result.error)
@@ -68,7 +68,7 @@ public class TraktRequestShowProgress: TraktRequest {
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let data = response.result.value as? JSONHash,
                 seasonsData = data["seasons"] as? [JSONHash] else {

@@ -30,7 +30,7 @@ public enum TraktId: String {
 
      - returns: parsed key:value
      */
-    static func extractIds(data: JSONHash?) -> [TraktId: AnyObject]? {
+    static func extractIds(_ data: JSONHash?) -> [TraktId: AnyObject]? {
         var ids: [TraktId: AnyObject] = [:]
         (data?["ids"] as? JSONHash)?.forEach { id, value in
             if let identifier = TraktId(rawValue: id) {

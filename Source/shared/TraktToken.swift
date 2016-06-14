@@ -13,7 +13,7 @@ import Foundation
     /// The access token
     public let accessToken: String
     /// Expiration date
-    public let expiresAt: NSDate
+    public let expiresAt: Date
     /// Refresh value
     public let refreshToken: String
     /// Token's type
@@ -30,7 +30,7 @@ import Foundation
      - parameter tokenType:    tokenType
      - parameter scope:        scope
      */
-    public init(accessToken: String, expiresAt: NSDate, refreshToken: String, tokenType: String, scope: String) {
+    public init(accessToken: String, expiresAt: Date, refreshToken: String, tokenType: String, scope: String) {
         self.accessToken = accessToken
         self.expiresAt = expiresAt
         self.refreshToken = refreshToken
@@ -51,16 +51,16 @@ import Foundation
             refreshToken = data?["refresh_token"] as? String else {
                 return nil
         }
-        self.init(accessToken: accessToken, expiresAt: NSDate(timeIntervalSinceNow: expiresIn), refreshToken: refreshToken, tokenType: tokenType, scope: scope)
+        self.init(accessToken: accessToken, expiresAt: Date(timeIntervalSinceNow: expiresIn), refreshToken: refreshToken, tokenType: tokenType, scope: scope)
     }
 
     /// NSCoding
     public required init?(coder aDecoder: NSCoder) {
-        guard let accessToken = aDecoder.decodeObjectForKey("accessToken") as? String,
-        tokenType = aDecoder.decodeObjectForKey("tokenType") as? String,
-        expiresAt = aDecoder.decodeObjectForKey("expiresAt") as? NSDate,
-        refreshToken = aDecoder.decodeObjectForKey("refreshToken") as? String,
-            scope = aDecoder.decodeObjectForKey("scope") as? String else {
+        guard let accessToken = aDecoder.decodeObject(forKey: "accessToken") as? String,
+        tokenType = aDecoder.decodeObject(forKey: "tokenType") as? String,
+        expiresAt = aDecoder.decodeObject(forKey: "expiresAt") as? Date,
+        refreshToken = aDecoder.decodeObject(forKey: "refreshToken") as? String,
+            scope = aDecoder.decodeObject(forKey: "scope") as? String else {
                 return nil
         }
 
@@ -77,11 +77,11 @@ import Foundation
     }
 
     /// NSCoding
-    public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(accessToken, forKey: "accessToken")
-        aCoder.encodeObject(tokenType, forKey: "tokenType")
-        aCoder.encodeObject(expiresAt, forKey: "expiresAt")
-        aCoder.encodeObject(refreshToken, forKey: "refreshToken")
-        aCoder.encodeObject(scope, forKey: "scope")
+    public func encode(with aCoder: NSCoder) {
+        aCoder.encode(accessToken, forKey: "accessToken")
+        aCoder.encode(tokenType, forKey: "tokenType")
+        aCoder.encode(expiresAt, forKey: "expiresAt")
+        aCoder.encode(refreshToken, forKey: "refreshToken")
+        aCoder.encode(scope, forKey: "scope")
     }
 }

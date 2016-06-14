@@ -19,7 +19,7 @@ public class TraktRequestAddToHistory<T: TraktObject where T: protocol<ObjectTyp
      - parameter id:        id
      - parameter watchedAt: optional date (default to now)
      */
-    public init(type: T.Type, id: TraktIdentifier, watchedAt: NSDate = NSDate()) {
+    public init(type: T.Type, id: TraktIdentifier, watchedAt: Date = Date()) {
         self.type = type
         let params: JSONHash = [
             type.listName: [
@@ -27,7 +27,7 @@ public class TraktRequestAddToHistory<T: TraktObject where T: protocol<ObjectTyp
                     "ids": [
                         "trakt": id
                     ],
-                    "watched_at": Trakt.datetimeFormatter.stringFromDate(watchedAt)
+                    "watched_at": Trakt.datetimeFormatter.string(from: watchedAt)
                 ]
             ]
         ]
@@ -43,7 +43,7 @@ public class TraktRequestAddToHistory<T: TraktObject where T: protocol<ObjectTyp
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 added = items["added"] as? [String: Int],
@@ -89,7 +89,7 @@ public class TraktRequestRemoveFromHistory<T: TraktObject where T: protocol<Obje
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 added = items["deleted"] as? [String: Int],

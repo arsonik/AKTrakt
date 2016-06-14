@@ -73,7 +73,7 @@ public class TraktRequestSearch<T: TraktObject where T: protocol<Searchable>>: T
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([TraktObject]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)

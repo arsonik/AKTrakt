@@ -15,7 +15,7 @@ public struct TraktRelease: CustomStringConvertible {
     /// Certification
     public let certification: String
     /// Date
-    public let date: NSDate
+    public let date: Date
     /// Type
     public let type: TraktReleaseType
     /// Note
@@ -31,7 +31,7 @@ public struct TraktRelease: CustomStringConvertible {
             let country = data?["country"] as? String,
             certification = data?["certification"] as? String,
             release_date = data?["release_date"] as? String,
-            date = Trakt.dateFormatter.dateFromString(release_date),
+            date = Trakt.dateFormatter.date(from: release_date),
             release_type = data?["release_type"] as? String,
             type = TraktReleaseType(rawValue: release_type)
             else {

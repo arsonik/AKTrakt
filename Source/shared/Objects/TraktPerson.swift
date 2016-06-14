@@ -15,9 +15,9 @@ public class TraktPerson: TraktObject, Searchable {
     /// Person's biography
     public var biography: String?
     /// Person's birthday
-    public var birthday: NSDate?
+    public var birthday: Date?
     /// Person's death
-    public var death: NSDate?
+    public var death: Date?
 
     /**
      Init with data
@@ -38,16 +38,16 @@ public class TraktPerson: TraktObject, Searchable {
 
      - parameter data: data
      */
-    public override func digest(data: JSONHash?) {
+    public override func digest(_ data: JSONHash?) {
         super.digest(data)
 
         biography = data?["biography"] as? String
 
-        if let value = data?["birthday"] as? String, date = Trakt.dateFormatter.dateFromString(value) {
+        if let value = data?["birthday"] as? String, date = Trakt.dateFormatter.date(from: value) {
             birthday = date
         }
 
-        if let value = data?["death"] as? String, date = Trakt.dateFormatter.dateFromString(value) {
+        if let value = data?["death"] as? String, date = Trakt.dateFormatter.date(from: value) {
             death = date
         }
     }
@@ -60,10 +60,10 @@ public class TraktPerson: TraktObject, Searchable {
         guard birthday != nil else {
             return nil
         }
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
-        let ageComponents = calendar.components(.Year,
-                                                fromDate: birthday!,
-                                                toDate: death ?? NSDate(),
+        let calendar = Calendar(calendarIdentifier: Calendar.Identifier.gregorian)!
+        let ageComponents = calendar.components(.year,
+                                                from: birthday!,
+                                                to: death ?? Date(),
                                                 options: [])
         return ageComponents.year
     }

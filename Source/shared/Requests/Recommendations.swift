@@ -24,7 +24,7 @@ public class TraktRequestRecommendations<T: TraktObject where T: protocol<Recomm
         super.init(path: "/recommendations/\(type.listName)", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
@@ -41,7 +41,7 @@ public class TraktRequestRecommendationsHide<T: TraktObject where T: protocol<Re
         super.init(method: "DELETE", path: "/recommendations/\(type.listName)/\(id)", oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(response.response?.statusCode == 204, response.result.error)
         }

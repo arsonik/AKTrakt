@@ -14,7 +14,7 @@ public class TraktRequestSeason: TraktRequest {
         super.init(path: "/shows/\(showId)/seasons/\(seasonNumber)", params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([TraktEpisode]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([TraktEpisode]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
@@ -31,7 +31,7 @@ public class TraktRequestSeasons: TraktRequest {
         super.init(path: "/shows/\(showId)/seasons/", params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)

@@ -17,7 +17,7 @@ public class TraktRequestGetWatchlist<T: TraktObject where T: protocol<Watchlist
         super.init(path: "/sync/watchlist/\(type.listName)", oAuth: true, params: extended?.value(), headers: sort?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([(listedAt: NSDate, media: T)]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([(listedAt: Date, media: T)]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
@@ -42,7 +42,7 @@ public class TraktRequestGetWatched<T: TraktObject where T: protocol<Watchlist>>
         super.init(path: "/sync/watched/\(type.listName)", oAuth: true, params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let entries = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)
@@ -76,7 +76,7 @@ public class TraktRequestAddToWatchlist<T: TraktObject where T: protocol<ObjectT
         super.init(method: "POST", path: "/sync/watchlist", params: params, oAuth: true)
     }
 
-    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 added = items["added"] as? [String: Int],
@@ -115,7 +115,7 @@ public class TraktRequestRemoveFromWatchlist<T: TraktObject where T: protocol<Ob
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 added = items["deleted"] as? [String: Int],

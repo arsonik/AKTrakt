@@ -15,12 +15,12 @@ public protocol TraktAuthViewControllerDelegate: class {
 
      - parameter controller: controller
      */
-    func TraktAuthViewControllerDidAuthenticate(controller: UIViewController)
+    func TraktAuthViewControllerDidAuthenticate(_ controller: UIViewController)
 
     /**
      Called when a user cancel the auth process
 
      - parameter controller: controller
      */
-    func TraktAuthViewControllerDidCancel(controller: UIViewController)
+    func TraktAuthViewControllerDidCancel(_ controller: UIViewController)
 }

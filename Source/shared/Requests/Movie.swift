@@ -14,7 +14,7 @@ public class TraktRequestMovie: TraktRequest {
         super.init(path: "/movies/\(id)", params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: (TraktMovie?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (TraktMovie?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             completion(TraktMovie(data: response.result.value as? JSONHash), response.result.error)
         }
@@ -27,7 +27,7 @@ public class TraktRequestMovieReleases: TraktRequest {
         super.init(path: "/movies/\(id)/releases" + (country != nil ? "/\(country!)" : ""), params: extended?.value())
     }
 
-    public func request(trakt: Trakt, completion: ([TraktRelease]?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: ([TraktRelease]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let data = response.result.value as? [JSONHash] else {
                 return completion(nil, response.result.error)

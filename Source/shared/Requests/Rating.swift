@@ -20,13 +20,13 @@ public class TraktRequestAddRating<T: TraktObject where T: protocol<ObjectType>,
      - parameter rating:  rating 0 to 10
      - parameter ratedAt: rate date optional
      */
-    public init(type: T.Type, id: TraktIdentifier, rating: UInt, ratedAt: NSDate = NSDate()) {
+    public init(type: T.Type, id: TraktIdentifier, rating: UInt, ratedAt: Date = Date()) {
         self.type = type
         let params: JSONHash = [
             type.listName: [
                 [
                     "rating": rating,
-                    "rated_at": Trakt.datetimeFormatter.stringFromDate(ratedAt),
+                    "rated_at": Trakt.datetimeFormatter.string(from: ratedAt),
                     "ids": [
                         "trakt": id
                     ]
@@ -44,7 +44,7 @@ public class TraktRequestAddRating<T: TraktObject where T: protocol<ObjectType>,
 
      - returns: Alamofire.Request
      */
-    public func request(trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
+    public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
                 added = items["added"] as? [String: Int],

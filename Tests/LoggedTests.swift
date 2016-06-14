@@ -17,7 +17,7 @@ class LoggedTests: XCTestCase {
 
     // arsonikTest
     let testToken = TraktToken(accessToken: "d69b61007069cdbc8999c09d4f254201baa60f5418b9ed39d622e02ee852fe2b",
-                               expiresAt: NSDate(timeIntervalSince1970: 1473256416),
+                               expiresAt: Date(timeIntervalSince1970: 1473256416),
                                refreshToken: "8fc9bc42fd54a4181b983e5ed50e5e375e14664548057d8d416e889d6d0b55e2",
                                tokenType: "bearer",
                                scope: "public"
@@ -30,20 +30,20 @@ class LoggedTests: XCTestCase {
     }
 
     func testProfile() {
-        let expectation = expectationWithDescription("Getting profile")
+        let expectation = self.expectation(withDescription: "Getting profile")
         TraktRequestProfile().request(trakt) { data, error in
             XCTAssertEqual(data?["username"] as? String, "arsonikTest")
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 
     func testRecommendedMovies() {
-        let expectation = expectationWithDescription("Getting recommended movies")
+        let expectation = self.expectation(withDescription: "Getting recommended movies")
         TraktRequestRecommendations(type: TraktMovie.self).request(trakt) { movies, error in
             XCTAssertEqual(movies?.count, 10)
             expectation.fulfill()
         }
-        waitForExpectationsWithTimeout(5, handler: nil)
+        waitForExpectations(withTimeout: 5, handler: nil)
     }
 }

@@ -19,7 +19,7 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Tren
     /// Production year
     public var year: Int?
     /// Release date
-    public var release: NSDate?
+    public var release: Date?
     /// Length in minutes
     public var runtime: Int?
     /// Array of genres
@@ -35,18 +35,18 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Tren
     /// Watchlist conformance
     public var watchlist: Bool?
     /// Watchable conformance
-    public var lastWatchedAt: NSDate? = nil
+    public var lastWatchedAt: Date? = nil
     /// Watchable conformance
     public var plays: UInt?
     /// Collectable conformance
-    public var collectedAt: NSDate?
+    public var collectedAt: Date?
 
     /**
      Digest data
 
      - parameter data: data
      */
-    override public func digest(data: JSONHash?) {
+    override public func digest(_ data: JSONHash?) {
         super.digest(data)
 
         rating = data?["rating"] as? Float ?? rating
@@ -55,11 +55,11 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Tren
         genres = data?["genres"] as? [String] ?? genres
         runtime = data?["runtime"] as? Int ?? runtime
 
-        if let r = data?["released"] as? String, d = Trakt.dateFormatter.dateFromString(r) {
+        if let r = data?["released"] as? String, d = Trakt.dateFormatter.date(from: r) {
             release = d
         }
 
-        if let x = data?["trailer"] as? String, url = NSURL(string: x), params = url.query?.componentsSeparatedByString("v=") where params.count == 2 {
+        if let x = data?["trailer"] as? String, url = URL(string: x), params = url.query?.components(separatedBy: "v=") where params.count == 2 {
             trailer = params[1]
         }
     }
