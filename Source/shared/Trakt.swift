@@ -21,8 +21,6 @@ public class Trakt {
     public var token: TraktToken?
     /// Delay between each re attempt in seconds
     internal var retryInterval: Double = 5
-    // Cache request attempts (in case of faileur/retry)
-    internal var attempts = Cache()
     // Alamofire Manager
     internal let manager = Manager()
     // Trakt api version

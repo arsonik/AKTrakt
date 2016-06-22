@@ -3,8 +3,8 @@ use_frameworks!
 
 abstract_target 'Internal' do
     pod "AKTrakt", :path => "."
-    pod "Alamofire", '~> 3.4.0'
-    pod "AlamofireImage", '~> 2.4.0'
+    pod "Alamofire", :git => "https://github.com/Alamofire/Alamofire.git", :branch => 'swift3'
+    pod "AlamofireImage", :git => "https://github.com/Alamofire/AlamofireImage.git", :branch => 'swift3'
 
     target 'AKTrakt iOS' do
         platform :ios, '8.0'

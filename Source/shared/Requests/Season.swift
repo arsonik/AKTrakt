@@ -38,7 +38,7 @@ public class TraktRequestSeasons: TraktRequest {
             }
             completion(items.flatMap {
                 TraktSeason(data: $0)
-            }.sort {
+            }.sorted {
                 $0.number < $1.number
             }, nil)
         }

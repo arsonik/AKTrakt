@@ -41,7 +41,7 @@ public class TraktRequestGenerateCode: TraktRequest {
                 interval = data["interval"] as? Double else {
                     return completion(nil, response.result.error)
             }
-            completion((deviceCode: deviceCode, userCode: userCode, verificationUrl: verificationUrl, expiresAt: NSDate().dateByAddingTimeInterval(expiresIn), interval: interval), nil)
+            completion((deviceCode: deviceCode, userCode: userCode, verificationUrl: verificationUrl, expiresAt: Date().addingTimeInterval(expiresIn), interval: interval), nil)
         }
     }
 }

@@ -93,7 +93,7 @@ class PublicTests: XCTestCase {
         let expectation = self.expectation(withDescription: "Getting a movie by id")
         TraktRequestPeople(id: "mel-gibson", extended: .Full).request(trakt) { person, error in
             XCTAssertEqual(person?.name, "Mel Gibson")
-            XCTAssertEqual(person?.birthday?.description.containsString("1956-01-03"), true)
+            XCTAssertEqual(person?.birthday?.description.contains("1956-01-03"), true)
             expectation.fulfill()
         }
         waitForExpectations(withTimeout: 5, handler: nil)

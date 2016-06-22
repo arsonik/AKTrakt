@@ -43,7 +43,7 @@ public class TraktRequestGetCollection<T: TraktObject where T: ListType, T: Obje
                 let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
                 if var object = media as? Collectable,
                     date = $0["collected_at"] as? String,
-                    collectedAt = Trakt.datetimeFormatter.dateFromString(date) {
+                    collectedAt = Trakt.datetimeFormatter.date(from: date) {
                         object.collectedAt = collectedAt
                 }
                 if var show = media as? TraktShow, let seasonsData = $0["seasons"] as? [JSONHash] {

@@ -21,7 +21,7 @@ public class TraktRequest {
     public let oAuth: Bool
     /// HTTP Headers
     public let headers: [String: String]?
-    /// Numbers of attemps in case of failure
+    /// Numbers of attempts in case of failure
     public var attemptLeft: Int = 5
 
     /**
@@ -152,8 +152,9 @@ extension Trakt {
             guard let url = URL(string: "https://api-v2launch.trakt.tv\(request.path)") else {
                 throw TraktError.urlError
             }
-            let mRequest = NSMutableURLRequest(URL: url)
-            mRequest.HTTPMethod = request.method
+
+            var mRequest = URLRequest(url: url)
+            mRequest.httpMethod = request.method
 
             mRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             mRequest.setValue("\(traktApiVersion)", forHTTPHeaderField: "trakt-api-version")
@@ -171,7 +172,7 @@ extension Trakt {
                 mRequest.setValue($0.1, forHTTPHeaderField: $0.0)
             }
 
-            let pRequest = (mRequest.HTTPMethod == "POST" ? ParameterEncoding.JSON : ParameterEncoding.URL).encode(mRequest, parameters: request.params).0
+            let pRequest = (mRequest.httpMethod! == "POST" ? ParameterEncoding.json : ParameterEncoding.url).encode(mRequest, parameters: request.params).0
 
             request.attemptLeft -= 1
             return manager.request(pRequest).responseJSON { [weak self] response in

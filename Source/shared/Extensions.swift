@@ -9,7 +9,7 @@
 import Foundation
 
 /// Key: Value typealias dictionary
-public typealias JSONHash = [String: AnyObject?]
+public typealias JSONHash = [String: AnyObject]
 
 // Allow to merge JSONHash
 func += (left: inout JSONHash, right: JSONHash) {
@@ -25,8 +25,7 @@ func += (left: inout JSONHash, right: JSONHash) {
  - parameter closure: closure to exec
  */
 internal func delay(_ delay: Double, closure: () ->()) {
-    DispatchQueue.main.after(
-        when: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), block: closure)
+    DispatchQueue.main.after(when: .now() + delay, execute: closure)
 }
 
 // Get the area of a size

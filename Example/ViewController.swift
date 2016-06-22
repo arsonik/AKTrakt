@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 
     var loadedOnce: Bool = false
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         if !loadedOnce {
@@ -67,12 +67,12 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func clearToken(sender: AnyObject) {
+    @IBAction func clearToken(_ sender: AnyObject) {
         trakt.clearToken()
         title = "Trakt"
     }
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if let vc = segue.destinationViewController as? MovieViewController, movie = sender as? TraktMovie {
             vc.movie = movie
         } else if let vc = segue.destinationViewController as? ShowViewController, show = sender as? TraktShow {
@@ -82,40 +82,40 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: TraktAuthViewControllerDelegate {
-    func TraktAuthViewControllerDidAuthenticate(controller: UIViewController) {
+    func TraktAuthViewControllerDidAuthenticate(_ controller: UIViewController) {
         loadUser()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
-    func TraktAuthViewControllerDidCancel(controller: UIViewController) {
-        dismissViewControllerAnimated(true, completion: nil)
+    func TraktAuthViewControllerDidCancel(_ controller: UIViewController) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return section == 0 ? movies.count : shows.count
     }
 
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        return collectionView.dequeueReusableCellWithReuseIdentifier("movie", forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        return collectionView.dequeueReusableCell(withReuseIdentifier: "movie", for: indexPath)
     }
 
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 0 {
             if let image = (cell.viewWithTag(1) as? UIImageView), url = movies[indexPath.row].imageURL(.Poster, thatFits: image) {
                 image.af_setImageWithURL(url, placeholderImage: nil)
             }
-        } else if let image = (cell.viewWithTag(1) as? UIImageView), url = shows[indexPath.row].imageURL(.Poster, thatFits: image) where indexPath.section == 1 {
+        } else if let image = (cell.viewWithTag(1) as? UIImageView), url = shows[indexPath.row].imageURL(.Poster, thatFits: image) where (indexPath as NSIndexPath).section == 1 {
             image.af_setImageWithURL(url, placeholderImage: nil)
         }
     }
 
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).section == 0 {
             performSegueWithIdentifier("movie", sender: movies[indexPath.row])
         } else {
             performSegueWithIdentifier("show", sender: shows[indexPath.row])
