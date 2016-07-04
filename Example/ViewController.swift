@@ -37,7 +37,7 @@ class ViewController: UIViewController {
 
     @IBAction func displayAuth() {
         if let vc = TraktAuthenticationViewController.credientialViewController(trakt, delegate: self) {
-            presentViewController(vc, animated: true, completion: nil)
+            present(vc, animated: true, completion: nil)
         }
     }
 
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         TraktRequestTrending(type: TraktMovie.self, extended: .Images, pagination: TraktPagination(page: 1, limit: 10)).request(trakt) { [weak self] objects, error in
             if let movies = objects?.flatMap({ $0.media }) {
                 self?.movies = movies
-                self?.collectionView.reloadSections(NSIndexSet(index: 0))
+                self?.collectionView.reloadSections(IndexSet(integer: 0))
             } else {
                 print(error)
             }
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
         TraktRequestTrending(type: TraktShow.self, extended: .Images, pagination: TraktPagination(page: 1, limit: 20)).request(trakt) { [weak self] objects, error in
             if let shows = objects?.flatMap({ $0.media }) {
                 self?.shows = shows
-                self?.collectionView.reloadSections(NSIndexSet(index: 1))
+                self?.collectionView.reloadSections(IndexSet(integer: 1))
             } else {
                 print(error)
             }
@@ -116,9 +116,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if (indexPath as NSIndexPath).section == 0 {
-            performSegueWithIdentifier("movie", sender: movies[indexPath.row])
+            performSegue(withIdentifier: "movie", sender: movies[indexPath.row])
         } else {
-            performSegueWithIdentifier("show", sender: shows[indexPath.row])
+            performSegue(withIdentifier: "show", sender: shows[indexPath.row])
         }
     }
 }
