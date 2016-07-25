@@ -68,7 +68,9 @@ public class TraktAuthenticationViewController: UIViewController, WKNavigationDe
             decisionHandler(.cancel)
             TraktRequestToken(trakt: trakt, pin: pin).request(trakt) { token, error in
                 guard token != nil else {
-                    UIAlertView(title: "", message: "Failed to get a valid token", delegate: nil, cancelButtonTitle: "OK").show()
+                    let ac = UIAlertController(title: "", message: "Failed to get a valid token", preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                    self.present(ac, animated: true, completion: nil)
                     self.initWebview()
                     return
                 }
