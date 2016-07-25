@@ -47,8 +47,8 @@ public class TraktRequestAddRating<T: TraktObject where T: protocol<ObjectType>,
     public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
-                added = items["added"] as? [String: Int],
-                value = added[self.type.listName]
+                let added = items["added"] as? [String: Int],
+                let value = added[self.type.listName]
                 else {
                     return completion(nil, response.result.error)
             }

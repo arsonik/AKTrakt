@@ -57,7 +57,7 @@ public class TraktEpisode: TraktObject, Descriptable, Watchable, Collectable, Wa
         super.digest(data)
 
         seasonNumber = data?["season"] as? TraktSeasonNumber ?? seasonNumber
-        if let fa = data["first_aired"] as? String, date = Trakt.datetimeFormatter.date(from: fa) {
+        if let fa = data["first_aired"] as? String, let date = Trakt.datetimeFormatter.date(from: fa) {
             firstAired = date
         }
     }

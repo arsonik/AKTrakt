@@ -6,7 +6,7 @@
 //  Copyright © 2015 Florian Morello. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Represents the possible image type
 public enum TraktImageType: String {

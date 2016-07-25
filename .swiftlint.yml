@@ -1,7 +1,7 @@
 disabled_rules:
 excluded:
-    - Pods/Alamofire
-    - Pods/AlamofireImage
+    - Pods/
+    - Carthage/
 line_length: 200
 type_body_length:
     - 300 # warning

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Florian Morello. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// Trakt identifier alias
 public typealias TraktIdentifier = UInt
@@ -83,9 +83,9 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
         ids = TraktId.extractIds(data) ?? ids
 
         (data?["images"] as? JSONHash)?.forEach { rawType, list in
-            if let type = TraktImageType(rawValue: rawType), listed = list as? JSONHash {
+            if let type = TraktImageType(rawValue: rawType), let listed = list as? JSONHash {
                 listed.forEach { rawSize, uri in
-                    if let size = TraktImageSize(rawValue: rawSize), u = uri as? String, url = URL(string: u) {
+                    if let size = TraktImageSize(rawValue: rawSize), let u = uri as? String, let url = URL(string: u) {
                         if images[type] == nil {
                             images[type] = [:]
                         }
@@ -103,14 +103,14 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
         if var me = self as? Watchable {
             me.watched = data?["completed"] as? Bool ?? me.watched
             me.plays = data?["plays"] as? UInt ?? me.plays
-            if let fa = data?["last_watched_at"] as? String, date = Trakt.datetimeFormatter.date(from: fa) {
+            if let fa = data?["last_watched_at"] as? String, let date = Trakt.datetimeFormatter.date(from: fa) {
                 me.lastWatchedAt = date
                 me.watched = true
             }
         }
 
         if var me = self as? Collectable {
-            if let string = data?["collected_at"] as? String, date = Trakt.datetimeFormatter.date(from: string) {
+            if let string = data?["collected_at"] as? String, let date = Trakt.datetimeFormatter.date(from: string) {
                 me.collectedAt = date
             }
         }
@@ -137,7 +137,7 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
             // use the largest image
             selectedSize = sizes.last?.0
         }
-        guard let aSize = selectedSize, url = images[type]?[aSize] else {
+        guard let aSize = selectedSize, let url = images[type]?[aSize] else {
             return nil
         }
         return url
@@ -158,19 +158,19 @@ public class TraktObject: CustomStringConvertible, Hashable, Extendable {
         ids = with.ids ?? ids
         images = with.images ?? images
 
-        if var me = self as? Descriptable, him = with as? Descriptable {
+        if var me = self as? Descriptable, let him = with as? Descriptable {
             me.title = him.title ?? me.title
             me.overview = him.overview ?? me.overview
         }
-        if var me = self as? Watchable, him = with as? Watchable {
+        if var me = self as? Watchable, let him = with as? Watchable {
             me.watched = him.watched ?? me.watched
             me.lastWatchedAt = him.lastWatchedAt ?? me.lastWatchedAt
             me.plays = him.plays ?? me.plays
         }
-        if var me = self as? Watchlist, him = with as? Watchlist {
+        if var me = self as? Watchlist, let him = with as? Watchlist {
             me.watchlist = him.watchlist ?? me.watchlist
         }
-        if var me = self as? Collectable, him = with as? Collectable {
+        if var me = self as? Collectable, let him = with as? Collectable {
             me.collectedAt = him.collectedAt ?? me.collectedAt
         }
     }

@@ -34,11 +34,11 @@ public class TraktRequestGenerateCode: TraktRequest {
         return trakt.request(self) { response in
             guard
                 let data = response.result.value as? JSONHash,
-                deviceCode = data["device_code"] as? String,
-                userCode = data["user_code"] as? String,
-                verificationUrl = data["verification_url"] as? String,
-                expiresIn = data["expires_in"] as? Double,
-                interval = data["interval"] as? Double else {
+                let deviceCode = data["device_code"] as? String,
+                let userCode = data["user_code"] as? String,
+                let verificationUrl = data["verification_url"] as? String,
+                let expiresIn = data["expires_in"] as? Double,
+                let interval = data["interval"] as? Double else {
                     return completion(nil, response.result.error)
             }
             completion((deviceCode: deviceCode, userCode: userCode, verificationUrl: verificationUrl, expiresAt: Date().addingTimeInterval(expiresIn), interval: interval), nil)

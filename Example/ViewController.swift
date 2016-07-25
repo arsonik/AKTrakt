@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AKTrakt
 import AlamofireImage
 
 class ViewController: UIViewController {
@@ -73,9 +72,9 @@ class ViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let vc = segue.destinationViewController as? MovieViewController, movie = sender as? TraktMovie {
+        if let vc = segue.destinationViewController as? MovieViewController, let movie = sender as? TraktMovie {
             vc.movie = movie
-        } else if let vc = segue.destinationViewController as? ShowViewController, show = sender as? TraktShow {
+        } else if let vc = segue.destinationViewController as? ShowViewController, let show = sender as? TraktShow {
             vc.show = show
         }
     }
@@ -106,10 +105,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if (indexPath as NSIndexPath).section == 0 {
-            if let image = (cell.viewWithTag(1) as? UIImageView), url = movies[indexPath.row].imageURL(.Poster, thatFits: image) {
+            if let image = (cell.viewWithTag(1) as? UIImageView), let url = movies[indexPath.row].imageURL(.Poster, thatFits: image) {
                 image.af_setImageWithURL(url, placeholderImage: nil)
             }
-        } else if let image = (cell.viewWithTag(1) as? UIImageView), url = shows[indexPath.row].imageURL(.Poster, thatFits: image) where (indexPath as NSIndexPath).section == 1 {
+        } else if let image = (cell.viewWithTag(1) as? UIImageView), let url = shows[indexPath.row].imageURL(.Poster, thatFits: image) where (indexPath as NSIndexPath).section == 1 {
             image.af_setImageWithURL(url, placeholderImage: nil)
         }
     }

@@ -45,10 +45,10 @@ import Foundation
      */
     convenience init?(data: JSONHash?) {
         guard let accessToken = data?["access_token"] as? String,
-            expiresIn = data?["expires_in"] as? Double,
-            scope = data?["scope"] as? String,
-            tokenType = data?["token_type"] as? String,
-            refreshToken = data?["refresh_token"] as? String else {
+            let expiresIn = data?["expires_in"] as? Double,
+            let scope = data?["scope"] as? String,
+            let tokenType = data?["token_type"] as? String,
+            let refreshToken = data?["refresh_token"] as? String else {
                 return nil
         }
         self.init(accessToken: accessToken, expiresAt: Date(timeIntervalSinceNow: expiresIn), refreshToken: refreshToken, tokenType: tokenType, scope: scope)
@@ -57,11 +57,11 @@ import Foundation
     /// NSCoding
     public required init?(coder aDecoder: NSCoder) {
         guard let accessToken = aDecoder.decodeObject(forKey: "accessToken") as? String,
-        tokenType = aDecoder.decodeObject(forKey: "tokenType") as? String,
-        expiresAt = aDecoder.decodeObject(forKey: "expiresAt") as? Date,
-        refreshToken = aDecoder.decodeObject(forKey: "refreshToken") as? String,
-            scope = aDecoder.decodeObject(forKey: "scope") as? String else {
-                return nil
+        let tokenType = aDecoder.decodeObject(forKey: "tokenType") as? String,
+        let expiresAt = aDecoder.decodeObject(forKey: "expiresAt") as? Date,
+        let refreshToken = aDecoder.decodeObject(forKey: "refreshToken") as? String,
+        let scope = aDecoder.decodeObject(forKey: "scope") as? String else {
+            return nil
         }
 
         print(accessToken)

@@ -21,7 +21,7 @@ public struct TraktCrew {
      - parameter data: JSONHash
      */
     init?(data: JSONHash) {
-        guard let n = data["job"] as? String, p = data["person"] as? JSONHash, pers = TraktPerson(data: p) else {
+        guard let n = data["job"] as? String, let p = data["person"] as? JSONHash, let pers = TraktPerson(data: p) else {
             return nil
         }
 

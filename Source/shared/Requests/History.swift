@@ -46,8 +46,8 @@ public class TraktRequestAddToHistory<T: TraktObject where T: protocol<ObjectTyp
     public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
-                added = items["added"] as? [String: Int],
-                value = added[self.type.listName]
+                let added = items["added"] as? [String: Int],
+                let value = added[self.type.listName]
                 else {
                 return completion(nil, response.result.error)
             }
@@ -92,8 +92,8 @@ public class TraktRequestRemoveFromHistory<T: TraktObject where T: protocol<Obje
     public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
-                added = items["deleted"] as? [String: Int],
-                value = added[self.type.listName]
+                let added = items["deleted"] as? [String: Int],
+                let value = added[self.type.listName]
                 else {
                     return completion(nil, response.result.error)
             }

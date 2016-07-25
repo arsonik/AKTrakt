@@ -5,11 +5,7 @@
 //  Created by Florian Morello on 31/05/16.
 //  Copyright © 2016 CocoaPods. All rights reserved.
 //
-
-import Foundation
-
 import UIKit
-import AKTrakt
 import AlamofireImage
 
 class ShowViewController: UIViewController {
@@ -28,7 +24,7 @@ class ShowViewController: UIViewController {
 
         title = show.title
 
-        if let image = view.viewWithTag(1) as? UIImageView, url = show.imageURL(.FanArt, thatFits: image) {
+        if let image = view.viewWithTag(1) as? UIImageView, let url = show.imageURL(.FanArt, thatFits: image) {
             image.af_setImageWithURL(url, placeholderImage: nil)
         }
 
@@ -76,7 +72,7 @@ extension ShowViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let character = casting[indexPath.row]
-        if let image = cell.viewWithTag(1) as? UIImageView, url = character.person.imageURL(.HeadShot, thatFits: image) {
+        if let image = cell.viewWithTag(1) as? UIImageView, let url = character.person.imageURL(.HeadShot, thatFits: image) {
             image.layer.cornerRadius = 25
             image.af_setImageWithURL(url, placeholderImage: nil)
         }

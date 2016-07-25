@@ -26,7 +26,7 @@ public class TraktRequestGetWatchlist<T: TraktObject where T: protocol<Watchlist
             completion(entries.flatMap {
                 var media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
                 media?.watchlist = true
-                guard let date = $0["listed_at"] as? String, listedAt = Trakt.datetimeFormatter.date(from: date) where media != nil else {
+                guard let date = $0["listed_at"] as? String, let listedAt = Trakt.datetimeFormatter.date(from: date) where media != nil else {
                     return nil
                 }
                 return (listedAt: listedAt, media: media!)
@@ -79,8 +79,8 @@ public class TraktRequestAddToWatchlist<T: TraktObject where T: protocol<ObjectT
     public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
-                added = items["added"] as? [String: Int],
-                value = added[self.type.listName]
+                let added = items["added"] as? [String: Int],
+                let value = added[self.type.listName]
                 else {
                     return completion(nil, response.result.error)
             }
@@ -118,8 +118,8 @@ public class TraktRequestRemoveFromWatchlist<T: TraktObject where T: protocol<Ob
     public func request(_ trakt: Trakt, completion: (Bool?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let items = response.result.value as? JSONHash,
-                added = items["deleted"] as? [String: Int],
-                value = added[self.type.listName]
+                let added = items["deleted"] as? [String: Int],
+                let value = added[self.type.listName]
                 else {
                     return completion(nil, response.result.error)
             }

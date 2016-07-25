@@ -55,11 +55,11 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Tren
         genres = data?["genres"] as? [String] ?? genres
         runtime = data?["runtime"] as? Int ?? runtime
 
-        if let r = data?["released"] as? String, d = Trakt.dateFormatter.date(from: r) {
+        if let r = data?["released"] as? String, let d = Trakt.dateFormatter.date(from: r) {
             release = d
         }
 
-        if let x = data?["trailer"] as? String, url = URL(string: x), params = url.query?.components(separatedBy: "v=") where params.count == 2 {
+        if let x = data?["trailer"] as? String, let url = URL(string: x), let params = url.query?.components(separatedBy: "v=") where params.count == 2 {
             trailer = params[1]
         }
     }

@@ -31,7 +31,7 @@ public class TraktRequestShow: TraktRequest {
      */
     public func request(_ trakt: Trakt, completion: (TraktShow?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
-            guard let item = response.result.value as? JSONHash, o = TraktShow(data: item) else {
+            guard let item = response.result.value as? JSONHash, let o = TraktShow(data: item) else {
                 return completion(nil, response.result.error)
             }
             completion(o, nil)
@@ -71,14 +71,15 @@ public class TraktRequestShowProgress: TraktRequest {
     public func request(_ trakt: Trakt, completion: ([TraktSeason]?, NSError?) -> Void) -> Request? {
         return trakt.request(self) { response in
             guard let data = response.result.value as? JSONHash,
-                seasonsData = data["seasons"] as? [JSONHash] else {
+                let seasonsData = data["seasons"] as? [JSONHash] else {
                 return completion(nil, response.result.error)
             }
             var seasons = seasonsData.flatMap {
                 TraktSeason(data: $0)
             }
             // extend next episode
-            if let nextEpisode = TraktEpisode(data: data["next_episode"] as? JSONHash) where nextEpisode.seasonNumber != nil {
+            if let nextEpisode = TraktEpisode(data: data["next_episode"] as? JSONHash)
+                where nextEpisode.seasonNumber != nil {
                 nextEpisode.watched = false
                 if let season = seasons.filter({ $0.number == nextEpisode.seasonNumber! }).first {
                     if season.episode(nextEpisode.number) == nil {

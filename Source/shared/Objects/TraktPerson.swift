@@ -43,11 +43,11 @@ public class TraktPerson: TraktObject, Searchable {
 
         biography = data?["biography"] as? String
 
-        if let value = data?["birthday"] as? String, date = Trakt.dateFormatter.date(from: value) {
+        if let value = data?["birthday"] as? String, let date = Trakt.dateFormatter.date(from: value) {
             birthday = date
         }
 
-        if let value = data?["death"] as? String, date = Trakt.dateFormatter.date(from: value) {
+        if let value = data?["death"] as? String, let date = Trakt.dateFormatter.date(from: value) {
             death = date
         }
     }

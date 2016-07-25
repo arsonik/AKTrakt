@@ -6,7 +6,7 @@
 //
 //
 
-import Foundation
+import UIKit
 
 /// Trakt auth view controller delegate protocol
 public protocol TraktAuthViewControllerDelegate: class {

@@ -3,166 +3,133 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
 		1770D6CD1D460FED00AC5AFE /* tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1770D6CB1D460FED00AC5AFE /* tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1770D6D01D460FED00AC5AFE /* AKTrakt tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt tvOS.framework */; };
-		1770D6D11D460FED00AC5AFE /* AKTrakt tvOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt tvOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1770D6D01D460FED00AC5AFE /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */; };
+		1770D6D11D460FED00AC5AFE /* AKTrakt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1770D7041D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6D81D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
-		1770D7061D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6D81D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
 		1770D7081D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
 		1770D7091D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
-		1770D70A1D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
 		1770D70B1D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
 		1770D70C1D46108C00AC5AFE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
 		1770D70D1D46108C00AC5AFE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
-		1770D70E1D46108C00AC5AFE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
 		1770D70F1D46108C00AC5AFE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
 		1770D7101D46108C00AC5AFE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
 		1770D7111D46108C00AC5AFE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
-		1770D7121D46108C00AC5AFE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
 		1770D7131D46108C00AC5AFE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
 		1770D7141D46108C00AC5AFE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
 		1770D7151D46108C00AC5AFE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
-		1770D7161D46108C00AC5AFE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
 		1770D7171D46108C00AC5AFE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
 		1770D7181D46108C00AC5AFE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
 		1770D7191D46108C00AC5AFE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
-		1770D71A1D46108C00AC5AFE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
 		1770D71B1D46108C00AC5AFE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
 		1770D71C1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
 		1770D71D1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
-		1770D71E1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
 		1770D71F1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
 		1770D7201D46108C00AC5AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
 		1770D7211D46108C00AC5AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
-		1770D7221D46108C00AC5AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
 		1770D7231D46108C00AC5AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
 		1770D7241D46108C00AC5AFE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
 		1770D7251D46108C00AC5AFE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
-		1770D7261D46108C00AC5AFE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
 		1770D7271D46108C00AC5AFE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
 		1770D7281D46108C00AC5AFE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
 		1770D7291D46108C00AC5AFE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
-		1770D72A1D46108C00AC5AFE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
 		1770D72B1D46108C00AC5AFE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
 		1770D72C1D46108C00AC5AFE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
 		1770D72D1D46108C00AC5AFE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
-		1770D72E1D46108C00AC5AFE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
 		1770D72F1D46108C00AC5AFE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
 		1770D7301D46108C00AC5AFE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
 		1770D7311D46108C00AC5AFE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
-		1770D7321D46108C00AC5AFE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
 		1770D7331D46108C00AC5AFE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
 		1770D7341D46108C00AC5AFE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
 		1770D7351D46108C00AC5AFE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
-		1770D7361D46108C00AC5AFE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
 		1770D7371D46108C00AC5AFE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
 		1770D7381D46108C00AC5AFE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
 		1770D7391D46108C00AC5AFE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
-		1770D73A1D46108C00AC5AFE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
 		1770D73B1D46108C00AC5AFE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
 		1770D73C1D46108C00AC5AFE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
 		1770D73D1D46108C00AC5AFE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
-		1770D73E1D46108C00AC5AFE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
 		1770D73F1D46108C00AC5AFE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
 		1770D7401D46108C00AC5AFE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
 		1770D7411D46108C00AC5AFE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
-		1770D7421D46108C00AC5AFE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
 		1770D7431D46108C00AC5AFE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
 		1770D7441D46108C00AC5AFE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
 		1770D7451D46108C00AC5AFE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
-		1770D7461D46108C00AC5AFE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
 		1770D7471D46108C00AC5AFE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
 		1770D7481D46108C00AC5AFE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
 		1770D7491D46108C00AC5AFE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
-		1770D74A1D46108C00AC5AFE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
 		1770D74B1D46108C00AC5AFE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
 		1770D74C1D46108C00AC5AFE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
 		1770D74D1D46108C00AC5AFE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
-		1770D74E1D46108C00AC5AFE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
 		1770D74F1D46108C00AC5AFE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
 		1770D7501D46108C00AC5AFE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
 		1770D7511D46108C00AC5AFE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
-		1770D7521D46108C00AC5AFE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
 		1770D7531D46108C00AC5AFE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
 		1770D7541D46108C00AC5AFE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
 		1770D7551D46108C00AC5AFE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
-		1770D7561D46108C00AC5AFE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
 		1770D7571D46108C00AC5AFE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
 		1770D7581D46108C00AC5AFE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
 		1770D7591D46108C00AC5AFE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
-		1770D75A1D46108C00AC5AFE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
 		1770D75B1D46108C00AC5AFE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
 		1770D75C1D46108C00AC5AFE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
 		1770D75D1D46108C00AC5AFE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
-		1770D75E1D46108C00AC5AFE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
 		1770D75F1D46108C00AC5AFE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
 		1770D7601D46108C00AC5AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
 		1770D7611D46108C00AC5AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
-		1770D7621D46108C00AC5AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
 		1770D7631D46108C00AC5AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
 		1770D7641D46108C00AC5AFE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
 		1770D7651D46108C00AC5AFE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
-		1770D7661D46108C00AC5AFE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
 		1770D7671D46108C00AC5AFE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
 		1770D7681D46108C00AC5AFE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
 		1770D7691D46108C00AC5AFE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
-		1770D76A1D46108C00AC5AFE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
 		1770D76B1D46108C00AC5AFE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
 		1770D76C1D46108C00AC5AFE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
 		1770D76D1D46108C00AC5AFE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
-		1770D76E1D46108C00AC5AFE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
 		1770D76F1D46108C00AC5AFE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
 		1770D7701D46108C00AC5AFE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
 		1770D7711D46108C00AC5AFE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
-		1770D7721D46108C00AC5AFE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
 		1770D7731D46108C00AC5AFE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
 		1770D7741D46108C00AC5AFE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
 		1770D7751D46108C00AC5AFE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
-		1770D7761D46108C00AC5AFE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
 		1770D7771D46108C00AC5AFE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
 		1770D7781D46108C00AC5AFE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
 		1770D7791D46108C00AC5AFE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
-		1770D77A1D46108C00AC5AFE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
 		1770D77B1D46108C00AC5AFE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
 		1770D77C1D46108C00AC5AFE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
 		1770D77D1D46108C00AC5AFE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
-		1770D77E1D46108C00AC5AFE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
 		1770D77F1D46108C00AC5AFE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
 		1770D7801D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
 		1770D7811D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
-		1770D7821D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
 		1770D7831D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
 		1770D7841D46108C00AC5AFE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
 		1770D7851D46108C00AC5AFE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
-		1770D7861D46108C00AC5AFE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
 		1770D7871D46108C00AC5AFE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
 		1770D7881D46108C00AC5AFE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
 		1770D7891D46108C00AC5AFE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
-		1770D78A1D46108C00AC5AFE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
 		1770D78B1D46108C00AC5AFE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
 		1770D78C1D46108C00AC5AFE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
 		1770D78D1D46108C00AC5AFE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
-		1770D78E1D46108C00AC5AFE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
 		1770D78F1D46108C00AC5AFE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
 		1770D7911D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D7011D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
-		1770D7921D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D7011D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
 		1770D7931D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D7011D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
 		1770D7951D46108C00AC5AFE /* TraktAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7021D46108C00AC5AFE /* TraktAuthenticationViewController.xib */; };
-		1770D7961D46108C00AC5AFE /* TraktAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7021D46108C00AC5AFE /* TraktAuthenticationViewController.xib */; };
 		1770D7971D46108C00AC5AFE /* TraktAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7021D46108C00AC5AFE /* TraktAuthenticationViewController.xib */; };
 		1770D7991D46108C00AC5AFE /* TraktQRCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7031D46108C00AC5AFE /* TraktQRCode.png */; };
-		1770D79A1D46108C00AC5AFE /* TraktQRCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7031D46108C00AC5AFE /* TraktQRCode.png */; };
 		1770D79B1D46108C00AC5AFE /* TraktQRCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7031D46108C00AC5AFE /* TraktQRCode.png */; };
+		1770D8D21D46426100AC5AFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7BD1D4617D900AC5AFE /* Alamofire.framework */; };
+		1770D8DF1D46436B00AC5AFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7B51D4617D900AC5AFE /* Alamofire.framework */; };
+		1770D8E01D46436B00AC5AFE /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7CF1D4617E500AC5AFE /* AlamofireImage.framework */; };
+		1770D8F91D4644E700AC5AFE /* AKTrakt iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1770D8E91D4644E700AC5AFE /* AKTrakt iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1770D8FC1D4644E700AC5AFE /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D8E71D4644E700AC5AFE /* AKTrakt.framework */; };
+		1770D8FD1D4644E700AC5AFE /* AKTrakt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D8E71D4644E700AC5AFE /* AKTrakt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1770D9051D46450100AC5AFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7B51D4617D900AC5AFE /* Alamofire.framework */; };
+		1770D9071D46463500AC5AFE /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D9061D46463500AC5AFE /* ShowViewController.swift */; };
+		1770D9081D46463500AC5AFE /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D9061D46463500AC5AFE /* ShowViewController.swift */; };
 		179029AF1CF4913D00078265 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 179029AE1CF4913D00078265 /* Default-568h@2x.png */; };
-		179029B71CF5945F00078265 /* PublicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* PublicTests.swift */; };
-		17B1BC941CFD8E580044C7A1 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */; };
-		17B1BC951CFD8E580044C7A1 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */; };
-		17C322E01D09B28A003BFFA4 /* LoggedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */; };
 		17C504921CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17C504931CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17CFD26D1CF45CE00050315A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17CFD26C1CF45CE00050315A /* Main.storyboard */; };
@@ -180,6 +147,111 @@
 			remoteGlobalIDString = 1770D6C81D460FED00AC5AFE;
 			remoteInfo = tvOS;
 		};
+		1770D7B41D4617D900AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
+		1770D7B61D4617D900AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS Tests";
+		};
+		1770D7B81D4617D900AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
+			remoteInfo = "Alamofire OSX";
+		};
+		1770D7BA1D4617D900AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
+			remoteInfo = "Alamofire OSX Tests";
+		};
+		1770D7BC1D4617D900AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS";
+		};
+		1770D7BE1D4617D900AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS Tests";
+		};
+		1770D7C01D4617D900AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4202FE01B667AA100C997FB;
+			remoteInfo = "Alamofire watchOS";
+		};
+		1770D7CE1D4617E500AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C9043771AABBFC5001B4E60;
+			remoteInfo = "AlamofireImage iOS";
+		};
+		1770D7D01D4617E500AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C9043821AABBFC5001B4E60;
+			remoteInfo = "AlamofireImage iOS Tests";
+		};
+		1770D7D21D4617E500AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CE611321AABC24E00D35044;
+			remoteInfo = "AlamofireImage OSX";
+		};
+		1770D7D41D4617E500AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4CE611471AABC5C900D35044;
+			remoteInfo = "AlamofireImage OSX Tests";
+		};
+		1770D7D61D4617E500AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C16B37D1BA9399500A66EF0;
+			remoteInfo = "AlamofireImage tvOS";
+		};
+		1770D7D81D4617E500AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C16B3861BA9399500A66EF0;
+			remoteInfo = "AlamofireImage tvOS Tests";
+		};
+		1770D7DA1D4617E500AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C4D4EC11B92976900C96855;
+			remoteInfo = "AlamofireImage watchOS";
+		};
+		1770D8FA1D4644E700AC5AFE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1770D8E61D4644E700AC5AFE;
+			remoteInfo = "AKTrakt iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -189,7 +261,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1770D6D11D460FED00AC5AFE /* AKTrakt tvOS.framework in Embed Frameworks */,
+				1770D6D11D460FED00AC5AFE /* AKTrakt.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1770D9011D4644E700AC5AFE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1770D8FD1D4644E700AC5AFE /* AKTrakt.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,7 +283,7 @@
 		17109D031C05EF0A007D3D16 /* Example tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17109D071C05EF0A007D3D16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Example/ViewController.swift; sourceTree = "<group>"; };
 		17109D0E1C05EF0A007D3D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1770D6C91D460FED00AC5AFE /* AKTrakt tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "AKTrakt tvOS.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1770D6C91D460FED00AC5AFE /* AKTrakt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AKTrakt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1770D6CB1D460FED00AC5AFE /* tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tvOS.h; sourceTree = "<group>"; };
 		1770D6CC1D460FED00AC5AFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1770D6D81D46108C00AC5AFE /* TraktAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktAuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -241,23 +324,22 @@
 		1770D7011D46108C00AC5AFE /* TraktAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktAuthenticationViewController.swift; sourceTree = "<group>"; };
 		1770D7021D46108C00AC5AFE /* TraktAuthenticationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TraktAuthenticationViewController.xib; sourceTree = "<group>"; };
 		1770D7031D46108C00AC5AFE /* TraktQRCode.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TraktQRCode.png; sourceTree = "<group>"; };
+		1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Carthage/Checkouts/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AlamofireImage.xcodeproj; path = Carthage/Checkouts/AlamofireImage/AlamofireImage.xcodeproj; sourceTree = "<group>"; };
+		1770D8E71D4644E700AC5AFE /* AKTrakt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AKTrakt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1770D8E91D4644E700AC5AFE /* AKTrakt iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AKTrakt iOS.h"; sourceTree = "<group>"; };
+		1770D8EA1D4644E700AC5AFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1770D9061D46463500AC5AFE /* ShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowViewController.swift; path = Example/ShowViewController.swift; sourceTree = "<group>"; };
 		179029AE1CF4913D00078265 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		179029B41CF5945F00078265 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		179029B61CF5945F00078265 /* PublicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicTests.swift; sourceTree = "<group>"; };
 		179029B81CF5945F00078265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		17A0DC851CF8328000A063BF /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		17B1BC921CFD7D150044C7A1 /* CHANGELOG.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
-		17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 		17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggedTests.swift; sourceTree = "<group>"; };
 		17C504911CF4480600CF368A /* MovieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MovieViewController.swift; path = Example/MovieViewController.swift; sourceTree = "<group>"; };
 		17CFD26C1CF45CE00050315A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		17CFD2721CF45DB90050315A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		245F7FCCBDB3759206111274 /* AKTrakt.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = AKTrakt.podspec; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Example iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Example/AppDelegate.swift; sourceTree = "<group>"; };
-		9E2E7AD6BF2AD4A119FBEB44 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		FA3246E36841A5DFB6A3322A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,7 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1770D6D01D460FED00AC5AFE /* AKTrakt tvOS.framework in Frameworks */,
+				1770D6D01D460FED00AC5AFE /* AKTrakt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,13 +355,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1770D8D21D46426100AC5AFE /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		179029B11CF5945F00078265 /* Frameworks */ = {
+		1770D8E31D4644E700AC5AFE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1770D9051D46450100AC5AFE /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +371,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1770D8FC1D4644E700AC5AFE /* AKTrakt.framework in Frameworks */,
+				1770D8DF1D46436B00AC5AFE /* Alamofire.framework in Frameworks */,
+				1770D8E01D46436B00AC5AFE /* AlamofireImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +500,56 @@
 			path = tvos;
 			sourceTree = "<group>";
 		};
+		1770D7AA1D4617D900AC5AFE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1770D7B51D4617D900AC5AFE /* Alamofire.framework */,
+				1770D7B71D4617D900AC5AFE /* Alamofire iOS Tests.xctest */,
+				1770D7B91D4617D900AC5AFE /* Alamofire.framework */,
+				1770D7BB1D4617D900AC5AFE /* Alamofire OSX Tests.xctest */,
+				1770D7BD1D4617D900AC5AFE /* Alamofire.framework */,
+				1770D7BF1D4617D900AC5AFE /* Alamofire tvOS Tests.xctest */,
+				1770D7C11D4617D900AC5AFE /* Alamofire.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1770D7C31D4617E500AC5AFE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1770D7CF1D4617E500AC5AFE /* AlamofireImage.framework */,
+				1770D7D11D4617E500AC5AFE /* AlamofireImage iOS Tests.xctest */,
+				1770D7D31D4617E500AC5AFE /* AlamofireImage.framework */,
+				1770D7D51D4617E500AC5AFE /* AlamofireImage OSX Tests.xctest */,
+				1770D7D71D4617E500AC5AFE /* AlamofireImage.framework */,
+				1770D7D91D4617E500AC5AFE /* AlamofireImage tvOS Tests.xctest */,
+				1770D7DB1D4617E500AC5AFE /* AlamofireImage.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1770D8E11D46442700AC5AFE /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				607FACD21AFB9204008FA782 /* iOS */,
+				17109D041C05EF0A007D3D16 /* tvOS */,
+				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				17109D071C05EF0A007D3D16 /* ViewController.swift */,
+				17C504911CF4480600CF368A /* MovieViewController.swift */,
+				1770D9061D46463500AC5AFE /* ShowViewController.swift */,
+			);
+			name = Example;
+			sourceTree = "<group>";
+		};
+		1770D8E81D4644E700AC5AFE /* AKTrakt iOS */ = {
+			isa = PBXGroup;
+			children = (
+				1770D8E91D4644E700AC5AFE /* AKTrakt iOS.h */,
+				1770D8EA1D4644E700AC5AFE /* Info.plist */,
+			);
+			path = "AKTrakt iOS";
+			sourceTree = "<group>";
+		};
 		179029B51CF5945F00078265 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,17 +563,14 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
-				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
-				17109D071C05EF0A007D3D16 /* ViewController.swift */,
-				17C504911CF4480600CF368A /* MovieViewController.swift */,
-				17B1BC931CFD8E580044C7A1 /* ShowViewController.swift */,
+				1770D8E11D46442700AC5AFE /* Example */,
 				1770D6D61D46108C00AC5AFE /* Source */,
-				607FACF51AFB993E008FA782 /* Podspec Metadata */,
-				607FACD21AFB9204008FA782 /* iOS */,
-				17109D041C05EF0A007D3D16 /* tvOS */,
 				179029B51CF5945F00078265 /* Tests */,
 				1770D6CA1D460FED00AC5AFE /* tvOS */,
+				1770D8E81D4644E700AC5AFE /* AKTrakt iOS */,
 				607FACD11AFB9204008FA782 /* Products */,
+				1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */,
+				1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -445,8 +579,8 @@
 			children = (
 				607FACD01AFB9204008FA782 /* Example iOS.app */,
 				17109D031C05EF0A007D3D16 /* Example tvOS.app */,
-				179029B41CF5945F00078265 /* Tests.xctest */,
-				1770D6C91D460FED00AC5AFE /* AKTrakt tvOS.framework */,
+				1770D6C91D460FED00AC5AFE /* AKTrakt.framework */,
+				1770D8E71D4644E700AC5AFE /* AKTrakt.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -462,18 +596,6 @@
 			path = Example/iOS;
 			sourceTree = "<group>";
 		};
-		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
-			isa = PBXGroup;
-			children = (
-				245F7FCCBDB3759206111274 /* AKTrakt.podspec */,
-				FA3246E36841A5DFB6A3322A /* README.md */,
-				17B1BC921CFD7D150044C7A1 /* CHANGELOG.md */,
-				9E2E7AD6BF2AD4A119FBEB44 /* LICENSE */,
-				17A0DC851CF8328000A063BF /* Package.swift */,
-			);
-			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -485,6 +607,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1770D8E41D4644E700AC5AFE /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1770D8F91D4644E700AC5AFE /* AKTrakt iOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -492,12 +622,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 17109D0F1C05EF0A007D3D16 /* Build configuration list for PBXNativeTarget "Example tvOS" */;
 			buildPhases = (
-				80474D58DC9AC96AB3211A7C /* [CP] Check Pods Manifest.lock */,
 				17109CFF1C05EF0A007D3D16 /* Sources */,
 				17109D001C05EF0A007D3D16 /* Frameworks */,
 				17109D011C05EF0A007D3D16 /* Resources */,
-				0DC09246E258DEDF7C6EDC1B /* [CP] Embed Pods Frameworks */,
-				C22FD465AC972ECF977EEDBE /* [CP] Copy Pods Resources */,
 				1770D6D51D460FED00AC5AFE /* Embed Frameworks */,
 			);
 			buildRules = (
@@ -525,44 +652,41 @@
 			);
 			name = "AKTrakt tvOS";
 			productName = tvOS;
-			productReference = 1770D6C91D460FED00AC5AFE /* AKTrakt tvOS.framework */;
+			productReference = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		179029B31CF5945F00078265 /* Tests */ = {
+		1770D8E61D4644E700AC5AFE /* AKTrakt iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 179029BB1CF5945F00078265 /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildConfigurationList = 1770D8FE1D4644E700AC5AFE /* Build configuration list for PBXNativeTarget "AKTrakt iOS" */;
 			buildPhases = (
-				F2FE2C09F5E60923809D5157 /* [CP] Check Pods Manifest.lock */,
-				179029B01CF5945F00078265 /* Sources */,
-				179029B11CF5945F00078265 /* Frameworks */,
-				179029B21CF5945F00078265 /* Resources */,
-				0A7D5F0AEC20A2CC98BBECF6 /* [CP] Embed Pods Frameworks */,
-				DA00051DA37E0DC1EA80DD29 /* [CP] Copy Pods Resources */,
+				1770D8E21D4644E700AC5AFE /* Sources */,
+				1770D8E31D4644E700AC5AFE /* Frameworks */,
+				1770D8E41D4644E700AC5AFE /* Headers */,
+				1770D8E51D4644E700AC5AFE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Tests;
-			productName = "AKTrakt iOSTests";
-			productReference = 179029B41CF5945F00078265 /* Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = "AKTrakt iOS";
+			productName = "AKTrakt iOS";
+			productReference = 1770D8E71D4644E700AC5AFE /* AKTrakt.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		607FACCF1AFB9204008FA782 /* Example iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "Example iOS" */;
 			buildPhases = (
-				85B7E2163FDFA45D4502C5DA /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				5DD668363034103C97473FB9 /* [CP] Embed Pods Frameworks */,
-				0F092E49AE63FBC26918D9E4 /* [CP] Copy Pods Resources */,
 				174FE9251C85917000FA2EAE /* 🛡 Swift lint */,
+				1770D9011D4644E700AC5AFE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1770D8FB1D4644E700AC5AFE /* PBXTargetDependency */,
 			);
 			name = "Example iOS";
 			productName = AKTrakt;
@@ -575,7 +699,7 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
@@ -587,9 +711,9 @@
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
 					};
-					179029B31CF5945F00078265 = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+					1770D8E61D4644E700AC5AFE = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
 					};
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -597,24 +721,135 @@
 				};
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "AKTrakt" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				Base,
+				en,
 			);
 			mainGroup = 607FACC71AFB9204008FA782;
 			productRefGroup = 607FACD11AFB9204008FA782 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1770D7AA1D4617D900AC5AFE /* Products */;
+					ProjectRef = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+				},
+				{
+					ProductGroup = 1770D7C31D4617E500AC5AFE /* Products */;
+					ProjectRef = 1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* Example iOS */,
 				17109D021C05EF0A007D3D16 /* Example tvOS */,
-				179029B31CF5945F00078265 /* Tests */,
+				1770D8E61D4644E700AC5AFE /* AKTrakt iOS */,
 				1770D6C81D460FED00AC5AFE /* AKTrakt tvOS */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1770D7B51D4617D900AC5AFE /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 1770D7B41D4617D900AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7B71D4617D900AC5AFE /* Alamofire iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire iOS Tests.xctest";
+			remoteRef = 1770D7B61D4617D900AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7B91D4617D900AC5AFE /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 1770D7B81D4617D900AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7BB1D4617D900AC5AFE /* Alamofire OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire OSX Tests.xctest";
+			remoteRef = 1770D7BA1D4617D900AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7BD1D4617D900AC5AFE /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 1770D7BC1D4617D900AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7BF1D4617D900AC5AFE /* Alamofire tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire tvOS Tests.xctest";
+			remoteRef = 1770D7BE1D4617D900AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7C11D4617D900AC5AFE /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 1770D7C01D4617D900AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7CF1D4617E500AC5AFE /* AlamofireImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AlamofireImage.framework;
+			remoteRef = 1770D7CE1D4617E500AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7D11D4617E500AC5AFE /* AlamofireImage iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "AlamofireImage iOS Tests.xctest";
+			remoteRef = 1770D7D01D4617E500AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7D31D4617E500AC5AFE /* AlamofireImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AlamofireImage.framework;
+			remoteRef = 1770D7D21D4617E500AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7D51D4617E500AC5AFE /* AlamofireImage OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "AlamofireImage OSX Tests.xctest";
+			remoteRef = 1770D7D41D4617E500AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7D71D4617E500AC5AFE /* AlamofireImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AlamofireImage.framework;
+			remoteRef = 1770D7D61D4617E500AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7D91D4617E500AC5AFE /* AlamofireImage tvOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "AlamofireImage tvOS Tests.xctest";
+			remoteRef = 1770D7D81D4617E500AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		1770D7DB1D4617E500AC5AFE /* AlamofireImage.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = AlamofireImage.framework;
+			remoteRef = 1770D7DA1D4617E500AC5AFE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		17109D011C05EF0A007D3D16 /* Resources */ = {
@@ -636,12 +871,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		179029B21CF5945F00078265 /* Resources */ = {
+		1770D8E51D4644E700AC5AFE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1770D79A1D46108C00AC5AFE /* TraktQRCode.png in Resources */,
-				1770D7961D46108C00AC5AFE /* TraktAuthenticationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,51 +890,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A7D5F0AEC20A2CC98BBECF6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-Tests/Pods-Internal-Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0DC09246E258DEDF7C6EDC1B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt tvOS/Pods-Internal-AKTrakt tvOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0F092E49AE63FBC26918D9E4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		174FE9251C85917000FA2EAE /* 🛡 Swift lint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -715,96 +903,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
-		};
-		5DD668363034103C97473FB9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt iOS/Pods-Internal-AKTrakt iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		80474D58DC9AC96AB3211A7C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		85B7E2163FDFA45D4502C5DA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		C22FD465AC972ECF977EEDBE /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-AKTrakt tvOS/Pods-Internal-AKTrakt tvOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DA00051DA37E0DC1EA80DD29 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Internal-Tests/Pods-Internal-Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F2FE2C09F5E60923809D5157 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -848,9 +946,9 @@
 				1770D74D1D46108C00AC5AFE /* Collection.swift in Sources */,
 				1770D71D1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */,
 				1770D7791D46108C00AC5AFE /* Watchlist.swift in Sources */,
+				1770D9081D46463500AC5AFE /* ShowViewController.swift in Sources */,
 				1770D76D1D46108C00AC5AFE /* Season.swift in Sources */,
 				1770D7691D46108C00AC5AFE /* Search.swift in Sources */,
-				17B1BC951CFD8E580044C7A1 /* ShowViewController.swift in Sources */,
 				1770D7491D46108C00AC5AFE /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -897,48 +995,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		179029B01CF5945F00078265 /* Sources */ = {
+		1770D8E21D4644E700AC5AFE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1770D7061D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */,
-				1770D7421D46108C00AC5AFE /* TraktShow.swift in Sources */,
-				1770D7161D46108C00AC5AFE /* TraktImageSize.swift in Sources */,
-				1770D74A1D46108C00AC5AFE /* Authentication.swift in Sources */,
-				1770D7661D46108C00AC5AFE /* Recommendations.swift in Sources */,
-				1770D7261D46108C00AC5AFE /* TraktCharacter.swift in Sources */,
-				1770D7521D46108C00AC5AFE /* Episode.swift in Sources */,
-				1770D71A1D46108C00AC5AFE /* TraktImageType.swift in Sources */,
-				1770D7761D46108C00AC5AFE /* Trending.swift in Sources */,
-				1770D72E1D46108C00AC5AFE /* TraktEpisode.swift in Sources */,
-				1770D7821D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */,
-				1770D7361D46108C00AC5AFE /* TraktObject.swift in Sources */,
-				1770D78A1D46108C00AC5AFE /* TraktRequest.swift in Sources */,
-				1770D70E1D46108C00AC5AFE /* TraktError.swift in Sources */,
-				1770D71E1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */,
-				1770D7321D46108C00AC5AFE /* TraktMovie.swift in Sources */,
-				1770D76A1D46108C00AC5AFE /* Search.swift in Sources */,
-				1770D7621D46108C00AC5AFE /* Rating.swift in Sources */,
-				1770D73A1D46108C00AC5AFE /* TraktPerson.swift in Sources */,
-				1770D7561D46108C00AC5AFE /* History.swift in Sources */,
-				1770D75A1D46108C00AC5AFE /* Movie.swift in Sources */,
-				1770D7721D46108C00AC5AFE /* Show.swift in Sources */,
-				1770D74E1D46108C00AC5AFE /* Collection.swift in Sources */,
-				1770D7221D46108C00AC5AFE /* Extensions.swift in Sources */,
-				1770D7461D46108C00AC5AFE /* Requests.swift in Sources */,
-				1770D7921D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */,
-				179029B71CF5945F00078265 /* PublicTests.swift in Sources */,
-				1770D75E1D46108C00AC5AFE /* People.swift in Sources */,
-				1770D70A1D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */,
-				1770D72A1D46108C00AC5AFE /* TraktCrew.swift in Sources */,
-				17C322E01D09B28A003BFFA4 /* LoggedTests.swift in Sources */,
-				1770D7861D46108C00AC5AFE /* TraktRelease.swift in Sources */,
-				1770D76E1D46108C00AC5AFE /* Season.swift in Sources */,
-				1770D77A1D46108C00AC5AFE /* Watchlist.swift in Sources */,
-				1770D73E1D46108C00AC5AFE /* TraktSeason.swift in Sources */,
-				1770D77E1D46108C00AC5AFE /* Trakt.swift in Sources */,
-				1770D78E1D46108C00AC5AFE /* TraktToken.swift in Sources */,
-				1770D7121D46108C00AC5AFE /* TraktId.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -981,9 +1041,9 @@
 				1770D74C1D46108C00AC5AFE /* Collection.swift in Sources */,
 				1770D71C1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */,
 				1770D7781D46108C00AC5AFE /* Watchlist.swift in Sources */,
+				1770D9071D46463500AC5AFE /* ShowViewController.swift in Sources */,
 				1770D76C1D46108C00AC5AFE /* Season.swift in Sources */,
 				1770D7681D46108C00AC5AFE /* Search.swift in Sources */,
-				17B1BC941CFD8E580044C7A1 /* ShowViewController.swift in Sources */,
 				1770D7481D46108C00AC5AFE /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -996,6 +1056,11 @@
 			target = 1770D6C81D460FED00AC5AFE /* AKTrakt tvOS */;
 			targetProxy = 1770D6CE1D460FED00AC5AFE /* PBXContainerItemProxy */;
 		};
+		1770D8FB1D4644E700AC5AFE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1770D8E61D4644E700AC5AFE /* AKTrakt iOS */;
+			targetProxy = 1770D8FA1D4644E700AC5AFE /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1005,6 +1070,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Example/tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arsonik.AKTrakt-TvOS-Example";
@@ -1020,6 +1089,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Example/tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.arsonik.AKTrakt-TvOS-Example";
@@ -1038,7 +1111,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
@@ -1048,14 +1121,13 @@
 				INFOPLIST_FILE = tvOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.tvOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.AKTrakt;
+				PRODUCT_NAME = AKTrakt;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 10.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1067,7 +1139,7 @@
 				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -1076,46 +1148,68 @@
 				INFOPLIST_FILE = tvOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.tvOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.AKTrakt;
+				PRODUCT_NAME = AKTrakt;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 10.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		179029BC1CF5945F00078265 /* Debug */ = {
+		1770D8FF1D4644E700AC5AFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "AKTrakt iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.AKTraktTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.AKTrakt;
+				PRODUCT_NAME = AKTrakt;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		179029BD1CF5945F00078265 /* Release */ = {
+		1770D9001D4644E700AC5AFE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
-				INFOPLIST_FILE = Tests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "AKTrakt iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.AKTraktTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.AKTrakt;
+				PRODUCT_NAME = AKTrakt;
+				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -1156,7 +1250,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1194,7 +1288,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1251,14 +1345,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		179029BB1CF5945F00078265 /* Build configuration list for PBXNativeTarget "Tests" */ = {
+		1770D8FE1D4644E700AC5AFE /* Build configuration list for PBXNativeTarget "AKTrakt iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				179029BC1CF5945F00078265 /* Debug */,
-				179029BD1CF5945F00078265 /* Release */,
+				1770D8FF1D4644E700AC5AFE /* Debug */,
+				1770D9001D4644E700AC5AFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "AKTrakt" */ = {
 			isa = XCConfigurationList;

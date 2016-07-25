@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "179029B31CF5945F00078265"
-               BuildableName = "Tests.xctest"
-               BlueprintName = "Tests"
+               BlueprintIdentifier = "1770D8E61D4644E700AC5AFE"
+               BuildableName = "AKTrakt.framework"
+               BlueprintName = "AKTrakt iOS"
                ReferencedContainer = "container:AKTrakt.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "179029B31CF5945F00078265"
-               BuildableName = "Tests.xctest"
-               BlueprintName = "Tests"
-               ReferencedContainer = "container:AKTrakt.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <AdditionalOptions>
       </AdditionalOptions>
@@ -55,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "179029B31CF5945F00078265"
-            BuildableName = "Tests.xctest"
-            BlueprintName = "Tests"
+            BlueprintIdentifier = "1770D8E61D4644E700AC5AFE"
+            BuildableName = "AKTrakt.framework"
+            BlueprintName = "AKTrakt iOS"
             ReferencedContainer = "container:AKTrakt.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -73,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "179029B31CF5945F00078265"
-            BuildableName = "Tests.xctest"
-            BlueprintName = "Tests"
+            BlueprintIdentifier = "1770D8E61D4644E700AC5AFE"
+            BuildableName = "AKTrakt.framework"
+            BlueprintName = "AKTrakt iOS"
             ReferencedContainer = "container:AKTrakt.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -53,7 +53,7 @@ public class Trakt {
     private func loadTokenFromDefaults() -> TraktToken? {
         let defaults = UserDefaults.standard
         guard let data = defaults.object(forKey: userDefaultsTokenKey) as? Data,
-            token = NSKeyedUnarchiver.unarchiveObject(with: data) as? TraktToken else {
+            let token = NSKeyedUnarchiver.unarchiveObject(with: data) as? TraktToken else {
             return nil
         }
         return token

@@ -42,11 +42,11 @@ public class TraktRequestGetCollection<T: TraktObject where T: ListType, T: Obje
             let list: [T] = entries.flatMap {
                 let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
                 if var object = media as? Collectable,
-                    date = $0["collected_at"] as? String,
-                    collectedAt = Trakt.datetimeFormatter.date(from: date) {
+                    let date = $0["collected_at"] as? String,
+                    let collectedAt = Trakt.datetimeFormatter.date(from: date) {
                         object.collectedAt = collectedAt
                 }
-                if var show = media as? TraktShow, let seasonsData = $0["seasons"] as? [JSONHash] {
+                if let show = media as? TraktShow, let seasonsData = $0["seasons"] as? [JSONHash] {
                     show.seasons = seasonsData.flatMap {
                         TraktSeason(data: $0)
                     }
