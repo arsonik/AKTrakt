@@ -2,3 +2,5 @@ Pods
 xcuserdata
 Podfile.lock
 build
+/Carthage
+/Cartfile.resolved
