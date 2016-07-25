@@ -14,7 +14,7 @@ public class TraktRequestGetWatchlist<T: TraktObject where T: protocol<Watchlist
     let type: T.Type
     public init(type: T.Type, extended: TraktRequestExtendedOptions? = nil, sort: TraktSortHeaders? = nil) {
         self.type = type
-        super.init(path: "/sync/watchlist/\(type.listName)", oAuth: true, params: extended?.value(), headers: sort?.value())
+        super.init(path: "/sync/watchlist/\(type.listName)", params: extended?.value(), oAuth: true, headers: sort?.value())
     }
 
     public func request(_ trakt: Trakt, completion: ([(listedAt: Date, media: T)]?, NSError?) -> Void) -> Request? {
@@ -39,7 +39,7 @@ public class TraktRequestGetWatched<T: TraktObject where T: protocol<Watchlist>>
     let type: T.Type
     public init(type: T.Type, extended: TraktRequestExtendedOptions? = nil) {
         self.type = type
-        super.init(path: "/sync/watched/\(type.listName)", oAuth: true, params: extended?.value())
+        super.init(path: "/sync/watched/\(type.listName)", params: extended?.value(), oAuth: true)
     }
 
     public func request(_ trakt: Trakt, completion: ([T]?, NSError?) -> Void) -> Request? {

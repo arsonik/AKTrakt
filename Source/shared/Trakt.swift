@@ -51,7 +51,7 @@ public class Trakt {
      - returns: TraktToken
      */
     private func loadTokenFromDefaults() -> TraktToken? {
-        let defaults = UserDefaults.standard()
+        let defaults = UserDefaults.standard
         guard let data = defaults.object(forKey: userDefaultsTokenKey) as? Data,
             token = NSKeyedUnarchiver.unarchiveObject(with: data) as? TraktToken else {
             return nil
@@ -68,12 +68,12 @@ public class Trakt {
         self.token = token
 
         let data = NSKeyedArchiver.archivedData(withRootObject: token)
-        UserDefaults.standard().set(data, forKey: userDefaultsTokenKey)
+        UserDefaults.standard.set(data, forKey: userDefaultsTokenKey)
     }
 
     /// Remove token from NSUserDefaults
     public func clearToken() {
-        UserDefaults.standard().removeObject(forKey: userDefaultsTokenKey)
+        UserDefaults.standard.removeObject(forKey: userDefaultsTokenKey)
         token = nil
     }
 
