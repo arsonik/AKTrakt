@@ -7,6 +7,7 @@
 [![License](https://img.shields.io/cocoapods/l/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
 [![Platform](https://img.shields.io/cocoapods/p/AKTrakt.svg?style=flat)](http://cocoapods.org/pods/AKTrakt)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/AKTrakt.svg?style=flat)](http://cocoadocs.org/docsets/AKTrakt/)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 AKTrakt is a trakt.tv client library written in Swift.
 

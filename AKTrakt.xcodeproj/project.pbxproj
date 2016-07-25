@@ -13,7 +13,6 @@
 		174E4F5F1D4657C300EF2FC7 /* AKTrakt.h in Headers */ = {isa = PBXBuildFile; fileRef = 174E4F5E1D4657C300EF2FC7 /* AKTrakt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		174E4F601D4657C300EF2FC7 /* AKTrakt.h in Headers */ = {isa = PBXBuildFile; fileRef = 174E4F5E1D4657C300EF2FC7 /* AKTrakt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		174E4F611D465DF900EF2FC7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7BD1D4617D900AC5AFE /* Alamofire.framework */; };
-		174E4F711D46625300EF2FC7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 179029B81CF5945F00078265 /* Info.plist */; };
 		174E4F721D46625700EF2FC7 /* LoggedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */; };
 		174E4F731D46625700EF2FC7 /* PublicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* PublicTests.swift */; };
 		174E4F761D46634700EF2FC7 /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D8E71D4644E700AC5AFE /* AKTrakt.framework */; };
@@ -115,6 +114,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1770D8E61D4644E700AC5AFE;
 			remoteInfo = "AKTrakt iOS";
+		};
+		174E4F771D4665DF00EF2FC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4CF626EE1BA7CB3E0011A099;
+			remoteInfo = "Alamofire tvOS";
+		};
+		174E4F791D4665E800EF2FC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
 		};
 		1770D6CE1D460FED00AC5AFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -645,6 +658,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				174E4F781D4665DF00EF2FC7 /* PBXTargetDependency */,
 			);
 			name = "AKTrakt tvOS";
 			productName = tvOS;
@@ -663,6 +677,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				174E4F7A1D4665E800EF2FC7 /* PBXTargetDependency */,
 			);
 			name = "AKTrakt iOS";
 			productName = "AKTrakt iOS";
@@ -867,7 +882,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				174E4F711D46625300EF2FC7 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1038,6 +1052,16 @@
 			isa = PBXTargetDependency;
 			target = 1770D8E61D4644E700AC5AFE /* AKTrakt iOS */;
 			targetProxy = 174E4F741D4662E200EF2FC7 /* PBXContainerItemProxy */;
+		};
+		174E4F781D4665DF00EF2FC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Alamofire tvOS";
+			targetProxy = 174E4F771D4665DF00EF2FC7 /* PBXContainerItemProxy */;
+		};
+		174E4F7A1D4665E800EF2FC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Alamofire iOS";
+			targetProxy = 174E4F791D4665E800EF2FC7 /* PBXContainerItemProxy */;
 		};
 		1770D6CF1D460FED00AC5AFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
