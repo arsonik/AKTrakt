@@ -8,6 +8,7 @@
 
 import XCTest
 import AKTrakt
+import Alamofire
 
 class LoggedTests: XCTestCase {
 
@@ -30,20 +31,20 @@ class LoggedTests: XCTestCase {
     }
 
     func testProfile() {
-        let expectation = self.expectation(withDescription: "Getting profile")
+        let expectation = self.expectation(description: "Getting profile")
         TraktRequestProfile().request(trakt) { data, error in
             XCTAssertEqual(data?["username"] as? String, "arsonikTest")
             expectation.fulfill()
         }
-        waitForExpectations(withTimeout: 5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 
     func testRecommendedMovies() {
-        let expectation = self.expectation(withDescription: "Getting recommended movies")
+        let expectation = self.expectation(description: "Getting recommended movies")
         TraktRequestRecommendations(type: TraktMovie.self).request(trakt) { movies, error in
             XCTAssertEqual(movies?.count, 10)
             expectation.fulfill()
         }
-        waitForExpectations(withTimeout: 5, handler: nil)
+        waitForExpectations(timeout: 5, handler: nil)
     }
 }

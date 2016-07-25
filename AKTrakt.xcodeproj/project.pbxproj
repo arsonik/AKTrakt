@@ -12,6 +12,11 @@
 		174E4F581D464C6300EF2FC7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7BD1D4617D900AC5AFE /* Alamofire.framework */; };
 		174E4F5F1D4657C300EF2FC7 /* AKTrakt.h in Headers */ = {isa = PBXBuildFile; fileRef = 174E4F5E1D4657C300EF2FC7 /* AKTrakt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		174E4F601D4657C300EF2FC7 /* AKTrakt.h in Headers */ = {isa = PBXBuildFile; fileRef = 174E4F5E1D4657C300EF2FC7 /* AKTrakt.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		174E4F611D465DF900EF2FC7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7BD1D4617D900AC5AFE /* Alamofire.framework */; };
+		174E4F711D46625300EF2FC7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 179029B81CF5945F00078265 /* Info.plist */; };
+		174E4F721D46625700EF2FC7 /* LoggedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */; };
+		174E4F731D46625700EF2FC7 /* PublicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* PublicTests.swift */; };
+		174E4F761D46634700EF2FC7 /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D8E71D4644E700AC5AFE /* AKTrakt.framework */; };
 		1770D6D01D460FED00AC5AFE /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */; };
 		1770D6D11D460FED00AC5AFE /* AKTrakt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1770D70B1D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
@@ -51,7 +56,6 @@
 		1770D7931D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D7011D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
 		1770D7971D46108C00AC5AFE /* TraktAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7021D46108C00AC5AFE /* TraktAuthenticationViewController.xib */; };
 		1770D79B1D46108C00AC5AFE /* TraktQRCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7031D46108C00AC5AFE /* TraktQRCode.png */; };
-		1770D8D21D46426100AC5AFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7BD1D4617D900AC5AFE /* Alamofire.framework */; };
 		1770D8DF1D46436B00AC5AFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7B51D4617D900AC5AFE /* Alamofire.framework */; };
 		1770D8E01D46436B00AC5AFE /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7CF1D4617E500AC5AFE /* AlamofireImage.framework */; };
 		1770D8FC1D4644E700AC5AFE /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D8E71D4644E700AC5AFE /* AKTrakt.framework */; };
@@ -105,6 +109,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		174E4F741D4662E200EF2FC7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1770D8E61D4644E700AC5AFE;
+			remoteInfo = "AKTrakt iOS";
+		};
 		1770D6CE1D460FED00AC5AFE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
@@ -249,6 +260,7 @@
 		17109D071C05EF0A007D3D16 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Example/ViewController.swift; sourceTree = "<group>"; };
 		17109D0E1C05EF0A007D3D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		174E4F5E1D4657C300EF2FC7 /* AKTrakt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKTrakt.h; path = Source/AKTrakt.h; sourceTree = SOURCE_ROOT; };
+		174E4F671D46623200EF2FC7 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1770D6C91D460FED00AC5AFE /* AKTrakt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AKTrakt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1770D6CC1D460FED00AC5AFE /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "Info-tvOS.plist"; path = "Source/Info-tvOS.plist"; sourceTree = "<group>"; };
 		1770D6D81D46108C00AC5AFE /* TraktAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktAuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -317,11 +329,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		174E4F641D46623200EF2FC7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				174E4F761D46634700EF2FC7 /* AKTrakt.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1770D6C51D460FED00AC5AFE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1770D8D21D46426100AC5AFE /* Alamofire.framework in Frameworks */,
+				174E4F611D465DF900EF2FC7 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,6 +558,7 @@
 				17109D031C05EF0A007D3D16 /* Example tvOS.app */,
 				1770D6C91D460FED00AC5AFE /* AKTrakt.framework */,
 				1770D8E71D4644E700AC5AFE /* AKTrakt.framework */,
+				174E4F671D46623200EF2FC7 /* Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -593,6 +614,24 @@
 			productName = AKTrakt_TvOS_Example;
 			productReference = 17109D031C05EF0A007D3D16 /* Example tvOS.app */;
 			productType = "com.apple.product-type.application";
+		};
+		174E4F661D46623200EF2FC7 /* Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 174E4F6E1D46623200EF2FC7 /* Build configuration list for PBXNativeTarget "Tests" */;
+			buildPhases = (
+				174E4F631D46623200EF2FC7 /* Sources */,
+				174E4F641D46623200EF2FC7 /* Frameworks */,
+				174E4F651D46623200EF2FC7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				174E4F751D4662E200EF2FC7 /* PBXTargetDependency */,
+			);
+			name = Tests;
+			productName = Tests;
+			productReference = 174E4F671D46623200EF2FC7 /* Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		1770D6C81D460FED00AC5AFE /* AKTrakt tvOS */ = {
 			isa = PBXNativeTarget;
@@ -664,6 +703,12 @@
 						CreatedOnToolsVersion = 7.1.1;
 						LastSwiftMigration = 0800;
 					};
+					174E4F661D46623200EF2FC7 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = RW4GJT4298;
+						DevelopmentTeamName = "Florian Morello (Personal Team)";
+						ProvisioningStyle = Automatic;
+					};
 					1770D6C81D460FED00AC5AFE = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
@@ -703,6 +748,7 @@
 				17109D021C05EF0A007D3D16 /* Example tvOS */,
 				1770D8E61D4644E700AC5AFE /* AKTrakt iOS */,
 				1770D6C81D460FED00AC5AFE /* AKTrakt tvOS */,
+				174E4F661D46623200EF2FC7 /* Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -817,6 +863,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		174E4F651D46623200EF2FC7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				174E4F711D46625300EF2FC7 /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1770D6C71D460FED00AC5AFE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -870,6 +924,15 @@
 				17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */,
 				17C504931CF4480600CF368A /* MovieViewController.swift in Sources */,
 				1770D9081D46463500AC5AFE /* ShowViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		174E4F631D46623200EF2FC7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				174E4F731D46625700EF2FC7 /* PublicTests.swift in Sources */,
+				174E4F721D46625700EF2FC7 /* LoggedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,6 +1034,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		174E4F751D4662E200EF2FC7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1770D8E61D4644E700AC5AFE /* AKTrakt iOS */;
+			targetProxy = 174E4F741D4662E200EF2FC7 /* PBXContainerItemProxy */;
+		};
 		1770D6CF1D460FED00AC5AFE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1770D6C81D460FED00AC5AFE /* AKTrakt tvOS */;
@@ -1022,6 +1090,37 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.0;
+			};
+			name = Release;
+		};
+		174E4F6F1D46623200EF2FC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		174E4F701D46623200EF2FC7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.Tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -1265,6 +1364,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		174E4F6E1D46623200EF2FC7 /* Build configuration list for PBXNativeTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				174E4F6F1D46623200EF2FC7 /* Debug */,
+				174E4F701D46623200EF2FC7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		1770D6D41D460FED00AC5AFE /* Build configuration list for PBXNativeTarget "AKTrakt tvOS" */ = {
 			isa = XCConfigurationList;
