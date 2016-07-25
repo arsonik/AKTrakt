@@ -12,7 +12,7 @@ AKTrakt is a trakt.tv client library written in Swift.
 
 ## Usage
 
-To run the example project: clone the repo, execute `pod install`, open AKTrakt.xcworkspace and build !
+To run the example project: clone the repo, execute `carthage update`, open AKTrakt.xcodeproj and build !
 
 ## Dependencies
 
@@ -34,15 +34,6 @@ pod "AKTrakt"
 ![alt tag](https://raw.githubusercontent.com/arsonik/AKTrakt/master/Screenshots/iOSmovies.png)
 
 ## Code
-
-```swift
-
-```
-
-A (probably not up to date) list of what you can request:
-```swift
-
-```
 
 Feel free to fork, and add more features !
 
