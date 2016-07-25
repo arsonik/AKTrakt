@@ -14,8 +14,8 @@
 		174E4F721D46625700EF2FC7 /* LoggedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */; };
 		174E4F731D46625700EF2FC7 /* PublicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179029B61CF5945F00078265 /* PublicTests.swift */; };
 		174E4F761D46634700EF2FC7 /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D8E71D4644E700AC5AFE /* AKTrakt.framework */; };
-		174E4F971D4670ED00EF2FC7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7B51D4617D900AC5AFE /* Alamofire.framework */; };
-		174E4F9A1D4670FC00EF2FC7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7BD1D4617D900AC5AFE /* Alamofire.framework */; };
+		174E4F9D1D46732300EF2FC7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174E4F9C1D46732300EF2FC7 /* Alamofire.framework */; };
+		174E4FA01D46736900EF2FC7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174E4F9E1D46732E00EF2FC7 /* Alamofire.framework */; };
 		1770D6D01D460FED00AC5AFE /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */; };
 		1770D6D11D460FED00AC5AFE /* AKTrakt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1770D70B1D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
@@ -272,6 +272,8 @@
 		17109D0E1C05EF0A007D3D16 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		174E4F5E1D4657C300EF2FC7 /* AKTrakt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKTrakt.h; path = Source/AKTrakt.h; sourceTree = SOURCE_ROOT; };
 		174E4F671D46623200EF2FC7 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		174E4F9C1D46732300EF2FC7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/tvOS/Alamofire.framework; sourceTree = "<group>"; };
+		174E4F9E1D46732E00EF2FC7 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		1770D6C91D460FED00AC5AFE /* AKTrakt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AKTrakt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1770D6CC1D460FED00AC5AFE /* Info-tvOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "Info-tvOS.plist"; path = "Source/Info-tvOS.plist"; sourceTree = "<group>"; };
 		1770D6D81D46108C00AC5AFE /* TraktAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TraktAuthenticationViewController.swift; sourceTree = "<group>"; };
@@ -351,7 +353,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				174E4F9A1D4670FC00EF2FC7 /* Alamofire.framework in Frameworks */,
+				174E4F9D1D46732300EF2FC7 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,7 +361,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				174E4F971D4670ED00EF2FC7 /* Alamofire.framework in Frameworks */,
+				174E4FA01D46736900EF2FC7 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,6 +385,15 @@
 			);
 			name = tvOS;
 			path = Example/tvOS;
+			sourceTree = "<group>";
+		};
+		174E4F9B1D46732300EF2FC7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				174E4F9E1D46732E00EF2FC7 /* Alamofire.framework */,
+				174E4F9C1D46732300EF2FC7 /* Alamofire.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		1770D6D61D46108C00AC5AFE /* Source */ = {
@@ -557,6 +568,7 @@
 				607FACD11AFB9204008FA782 /* Products */,
 				1770D7A91D4617D900AC5AFE /* Alamofire.xcodeproj */,
 				1770D7C21D4617E500AC5AFE /* AlamofireImage.xcodeproj */,
+				174E4F9B1D46732300EF2FC7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -708,7 +720,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
 				LastUpgradeCheck = 0800;
-				ORGANIZATIONNAME = CocoaPods;
+				ORGANIZATIONNAME = Arsonik;
 				TargetAttributes = {
 					17109D021C05EF0A007D3D16 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -1157,6 +1169,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
 				INFOPLIST_FILE = "Source/Info-tvOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1183,6 +1199,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/tvOS",
+				);
 				INFOPLIST_FILE = "Source/Info-tvOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1210,6 +1230,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1236,6 +1260,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
