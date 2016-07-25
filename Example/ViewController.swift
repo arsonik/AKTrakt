@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import AKTrakt
 
 class ViewController: UIViewController {
 
@@ -108,7 +109,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             if let image = (cell.viewWithTag(1) as? UIImageView), let url = movies[indexPath.row].imageURL(.Poster, thatFits: image) {
                 image.af_setImageWithURL(url, placeholderImage: nil)
             }
-        } else if let image = (cell.viewWithTag(1) as? UIImageView), let url = shows[indexPath.row].imageURL(.Poster, thatFits: image) where (indexPath as NSIndexPath).section == 1 {
+        } else if let image = (cell.viewWithTag(1) as? UIImageView), let url = shows[indexPath.row].imageURL(.Poster, thatFits: image), (indexPath as NSIndexPath).section == 1 {
             image.af_setImageWithURL(url, placeholderImage: nil)
         }
     }

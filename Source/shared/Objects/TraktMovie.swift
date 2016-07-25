@@ -59,7 +59,7 @@ public class TraktMovie: TraktObject, Descriptable, Watchable, Collectable, Tren
             release = d
         }
 
-        if let x = data?["trailer"] as? String, let url = URL(string: x), let params = url.query?.components(separatedBy: "v=") where params.count == 2 {
+        if let x = data?["trailer"] as? String, let url = URL(string: x), let params = url.query?.components(separatedBy: "v="), params.count == 2 {
             trailer = params[1]
         }
     }

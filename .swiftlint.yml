@@ -1,6 +1,6 @@
 disabled_rules:
+    - conditional_binding_cascade
 excluded:
-    - Pods/
     - Carthage/
 line_length: 200
 type_body_length:

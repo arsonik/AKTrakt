@@ -23,7 +23,7 @@ private enum TraktSearchType: String {
     case Person = "person"
 
     /// Associated TraktObject type
-    public var classType: TraktObject.Type? {
+    private var classType: TraktObject.Type? {
         switch self {
         case .Movie:
             return TraktMovie.self

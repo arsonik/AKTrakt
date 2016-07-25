@@ -49,7 +49,7 @@ public class TraktRequestTrending<T: TraktObject where T: protocol<Trending>>: T
 
             let list: [(watchers: UInt, media: T)] = entries.flatMap {
                 let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
-                guard let watchers = $0["watchers"] as? UInt where media != nil else {
+                guard let watchers = $0["watchers"] as? UInt, media != nil else {
                     return nil
                 }
                 return (watchers: watchers, media: media!)

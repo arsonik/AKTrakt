@@ -8,117 +8,47 @@
 
 /* Begin PBXBuildFile section */
 		17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17109D071C05EF0A007D3D16 /* ViewController.swift */; };
+		174E4F571D464C3900EF2FC7 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7D71D4617E500AC5AFE /* AlamofireImage.framework */; };
+		174E4F581D464C6300EF2FC7 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7BD1D4617D900AC5AFE /* Alamofire.framework */; };
 		1770D6CD1D460FED00AC5AFE /* tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1770D6CB1D460FED00AC5AFE /* tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1770D6D01D460FED00AC5AFE /* AKTrakt.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */; };
 		1770D6D11D460FED00AC5AFE /* AKTrakt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D6C91D460FED00AC5AFE /* AKTrakt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		1770D7041D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6D81D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
-		1770D7081D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
-		1770D7091D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
 		1770D70B1D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
-		1770D70C1D46108C00AC5AFE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
-		1770D70D1D46108C00AC5AFE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
 		1770D70F1D46108C00AC5AFE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
-		1770D7101D46108C00AC5AFE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
-		1770D7111D46108C00AC5AFE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
 		1770D7131D46108C00AC5AFE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
-		1770D7141D46108C00AC5AFE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
-		1770D7151D46108C00AC5AFE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
 		1770D7171D46108C00AC5AFE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
-		1770D7181D46108C00AC5AFE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
-		1770D7191D46108C00AC5AFE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
 		1770D71B1D46108C00AC5AFE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
-		1770D71C1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
-		1770D71D1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
 		1770D71F1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
-		1770D7201D46108C00AC5AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
-		1770D7211D46108C00AC5AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
 		1770D7231D46108C00AC5AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
-		1770D7241D46108C00AC5AFE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
-		1770D7251D46108C00AC5AFE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
 		1770D7271D46108C00AC5AFE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
-		1770D7281D46108C00AC5AFE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
-		1770D7291D46108C00AC5AFE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
 		1770D72B1D46108C00AC5AFE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
-		1770D72C1D46108C00AC5AFE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
-		1770D72D1D46108C00AC5AFE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
 		1770D72F1D46108C00AC5AFE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
-		1770D7301D46108C00AC5AFE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
-		1770D7311D46108C00AC5AFE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
 		1770D7331D46108C00AC5AFE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
-		1770D7341D46108C00AC5AFE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
-		1770D7351D46108C00AC5AFE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
 		1770D7371D46108C00AC5AFE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
-		1770D7381D46108C00AC5AFE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
-		1770D7391D46108C00AC5AFE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
 		1770D73B1D46108C00AC5AFE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
-		1770D73C1D46108C00AC5AFE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
-		1770D73D1D46108C00AC5AFE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
 		1770D73F1D46108C00AC5AFE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
-		1770D7401D46108C00AC5AFE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
-		1770D7411D46108C00AC5AFE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
 		1770D7431D46108C00AC5AFE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
-		1770D7441D46108C00AC5AFE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
-		1770D7451D46108C00AC5AFE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
 		1770D7471D46108C00AC5AFE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
-		1770D7481D46108C00AC5AFE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
-		1770D7491D46108C00AC5AFE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
 		1770D74B1D46108C00AC5AFE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
-		1770D74C1D46108C00AC5AFE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
-		1770D74D1D46108C00AC5AFE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
 		1770D74F1D46108C00AC5AFE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
-		1770D7501D46108C00AC5AFE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
-		1770D7511D46108C00AC5AFE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
 		1770D7531D46108C00AC5AFE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
-		1770D7541D46108C00AC5AFE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
-		1770D7551D46108C00AC5AFE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
 		1770D7571D46108C00AC5AFE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
-		1770D7581D46108C00AC5AFE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
-		1770D7591D46108C00AC5AFE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
 		1770D75B1D46108C00AC5AFE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
-		1770D75C1D46108C00AC5AFE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
-		1770D75D1D46108C00AC5AFE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
 		1770D75F1D46108C00AC5AFE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
-		1770D7601D46108C00AC5AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
-		1770D7611D46108C00AC5AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
 		1770D7631D46108C00AC5AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
-		1770D7641D46108C00AC5AFE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
-		1770D7651D46108C00AC5AFE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
 		1770D7671D46108C00AC5AFE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
-		1770D7681D46108C00AC5AFE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
-		1770D7691D46108C00AC5AFE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
 		1770D76B1D46108C00AC5AFE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
-		1770D76C1D46108C00AC5AFE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
-		1770D76D1D46108C00AC5AFE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
 		1770D76F1D46108C00AC5AFE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
-		1770D7701D46108C00AC5AFE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
-		1770D7711D46108C00AC5AFE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
 		1770D7731D46108C00AC5AFE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
-		1770D7741D46108C00AC5AFE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
-		1770D7751D46108C00AC5AFE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
 		1770D7771D46108C00AC5AFE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
-		1770D7781D46108C00AC5AFE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
-		1770D7791D46108C00AC5AFE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
 		1770D77B1D46108C00AC5AFE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
-		1770D77C1D46108C00AC5AFE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
-		1770D77D1D46108C00AC5AFE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
 		1770D77F1D46108C00AC5AFE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
-		1770D7801D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
-		1770D7811D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
 		1770D7831D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
-		1770D7841D46108C00AC5AFE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
-		1770D7851D46108C00AC5AFE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
 		1770D7871D46108C00AC5AFE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
-		1770D7881D46108C00AC5AFE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
-		1770D7891D46108C00AC5AFE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
 		1770D78B1D46108C00AC5AFE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
-		1770D78C1D46108C00AC5AFE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
-		1770D78D1D46108C00AC5AFE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
 		1770D78F1D46108C00AC5AFE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
-		1770D7911D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D7011D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
 		1770D7931D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D7011D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
-		1770D7951D46108C00AC5AFE /* TraktAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7021D46108C00AC5AFE /* TraktAuthenticationViewController.xib */; };
 		1770D7971D46108C00AC5AFE /* TraktAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7021D46108C00AC5AFE /* TraktAuthenticationViewController.xib */; };
-		1770D7991D46108C00AC5AFE /* TraktQRCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7031D46108C00AC5AFE /* TraktQRCode.png */; };
 		1770D79B1D46108C00AC5AFE /* TraktQRCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7031D46108C00AC5AFE /* TraktQRCode.png */; };
 		1770D8D21D46426100AC5AFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7BD1D4617D900AC5AFE /* Alamofire.framework */; };
 		1770D8DF1D46436B00AC5AFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7B51D4617D900AC5AFE /* Alamofire.framework */; };
@@ -129,6 +59,41 @@
 		1770D9051D46450100AC5AFE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7B51D4617D900AC5AFE /* Alamofire.framework */; };
 		1770D9071D46463500AC5AFE /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D9061D46463500AC5AFE /* ShowViewController.swift */; };
 		1770D9081D46463500AC5AFE /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D9061D46463500AC5AFE /* ShowViewController.swift */; };
+		1770D9091D46481A00AC5AFE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
+		1770D90A1D46481A00AC5AFE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
+		1770D90B1D46481A00AC5AFE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
+		1770D90C1D46481A00AC5AFE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
+		1770D90D1D46481A00AC5AFE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
+		1770D90E1D46481A00AC5AFE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
+		1770D90F1D46482000AC5AFE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
+		1770D9101D46482000AC5AFE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
+		1770D9111D46482000AC5AFE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
+		1770D9121D46482000AC5AFE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
+		1770D9131D46482000AC5AFE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
+		1770D9141D46482000AC5AFE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
+		1770D9151D46482000AC5AFE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
+		1770D9161D46482000AC5AFE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
+		1770D9171D46482400AC5AFE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
+		1770D9181D46482800AC5AFE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
+		1770D9191D46482800AC5AFE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
+		1770D91A1D46482800AC5AFE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
+		1770D91B1D46482800AC5AFE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
+		1770D91C1D46482800AC5AFE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
+		1770D91D1D46482800AC5AFE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
+		1770D91E1D46482800AC5AFE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
+		1770D91F1D46482800AC5AFE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
+		1770D9201D46482800AC5AFE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
+		1770D9211D46482800AC5AFE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
+		1770D9221D46482800AC5AFE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
+		1770D9231D46482800AC5AFE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
+		1770D9241D46482800AC5AFE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
+		1770D9251D46482E00AC5AFE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
+		1770D9261D46482E00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
+		1770D9271D46482E00AC5AFE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
+		1770D9281D46482E00AC5AFE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
+		1770D9291D46482E00AC5AFE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
+		1770D92A1D46483100AC5AFE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6D81D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
+		1770D92B1D46487E00AC5AFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
 		179029AF1CF4913D00078265 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 179029AE1CF4913D00078265 /* Default-568h@2x.png */; };
 		17C504921CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
 		17C504931CF4480600CF368A /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C504911CF4480600CF368A /* MovieViewController.swift */; };
@@ -347,6 +312,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				174E4F581D464C6300EF2FC7 /* Alamofire.framework in Frameworks */,
+				174E4F571D464C3900EF2FC7 /* AlamofireImage.framework in Frameworks */,
 				1770D6D01D460FED00AC5AFE /* AKTrakt.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -857,8 +824,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				17CFD2731CF45DB90050315A /* Main.storyboard in Resources */,
-				1770D7991D46108C00AC5AFE /* TraktQRCode.png in Resources */,
-				1770D7951D46108C00AC5AFE /* TraktAuthenticationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -911,45 +876,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1770D72D1D46108C00AC5AFE /* TraktEpisode.swift in Sources */,
-				1770D7511D46108C00AC5AFE /* Episode.swift in Sources */,
-				1770D7391D46108C00AC5AFE /* TraktPerson.swift in Sources */,
-				1770D78D1D46108C00AC5AFE /* TraktToken.swift in Sources */,
-				1770D7311D46108C00AC5AFE /* TraktMovie.swift in Sources */,
-				1770D7191D46108C00AC5AFE /* TraktImageType.swift in Sources */,
-				1770D7091D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */,
-				1770D7711D46108C00AC5AFE /* Show.swift in Sources */,
-				1770D7411D46108C00AC5AFE /* TraktShow.swift in Sources */,
 				17F050031C91E044006F448F /* AppDelegate.swift in Sources */,
-				1770D7591D46108C00AC5AFE /* Movie.swift in Sources */,
-				1770D73D1D46108C00AC5AFE /* TraktSeason.swift in Sources */,
-				1770D7551D46108C00AC5AFE /* History.swift in Sources */,
-				1770D7291D46108C00AC5AFE /* TraktCrew.swift in Sources */,
-				1770D7891D46108C00AC5AFE /* TraktRequest.swift in Sources */,
-				1770D75D1D46108C00AC5AFE /* People.swift in Sources */,
-				1770D7351D46108C00AC5AFE /* TraktObject.swift in Sources */,
-				1770D7111D46108C00AC5AFE /* TraktId.swift in Sources */,
-				1770D7451D46108C00AC5AFE /* Requests.swift in Sources */,
-				1770D70D1D46108C00AC5AFE /* TraktError.swift in Sources */,
-				1770D7151D46108C00AC5AFE /* TraktImageSize.swift in Sources */,
-				1770D7851D46108C00AC5AFE /* TraktRelease.swift in Sources */,
-				1770D7211D46108C00AC5AFE /* Extensions.swift in Sources */,
-				1770D7611D46108C00AC5AFE /* Rating.swift in Sources */,
-				1770D7811D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */,
-				1770D7651D46108C00AC5AFE /* Recommendations.swift in Sources */,
 				17109D081C05EF0A007D3D16 /* ViewController.swift in Sources */,
-				1770D77D1D46108C00AC5AFE /* Trakt.swift in Sources */,
-				1770D7751D46108C00AC5AFE /* Trending.swift in Sources */,
 				17C504931CF4480600CF368A /* MovieViewController.swift in Sources */,
-				1770D7911D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */,
-				1770D7251D46108C00AC5AFE /* TraktCharacter.swift in Sources */,
-				1770D74D1D46108C00AC5AFE /* Collection.swift in Sources */,
-				1770D71D1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */,
-				1770D7791D46108C00AC5AFE /* Watchlist.swift in Sources */,
 				1770D9081D46463500AC5AFE /* ShowViewController.swift in Sources */,
-				1770D76D1D46108C00AC5AFE /* Season.swift in Sources */,
-				1770D7691D46108C00AC5AFE /* Search.swift in Sources */,
-				1770D7491D46108C00AC5AFE /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,6 +929,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1770D90D1D46481A00AC5AFE /* TraktImageType.swift in Sources */,
+				1770D9151D46482000AC5AFE /* TraktSeason.swift in Sources */,
+				1770D91B1D46482800AC5AFE /* History.swift in Sources */,
+				1770D9191D46482800AC5AFE /* Collection.swift in Sources */,
+				1770D9261D46482E00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */,
+				1770D9141D46482000AC5AFE /* TraktPerson.swift in Sources */,
+				1770D9171D46482400AC5AFE /* Requests.swift in Sources */,
+				1770D9121D46482000AC5AFE /* TraktMovie.swift in Sources */,
+				1770D9131D46482000AC5AFE /* TraktObject.swift in Sources */,
+				1770D92A1D46483100AC5AFE /* TraktAuthenticationViewController.swift in Sources */,
+				1770D9271D46482E00AC5AFE /* TraktRelease.swift in Sources */,
+				1770D91A1D46482800AC5AFE /* Episode.swift in Sources */,
+				1770D9101D46482000AC5AFE /* TraktCrew.swift in Sources */,
+				1770D9291D46482E00AC5AFE /* TraktToken.swift in Sources */,
+				1770D9221D46482800AC5AFE /* Show.swift in Sources */,
+				1770D9091D46481A00AC5AFE /* TraktCrewPosition.swift in Sources */,
+				1770D9231D46482800AC5AFE /* Trending.swift in Sources */,
+				1770D9241D46482800AC5AFE /* Watchlist.swift in Sources */,
+				1770D90A1D46481A00AC5AFE /* TraktError.swift in Sources */,
+				1770D90B1D46481A00AC5AFE /* TraktId.swift in Sources */,
+				1770D92B1D46487E00AC5AFE /* Extensions.swift in Sources */,
+				1770D91D1D46482800AC5AFE /* People.swift in Sources */,
+				1770D90E1D46481A00AC5AFE /* TraktReleaseType.swift in Sources */,
+				1770D91C1D46482800AC5AFE /* Movie.swift in Sources */,
+				1770D91E1D46482800AC5AFE /* Rating.swift in Sources */,
+				1770D9211D46482800AC5AFE /* Season.swift in Sources */,
+				1770D9111D46482000AC5AFE /* TraktEpisode.swift in Sources */,
+				1770D9251D46482E00AC5AFE /* Trakt.swift in Sources */,
+				1770D90F1D46482000AC5AFE /* TraktCharacter.swift in Sources */,
+				1770D91F1D46482800AC5AFE /* Recommendations.swift in Sources */,
+				1770D90C1D46481A00AC5AFE /* TraktImageSize.swift in Sources */,
+				1770D9281D46482E00AC5AFE /* TraktRequest.swift in Sources */,
+				1770D9201D46482800AC5AFE /* Search.swift in Sources */,
+				1770D9161D46482000AC5AFE /* TraktShow.swift in Sources */,
+				1770D9181D46482800AC5AFE /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1006,45 +971,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1770D72C1D46108C00AC5AFE /* TraktEpisode.swift in Sources */,
-				1770D7501D46108C00AC5AFE /* Episode.swift in Sources */,
-				1770D7381D46108C00AC5AFE /* TraktPerson.swift in Sources */,
-				1770D78C1D46108C00AC5AFE /* TraktToken.swift in Sources */,
-				1770D7301D46108C00AC5AFE /* TraktMovie.swift in Sources */,
-				1770D7181D46108C00AC5AFE /* TraktImageType.swift in Sources */,
-				1770D7081D46108C00AC5AFE /* TraktCrewPosition.swift in Sources */,
-				1770D7701D46108C00AC5AFE /* Show.swift in Sources */,
-				1770D7401D46108C00AC5AFE /* TraktShow.swift in Sources */,
 				17F050011C91D789006F448F /* ViewController.swift in Sources */,
-				1770D7581D46108C00AC5AFE /* Movie.swift in Sources */,
-				1770D73C1D46108C00AC5AFE /* TraktSeason.swift in Sources */,
-				1770D7541D46108C00AC5AFE /* History.swift in Sources */,
-				1770D7281D46108C00AC5AFE /* TraktCrew.swift in Sources */,
-				1770D7041D46108C00AC5AFE /* TraktAuthenticationViewController.swift in Sources */,
-				1770D7881D46108C00AC5AFE /* TraktRequest.swift in Sources */,
-				1770D75C1D46108C00AC5AFE /* People.swift in Sources */,
-				1770D7341D46108C00AC5AFE /* TraktObject.swift in Sources */,
-				1770D7101D46108C00AC5AFE /* TraktId.swift in Sources */,
-				1770D7441D46108C00AC5AFE /* Requests.swift in Sources */,
-				1770D70C1D46108C00AC5AFE /* TraktError.swift in Sources */,
-				1770D7141D46108C00AC5AFE /* TraktImageSize.swift in Sources */,
-				1770D7841D46108C00AC5AFE /* TraktRelease.swift in Sources */,
-				1770D7201D46108C00AC5AFE /* Extensions.swift in Sources */,
-				1770D7601D46108C00AC5AFE /* Rating.swift in Sources */,
-				1770D7801D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift in Sources */,
-				1770D7641D46108C00AC5AFE /* Recommendations.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
-				1770D77C1D46108C00AC5AFE /* Trakt.swift in Sources */,
-				1770D7741D46108C00AC5AFE /* Trending.swift in Sources */,
 				17C504921CF4480600CF368A /* MovieViewController.swift in Sources */,
-				1770D7241D46108C00AC5AFE /* TraktCharacter.swift in Sources */,
-				1770D74C1D46108C00AC5AFE /* Collection.swift in Sources */,
-				1770D71C1D46108C00AC5AFE /* TraktReleaseType.swift in Sources */,
-				1770D7781D46108C00AC5AFE /* Watchlist.swift in Sources */,
 				1770D9071D46463500AC5AFE /* ShowViewController.swift in Sources */,
-				1770D76C1D46108C00AC5AFE /* Season.swift in Sources */,
-				1770D7681D46108C00AC5AFE /* Search.swift in Sources */,
-				1770D7481D46108C00AC5AFE /* Authentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1128,6 +1058,7 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1155,6 +1086,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1163,6 +1095,7 @@
 		1770D8FF1D4644E700AC5AFE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1174,7 +1107,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "AKTrakt iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.AKTrakt;
 				PRODUCT_NAME = AKTrakt;
@@ -1190,6 +1123,7 @@
 		1770D9001D4644E700AC5AFE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -1200,7 +1134,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "AKTrakt iOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.arsonik.AKTrakt;
 				PRODUCT_NAME = AKTrakt;
@@ -1352,6 +1286,7 @@
 				1770D9001D4644E700AC5AFE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "AKTrakt" */ = {
 			isa = XCConfigurationList;

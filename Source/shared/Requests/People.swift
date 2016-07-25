@@ -81,7 +81,7 @@ public class TraktRequestPeopleCredits<T: TraktObject where T: protocol<Credits>
                 tuple.crew![position] = values.flatMap {
                     let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
 
-                    guard let job = $0["job"] as? String where media != nil else {
+                    guard let job = $0["job"] as? String, media != nil else {
                         print("cannot find job or media")
                         return nil
                     }
@@ -91,7 +91,7 @@ public class TraktRequestPeopleCredits<T: TraktObject where T: protocol<Credits>
             // Cast
             tuple.cast = (result["cast"] as? [JSONHash])?.flatMap {
                 let media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
-                guard let character = $0["character"] as? String where media != nil else {
+                guard let character = $0["character"] as? String, media != nil else {
                     return nil
                 }
                 return (character: character, media: media!)

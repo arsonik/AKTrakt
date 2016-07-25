@@ -7,6 +7,7 @@
 //
 import UIKit
 import AlamofireImage
+import AKTrakt
 
 class ShowViewController: UIViewController {
 

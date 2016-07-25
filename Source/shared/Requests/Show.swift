@@ -78,8 +78,8 @@ public class TraktRequestShowProgress: TraktRequest {
                 TraktSeason(data: $0)
             }
             // extend next episode
-            if let nextEpisode = TraktEpisode(data: data["next_episode"] as? JSONHash)
-                where nextEpisode.seasonNumber != nil {
+            if let nextEpisode = TraktEpisode(data: data["next_episode"] as? JSONHash),
+                nextEpisode.seasonNumber != nil {
                 nextEpisode.watched = false
                 if let season = seasons.filter({ $0.number == nextEpisode.seasonNumber! }).first {
                     if season.episode(nextEpisode.number) == nil {

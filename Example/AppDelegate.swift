@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AKTrakt
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -6,8 +6,7 @@
 //
 //
 
-import Foundation
-import CoreGraphics
+import UIKit
 
 /// Key: Value typealias dictionary
 public typealias JSONHash = [String: AnyObject]

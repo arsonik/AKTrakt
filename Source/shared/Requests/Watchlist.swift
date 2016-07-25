@@ -26,7 +26,7 @@ public class TraktRequestGetWatchlist<T: TraktObject where T: protocol<Watchlist
             completion(entries.flatMap {
                 var media: T? = self.type.init(data: $0[self.type.objectName] as? JSONHash)
                 media?.watchlist = true
-                guard let date = $0["listed_at"] as? String, let listedAt = Trakt.datetimeFormatter.date(from: date) where media != nil else {
+                guard let date = $0["listed_at"] as? String, let listedAt = Trakt.datetimeFormatter.date(from: date), media != nil else {
                     return nil
                 }
                 return (listedAt: listedAt, media: media!)

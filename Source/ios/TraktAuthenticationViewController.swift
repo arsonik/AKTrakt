@@ -56,7 +56,7 @@ public class TraktAuthenticationViewController: UIViewController, WKNavigationDe
     }
 
     private func pinFromNavigation(_ action: WKNavigationAction) -> String? {
-        if let path = action.request.url?.path where path.contains("/oauth/authorize/") {
+        if let path = action.request.url?.path, path.contains("/oauth/authorize/") {
             let folders = path.components(separatedBy: "/")
             return folders[3]
         }
