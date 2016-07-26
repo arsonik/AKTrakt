@@ -12,6 +12,43 @@
 		173BE3871D479AB900D389CE /* AKTrakt.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 173BE37F1D479AB900D389CE /* AKTrakt.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		173BE38B1D479AC200D389CE /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 174E4F9C1D46732300EF2FC7 /* Alamofire.framework */; };
 		173BE38E1D479AEF00D389CE /* AKTrakt.h in Headers */ = {isa = PBXBuildFile; fileRef = 174E4F5E1D4657C300EF2FC7 /* AKTrakt.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		173BE3901D479B7500D389CE /* Trakt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FB1D46108C00AC5AFE /* Trakt.swift */; };
+		173BE3911D479B7500D389CE /* TraktAuthViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FC1D46108C00AC5AFE /* TraktAuthViewControllerDelegate.swift */; };
+		173BE3921D479B7500D389CE /* TraktRelease.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FD1D46108C00AC5AFE /* TraktRelease.swift */; };
+		173BE3931D479B7500D389CE /* TraktRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FE1D46108C00AC5AFE /* TraktRequest.swift */; };
+		173BE3941D479B7500D389CE /* TraktToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FF1D46108C00AC5AFE /* TraktToken.swift */; };
+		173BE3951D479B8400D389CE /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EE1D46108C00AC5AFE /* Authentication.swift */; };
+		173BE3961D479B8400D389CE /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EF1D46108C00AC5AFE /* Collection.swift */; };
+		173BE3971D479B8400D389CE /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F01D46108C00AC5AFE /* Episode.swift */; };
+		173BE3981D479B8400D389CE /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F11D46108C00AC5AFE /* History.swift */; };
+		173BE3991D479B8400D389CE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F21D46108C00AC5AFE /* Movie.swift */; };
+		173BE39A1D479B8400D389CE /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F31D46108C00AC5AFE /* People.swift */; };
+		173BE39B1D479B8400D389CE /* Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F41D46108C00AC5AFE /* Rating.swift */; };
+		173BE39C1D479B8400D389CE /* Recommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F51D46108C00AC5AFE /* Recommendations.swift */; };
+		173BE39D1D479B8400D389CE /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F61D46108C00AC5AFE /* Search.swift */; };
+		173BE39E1D479B8400D389CE /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F71D46108C00AC5AFE /* Season.swift */; };
+		173BE39F1D479B8400D389CE /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F81D46108C00AC5AFE /* Show.swift */; };
+		173BE3A01D479B8400D389CE /* Trending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6F91D46108C00AC5AFE /* Trending.swift */; };
+		173BE3A11D479B8400D389CE /* Watchlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6FA1D46108C00AC5AFE /* Watchlist.swift */; };
+		173BE3A21D479B8700D389CE /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EC1D46108C00AC5AFE /* Requests.swift */; };
+		173BE3A31D479B8B00D389CE /* TraktCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E31D46108C00AC5AFE /* TraktCharacter.swift */; };
+		173BE3A41D479B8B00D389CE /* TraktCrew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E41D46108C00AC5AFE /* TraktCrew.swift */; };
+		173BE3A51D479B8B00D389CE /* TraktEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E51D46108C00AC5AFE /* TraktEpisode.swift */; };
+		173BE3A61D479B8B00D389CE /* TraktMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E61D46108C00AC5AFE /* TraktMovie.swift */; };
+		173BE3A71D479B8B00D389CE /* TraktObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E71D46108C00AC5AFE /* TraktObject.swift */; };
+		173BE3A81D479B8B00D389CE /* TraktPerson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E81D46108C00AC5AFE /* TraktPerson.swift */; };
+		173BE3A91D479B8B00D389CE /* TraktSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E91D46108C00AC5AFE /* TraktSeason.swift */; };
+		173BE3AA1D479B8B00D389CE /* TraktShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6EA1D46108C00AC5AFE /* TraktShow.swift */; };
+		173BE3AB1D479B8D00D389CE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E11D46108C00AC5AFE /* Extensions.swift */; };
+		173BE3AC1D479B9200D389CE /* TraktCrewPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DB1D46108C00AC5AFE /* TraktCrewPosition.swift */; };
+		173BE3AD1D479B9200D389CE /* TraktError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DC1D46108C00AC5AFE /* TraktError.swift */; };
+		173BE3AE1D479B9200D389CE /* TraktId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DD1D46108C00AC5AFE /* TraktId.swift */; };
+		173BE3AF1D479B9200D389CE /* TraktImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DE1D46108C00AC5AFE /* TraktImageSize.swift */; };
+		173BE3B01D479B9200D389CE /* TraktImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6DF1D46108C00AC5AFE /* TraktImageType.swift */; };
+		173BE3B11D479B9200D389CE /* TraktReleaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D6E01D46108C00AC5AFE /* TraktReleaseType.swift */; };
+		173BE3B21D479B9700D389CE /* TraktAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1770D7011D46108C00AC5AFE /* TraktAuthenticationViewController.swift */; };
+		173BE3B31D479B9700D389CE /* TraktAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7021D46108C00AC5AFE /* TraktAuthenticationViewController.xib */; };
+		173BE3B41D479B9700D389CE /* TraktQRCode.png in Resources */ = {isa = PBXBuildFile; fileRef = 1770D7031D46108C00AC5AFE /* TraktQRCode.png */; };
 		174E4F571D464C3900EF2FC7 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1770D7D71D4617E500AC5AFE /* AlamofireImage.framework */; };
 		174E4F5F1D4657C300EF2FC7 /* AKTrakt.h in Headers */ = {isa = PBXBuildFile; fileRef = 174E4F5E1D4657C300EF2FC7 /* AKTrakt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		174E4F721D46625700EF2FC7 /* LoggedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C322DF1D09B28A003BFFA4 /* LoggedTests.swift */; };
@@ -853,6 +890,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				173BE3B41D479B9700D389CE /* TraktQRCode.png in Resources */,
+				173BE3B31D479B9700D389CE /* TraktAuthenticationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,6 +953,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				173BE3A51D479B8B00D389CE /* TraktEpisode.swift in Sources */,
+				173BE3AD1D479B9200D389CE /* TraktError.swift in Sources */,
+				173BE3A91D479B8B00D389CE /* TraktSeason.swift in Sources */,
+				173BE39C1D479B8400D389CE /* Recommendations.swift in Sources */,
+				173BE39B1D479B8400D389CE /* Rating.swift in Sources */,
+				173BE3981D479B8400D389CE /* History.swift in Sources */,
+				173BE3A41D479B8B00D389CE /* TraktCrew.swift in Sources */,
+				173BE3931D479B7500D389CE /* TraktRequest.swift in Sources */,
+				173BE3971D479B8400D389CE /* Episode.swift in Sources */,
+				173BE3A61D479B8B00D389CE /* TraktMovie.swift in Sources */,
+				173BE3B01D479B9200D389CE /* TraktImageType.swift in Sources */,
+				173BE3911D479B7500D389CE /* TraktAuthViewControllerDelegate.swift in Sources */,
+				173BE3AA1D479B8B00D389CE /* TraktShow.swift in Sources */,
+				173BE39F1D479B8400D389CE /* Show.swift in Sources */,
+				173BE3991D479B8400D389CE /* Movie.swift in Sources */,
+				173BE39E1D479B8400D389CE /* Season.swift in Sources */,
+				173BE3AE1D479B9200D389CE /* TraktId.swift in Sources */,
+				173BE3921D479B7500D389CE /* TraktRelease.swift in Sources */,
+				173BE3A31D479B8B00D389CE /* TraktCharacter.swift in Sources */,
+				173BE3941D479B7500D389CE /* TraktToken.swift in Sources */,
+				173BE3AF1D479B9200D389CE /* TraktImageSize.swift in Sources */,
+				173BE3A01D479B8400D389CE /* Trending.swift in Sources */,
+				173BE3A21D479B8700D389CE /* Requests.swift in Sources */,
+				173BE3AC1D479B9200D389CE /* TraktCrewPosition.swift in Sources */,
+				173BE3A71D479B8B00D389CE /* TraktObject.swift in Sources */,
+				173BE39A1D479B8400D389CE /* People.swift in Sources */,
+				173BE3B21D479B9700D389CE /* TraktAuthenticationViewController.swift in Sources */,
+				173BE3901D479B7500D389CE /* Trakt.swift in Sources */,
+				173BE3A81D479B8B00D389CE /* TraktPerson.swift in Sources */,
+				173BE3961D479B8400D389CE /* Collection.swift in Sources */,
+				173BE3951D479B8400D389CE /* Authentication.swift in Sources */,
+				173BE39D1D479B8400D389CE /* Search.swift in Sources */,
+				173BE3A11D479B8400D389CE /* Watchlist.swift in Sources */,
+				173BE3B11D479B9200D389CE /* TraktReleaseType.swift in Sources */,
+				173BE3AB1D479B8D00D389CE /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
