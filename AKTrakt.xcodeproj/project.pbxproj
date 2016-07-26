@@ -1418,6 +1418,7 @@
 				173BE38A1D479ABA00D389CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		174E4F6E1D46623200EF2FC7 /* Build configuration list for PBXNativeTarget "Tests" */ = {
 			isa = XCConfigurationList;
